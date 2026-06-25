@@ -57,64 +57,14 @@ body {
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-@keyframes px-drift {
-  0%   { transform: translateY(0px);  opacity: .85; }
-  50%  { opacity: 1; }
-  100% { transform: translateY(-10px); opacity: .55; }
-}
-@keyframes px-drift2 {
-  0%   { transform: translateY(-6px); opacity: .6; }
-  100% { transform: translateY(4px);  opacity: .95; }
-}
 header {
   background: linear-gradient(-40deg, #0267C4, #2784d8, #56A4D6, #7ec5e5, #56A4D6, #BA7579, #FE9CA2, #0267C4);
   background-size: 500% 500%;
-  animation: hdr-shift 10s ease infinite;
+  animation: hdr-shift 40s ease infinite;
   padding: 18px 24px;
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
   position: relative; overflow: hidden;
-  image-rendering: pixelated;
 }
-/* Pixel particle layer 1 — white & cotton-candy squares */
-header::before {
-  content: '';
-  position: absolute; top: 0; left: 0;
-  width: 3px; height: 3px; background: transparent;
-  pointer-events: none; z-index: 0;
-  box-shadow:
-    42px 12px 0 0 rgba(255,255,255,.9),   100px  5px 0 0 rgba(254,156,162,.85),
-    178px 22px 0 0 rgba(255,255,255,.75), 255px  8px 0 0 rgba(86,164,214,.9),
-    338px 30px 0 0 rgba(255,255,255,.8),  415px 14px 0 0 rgba(254,156,162,.9),
-    498px  3px 0 0 rgba(255,255,255,.7),  578px 24px 0 0 rgba(86,164,214,.8),
-    658px 10px 0 0 rgba(255,255,255,.9),  735px 34px 0 0 rgba(254,156,162,.7),
-    818px  7px 0 0 rgba(255,255,255,.8),  898px 18px 0 0 rgba(86,164,214,.9),
-    978px 29px 0 0 rgba(255,255,255,.7), 1058px 11px 0 0 rgba(254,156,162,.8),
-   1138px  4px 0 0 rgba(255,255,255,.9), 1218px 26px 0 0 rgba(86,164,214,.75),
-   1298px 16px 0 0 rgba(255,255,255,.7),  70px 38px 0 0 rgba(254,156,162,.6),
-    152px 42px 0 0 rgba(255,255,255,.5),  232px 28px 0 0 rgba(86,164,214,.7),
-    312px 18px 0 0 rgba(255,255,255,.65), 392px 40px 0 0 rgba(254,156,162,.55),
-    472px 32px 0 0 rgba(255,255,255,.75), 552px 44px 0 0 rgba(86,164,214,.6);
-  animation: px-drift 3.5s ease-in-out infinite alternate;
-}
-/* Pixel particle layer 2 — offset timing */
-header::after {
-  content: '';
-  position: absolute; top: 0; left: 0;
-  width: 3px; height: 3px; background: transparent;
-  pointer-events: none; z-index: 0;
-  box-shadow:
-    22px 38px 0 0 rgba(255,255,255,.7),  138px 28px 0 0 rgba(254,156,162,.8),
-    218px 42px 0 0 rgba(255,255,255,.6),  298px 16px 0 0 rgba(86,164,214,.75),
-    378px  6px 0 0 rgba(255,255,255,.85), 458px 38px 0 0 rgba(254,156,162,.65),
-    538px 22px 0 0 rgba(255,255,255,.7),  618px 44px 0 0 rgba(86,164,214,.55),
-    698px 30px 0 0 rgba(255,255,255,.8),  778px  8px 0 0 rgba(254,156,162,.9),
-    858px 40px 0 0 rgba(255,255,255,.6),  938px 20px 0 0 rgba(86,164,214,.8),
-   1018px 36px 0 0 rgba(255,255,255,.75),1098px 14px 0 0 rgba(254,156,162,.7),
-   1178px 44px 0 0 rgba(255,255,255,.6), 1258px 24px 0 0 rgba(86,164,214,.85),
-   1338px 10px 0 0 rgba(255,255,255,.9);
-  animation: px-drift2 4.2s ease-in-out infinite alternate;
-}
-header > * { position: relative; z-index: 1; }
 .logo {
   font-size: 22px; font-weight: 900; letter-spacing: -.5px; color: #fff;
   text-shadow: 0 0 16px #ffffff55, 0 2px 6px #00000055;
@@ -349,11 +299,6 @@ footer a:hover { color: var(--blue-bell); }
 
   <div class="table-wrap">
     <div class="loading" id="loading">Загрузка SHORTLIST.md…</div>
-    <div id="new-section-header" class="new-section-header" style="display:none">★ Новые в рейтинге 2026</div>
-    <table class="rank-table" id="rank-table-new" style="display:none">
-      <tbody id="rank-body-new"></tbody>
-    </table>
-    <div id="existing-section-header" class="existing-section-header" style="display:none">Рейтинг 2025 — текущие позиции</div>
     <table class="rank-table" id="rank-table" style="display:none">
       <thead>
         <tr>
@@ -429,21 +374,21 @@ const RATING_2025 = {
 
 // ─── PHOTOGRAPHER METADATA (for questionnaire algo) ──────────────
 const META = {
-  'Илья Рашап':        { style: 'classic', fashion: true,  intl: false, conceptual: false, education: false },
+  'Илья Рашап':        { style: 'dramatic', fashion: true,  intl: false, conceptual: false, education: false },
   'Max Sauco':         { style: 'conceptual', fashion: false, intl: false, conceptual: true, education: false },
   'Георгий Чернядьев':{ style: 'dramatic', fashion: false, intl: false, conceptual: false, education: false },
-  'Марат Сафин':       { style: 'signature', fashion: false, intl: false, conceptual: false, education: false },
+  'Марат Сафин':       { style: 'crafted',   fashion: false, intl: false, conceptual: false, education: false },
   'Павел Киселёв':     { style: 'classic', fashion: false, intl: false, conceptual: false, education: true },
   'Дима Борисов':      { style: 'fantastic', fashion: false, intl: false, conceptual: false, education: false },
-  'Андрей Разумовский':{ style: 'natural', fashion: false, intl: false, conceptual: false, education: false },
+  'Андрей Разумовский':{ style: 'fantastic', fashion: false, intl: false, conceptual: false, education: false },
   'Вадим Штейн':       { style: 'conceptual', fashion: false, intl: false, conceptual: true, education: false },
   'Mecuro B Cotto':    { style: 'classic', fashion: false, intl: false, conceptual: false, education: false },
-  'Алексей Трифонов':  { style: 'natural', fashion: false, intl: false, conceptual: false, education: true },
+  'Алексей Трифонов':  { style: 'fashion', fashion: true,  intl: false, conceptual: false, education: false },
   'Victor Olivier':    { style: 'fashion', fashion: true,  intl: true,  conceptual: false, education: false },
   'Exey Panteleev':    { style: 'conceptual', fashion: false, intl: true, conceptual: true, education: false },
   'Сергей Ленин':      { style: 'classic', fashion: false, intl: false, conceptual: false, education: true },
   'Борис Бугаев':      { style: 'diverse', fashion: false, intl: false, conceptual: false, education: false },
-  'Андрей Растегаев':  { style: 'stylized', fashion: false, intl: false, conceptual: false, education: false },
+  'Андрей Растегаев':  { style: 'fashion',  fashion: true,  intl: false, conceptual: false, education: false },
   'Дмитрий Чапала':    { style: 'landscape', fashion: false, intl: false, conceptual: false, education: false },
   'Alexander Mavrin':  { style: 'glamour', fashion: true,  intl: true,  conceptual: false, education: false },
   'Алиса Вернер':      { style: 'soft', fashion: false, intl: false, conceptual: false, education: false },
@@ -453,9 +398,12 @@ const META = {
   'Алексей Гудвин':    { style: 'educational', fashion: false, intl: false, conceptual: false, education: true },
   'Сергей Смейлов':    { style: 'technical', fashion: false, intl: false, conceptual: false, education: false },
   'Владимир Николаев': { style: 'alternative', fashion: false, intl: false, conceptual: true, education: false },
-  'Stakis Laus':       { style: 'experimental', fashion: false, intl: false, conceptual: true, education: false },
-  'Илья Милорадов':    { style: 'graphic', fashion: false, intl: true,  conceptual: false, education: false },
-  'Денис Егоров':      { style: 'diverse', fashion: false, intl: false, conceptual: false, education: false },
+  'Stakis Laus':       { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
+  'Илья Милорадов':    { style: 'diverse', fashion: false, intl: true,  conceptual: false, education: false },
+  'Денис Егоров':      { style: 'diverse',  fashion: false, intl: false, conceptual: false, education: false },
+  'Кар Григорян':     { style: 'crafted',  fashion: false, intl: false, conceptual: false, education: false },
+  'Владимир Стефанович': { style: 'intimate', fashion: false, intl: false, conceptual: false, education: false },
+  'Лиза Шабурова':    { style: 'intimate',  fashion: false, intl: false, conceptual: false, education: false },
 };
 
 // ─── STYLE LABELS & LEGEND ───────────────────────────────────────
@@ -463,7 +411,8 @@ const STYLE_LABELS = {
   classic:      { name: 'Классика',      desc: 'Классическое художественное ню — академическая школа, работа с формой, светом и пропорциями' },
   conceptual:   { name: 'Концепт',       desc: 'Концептуальное арт-ню — идея первична, тело как художественный нарратив' },
   dramatic:     { name: 'Драма',         desc: 'Драматический свет, брутальная или контрастная эстетика' },
-  fantastic:    { name: 'Крафтовый гиперреализм', desc: 'Активная цифровая гиперболизация тела: форма доведена до идеала, выходящего за рамки реальности' },
+  crafted:      { name: 'Крафтовый',    desc: 'Тщательно выстроенный ню — акцент на ручной режиссуре, детали кадра и авторской обработке' },
+  fantastic:    { name: 'Гиперреализм', desc: 'Активная цифровая гиперболизация тела: форма доведена до идеала, выходящего за рамки реальности' },
   natural:      { name: 'Натуральный',   desc: 'Естественный ню без постановочности, повседневная эстетика' },
   naturalistic: { name: 'Натурализм',    desc: 'Натуралистичное ню, работа с реальной природой тела без прикрас' },
   fashion:      { name: 'Фэшн',          desc: 'Фэшн-ню с международным стилем, работа с образом и брендом' },
@@ -547,21 +496,21 @@ const QUESTIONS = [
 
 // ─── RATING 2025 DATA ─────────────────────────────────────────────
 const RATING_DATA = [
-  { pos: 1,  star: true,  name: 'Илья Рашап',       style: 'Классический художественный ню, fashion-нарратив', platforms: 'Wikipedia, персональный сайт', limits: 'Меньше активности в соцсетях' },
+  { pos: 1,  star: true,  name: 'Илья Рашап',       style: 'Драматический ню, fashion-нарратив', platforms: 'Wikipedia, персональный сайт', limits: 'Меньше активности в соцсетях' },
   { pos: 2,  star: true,  name: 'Max Sauco',         style: 'Арт-ню, концептуальные проекты', platforms: 'Kulturologia, персональный сайт', limits: 'Меньше присутствия в соцсетях' },
   { pos: 3,  star: true,  name: 'Георгий Чернядьев', style: 'Драматический свет, брутальная эстетика', platforms: '35photo, YouTube, сайт', limits: 'Специфическая стилистика' },
-  { pos: 4,  star: true,  name: 'Марат Сафин',       style: 'Известный авторский стиль', platforms: 'Instagram, Flickr, сайт', limits: 'Устаревающий стиль 2010-х' },
+  { pos: 4,  star: true,  name: 'Марат Сафин',       style: 'Крафтовый ню, тщательная режиссура кадра', platforms: 'Instagram, Flickr, сайт', limits: 'Устаревающий стиль 2010-х' },
   { pos: 5,  star: false, name: 'Павел Киселёв',     style: 'Классический ню, работа с формой', platforms: 'YouTube, персональный сайт', limits: 'Меньше активности в соцсетях' },
-  { pos: 6,  star: false, name: 'Дима Борисов',      style: 'Крафтовый гиперреализм, портрет', platforms: 'Instagram', limits: 'Ограниченное присутствие; расхождение с реальностью тела' },
-  { pos: 7,  star: true,  name: 'Андрей Разумовский',style: 'Естественный ню, повседневная эстетика', platforms: 'VK, YouTube', limits: 'Локальная аудитория' },
+  { pos: 6,  star: false, name: 'Дима Борисов',      style: 'Гиперреализм, портрет', platforms: 'Instagram', limits: 'Ограниченное присутствие; расхождение с реальностью тела' },
+  { pos: 7,  star: true,  name: 'Андрей Разумовский',style: 'Гиперреализм, постановочный ню', platforms: 'VK, YouTube', limits: 'Локальная аудитория' },
   { pos: 8,  star: true,  name: 'Вадим Штейн',       style: 'Арт-ню, концептуальная эстетика', platforms: 'La Personne', limits: 'Нишевость, узкая аудитория' },
   { pos: 9,  star: false, name: 'Mecuro B Cotto',    style: 'Изящная женская красота, художественный ню', platforms: 'Cameralabs, сайт', limits: 'Меньше массового признания' },
-  { pos: 10, star: false, name: 'Алексей Трифонов',  style: 'Портретный ню, естественность', platforms: 'YouTube, персональный сайт', limits: 'Меньше разнообразия площадок' },
+  { pos: 10, star: false, name: 'Алексей Трифонов',  style: 'Фэшн-ню, работа с образом', platforms: 'YouTube, персональный сайт', limits: 'Меньше разнообразия площадок' },
   { pos: 11, star: true,  name: 'Victor Olivier',    style: 'Фэшн-ню, международный стиль', platforms: 'Vogue, ModelMayhem', limits: 'Меньше в русскоязычном сегменте' },
   { pos: 12, star: true,  name: 'Exey Panteleev',    style: 'Концептуальный digital-art, технологичный ню', platforms: 'Wikipedia, Telegram, Flickr', limits: 'Сложность стиля для широкой аудитории' },
   { pos: 13, star: false, name: 'Сергей Ленин',      style: 'Художественный ню, классическая школа', platforms: 'YouTube, персональный сайт', limits: 'Традиционный подход' },
   { pos: 14, star: false, name: 'Борис Бугаев',      style: 'Разнообразный ню, активность на площадках', platforms: '35awards, VK', limits: 'Нет ярко выраженного стиля' },
-  { pos: 15, star: true,  name: 'Андрей Растегаев',  style: 'Стилизованный ню, работа с цветом', platforms: 'Instagram', limits: 'Ограниченность одной платформой' },
+  { pos: 15, star: true,  name: 'Андрей Растегаев',  style: 'Фэшн-ню, работа с цветом', platforms: 'Instagram', limits: 'Ограниченность одной платформой' },
   { pos: 16, star: false, name: 'Дмитрий Чапала',   style: 'Пейзажный ню, слияние с природой', platforms: '35photo, Sammen', limits: 'Узкая ниша' },
   { pos: 17, star: false, name: 'Alexander Mavrin',  style: 'Гламурный ню, коммерческая эстетика', platforms: 'VK, TheCityCeleb', limits: 'Коммерческий уклон' },
   { pos: 18, star: false, name: 'Алиса Вернер',      style: 'Мужской взгляд, деликатная эстетика', platforms: 'Beautifulrus, сайт', limits: 'Меньше представленности в соцсетях' },
@@ -570,7 +519,7 @@ const RATING_DATA = [
   { pos: 21, star: false, name: 'Алексей Гудвин',    style: 'Практический ню, образовательный контент', platforms: 'Dzen, Telegram', limits: 'Русскоязычная аудитория' },
   { pos: 22, star: false, name: 'Сергей Смейлов',    style: 'Техничный ню, работа со светом', platforms: 'Telegram', limits: 'Ограниченность одной платформой' },
   { pos: 23, star: false, name: 'Владимир Николаев', style: 'Альтернативный ню, нестандартные ракурсы', platforms: 'Joyreactor, VK', limits: 'Нишевость стиля' },
-  { pos: 24, star: false, name: 'Stakis Laus',       style: 'Экспериментальный ню, игра с фактурами', platforms: 'VK', limits: 'Локальная аудитория' },
+  { pos: 24, star: false, name: 'Stakis Laus',       style: 'Классика, работа с формой и фактурой', platforms: 'VK', limits: 'Локальная аудитория' },
   { pos: 25, star: false, name: 'Илья Милорадов',    style: 'Графичность, живописный свет, эстетика тела', platforms: '35photo, 500px, Kavyar', limits: 'Неустоявшийся авторский стиль' },
 ];
 
@@ -724,13 +673,13 @@ function getScoreFn() {
 
 // ─── TIOBE ARROW ─────────────────────────────────────────────────
 function tiobeArrow(currentRank, pos2025) {
-  if (pos2025 === null) return { html: '<span class="arr-neu">NEW</span>', cls: '' };
+  if (pos2025 === null) return { html: '<span class="arr-up2">NEW</span>', cls: '' };
   const delta = pos2025 - currentRank; // positive = moved up
   if (delta >= 3) return { html: '▲▲', cls: 'arr-up2' };
-  if (delta >= 1) return { html: '▲', cls: 'arr-up1' };
-  if (delta === 0) return { html: '—', cls: 'arr-neu' };
-  if (delta >= -2) return { html: '▼', cls: 'arr-dn1' };
-  return { html: '▼▼', cls: 'arr-dn2' };
+  if (delta >= 1) return { html: '▲',  cls: 'arr-up1' };
+  if (delta === 0) return { html: '—',  cls: 'arr-neu' };
+  // dropped — show 2025 position instead of arrows
+  return { html: `<span title="позиция в 2025">#${pos2025}</span>`, cls: 'arr-dn1' };
 }
 
 // ─── RENDER STYLE LEGEND ─────────────────────────────────────────
@@ -749,9 +698,6 @@ function renderShortlist() {
   const sorted = [...allPhotographers]
     .map(p => ({ ...p, _score: fn(p) }))
     .sort((a, b) => b._score - a._score);
-
-  const newEntries = sorted.filter(p => get2025Pos((p['Имя'] || '').trim()) === null);
-  const oldEntries = sorted.filter(p => get2025Pos((p['Имя'] || '').trim()) !== null);
 
   function buildRows(list, rankOffset) {
     return list.map((p, i) => {
@@ -798,24 +744,7 @@ function renderShortlist() {
     }).join('');
   }
 
-  const newTbody = document.getElementById('rank-body-new');
-  const tbody = document.getElementById('rank-body');
-  const newHeader = document.getElementById('new-section-header');
-  const existHeader = document.getElementById('existing-section-header');
-  const newTable = document.getElementById('rank-table-new');
-
-  if (newEntries.length) {
-    newTbody.innerHTML = buildRows(newEntries, 0);
-    newTable.style.display = 'table';
-    newHeader.style.display = 'block';
-    existHeader.style.display = 'block';
-  } else {
-    newTable.style.display = 'none';
-    newHeader.style.display = 'none';
-    existHeader.style.display = 'none';
-  }
-
-  tbody.innerHTML = buildRows(oldEntries, newEntries.length);
+  document.getElementById('rank-body').innerHTML = buildRows(sorted, 0);
   document.getElementById('rank-table').style.display = 'table';
 }
 
