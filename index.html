@@ -8,67 +8,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
 
 :root {
-  --bg: #fdf4ff;
-  --card: #ffffff;
-  --card2: #fef0fc;
-  --border: #ecd3f7;
-  --border2: #f5e3ff;
-  --text: #1e0838;
-  --muted: #9d71b8;
-  --pink: #e8198b;
-  --pink-dim: #b01169;
-  --purple: #7c3aed;
-  --cyan: #06b6d4;
-  --yellow: #fbbf24;
-  --coral: #fb7185;
-  --mint: #10d9a0;
-  --up: #10d9a0;
-  --down: #f43f5e;
-  --neutral: #c4a8d8;
-  --blue: #818cf8;
+  /* ─── Palette ─── */
+  --dusty-rose:    #BA7579;
+  --muted-olive:   #9EC189;
+  --cotton-candy:  #FE9CA2;
+  --ocean-deep:    #0267C4;
+  --blue-bell:     #56A4D6;
+  --mahogany-red:  #B21D17;
+  /* Expansions */
+  --leaf-dark:     #3D7030;
+  --leaf-mid:      #6FAD56;
+  --sky-pale:      #E6F4FD;
+  --sky-mid:       #C2DFF2;
+  --cloud:         #FFFFFF;
+  --sand:          #FFF7EE;
+  /* Semantic aliases */
+  --bg:       #E9F5FD;
+  --card:     #FFFFFF;
+  --card2:    #F4FBFF;
+  --border:   #B6D8EE;
+  --border2:  #D4EBF7;
+  --text:     #082136;
+  --muted:    #5A8BA8;
+  --up:       #3D7030;
+  --down:     #B21D17;
+  --neutral:  #9FBCCC;
+  --blue:     #0267C4;
   --radius: 10px;
-  --header-grad: linear-gradient(135deg, #5b21b6 0%, #a21caf 38%, #e11d48 72%, #f97316 100%);
+  --header-grad: linear-gradient(180deg, #0267C4 0%, #56A4D6 65%, #6FAD56 100%);
+  --accent-grad: linear-gradient(135deg, #0267C4, #56A4D6, #FE9CA2);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);
   background-image:
-    radial-gradient(ellipse at 10% 0%, #e9d5ff55 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 100%, #fce7f355 0%, transparent 50%);
+    radial-gradient(ellipse at 0% 100%, #9EC18928 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 100%, #9EC18920 0%, transparent 40%);
   background-attachment: fixed;
   color: var(--text);
   font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   min-height: 100vh;
 }
 
-/* HEADER — city pop sunset gradient */
+/* HEADER — sky + clouds + palm leaves */
 header {
   background: var(--header-grad);
   padding: 18px 24px;
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
-  box-shadow: 0 4px 24px #a21caf33;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 20px #0267C433;
 }
+.header-deco {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+header > *:not(.header-deco) { position: relative; z-index: 1; }
 .logo {
-  font-size: 24px; font-weight: 900; letter-spacing: -.5px;
-  color: #fff;
-  text-shadow: 0 0 20px #ffffff66, 0 2px 8px #00000044;
+  font-size: 22px; font-weight: 900; letter-spacing: -.5px; color: #fff;
+  text-shadow: 0 0 16px #ffffff55, 0 2px 6px #00000055;
 }
-.site-title { flex: 1; font-size: 14px; color: #ffffff99; min-width: 180px; font-weight: 600; }
+.site-title { flex: 1; font-size: 13px; color: #ffffffbb; min-width: 160px; font-weight: 600; }
 nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .tab-btn {
-  background: #ffffff22; border: 1px solid #ffffff44; color: #fff;
-  padding: 7px 15px; border-radius: var(--radius); cursor: pointer; font-size: 12px;
+  background: #ffffff22; border: 1px solid #ffffff55; color: #fff;
+  padding: 7px 14px; border-radius: var(--radius); cursor: pointer; font-size: 12px;
   font-weight: 700; letter-spacing: .3px; transition: all .15s; backdrop-filter: blur(4px);
 }
-.tab-btn:hover { background: #ffffff44; border-color: #ffffff88; }
-.tab-btn.active { background: #fff; border-color: #fff; color: var(--pink); box-shadow: 0 2px 12px #ffffff55; }
+.tab-btn:hover { background: #ffffff44; border-color: #ffffffaa; }
+.tab-btn.active { background: #fff; border-color: #fff; color: var(--ocean-deep); box-shadow: 0 2px 12px #ffffff44; }
 .tg-btn {
-  background: #06b6d422; border: 1px solid #06b6d466; color: #e0f7ff;
-  padding: 7px 15px; border-radius: var(--radius); text-decoration: none;
+  background: #ffffff18; border: 1px solid #ffffff55; color: #e0f5ff;
+  padding: 7px 14px; border-radius: var(--radius); text-decoration: none;
   font-size: 12px; font-weight: 700; transition: all .15s;
 }
-.tg-btn:hover { background: #06b6d444; }
+.tg-btn:hover { background: #ffffff33; }
 
 /* TABS */
 .tab-content { display: none; }
@@ -86,10 +100,10 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   padding: 5px 14px; border-radius: 20px; cursor: pointer; font-size: 12px;
   font-weight: 600; transition: all .15s;
 }
-.algo-btn:hover { border-color: var(--purple); color: var(--purple); background: #f3e8ff; }
+.algo-btn:hover { border-color: var(--ocean-deep); color: var(--ocean-deep); background: #daeefb; }
 .algo-btn.active {
-  background: linear-gradient(135deg, #7c3aed18, #e8198b18);
-  border-color: var(--pink); color: var(--pink);
+  background: #0267C418;
+  border-color: var(--ocean-deep); color: var(--ocean-deep);
 }
 .algo-desc { font-size: 11px; color: var(--muted); max-width: 400px; }
 
@@ -103,13 +117,13 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .q-item label { font-size: 12px; color: var(--text); font-weight: 700; }
 .q-item .q-poles { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); }
 .q-item input[type=range] { width: 100%; accent-color: var(--pink); cursor: pointer; }
-.q-val { font-size: 12px; font-weight: 700; color: var(--pink); text-align: right; }
+.q-val { font-size: 12px; font-weight: 700; color: var(--ocean-deep); text-align: right; }
 .q-apply {
   margin-top: 14px;
-  background: linear-gradient(135deg, var(--purple), var(--pink));
+  background: linear-gradient(135deg, var(--ocean-deep), var(--blue-bell));
   color: #fff; border: none; padding: 9px 22px; border-radius: var(--radius);
   cursor: pointer; font-weight: 800; font-size: 13px; letter-spacing: .3px;
-  box-shadow: 0 4px 14px #e8198b44; transition: opacity .15s;
+  box-shadow: 0 4px 14px #0267C444; transition: opacity .15s;
 }
 .q-apply:hover { opacity: .88; }
 
@@ -123,45 +137,67 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   border-bottom: 2px solid var(--border);
 }
 .rank-table td { padding: 10px 10px; border-bottom: 1px solid var(--border2); vertical-align: middle; }
-.rank-table tr:hover td { background: #f9f0ff; }
+.rank-table tr:hover td { background: #ddf0fb44; }
 .rank-num { color: var(--muted); font-weight: 900; font-size: 15px; min-width: 32px; }
 .rank-arrow { font-size: 14px; font-weight: 900; min-width: 40px; }
-.arr-up2 { color: #10d9a0; text-shadow: 0 0 8px #10d9a066; }
-.arr-up1 { color: #6ee7c0; }
+.arr-up2 { color: #2e7d1e; text-shadow: 0 0 8px #3d703066; }
+.arr-up1 { color: var(--muted-olive); }
 .arr-neu { color: var(--neutral); }
-.arr-dn1 { color: #fda4af; }
-.arr-dn2 { color: #f43f5e; text-shadow: 0 0 8px #f43f5e55; }
+.arr-dn1 { color: var(--dusty-rose); }
+.arr-dn2 { color: var(--mahogany-red); text-shadow: 0 0 6px #B21D1744; }
 .ph-name { font-weight: 700; color: var(--text); font-size: 14px; }
 .ph-name a { color: inherit; text-decoration: none; }
-.ph-name a:hover { color: var(--pink); }
+.ph-name a:hover { color: var(--ocean-deep); }
 .ph-style { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 600; }
 .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
-.score-val { font-size: 17px; font-weight: 900; color: var(--pink); min-width: 34px; }
-.score-bar { flex: 1; height: 5px; background: #f0d8ff; border-radius: 3px; max-width: 80px; }
-.score-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #7c3aed, #e8198b, #f97316); }
+.score-val { font-size: 17px; font-weight: 900; color: var(--ocean-deep); min-width: 34px; }
+.score-bar { flex: 1; height: 5px; background: var(--sky-mid); border-radius: 3px; max-width: 80px; }
+.score-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--ocean-deep), var(--blue-bell), var(--cotton-candy)); }
 .platform-links { display: flex; flex-wrap: wrap; gap: 4px; }
 .plat-tag {
-  font-size: 10px; background: #f5e8ff; border: 1px solid #ddb8f5;
-  border-radius: 5px; padding: 2px 7px; color: var(--purple); text-decoration: none; font-weight: 600;
+  font-size: 10px; background: var(--sky-pale); border: 1px solid var(--sky-mid);
+  border-radius: 5px; padding: 2px 7px; color: var(--ocean-deep); text-decoration: none; font-weight: 600;
   transition: all .12s;
 }
-.plat-tag:hover { background: #eed6ff; border-color: var(--pink); color: var(--pink); }
-.star-mark { color: var(--yellow); font-size: 12px; margin-left: 4px; }
+.plat-tag:hover { background: #C2DFF2; border-color: var(--blue-bell); color: #024a94; }
+.star-mark { color: var(--cotton-candy); font-size: 12px; margin-left: 4px; }
 .nov-badge { font-size: 10px; padding: 2px 7px; border-radius: 5px; font-weight: 700; }
 .nov-yes { background: #d1fae5; color: #059669; border: 1px solid #6ee7b7; }
-.nov-no { background: #ffe4e6; color: #e11d48; border: 1px solid #fda4af; }
+.nov-no { background: #ffeaea; color: var(--mahogany-red); border: 1px solid #f5b0ae; }
 .challenge-btn {
-  background: linear-gradient(135deg, #fdf4ff, #fff5f9);
+  background: var(--sky-pale);
   border: 1.5px solid var(--border); color: var(--muted);
   font-size: 10px; padding: 4px 10px; border-radius: 6px;
   cursor: pointer; text-decoration: none; white-space: nowrap;
   font-weight: 700; transition: all .15s;
 }
-.challenge-btn:hover { border-color: var(--pink); color: var(--pink); background: #fce7f3; box-shadow: 0 2px 8px #e8198b22; }
+.challenge-btn:hover { border-color: var(--dusty-rose); color: var(--dusty-rose); background: #f7e8e8; box-shadow: 0 2px 8px #BA757922; }
 .new-badge {
-  font-size: 9px; background: #cffafe; color: #0891b2;
-  border: 1px solid #a5f3fc; border-radius: 4px; padding: 1px 6px; margin-left: 5px;
+  font-size: 9px; background: #FE9CA233; color: #8a1a35;
+  border: 1px solid var(--cotton-candy); border-radius: 4px; padding: 1px 6px; margin-left: 5px;
   font-weight: 800; letter-spacing: .3px;
+}
+/* Style legend bar */
+.style-legend-bar { background: var(--card2); border-bottom: 1px solid var(--border2); padding: 8px 24px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.legend-label { font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: .8px; text-transform: uppercase; margin-right: 4px; }
+.style-tag {
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+  background: var(--sky-pale); border: 1px solid var(--border); color: var(--ocean-deep);
+  cursor: default; position: relative;
+}
+.style-tag[title]:hover::after {
+  content: attr(title); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+  background: var(--text); color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 5px;
+  white-space: nowrap; z-index: 99; pointer-events: none; font-weight: 400;
+}
+/* NEW section */
+.new-section-header {
+  padding: 10px 24px 6px; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  color: #8a1a35; text-transform: uppercase; background: #FE9CA211; border-bottom: 1px solid #FE9CA244;
+}
+.existing-section-header {
+  padding: 10px 24px 6px; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  color: var(--muted); text-transform: uppercase; border-bottom: 1px solid var(--border2);
 }
 
 /* RATING 2025 TAB */
@@ -171,12 +207,12 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .rating-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .rating-table th { text-align: left; padding: 8px 10px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; border-bottom: 2px solid var(--border); }
 .rating-table td { padding: 10px 10px; border-bottom: 1px solid var(--border2); vertical-align: top; }
-.rating-table tr:hover td { background: #f9f0ff; }
+.rating-table tr:hover td { background: #ddf0fb44; }
 .pos-num { font-size: 18px; font-weight: 900; color: var(--muted); }
-.pos-star { font-size: 14px; color: var(--yellow); margin-left: 2px; filter: drop-shadow(0 0 4px #fbbf2488); }
+.pos-star { font-size: 14px; color: var(--dusty-rose); margin-left: 2px; filter: drop-shadow(0 0 4px #BA757966); }
 .r-name { font-weight: 800; font-size: 14px; color: var(--text); }
 .r-style { font-size: 12px; color: var(--text); margin-top: 2px; }
-.r-platform { font-size: 11px; color: var(--purple); font-weight: 600; }
+.r-platform { font-size: 11px; color: var(--ocean-deep); font-weight: 600; }
 .r-limit { font-size: 11px; color: var(--muted); font-style: italic; }
 
 /* CRITERIA TAB */
@@ -186,25 +222,26 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 12px; }
 .metric-card {
   background: var(--card); border: 1.5px solid var(--border);
-  border-left: 4px solid var(--pink);
+  border-left: 4px solid var(--blue-bell);
   border-radius: var(--radius); padding: 15px;
   transition: box-shadow .15s;
 }
-.metric-card:hover { box-shadow: 0 4px 18px #e8198b18; }
+.metric-card:nth-child(even) { border-left-color: var(--muted-olive); }
+.metric-card:hover { box-shadow: 0 4px 18px #0267C422; }
 .metric-num { font-size: 11px; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px;
-  background: var(--header-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  background: var(--accent-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .metric-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
 .metric-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
 .scale-section { margin-top: 30px; }
-.scale-section h3 { font-size: 16px; font-weight: 800; color: var(--purple); margin-bottom: 12px; }
+.scale-section h3 { font-size: 16px; font-weight: 800; color: var(--ocean-deep); margin-bottom: 12px; }
 .scale-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
 .scale-card {
   background: var(--card); border: 1.5px solid var(--border);
   border-radius: var(--radius); padding: 12px 14px;
   transition: transform .12s, box-shadow .12s;
 }
-.scale-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px #7c3aed18; }
-.scale-score { font-size: 22px; font-weight: 900; background: var(--header-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.scale-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px #0267C422; }
+.scale-score { font-size: 22px; font-weight: 900; background: var(--accent-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .scale-label { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
 .scale-examples { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
@@ -215,8 +252,8 @@ footer {
   margin-top: 40px; background: #fdf4ff;
 }
 footer p { font-size: 11px; color: var(--muted); }
-footer a { color: var(--pink-dim); text-decoration: none; font-weight: 700; }
-footer a:hover { color: var(--pink); }
+footer a { color: var(--ocean-deep); text-decoration: none; font-weight: 700; }
+footer a:hover { color: var(--blue-bell); }
 
 @media (max-width: 700px) {
   .rank-table th:nth-child(4), .rank-table td:nth-child(4) { display: none; }
@@ -229,6 +266,31 @@ footer a:hover { color: var(--pink); }
 <body>
 
 <header>
+  <!-- Clouds + palm leaves -->
+  <svg class="header-deco" viewBox="0 0 1400 88" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Clouds -->
+    <g fill="#fff" opacity=".52">
+      <ellipse cx="185" cy="26" rx="74" ry="18"/><ellipse cx="152" cy="36" rx="44" ry="15"/><ellipse cx="218" cy="35" rx="54" ry="16"/>
+      <ellipse cx="630" cy="19" rx="92" ry="20"/><ellipse cx="592" cy="30" rx="56" ry="16"/><ellipse cx="668" cy="28" rx="62" ry="18"/>
+      <ellipse cx="1060" cy="24" rx="82" ry="19"/><ellipse cx="1022" cy="35" rx="50" ry="14"/><ellipse cx="1098" cy="34" rx="56" ry="15"/>
+      <ellipse cx="390" cy="13" rx="52" ry="12"/><ellipse cx="366" cy="19" rx="32" ry="10"/><ellipse cx="414" cy="18" rx="37" ry="11"/>
+      <ellipse cx="870" cy="15" rx="46" ry="12"/><ellipse cx="848" cy="22" rx="28" ry="9"/><ellipse cx="892" cy="21" rx="33" ry="10"/>
+    </g>
+    <!-- Left palm leaves -->
+    <g>
+      <path d="M-35,90 C18,62 82,32 168,7 C108,28 44,58 -35,90Z" fill="#6FAD56" opacity=".88"/>
+      <path d="M-18,72 C38,56 112,48 200,56 C140,48 58,58 -18,72Z" fill="#9EC189" opacity=".82"/>
+      <path d="M22,90 C20,53 27,16 54,-14 C38,16 24,53 22,90Z" fill="#3D7030" opacity=".78"/>
+      <path d="M-10,52 C28,35 78,14 118,0 C80,18 30,38 -10,52Z" fill="#9EC189" opacity=".58"/>
+    </g>
+    <!-- Right palm leaves -->
+    <g transform="translate(1400,0) scale(-1,1)">
+      <path d="M-35,90 C18,62 82,32 168,7 C108,28 44,58 -35,90Z" fill="#6FAD56" opacity=".88"/>
+      <path d="M-18,72 C38,56 112,48 200,56 C140,48 58,58 -18,72Z" fill="#9EC189" opacity=".82"/>
+      <path d="M22,90 C20,53 27,16 54,-14 C38,16 24,53 22,90Z" fill="#3D7030" opacity=".78"/>
+      <path d="M-10,52 C28,35 78,14 118,0 C80,18 30,38 -10,52Z" fill="#9EC189" opacity=".58"/>
+    </g>
+  </svg>
   <div class="logo">Худсовет</div>
   <div class="site-title">Рейтинг арт-ню фотографов России</div>
   <nav>
@@ -257,8 +319,15 @@ footer a:hover { color: var(--pink); }
     <button class="q-apply" onclick="applyQuestionnaire()">Применить</button>
   </div>
 
+  <div class="style-legend-bar" id="style-legend-bar"></div>
+
   <div class="table-wrap">
     <div class="loading" id="loading">Загрузка SHORTLIST.md…</div>
+    <div id="new-section-header" class="new-section-header" style="display:none">★ Новые в рейтинге 2026</div>
+    <table class="rank-table" id="rank-table-new" style="display:none">
+      <tbody id="rank-body-new"></tbody>
+    </table>
+    <div id="existing-section-header" class="existing-section-header" style="display:none">Рейтинг 2025 — текущие позиции</div>
     <table class="rank-table" id="rank-table" style="display:none">
       <thead>
         <tr>
@@ -305,6 +374,11 @@ footer a:hover { color: var(--pink); }
       <h3>Шкала уровней</h3>
       <div class="scale-grid" id="scale-grid"></div>
     </div>
+    <div class="scale-section">
+      <h3>Стилевые категории</h3>
+      <p class="criteria-intro" style="margin-bottom:14px">Расшифровка ярлыков стиля из колонки SHORTLIST. Наведите на тег — увидите описание.</p>
+      <div class="metric-grid" id="styles-grid"></div>
+    </div>
   </div>
 </div>
 
@@ -334,7 +408,7 @@ const META = {
   'Георгий Чернядьев':{ style: 'dramatic', fashion: false, intl: false, conceptual: false, education: false },
   'Марат Сафин':       { style: 'signature', fashion: false, intl: false, conceptual: false, education: false },
   'Павел Киселёв':     { style: 'classic', fashion: false, intl: false, conceptual: false, education: true },
-  'Дима Борисов':      { style: 'naturalistic', fashion: false, intl: false, conceptual: false, education: false },
+  'Дима Борисов':      { style: 'fantastic', fashion: false, intl: false, conceptual: false, education: false },
   'Андрей Разумовский':{ style: 'natural', fashion: false, intl: false, conceptual: false, education: false },
   'Вадим Штейн':       { style: 'conceptual', fashion: false, intl: false, conceptual: true, education: false },
   'Mecuro B Cotto':    { style: 'classic', fashion: false, intl: false, conceptual: false, education: false },
@@ -355,6 +429,30 @@ const META = {
   'Владимир Николаев': { style: 'alternative', fashion: false, intl: false, conceptual: true, education: false },
   'Stakis Laus':       { style: 'experimental', fashion: false, intl: false, conceptual: true, education: false },
   'Илья Милорадов':    { style: 'graphic', fashion: false, intl: true,  conceptual: false, education: false },
+  'Денис Егоров':      { style: 'diverse', fashion: false, intl: false, conceptual: false, education: false },
+};
+
+// ─── STYLE LABELS & LEGEND ───────────────────────────────────────
+const STYLE_LABELS = {
+  classic:      { name: 'Классика',      desc: 'Классическое художественное ню — академическая школа, работа с формой, светом и пропорциями' },
+  conceptual:   { name: 'Концепт',       desc: 'Концептуальное арт-ню — идея первична, тело как художественный нарратив' },
+  dramatic:     { name: 'Драма',         desc: 'Драматический свет, брутальная или контрастная эстетика' },
+  fantastic:    { name: 'Фантастическое',desc: 'Фантастический ню с активной цифровой гиперболизацией и ретушью' },
+  natural:      { name: 'Натуральный',   desc: 'Естественный ню без постановочности, повседневная эстетика' },
+  naturalistic: { name: 'Натурализм',    desc: 'Натуралистичное ню, работа с реальной природой тела без прикрас' },
+  fashion:      { name: 'Фэшн',          desc: 'Фэшн-ню с международным стилем, работа с образом и брендом' },
+  signature:    { name: 'Авторский',     desc: 'Ярко выраженный узнаваемый авторский стиль, сильный личный почерк' },
+  glamour:      { name: 'Гламур',        desc: 'Коммерческая гламурная эстетика, акцент на идеализированной красоте' },
+  stylized:     { name: 'Стилизация',    desc: 'Стилизованный ню с акцентом на цвет, свет и декоративность' },
+  landscape:    { name: 'Пейзажный',     desc: 'Слияние ню с природным пейзажем, тело в контексте среды' },
+  soft:         { name: 'Мягкий',        desc: 'Деликатная эстетика, мягкий свет, женский или чувственный взгляд' },
+  intimate:     { name: 'Интимный',      desc: 'Психологичный интимный арт-ню, акцент на внутреннем состоянии' },
+  educational:  { name: 'Образование',   desc: 'Образовательный контент, практические техники съёмки и обработки' },
+  technical:    { name: 'Техника',       desc: 'Акцент на технической стороне — свет, экспозиция, резкость, оптика' },
+  alternative:  { name: 'Альтернатива',  desc: 'Нестандартные ракурсы, альтернативная или провокационная эстетика' },
+  experimental: { name: 'Эксперимент',   desc: 'Экспериментальный ню, игра с фактурами, материалами, пространством' },
+  graphic:      { name: 'Графика',       desc: 'Графичность, живописный свет, тело как геометрический объект' },
+  diverse:      { name: 'Разнообразный', desc: 'Широкий диапазон подходов и стилей, без ярко выраженного одного' },
 };
 
 // ─── QUESTIONNAIRE DEFINITION ────────────────────────────────────
@@ -428,7 +526,7 @@ const RATING_DATA = [
   { pos: 3,  star: true,  name: 'Георгий Чернядьев', style: 'Драматический свет, брутальная эстетика', platforms: '35photo, YouTube, сайт', limits: 'Специфическая стилистика' },
   { pos: 4,  star: true,  name: 'Марат Сафин',       style: 'Известный авторский стиль', platforms: 'Instagram, Flickr, сайт', limits: 'Устаревающий стиль 2010-х' },
   { pos: 5,  star: false, name: 'Павел Киселёв',     style: 'Классический ню, работа с формой', platforms: 'YouTube, персональный сайт', limits: 'Меньше активности в соцсетях' },
-  { pos: 6,  star: false, name: 'Дима Борисов',      style: 'Натуралистичный ню, портрет', platforms: 'Instagram', limits: 'Ограниченное присутствие' },
+  { pos: 6,  star: false, name: 'Дима Борисов',      style: 'Фантастический ню (цифровая гиперболизация тела), портрет', platforms: 'Instagram', limits: 'Ограниченное присутствие, спорный реализм' },
   { pos: 7,  star: true,  name: 'Андрей Разумовский',style: 'Естественный ню, повседневная эстетика', platforms: 'VK, YouTube', limits: 'Локальная аудитория' },
   { pos: 8,  star: true,  name: 'Вадим Штейн',       style: 'Арт-ню, концептуальная эстетика', platforms: 'La Personne', limits: 'Нишевость, узкая аудитория' },
   { pos: 9,  star: false, name: 'Mecuro B Cotto',    style: 'Изящная женская красота, художественный ню', platforms: 'Cameralabs, сайт', limits: 'Меньше массового признания' },
@@ -440,14 +538,14 @@ const RATING_DATA = [
   { pos: 15, star: true,  name: 'Андрей Растегаев',  style: 'Стилизованный ню, работа с цветом', platforms: 'Instagram', limits: 'Ограниченность одной платформой' },
   { pos: 16, star: false, name: 'Дмитрий Чапала',   style: 'Пейзажный ню, слияние с природой', platforms: '35photo, Sammen', limits: 'Узкая ниша' },
   { pos: 17, star: false, name: 'Alexander Mavrin',  style: 'Гламурный ню, коммерческая эстетика', platforms: 'VK, TheCityCeleb', limits: 'Коммерческий уклон' },
-  { pos: 18, star: false, name: 'Алиса Вернер',      style: 'Женский взгляд, мягкая эстетика', platforms: 'Beautifulrus, сайт', limits: 'Меньше представленности в соцсетях' },
+  { pos: 18, star: false, name: 'Алиса Вернер',      style: 'Женский взгляд, деликатная эстетика', platforms: 'Beautifulrus, сайт', limits: 'Меньше представленности в соцсетях; трактовка стиля вызывает дискуссии' },
   { pos: 19, star: false, name: 'Дима Игнатов',      style: 'Арт-ню, живописные композиции', platforms: 'VK', limits: 'Локальная аудитория' },
   { pos: 20, star: false, name: 'Иван Ковалёв',      style: 'Интимный арт-ню, психологичный подход', platforms: 'Photar, Dzen, Instagram', limits: 'Меньше галерейного признания' },
   { pos: 21, star: false, name: 'Алексей Гудвин',    style: 'Практический ню, образовательный контент', platforms: 'Dzen, Telegram', limits: 'Русскоязычная аудитория' },
   { pos: 22, star: false, name: 'Сергей Смейлов',    style: 'Техничный ню, работа со светом', platforms: 'Telegram', limits: 'Ограниченность одной платформой' },
   { pos: 23, star: false, name: 'Владимир Николаев', style: 'Альтернативный ню, нестандартные ракурсы', platforms: 'Joyreactor, VK', limits: 'Нишевость стиля' },
   { pos: 24, star: false, name: 'Stakis Laus',       style: 'Экспериментальный ню, игра с фактурами', platforms: 'VK', limits: 'Локальная аудитория' },
-  { pos: 25, star: false, name: 'Илья Милорадов',    style: 'Графичность, живописный свет, эстетика тела', platforms: '35photo, 500px, Kavyar', limits: 'Узкая аудитория' },
+  { pos: 25, star: false, name: 'Илья Милорадов',    style: 'Графичность, живописный свет, эстетика тела', platforms: '35photo, 500px, Kavyar', limits: 'Формирующаяся международная аудитория' },
 ];
 
 // ─── METRICS ──────────────────────────────────────────────────────
@@ -609,6 +707,15 @@ function tiobeArrow(currentRank, pos2025) {
   return { html: '▼▼', cls: 'arr-dn2' };
 }
 
+// ─── RENDER STYLE LEGEND ─────────────────────────────────────────
+function renderLegend() {
+  const bar = document.getElementById('style-legend-bar');
+  bar.innerHTML = '<span class="legend-label">Стиль:</span>' +
+    Object.entries(STYLE_LABELS).map(([k, v]) =>
+      `<span class="style-tag" title="${v.desc}">${v.name}</span>`
+    ).join('');
+}
+
 // ─── RENDER SHORTLIST ─────────────────────────────────────────────
 function renderShortlist() {
   if (!allPhotographers.length) return;
@@ -617,64 +724,72 @@ function renderShortlist() {
     .map(p => ({ ...p, _score: fn(p) }))
     .sort((a, b) => b._score - a._score);
 
+  const newEntries = sorted.filter(p => get2025Pos((p['Имя'] || '').trim()) === null);
+  const oldEntries = sorted.filter(p => get2025Pos((p['Имя'] || '').trim()) !== null);
+
+  function buildRows(list, rankOffset) {
+    return list.map((p, i) => {
+      const rank = rankOffset + i + 1;
+      const name = (p['Имя'] || '').trim();
+      const pos2025 = get2025Pos(name);
+      const { html: arrHtml, cls: arrCls } = tiobeArrow(rank, pos2025);
+      const score = parseFloat(p['Оценка']) || 0;
+      const fillPct = (score / 10 * 100).toFixed(0);
+      const links = extractLinks(p);
+      const nov = (p['Нояб25'] || '').trim();
+      const site = (p['Сайт'] || '').trim();
+      const displayName = site
+        ? `<a href="${site}" target="_blank" rel="noopener">${name}</a>`
+        : name;
+      const isNew = pos2025 === null;
+      const metaStyle = getMeta(p).style;
+      const styleMeta = STYLE_LABELS[metaStyle] || { name: metaStyle };
+      const issueTitle = encodeURIComponent(`Голос: ${name}`);
+      const issueBody = encodeURIComponent(`**Фотограф:** ${name}\n**Моя оценка (1–10):** \n\n**Обоснование по метрикам:**\n- M1 Авторский стиль:\n- M2 Техника:\n- M3 Работа с моделью:\n- M4 Концепция:\n- M6 Постобработка / новаторство:\n\n**Ссылки на работы:**`);
+      const issueUrl = `https://github.com/Exey/xyd/issues/new?title=${issueTitle}&body=${issueBody}&labels=vote`;
+      const platHtml = links.map(u =>
+        `<a class="plat-tag" href="${u.startsWith('http') ? u : 'https://' + u}" target="_blank" rel="noopener">${platformLabel(u)}</a>`
+      ).join('');
+      const novHtml = nov === 'Да'
+        ? `<span class="nov-badge nov-yes">Да ✓</span>`
+        : nov === 'Нет' ? `<span class="nov-badge nov-no">Нет</span>` : '';
+      return `<tr>
+        <td class="rank-num">${rank}</td>
+        <td class="rank-arrow ${arrCls}">${isNew ? '<span class="arr-up2" title="Новый в рейтинге">NEW</span>' : `<span title="2025: #${pos2025}">${arrHtml}</span>`}</td>
+        <td>
+          <div class="ph-name">${displayName}${isNew ? '<span class="new-badge">NEW</span>' : ''}</div>
+          <div class="ph-style" title="${STYLE_LABELS[metaStyle]?.desc || ''}">${styleMeta.name}${nov ? ' · ' + novHtml : ''}</div>
+        </td>
+        <td>
+          <div class="score-bar-wrap">
+            <span class="score-val">${score}</span>
+            <div class="score-bar"><div class="score-fill" style="width:${fillPct}%"></div></div>
+          </div>
+        </td>
+        <td><div class="platform-links">${platHtml}</div></td>
+        <td><a class="challenge-btn" href="${issueUrl}" target="_blank" rel="noopener" title="Каждый Issue = один голос">Дать оценку</a></td>
+      </tr>`;
+    }).join('');
+  }
+
+  const newTbody = document.getElementById('rank-body-new');
   const tbody = document.getElementById('rank-body');
-  const pos2025Set = new Set(Object.keys(RATING_2025).map(k => normalizeName(k)));
+  const newHeader = document.getElementById('new-section-header');
+  const existHeader = document.getElementById('existing-section-header');
+  const newTable = document.getElementById('rank-table-new');
 
-  tbody.innerHTML = sorted.map((p, i) => {
-    const rank = i + 1;
-    const name = (p['Имя'] || '').trim();
-    const pos2025 = get2025Pos(name);
-    const { html: arrHtml, cls: arrCls } = tiobeArrow(rank, pos2025);
-    const score = parseFloat(p['Оценка']) || 0;
-    const fillPct = (score / 10 * 100).toFixed(0);
-    const links = extractLinks(p);
-    const nov = (p['Нояб25'] || '').trim();
-    const site = (p['Сайт'] || '').trim();
-    const displayName = site
-      ? `<a href="${site}" target="_blank" rel="noopener">${name}</a>`
-      : name;
-    const isNew = pos2025 === null;
-    const inRating = pos2025Set.has(normalizeName(name));
-    const metaStyle = getMeta(p).style;
-    const styleLabel = {
-      classic: 'Классика', conceptual: 'Концепт', dramatic: 'Драма',
-      naturalistic: 'Натурализм', natural: 'Натуральный', fashion: 'Фэшн',
-      signature: 'Авторский стиль', glamour: 'Гламур', diverse: 'Разнообразный',
-      stylized: 'Стилизованный', landscape: 'Пейзажный', soft: 'Мягкий',
-      intimate: 'Интимный', educational: 'Образовательный', technical: 'Техничный',
-      alternative: 'Альтернативный', experimental: 'Эксперимент', graphic: 'Графика',
-    }[metaStyle] || metaStyle;
+  if (newEntries.length) {
+    newTbody.innerHTML = buildRows(newEntries, 0);
+    newTable.style.display = 'table';
+    newHeader.style.display = 'block';
+    existHeader.style.display = 'block';
+  } else {
+    newTable.style.display = 'none';
+    newHeader.style.display = 'none';
+    existHeader.style.display = 'none';
+  }
 
-    const issueTitle = encodeURIComponent(`Голос: ${name}`);
-    const issueBody = encodeURIComponent(`**Фотограф:** ${name}\n**Моя оценка (1–10):** \n\n**Обоснование по метрикам:**\n- M1 Авторский стиль:\n- M2 Техника:\n- M3 Работа с моделью:\n- M4 Концепция:\n- M6 Постобработка / новаторство:\n\n**Ссылки на работы:**`);
-    const issueUrl = `https://github.com/Exey/xyd/issues/new?title=${issueTitle}&body=${issueBody}&labels=vote`;
-
-    const platHtml = links.map(u =>
-      `<a class="plat-tag" href="${u.startsWith('http') ? u : 'https://' + u}" target="_blank" rel="noopener">${platformLabel(u)}</a>`
-    ).join('');
-
-    const novHtml = nov === 'Да'
-      ? `<span class="nov-badge nov-yes">Да ✓</span>`
-      : nov === 'Нет' ? `<span class="nov-badge nov-no">Нет</span>` : '';
-
-    return `<tr>
-      <td class="rank-num">${rank}</td>
-      <td class="rank-arrow ${arrCls}">${pos2025 !== null ? `<span title="2025: #${pos2025}">${arrHtml}</span>` : `<span class="arr-up2" title="Новый в рейтинге">NEW</span>`}</td>
-      <td>
-        <div class="ph-name">${displayName}${isNew ? '<span class="new-badge">NEW</span>' : ''}</div>
-        <div class="ph-style">${styleLabel}${nov ? ' · ' + novHtml : ''}</div>
-      </td>
-      <td>
-        <div class="score-bar-wrap">
-          <span class="score-val">${score}</span>
-          <div class="score-bar"><div class="score-fill" style="width:${fillPct}%"></div></div>
-        </div>
-      </td>
-      <td><div class="platform-links">${platHtml}</div></td>
-      <td><a class="challenge-btn" href="${issueUrl}" target="_blank" rel="noopener" title="Каждый Issue = один голос">Дать оценку</a></td>
-    </tr>`;
-  }).join('');
-
+  tbody.innerHTML = buildRows(oldEntries, newEntries.length);
   document.getElementById('rank-table').style.display = 'table';
 }
 
@@ -734,6 +849,12 @@ function renderCriteria() {
       <div class="scale-examples">${s.desc}</div>
     </div>
   `).join('');
+  document.getElementById('styles-grid').innerHTML = Object.entries(STYLE_LABELS).map(([k, v]) => `
+    <div class="metric-card" style="border-left-color: var(--blue-bell)">
+      <div class="metric-num" style="font-size:13px">${v.name}</div>
+      <div class="metric-desc">${v.desc}</div>
+    </div>
+  `).join('');
 }
 
 // ─── TAB SWITCHER ─────────────────────────────────────────────────
@@ -748,6 +869,7 @@ function showTab(name) {
 async function init() {
   renderRating();
   renderCriteria();
+  renderLegend();
   buildQuestionnaire();
 
   try {

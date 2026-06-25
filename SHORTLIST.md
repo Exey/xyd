@@ -4,6 +4,7 @@
 
 | Имя | Сайт | Упоминания | Каналы | Нояб25 | Оценка |
 |-----|------|-----------|--------|--------|--------|
+| Денис Егоров | https://egorovd.ru | | https://t.me/EgorovD_Photo_Life | | 5 |
 | Илья Рашап | https://rashap.com | https://ru.wikipedia.org/wiki/Рашап,_Илья_Юлианович | | Нет | 7 |
 | Max Sauco | https://maxsauco.ru | https://kulturologia.ru/blogs/300810/13000 | | Нет | 7 |
 | Георгий Чернядьев | https://imwarrior.ru | https://35photo.pro/imwarrior https://youtube.com/watch?v=ecqcw8yB5fg | https://t.me/gerachernyadyev | | 7 |
