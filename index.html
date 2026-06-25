@@ -344,8 +344,8 @@ footer a:hover { color: var(--ink); }
       <div class="scale-grid" id="scale-grid"></div>
     </div>
     <div class="scale-section">
-      <h3>Стилевые категории</h3>
-      <p class="criteria-intro" style="margin-bottom:14px">Расшифровка стилевых категорий. Наведите на тег — увидите описание.</p>
+      <h3>Поджанры ню</h3>
+      <p class="criteria-intro" style="margin-bottom:14px">Расшифровка поджанров. Наведите на тег — увидите описание.</p>
       <div class="metric-grid" id="styles-grid"></div>
     </div>
   </div>
@@ -374,13 +374,14 @@ const STYLE_LABELS = {
   classic:     { name: 'Классика',    desc: 'Академическая школа, работа с формой, светом и пропорциями тела',                              bg: '#FEF9F0', border: '#C8A87A', text: '#7A5C2A' },
   conceptual:  { name: 'Концепт',     desc: 'Концептуальное арт-ню — идея первична, тело как художественный нарратив',                     bg: '#F0EBF8', border: '#8E5CB5', text: '#5E3A85' },
   dramatic:    { name: 'Драма',       desc: 'Драматический свет, брутальная или контрастная эстетика',                                     bg: '#EDECEA', border: '#2C2C2C', text: '#1A1A1A' },
-  intimate:    { name: 'Интимный',    desc: 'Психологичный интимный арт-ню, акцент на внутреннем состоянии и доверии',                    bg: '#FDEAE8', border: '#C4706A', text: '#8A3830' },
+  kink:        { name: 'Кинк',        desc: 'Чувственная эстетика: игра с психологией тела, напряжение, доминирование и покорность в кадре', bg: '#F8E8F2', border: '#9C3060', text: '#6A1040' },
+  raw:         { name: 'Raw',         desc: 'Сырая документальная эстетика — никакого лоска, тело как оно есть, без приукрашивания',           bg: '#F2EDE8', border: '#7A5A3A', text: '#4A2E12' },
   fashion:     { name: 'Фэшн',        desc: 'Фэшн-ню с международным стилем, работа с образом и брендом',                                  bg: '#F5F5F5', border: '#1E1514', text: '#1E1514' },
   glamour:     { name: 'Гламур',      desc: 'Коммерческая гламурная эстетика, акцент на идеализированной красоте',                         bg: '#FFFBEA', border: '#C9A227', text: '#8A6A00' },
   thug:        { name: 'Thug',        desc: 'Тёмная эстетика, уличная культура, маскулинная брутальность в ню',                            bg: '#F0E8F5', border: '#4A1560', text: '#4A1560' },
   experimental:{ name: 'Эксперимент', desc: 'Экспериментальный ню, игра с фактурами, материалами, цифровые техники',                      bg: '#FFF3E8', border: '#D4680A', text: '#9A4A00' },
   academism:   { name: 'Академизм',   desc: 'Академический подход: техническое мастерство, образовательный контент, высокая школа',        bg: '#E8EEF8', border: '#1B3A6B', text: '#1B3A6B' },
-  crafted:     { name: 'Крафт',       desc: 'Тщательно выстроенный ню — ручная режиссура, детали кадра, авторская обработка',             bg: '#F6EEE6', border: '#8B5A2B', text: '#5A3010' },
+  crafted:     { name: 'Крафт',       desc: 'Тщательно выстроенный ню — ручная режиссура, авторская обработка, часто пленка',             bg: '#F6EEE6', border: '#8B5A2B', text: '#5A3010' },
   symbolism:   { name: 'Символизм',   desc: 'Символистская эстетика: метафора, архетип, мистика через образ тела',                         bg: '#E8F5F2', border: '#2C8C77', text: '#1A5C4A' },
 };
 
@@ -392,30 +393,30 @@ const META = {
   'Павел Киселёв':          { style: 'classic',      fashion: false, intl: false, conceptual: false, education: true  },
   'Дима Борисов':           { style: 'crafted',      fashion: false, intl: false, conceptual: false, education: false },
   'Андрей Разумовский':     { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
-  'Вадим Штейн':            { style: 'conceptual',   fashion: false, intl: false, conceptual: true,  education: false },
+  'Вадим Штейн':            { style: 'dramatic',     fashion: false, intl: false, conceptual: false, education: false },
   'Mecuro B Cotto':         { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
   'Алексей Трифонов':       { style: 'fashion',      fashion: true,  intl: false, conceptual: false, education: false },
   'Victor Olivier':         { style: 'fashion',      fashion: true,  intl: true,  conceptual: false, education: false },
   'Exey Panteleev':         { style: 'conceptual',   fashion: false, intl: true,  conceptual: true,  education: false },
-  'Сергей Ленин':           { style: 'classic',      fashion: false, intl: false, conceptual: false, education: true  },
+  'Сергей Ленин':           { style: 'kink',         fashion: false, intl: false, conceptual: false, education: true  },
   'Борис Бугаев':           { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
   'Андрей Растегаев':       { style: 'fashion',      fashion: true,  intl: false, conceptual: false, education: false },
   'Дмитрий Чапала':         { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
   'Alexander Mavrin':       { style: 'glamour',      fashion: true,  intl: true,  conceptual: false, education: false },
-  'Алиса Вернер':           { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
+  'Алиса Вернер':           { style: 'kink',     fashion: false, intl: false, conceptual: false, education: false },
   'Дима Игнатов':           { style: 'conceptual',   fashion: false, intl: false, conceptual: true,  education: false },
   'Иван Ковалев':           { style: 'academism',    fashion: false, intl: false, conceptual: false, education: false },
   'Иван Ковалёв':           { style: 'academism',    fashion: false, intl: false, conceptual: false, education: false },
   'Алексей Гудвин':         { style: 'academism',    fashion: false, intl: false, conceptual: false, education: true  },
   'Сергей Смейлов':         { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
   'Владимир Николаев':      { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
-  'Stakis Laus':            { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
-  'Илья Милорадов':         { style: 'glamour',      fashion: false, intl: true,  conceptual: false, education: false },
+  'Stakis Laus':            { style: 'raw',          fashion: false, intl: false, conceptual: false, education: false },
+  'Илья Милорадов':         { style: 'raw',          fashion: false, intl: true,  conceptual: false, education: false },
   'Денис Егоров':           { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Кар Григорян':           { style: 'crafted',      fashion: false, intl: false, conceptual: false, education: false },
-  'Владимир Стефанович':    { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
-  'Лиза Шабурова':          { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
-  'Дмитрий Плотников':      { style: 'glamour',      fashion: true,  intl: false, conceptual: false, education: false },
+  'Владимир Стефанович':    { style: 'kink',     fashion: false, intl: false, conceptual: false, education: false },
+  'Лиза Шабурова':          { style: 'kink',     fashion: false, intl: false, conceptual: false, education: false },
+  'Дмитрий Плотников':      { style: 'raw',          fashion: false, intl: false, conceptual: false, education: false },
   'Максим Густарев':        { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Георгий Казанцев (GAK)': { style: 'thug',         fashion: false, intl: false, conceptual: false, education: false },
   'Gene Oryx':              { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
@@ -424,7 +425,7 @@ const META = {
   'Александр Татуевский':   { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
   'Алекс Талюка':           { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
   'Максим Чуприн':          { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
-  'Пётр Че':                { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
+  'Пётр Че':                { style: 'kink',     fashion: false, intl: false, conceptual: false, education: false },
   'Игорь Куприянов':        { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Dmitry Romanoff':        { style: 'dramatic',     fashion: false, intl: false, conceptual: false, education: false },
 };
@@ -656,7 +657,7 @@ function tiobeArrow(currentRank, pos2025) {
 
 function renderLegend() {
   const bar = document.getElementById('style-legend-bar');
-  bar.innerHTML = '<span class="legend-label">Стиль:</span>' +
+  bar.innerHTML = '<span class="legend-label">Поджанры ню:</span>' +
     Object.entries(STYLE_LABELS).map(([k, v]) =>
       `<span class="style-tag" title="${v.desc}" style="background:${v.bg};border-color:${v.border};color:${v.text}">${v.name}</span>`
     ).join('');
