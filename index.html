@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XYD — Рейтинг арт-ню фотографов</title>
+<style>
+:root {
+  --bg: #0e0e0e;
+  --card: #161616;
+  --card2: #1c1c1c;
+  --border: #2a2a2a;
+  --text: #e0e0e0;
+  --muted: #777;
+  --gold: #c8a053;
+  --gold-dim: #8a6a2a;
+  --up: #4ade80;
+  --down: #f87171;
+  --neutral: #888;
+  --blue: #60a5fa;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; min-height: 100vh; }
+
+/* HEADER */
+header { background: #0a0a0a; border-bottom: 1px solid var(--border); padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; color: var(--gold); font-variant: small-caps; }
+.site-title { flex: 1; font-size: 15px; color: var(--muted); min-width: 200px; }
+nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tab-btn {
+  background: transparent; border: 1px solid var(--border); color: var(--muted);
+  padding: 8px 16px; border-radius: var(--radius); cursor: pointer; font-size: 13px;
+  font-weight: 600; letter-spacing: .5px; transition: all .15s;
+}
+.tab-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+.tab-btn.active { background: var(--gold); border-color: var(--gold); color: #000; }
+.tg-btn {
+  background: #0088cc22; border: 1px solid #0088cc55; color: #60b8e8;
+  padding: 8px 16px; border-radius: var(--radius); text-decoration: none;
+  font-size: 13px; font-weight: 600; transition: all .15s;
+}
+.tg-btn:hover { background: #0088cc44; }
+
+/* TABS */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ALGO PANEL */
+.algo-panel { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.algo-label { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.algo-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.algo-btn {
+  background: transparent; border: 1px solid var(--border); color: var(--muted);
+  padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 12px;
+  font-weight: 500; transition: all .15s;
+}
+.algo-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+.algo-btn.active { background: #c8a05322; border-color: var(--gold); color: var(--gold); }
+.algo-desc { font-size: 11px; color: var(--muted); max-width: 400px; }
+
+/* QUESTIONNAIRE */
+#questionnaire {
+  background: var(--card2); border-bottom: 1px solid var(--border);
+  padding: 20px 24px; display: none;
+}
+.q-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.q-item { display: flex; flex-direction: column; gap: 8px; }
+.q-item label { font-size: 12px; color: var(--text); font-weight: 500; }
+.q-item .q-poles { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); }
+.q-item input[type=range] {
+  width: 100%; accent-color: var(--gold); height: 4px; cursor: pointer;
+}
+.q-val { font-size: 11px; color: var(--gold); text-align: right; }
+.q-apply { margin-top: 12px; background: var(--gold); color: #000; border: none; padding: 8px 20px; border-radius: var(--radius); cursor: pointer; font-weight: 700; font-size: 12px; }
+.q-apply:hover { opacity: .85; }
+
+/* MAIN TABLE */
+.table-wrap { padding: 20px 24px; }
+.loading { color: var(--muted); padding: 40px 24px; font-size: 14px; }
+.rank-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.rank-table th { text-align: left; padding: 8px 10px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.rank-table td { padding: 10px 10px; border-bottom: 1px solid #1e1e1e; vertical-align: middle; }
+.rank-table tr:hover td { background: #ffffff06; }
+.rank-num { color: var(--muted); font-weight: 700; font-size: 15px; min-width: 32px; }
+.rank-arrow { font-size: 13px; font-weight: 700; min-width: 40px; }
+.arr-up2 { color: #22c55e; }
+.arr-up1 { color: #86efac; }
+.arr-neu { color: var(--neutral); }
+.arr-dn1 { color: #fca5a5; }
+.arr-dn2 { color: #ef4444; }
+.ph-name { font-weight: 600; color: var(--text); font-size: 14px; }
+.ph-name a { color: inherit; text-decoration: none; }
+.ph-name a:hover { color: var(--gold); }
+.ph-style { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+.score-val { font-size: 16px; font-weight: 700; color: var(--gold); min-width: 34px; }
+.score-bar { flex: 1; height: 4px; background: #2a2a2a; border-radius: 2px; max-width: 80px; }
+.score-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); }
+.platform-links { display: flex; flex-wrap: wrap; gap: 4px; }
+.plat-tag { font-size: 10px; background: #ffffff08; border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; color: var(--muted); text-decoration: none; }
+.plat-tag:hover { color: var(--text); border-color: #444; }
+.star-mark { color: var(--gold); font-size: 11px; margin-left: 4px; }
+.nov-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; }
+.nov-yes { background: #22c55e18; color: #86efac; border: 1px solid #22c55e33; }
+.nov-no { background: #ff000012; color: #fca5a5; border: 1px solid #ff000030; }
+.challenge-btn {
+  background: transparent; border: 1px solid #333; color: #555; font-size: 10px;
+  padding: 3px 8px; border-radius: 4px; cursor: pointer; text-decoration: none;
+  white-space: nowrap;
+}
+.challenge-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.new-badge { font-size: 9px; background: #3b82f622; color: var(--blue); border: 1px solid #3b82f633; border-radius: 3px; padding: 1px 5px; margin-left: 4px; }
+
+/* RATING 2025 TAB */
+.rating-wrap { padding: 20px 24px; }
+.rating-wrap h2 { font-size: 18px; color: var(--gold); margin-bottom: 8px; }
+.rating-wrap .subtitle { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+.rating-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.rating-table th { text-align: left; padding: 8px 10px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.rating-table td { padding: 10px 10px; border-bottom: 1px solid #1e1e1e; vertical-align: top; }
+.rating-table tr:hover td { background: #ffffff05; }
+.pos-num { font-size: 18px; font-weight: 900; color: var(--muted); }
+.pos-star { font-size: 13px; color: var(--gold); margin-left: 3px; }
+.r-name { font-weight: 600; font-size: 14px; }
+.r-style { font-size: 12px; color: var(--text); }
+.r-platform { font-size: 11px; color: var(--blue); }
+.r-limit { font-size: 11px; color: var(--muted); font-style: italic; }
+
+/* CRITERIA TAB */
+.criteria-wrap { padding: 20px 24px; max-width: 900px; }
+.criteria-wrap h2 { font-size: 18px; color: var(--gold); margin-bottom: 4px; }
+.criteria-intro { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 14px; }
+.metric-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+.metric-num { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+.metric-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.metric-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.scale-section { margin-top: 32px; }
+.scale-section h3 { font-size: 15px; color: var(--gold); margin-bottom: 12px; }
+.scale-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.scale-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+.scale-score { font-size: 20px; font-weight: 900; color: var(--gold); }
+.scale-label { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.scale-examples { font-size: 11px; color: var(--muted); font-style: italic; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-top: 40px; }
+footer p { font-size: 11px; color: #444; }
+footer a { color: var(--gold-dim); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+@media (max-width: 700px) {
+  .rank-table th:nth-child(4), .rank-table td:nth-child(4) { display: none; }
+  .rank-table th:nth-child(5), .rank-table td:nth-child(5) { display: none; }
+  .table-wrap { padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">XYD</div>
+  <div class="site-title">Рейтинг арт-ню фотографов России</div>
+  <nav>
+    <button class="tab-btn active" onclick="showTab('shortlist')">SHORTLIST 2026</button>
+    <button class="tab-btn" onclick="showTab('rating')">RATING 2025</button>
+    <button class="tab-btn" onclick="showTab('criteria')">Критерии</button>
+    <a class="tg-btn" href="https://t.me/XYDpodcast" target="_blank">▶ Telegram</a>
+  </nav>
+</header>
+
+<!-- ══════════════════ SHORTLIST 2026 ══════════════════ -->
+<div id="tab-shortlist" class="tab-content active">
+  <div class="algo-panel">
+    <span class="algo-label">Алгоритм</span>
+    <div class="algo-btns">
+      <button class="algo-btn active" onclick="setAlgo('score')">По оценке</button>
+      <button class="algo-btn" onclick="setAlgo('activity')">По активности</button>
+      <button class="algo-btn" onclick="setAlgo('platforms')">По охвату</button>
+      <button class="algo-btn" onclick="setAlgo('questionnaire')">Моя анкета</button>
+    </div>
+    <span class="algo-desc" id="algo-desc">Сортировка по оценке худсовета (0–10)</span>
+  </div>
+
+  <div id="questionnaire">
+    <div class="q-grid" id="q-grid"></div>
+    <button class="q-apply" onclick="applyQuestionnaire()">Применить</button>
+  </div>
+
+  <div class="table-wrap">
+    <div class="loading" id="loading">Загрузка SHORTLIST.md…</div>
+    <table class="rank-table" id="rank-table" style="display:none">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th style="width:52px">±2025</th>
+          <th>Фотограф</th>
+          <th>Оценка</th>
+          <th>Платформы</th>
+          <th style="width:40px"></th>
+        </tr>
+      </thead>
+      <tbody id="rank-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════ RATING 2025 ══════════════════ -->
+<div id="tab-rating" class="tab-content">
+  <div class="rating-wrap">
+    <h2>RATING 2025</h2>
+    <p class="subtitle">Итоговый рейтинг по 10 метрикам. ★ — вошёл в топ по совокупности критериев.</p>
+    <table class="rating-table" id="rating-table">
+      <thead>
+        <tr>
+          <th style="width:60px">Место</th>
+          <th>Имя</th>
+          <th>Стиль / сильные стороны</th>
+          <th>Платформы</th>
+          <th>Ограничения</th>
+        </tr>
+      </thead>
+      <tbody id="rating-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════ CRITERIA ══════════════════ -->
+<div id="tab-criteria" class="tab-content">
+  <div class="criteria-wrap">
+    <h2>Критерии оценки</h2>
+    <p class="criteria-intro">Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.</p>
+    <div class="metric-grid" id="metrics-grid"></div>
+    <div class="scale-section">
+      <h3>Шкала уровней</h3>
+      <div class="scale-grid" id="scale-grid"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a></p>
+  <p>Данные: <a href="SHORTLIST.md">SHORTLIST.md</a> · <a href="RATING.md">RATING.md</a></p>
+</footer>
+
+<script>
+// ─── 2025 POSITIONS (for TIOBE arrows) ───────────────────────────
+const RATING_2025 = {
+  'Илья Рашап': 1, 'Max Sauco': 2, 'Георгий Чернядьев': 3,
+  'Марат Сафин': 4, 'Павел Киселёв': 5, 'Дима Борисов': 6,
+  'Андрей Разумовский': 7, 'Вадим Штейн': 8, 'Mecuro B Cotto': 9,
+  'Алексей Трифонов': 10, 'Victor Olivier': 11, 'Exey Panteleev': 12,
+  'Сергей Ленин': 13, 'Борис Бугаев': 14, 'Андрей Растегаев': 15,
+  'Дмитрий Чапала': 16, 'Alexander Mavrin': 17, 'Алиса Вернер': 18,
+  'Дима Игнатов': 19, 'Иван Ковалев': 20, 'Иван Ковалёв': 20,
+  'Алексей Гудвин': 21, 'Сергей Смейлов': 22, 'Владимир Николаев': 23,
+  'Stakis Laus': 24, 'Илья Милорадов': 25,
+};
+
+// ─── PHOTOGRAPHER METADATA (for questionnaire algo) ──────────────
+const META = {
+  'Илья Рашап':        { style: 'classic', fashion: true,  intl: false, conceptual: false, education: false },
+  'Max Sauco':         { style: 'conceptual', fashion: false, intl: false, conceptual: true, education: false },
+  'Георгий Чернядьев':{ style: 'dramatic', fashion: false, intl: false, conceptual: false, education: false },
+  'Марат Сафин':       { style: 'signature', fashion: false, intl: false, conceptual: false, education: false },
+  'Павел Киселёв':     { style: 'classic', fashion: false, intl: false, conceptual: false, education: true },
+  'Дима Борисов':      { style: 'naturalistic', fashion: false, intl: false, conceptual: false, education: false },
+  'Андрей Разумовский':{ style: 'natural', fashion: false, intl: false, conceptual: false, education: false },
+  'Вадим Штейн':       { style: 'conceptual', fashion: false, intl: false, conceptual: true, education: false },
+  'Mecuro B Cotto':    { style: 'classic', fashion: false, intl: false, conceptual: false, education: false },
+  'Алексей Трифонов':  { style: 'natural', fashion: false, intl: false, conceptual: false, education: true },
+  'Victor Olivier':    { style: 'fashion', fashion: true,  intl: true,  conceptual: false, education: false },
+  'Exey Panteleev':    { style: 'conceptual', fashion: false, intl: true, conceptual: true, education: false },
+  'Сергей Ленин':      { style: 'classic', fashion: false, intl: false, conceptual: false, education: true },
+  'Борис Бугаев':      { style: 'diverse', fashion: false, intl: false, conceptual: false, education: false },
+  'Андрей Растегаев':  { style: 'stylized', fashion: false, intl: false, conceptual: false, education: false },
+  'Дмитрий Чапала':    { style: 'landscape', fashion: false, intl: false, conceptual: false, education: false },
+  'Alexander Mavrin':  { style: 'glamour', fashion: true,  intl: true,  conceptual: false, education: false },
+  'Алиса Вернер':      { style: 'soft', fashion: false, intl: false, conceptual: false, education: false },
+  'Дима Игнатов':      { style: 'conceptual', fashion: false, intl: false, conceptual: true, education: false },
+  'Иван Ковалев':      { style: 'intimate', fashion: false, intl: false, conceptual: true, education: false },
+  'Иван Ковалёв':      { style: 'intimate', fashion: false, intl: false, conceptual: true, education: false },
+  'Алексей Гудвин':    { style: 'educational', fashion: false, intl: false, conceptual: false, education: true },
+  'Сергей Смейлов':    { style: 'technical', fashion: false, intl: false, conceptual: false, education: false },
+  'Владимир Николаев': { style: 'alternative', fashion: false, intl: false, conceptual: true, education: false },
+  'Stakis Laus':       { style: 'experimental', fashion: false, intl: false, conceptual: true, education: false },
+  'Илья Милорадов':    { style: 'graphic', fashion: false, intl: true,  conceptual: false, education: false },
+};
+
+// ─── QUESTIONNAIRE DEFINITION ────────────────────────────────────
+const QUESTIONS = [
+  {
+    id: 'q_art',
+    label: 'Стиль',
+    question: 'Классическое ню ← → Концептуальное арт-ню',
+    poles: ['Классика', 'Концепт'],
+    default: 3,
+    effect: (p, v) => {
+      const m = getMeta(p);
+      if (m.conceptual) return v * 0.04;
+      if (m.style === 'classic' || m.style === 'naturalistic') return (5 - v) * 0.03;
+      return 0;
+    }
+  },
+  {
+    id: 'q_intl',
+    label: 'Международность',
+    question: 'Местное признание ← → Международный стиль',
+    poles: ['Локальный', 'Международный'],
+    default: 2,
+    effect: (p, v) => {
+      const m = getMeta(p);
+      return m.intl ? v * 0.04 : 0;
+    }
+  },
+  {
+    id: 'q_fashion',
+    label: 'Мода / Арт',
+    question: 'Художественное ← → Фэшн и гламур',
+    poles: ['Арт', 'Фэшн'],
+    default: 2,
+    effect: (p, v) => {
+      const m = getMeta(p);
+      if (m.fashion) return v * 0.04;
+      if (m.style === 'glamour') return v * 0.05;
+      return 0;
+    }
+  },
+  {
+    id: 'q_activity',
+    label: 'Активность',
+    question: 'Насколько важна текущая активность?',
+    poles: ['Не важно', 'Очень важно'],
+    default: 3,
+    effect: (p, v) => {
+      if (p.nov25 === 'Да') return v * 0.04;
+      if (p.nov25 === 'Нет') return -v * 0.015;
+      return 0;
+    }
+  },
+  {
+    id: 'q_edu',
+    label: 'Обучение',
+    question: 'Важен ли образовательный контент?',
+    poles: ['Нет', 'Да'],
+    default: 2,
+    effect: (p, v) => {
+      const m = getMeta(p);
+      return m.education ? v * 0.035 : 0;
+    }
+  },
+];
+
+// ─── RATING 2025 DATA ─────────────────────────────────────────────
+const RATING_DATA = [
+  { pos: 1,  star: true,  name: 'Илья Рашап',       style: 'Классический художественный ню, fashion-нарратив', platforms: 'Wikipedia, персональный сайт', limits: 'Меньше активности в соцсетях' },
+  { pos: 2,  star: true,  name: 'Max Sauco',         style: 'Арт-ню, концептуальные проекты', platforms: 'Kulturologia, персональный сайт', limits: 'Меньше присутствия в соцсетях' },
+  { pos: 3,  star: true,  name: 'Георгий Чернядьев', style: 'Драматический свет, брутальная эстетика', platforms: '35photo, YouTube, сайт', limits: 'Специфическая стилистика' },
+  { pos: 4,  star: true,  name: 'Марат Сафин',       style: 'Известный авторский стиль', platforms: 'Instagram, Flickr, сайт', limits: 'Устаревающий стиль 2010-х' },
+  { pos: 5,  star: false, name: 'Павел Киселёв',     style: 'Классический ню, работа с формой', platforms: 'YouTube, персональный сайт', limits: 'Меньше активности в соцсетях' },
+  { pos: 6,  star: false, name: 'Дима Борисов',      style: 'Натуралистичный ню, портрет', platforms: 'Instagram', limits: 'Ограниченное присутствие' },
+  { pos: 7,  star: true,  name: 'Андрей Разумовский',style: 'Естественный ню, повседневная эстетика', platforms: 'VK, YouTube', limits: 'Локальная аудитория' },
+  { pos: 8,  star: true,  name: 'Вадим Штейн',       style: 'Арт-ню, концептуальная эстетика', platforms: 'La Personne', limits: 'Нишевость, узкая аудитория' },
+  { pos: 9,  star: false, name: 'Mecuro B Cotto',    style: 'Изящная женская красота, художественный ню', platforms: 'Cameralabs, сайт', limits: 'Меньше массового признания' },
+  { pos: 10, star: false, name: 'Алексей Трифонов',  style: 'Портретный ню, естественность', platforms: 'YouTube, персональный сайт', limits: 'Меньше разнообразия площадок' },
+  { pos: 11, star: true,  name: 'Victor Olivier',    style: 'Фэшн-ню, международный стиль', platforms: 'Vogue, ModelMayhem', limits: 'Меньше в русскоязычном сегменте' },
+  { pos: 12, star: true,  name: 'Exey Panteleev',    style: 'Концептуальный digital-art, технологичный ню', platforms: 'Wikipedia, Telegram, Flickr', limits: 'Сложность стиля для широкой аудитории' },
+  { pos: 13, star: false, name: 'Сергей Ленин',      style: 'Художественный ню, классическая школа', platforms: 'YouTube, персональный сайт', limits: 'Традиционный подход' },
+  { pos: 14, star: false, name: 'Борис Бугаев',      style: 'Разнообразный ню, активность на площадках', platforms: '35awards, VK', limits: 'Нет ярко выраженного стиля' },
+  { pos: 15, star: true,  name: 'Андрей Растегаев',  style: 'Стилизованный ню, работа с цветом', platforms: 'Instagram', limits: 'Ограниченность одной платформой' },
+  { pos: 16, star: false, name: 'Дмитрий Чапала',   style: 'Пейзажный ню, слияние с природой', platforms: '35photo, Sammen', limits: 'Узкая ниша' },
+  { pos: 17, star: false, name: 'Alexander Mavrin',  style: 'Гламурный ню, коммерческая эстетика', platforms: 'VK, TheCityCeleb', limits: 'Коммерческий уклон' },
+  { pos: 18, star: false, name: 'Алиса Вернер',      style: 'Женский взгляд, мягкая эстетика', platforms: 'Beautifulrus, сайт', limits: 'Меньше представленности в соцсетях' },
+  { pos: 19, star: false, name: 'Дима Игнатов',      style: 'Арт-ню, живописные композиции', platforms: 'VK', limits: 'Локальная аудитория' },
+  { pos: 20, star: false, name: 'Иван Ковалёв',      style: 'Интимный арт-ню, психологичный подход', platforms: 'Photar, Dzen, Instagram', limits: 'Меньше галерейного признания' },
+  { pos: 21, star: false, name: 'Алексей Гудвин',    style: 'Практический ню, образовательный контент', platforms: 'Dzen, Telegram', limits: 'Русскоязычная аудитория' },
+  { pos: 22, star: false, name: 'Сергей Смейлов',    style: 'Техничный ню, работа со светом', platforms: 'Telegram', limits: 'Ограниченность одной платформой' },
+  { pos: 23, star: false, name: 'Владимир Николаев', style: 'Альтернативный ню, нестандартные ракурсы', platforms: 'Joyreactor, VK', limits: 'Нишевость стиля' },
+  { pos: 24, star: false, name: 'Stakis Laus',       style: 'Экспериментальный ню, игра с фактурами', platforms: 'VK', limits: 'Локальная аудитория' },
+  { pos: 25, star: false, name: 'Илья Милорадов',    style: 'Графичность, живописный свет, эстетика тела', platforms: '35photo, 500px, Kavyar', limits: 'Узкая аудитория' },
+];
+
+// ─── METRICS ──────────────────────────────────────────────────────
+const METRICS = [
+  { n: 'M1', title: 'Узнаваемость авторского стиля', desc: 'Насколько легко узнать работы без подписи. Уникальность визуального языка.' },
+  { n: 'M2', title: 'Техническое мастерство', desc: 'Свет, композиция, ракурс, резкость, экспозиция.' },
+  { n: 'M3', title: 'Работа с моделью', desc: 'Эмоциональная выразительность, естественность поз, доверие в кадре.' },
+  { n: 'M4', title: 'Сила и оригинальность концепции', desc: 'Глубина и новизна художественного замысла. Наличие авторской идеи.' },
+  { n: 'M5', title: 'Внимание к деталям', desc: 'Отсутствие визуального «мусора», аккуратность кадра и постобработки.' },
+  { n: 'M6', title: 'Качество постобработки', desc: 'Ретушь, колористика, тональность. Техническая сложность и целостность.' },
+  { n: 'M7', title: 'Целостные серии / проекты', desc: 'Умение создавать связные истории, а не только отдельные кадры.' },
+  { n: 'M8', title: 'Публикации и медиа-присутствие', desc: 'Статьи, интервью, соцсети, узнаваемость в профессиональном сообществе.' },
+  { n: 'M9', title: 'Выставки и коллаборации', desc: 'Галерейные проекты, работа с брендами, международные публикации.' },
+  { n: 'M10', title: 'Репутация и этичность практик', desc: 'Отзывы моделей, соблюдение профессиональных и этических стандартов.' },
+];
+
+const SCALE = [
+  { score: '1–2', label: 'Начинающий', desc: 'Грубые технические ошибки, отсутствие стиля или серьёзные этические нарушения.' },
+  { score: '3', label: 'Любитель с амбициями', desc: 'Базовые ошибки, попытки позиционировать себя как фотографа без понимания визуального языка.' },
+  { score: '4', label: 'Пред-профи', desc: 'Огрехи в деталях, неестественные позы, отсутствие целостных серий.' },
+  { score: '5', label: 'Профессионал', desc: 'Стабильная техника, но нет уникального стиля. Надёжный ремесленник.' },
+  { score: '5.5', label: 'Профессионал+', desc: 'Поиск авторского голоса, первые персональные проекты, стиль формируется.' },
+  { score: '6', label: 'Локально признанный художник', desc: 'Узнаваемый стиль, признание в профессиональной нише, высокий техуровень.' },
+  { score: '7', label: 'Высокий уровень', desc: 'Яркий стиль, заметное медийное присутствие, мастер-классы, мощные серии.' },
+  { score: '7.5', label: 'На пороге международного', desc: 'Прорыв за пределы страны: зарубежные публикации и выставки.' },
+  { score: '8', label: 'Международно известный', desc: 'Vogue, Harper\'s Bazaar, персональные выставки в топ-галереях.' },
+  { score: '9', label: 'Выдающийся', desc: 'Сильнейший художественный почерк, новаторские концепции, влияние на индустрию.' },
+  { score: '10', label: 'Легендарный', desc: 'Работы — часть визуальной культуры, влияние на поколения (Ньютон, Пенн, Бурден).' },
+];
+
+// ─── STATE ────────────────────────────────────────────────────────
+let allPhotographers = [];
+let currentAlgo = 'score';
+let qAnswers = {};
+
+QUESTIONS.forEach(q => { qAnswers[q.id] = q.default; });
+
+// ─── PARSE SHORTLIST.MD ───────────────────────────────────────────
+function parseMarkdownTable(md) {
+  const lines = md.split('\n').filter(l => l.trim().startsWith('|'));
+  if (lines.length < 3) return [];
+  const headers = lines[0].split('|').map(s => s.trim()).filter(Boolean);
+  const dataLines = lines.slice(2); // skip header and separator
+  return dataLines.map(line => {
+    const cells = line.split('|').map(s => s.trim()).filter(Boolean);
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (cells[i] || '').trim(); });
+    return obj;
+  }).filter(r => r[headers[0]]);
+}
+
+function normalizeName(name) {
+  return name.trim().replace(/\s+/g, ' ')
+    .replace(/ё/g, 'е').replace(/Ё/g, 'Е')
+    .toLowerCase();
+}
+
+function get2025Pos(name) {
+  const clean = name.trim();
+  if (RATING_2025[clean] !== undefined) return RATING_2025[clean];
+  const norm = normalizeName(clean);
+  for (const [k, v] of Object.entries(RATING_2025)) {
+    if (normalizeName(k) === norm) return v;
+  }
+  return null;
+}
+
+function getMeta(p) {
+  const name = p['Имя'] || p.name || '';
+  const clean = name.trim();
+  if (META[clean]) return META[clean];
+  const norm = normalizeName(clean);
+  for (const [k, v] of Object.entries(META)) {
+    if (normalizeName(k) === norm) return v;
+  }
+  return { style: 'diverse', fashion: false, intl: false, conceptual: false, education: false };
+}
+
+function countPlatforms(p) {
+  const text = (p['Упоминания'] || '') + ' ' + (p['Каналы'] || '');
+  const urls = text.match(/https?:\/\/\S+|[\w-]+\.(com|ru|pro|art|photo|me|net|org|info|io)\S*/gi);
+  return urls ? urls.length : 0;
+}
+
+function extractLinks(p) {
+  const siteText = p['Сайт'] || '';
+  const mentText = p['Упоминания'] || '';
+  const chanText = p['Каналы'] || '';
+  const all = [siteText, mentText, chanText].join(' ');
+  const urls = all.match(/https?:\/\/[^\s]+|[\w.-]+\.(com|ru|pro|art|photo|me|net|org|io|info)(?:\/[^\s]*)?/gi) || [];
+  return [...new Set(urls)].slice(0, 5);
+}
+
+function platformLabel(url) {
+  try {
+    const u = url.startsWith('http') ? new URL(url) : new URL('https://' + url);
+    return u.hostname.replace('www.', '');
+  } catch { return url.split('/')[0]; }
+}
+
+// ─── RANKING ALGORITHMS ───────────────────────────────────────────
+const ALGO_DESCS = {
+  score:       'Сортировка по оценке худсовета (0–10)',
+  activity:    'Взвешенный балл: оценка × коэффициент активности + бонус за платформы',
+  platforms:   'TIOBE-style: вес = оценка × 0.5 + охват платформ × 0.5',
+  questionnaire: 'Персональная оценка на основе ваших предпочтений',
+};
+
+function scoreByScore(p) { return parseFloat(p['Оценка']) || 0; }
+
+function scoreByActivity(p) {
+  const base = parseFloat(p['Оценка']) || 0;
+  const nov = p['Нояб25'] || p['Нояб25 '] || '';
+  let mult = 1.0;
+  if (nov === 'Да') mult = 1.15;
+  else if (nov === 'Нет') mult = 0.92;
+  const platforms = countPlatforms(p);
+  const platBonus = Math.min(platforms / 10, 1) * 0.5;
+  return base * mult + platBonus;
+}
+
+function scoreByPlatforms(p) {
+  const base = parseFloat(p['Оценка']) || 0;
+  const platforms = countPlatforms(p);
+  const maxPlat = 8;
+  const platScore = (Math.min(platforms, maxPlat) / maxPlat) * 10;
+  return base * 0.5 + platScore * 0.5;
+}
+
+function scoreByQuestionnaire(p) {
+  const base = parseFloat(p['Оценка']) || 0;
+  let delta = 0;
+  QUESTIONS.forEach(q => {
+    const v = qAnswers[q.id] || q.default;
+    delta += q.effect(p, v);
+  });
+  return base * (1 + delta);
+}
+
+function getScoreFn() {
+  if (currentAlgo === 'score') return scoreByScore;
+  if (currentAlgo === 'activity') return scoreByActivity;
+  if (currentAlgo === 'platforms') return scoreByPlatforms;
+  if (currentAlgo === 'questionnaire') return scoreByQuestionnaire;
+  return scoreByScore;
+}
+
+// ─── TIOBE ARROW ─────────────────────────────────────────────────
+function tiobeArrow(currentRank, pos2025) {
+  if (pos2025 === null) return { html: '<span class="arr-neu">NEW</span>', cls: '' };
+  const delta = pos2025 - currentRank; // positive = moved up
+  if (delta >= 3) return { html: '▲▲', cls: 'arr-up2' };
+  if (delta >= 1) return { html: '▲', cls: 'arr-up1' };
+  if (delta === 0) return { html: '—', cls: 'arr-neu' };
+  if (delta >= -2) return { html: '▼', cls: 'arr-dn1' };
+  return { html: '▼▼', cls: 'arr-dn2' };
+}
+
+// ─── RENDER SHORTLIST ─────────────────────────────────────────────
+function renderShortlist() {
+  if (!allPhotographers.length) return;
+  const fn = getScoreFn();
+  const sorted = [...allPhotographers]
+    .map(p => ({ ...p, _score: fn(p) }))
+    .sort((a, b) => b._score - a._score);
+
+  const tbody = document.getElementById('rank-body');
+  const pos2025Set = new Set(Object.keys(RATING_2025).map(k => normalizeName(k)));
+
+  tbody.innerHTML = sorted.map((p, i) => {
+    const rank = i + 1;
+    const name = (p['Имя'] || '').trim();
+    const pos2025 = get2025Pos(name);
+    const { html: arrHtml, cls: arrCls } = tiobeArrow(rank, pos2025);
+    const score = parseFloat(p['Оценка']) || 0;
+    const fillPct = (score / 10 * 100).toFixed(0);
+    const links = extractLinks(p);
+    const nov = (p['Нояб25'] || '').trim();
+    const site = (p['Сайт'] || '').trim();
+    const displayName = site
+      ? `<a href="${site}" target="_blank" rel="noopener">${name}</a>`
+      : name;
+    const isNew = pos2025 === null;
+    const inRating = pos2025Set.has(normalizeName(name));
+    const metaStyle = getMeta(p).style;
+    const styleLabel = {
+      classic: 'Классика', conceptual: 'Концепт', dramatic: 'Драма',
+      naturalistic: 'Натурализм', natural: 'Натуральный', fashion: 'Фэшн',
+      signature: 'Авторский стиль', glamour: 'Гламур', diverse: 'Разнообразный',
+      stylized: 'Стилизованный', landscape: 'Пейзажный', soft: 'Мягкий',
+      intimate: 'Интимный', educational: 'Образовательный', technical: 'Техничный',
+      alternative: 'Альтернативный', experimental: 'Эксперимент', graphic: 'Графика',
+    }[metaStyle] || metaStyle;
+
+    const issueTitle = encodeURIComponent(`Пересмотр оценки: ${name}`);
+    const issueBody = encodeURIComponent(`**Фотограф:** ${name}\n**Текущая оценка:** ${score}\n**Предлагаемая оценка:** \n**Обоснование:** \n\n_Ссылки на работы:_`);
+    const issueUrl = `https://github.com/Exey/xyd/issues/new?title=${issueTitle}&body=${issueBody}`;
+
+    const platHtml = links.map(u =>
+      `<a class="plat-tag" href="${u.startsWith('http') ? u : 'https://' + u}" target="_blank" rel="noopener">${platformLabel(u)}</a>`
+    ).join('');
+
+    const novHtml = nov === 'Да'
+      ? `<span class="nov-badge nov-yes">Да ✓</span>`
+      : nov === 'Нет' ? `<span class="nov-badge nov-no">Нет</span>` : '';
+
+    return `<tr>
+      <td class="rank-num">${rank}</td>
+      <td class="rank-arrow ${arrCls}">${pos2025 !== null ? `<span title="2025: #${pos2025}">${arrHtml}</span>` : `<span class="arr-up2" title="Новый в рейтинге">NEW</span>`}</td>
+      <td>
+        <div class="ph-name">${displayName}${isNew ? '<span class="new-badge">NEW</span>' : ''}</div>
+        <div class="ph-style">${styleLabel}${nov ? ' · ' + novHtml : ''}</div>
+      </td>
+      <td>
+        <div class="score-bar-wrap">
+          <span class="score-val">${score}</span>
+          <div class="score-bar"><div class="score-fill" style="width:${fillPct}%"></div></div>
+        </div>
+      </td>
+      <td><div class="platform-links">${platHtml}</div></td>
+      <td><a class="challenge-btn" href="${issueUrl}" target="_blank" rel="noopener">Оспорить</a></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('rank-table').style.display = 'table';
+}
+
+// ─── ALGO SWITCHER ────────────────────────────────────────────────
+function setAlgo(algo) {
+  currentAlgo = algo;
+  document.querySelectorAll('.algo-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('algo-desc').textContent = ALGO_DESCS[algo];
+  const qEl = document.getElementById('questionnaire');
+  qEl.style.display = algo === 'questionnaire' ? 'block' : 'none';
+  renderShortlist();
+}
+
+// ─── QUESTIONNAIRE UI ─────────────────────────────────────────────
+function buildQuestionnaire() {
+  const grid = document.getElementById('q-grid');
+  grid.innerHTML = QUESTIONS.map(q => `
+    <div class="q-item">
+      <label>${q.question}</label>
+      <div class="q-poles"><span>${q.poles[0]}</span><span>${q.poles[1]}</span></div>
+      <input type="range" min="0" max="5" step="1" value="${q.default}" id="${q.id}"
+        oninput="qAnswers['${q.id}']=+this.value; document.getElementById('val_${q.id}').textContent=this.value">
+      <span class="q-val" id="val_${q.id}">${q.default}</span>
+    </div>
+  `).join('');
+}
+
+function applyQuestionnaire() { renderShortlist(); }
+
+// ─── RATING 2025 RENDER ───────────────────────────────────────────
+function renderRating() {
+  document.getElementById('rating-body').innerHTML = RATING_DATA.map(r => `
+    <tr>
+      <td><span class="pos-num">${r.pos}</span>${r.star ? '<span class="pos-star">★</span>' : ''}</td>
+      <td><span class="r-name">${r.name}</span></td>
+      <td><span class="r-style">${r.style}</span></td>
+      <td><span class="r-platform">${r.platforms}</span></td>
+      <td><span class="r-limit">${r.limits}</span></td>
+    </tr>
+  `).join('');
+}
+
+// ─── CRITERIA RENDER ─────────────────────────────────────────────
+function renderCriteria() {
+  document.getElementById('metrics-grid').innerHTML = METRICS.map(m => `
+    <div class="metric-card">
+      <div class="metric-num">${m.n}</div>
+      <div class="metric-title">${m.title}</div>
+      <div class="metric-desc">${m.desc}</div>
+    </div>
+  `).join('');
+  document.getElementById('scale-grid').innerHTML = SCALE.map(s => `
+    <div class="scale-card">
+      <div class="scale-score">${s.score}</div>
+      <div class="scale-label">${s.label}</div>
+      <div class="scale-examples">${s.desc}</div>
+    </div>
+  `).join('');
+}
+
+// ─── TAB SWITCHER ─────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────
+async function init() {
+  renderRating();
+  renderCriteria();
+  buildQuestionnaire();
+
+  try {
+    const res = await fetch('SHORTLIST.md');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    allPhotographers = parseMarkdownTable(text);
+    document.getElementById('loading').style.display = 'none';
+    renderShortlist();
+  } catch (e) {
+    document.getElementById('loading').textContent = 'Ошибка загрузки SHORTLIST.md: ' + e.message;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
