@@ -51,19 +51,70 @@ body {
   min-height: 100vh;
 }
 
-/* HEADER — sky + clouds + palm leaves */
+/* HEADER — pixel anime sky */
+@keyframes hdr-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes px-drift {
+  0%   { transform: translateY(0px);  opacity: .85; }
+  50%  { opacity: 1; }
+  100% { transform: translateY(-10px); opacity: .55; }
+}
+@keyframes px-drift2 {
+  0%   { transform: translateY(-6px); opacity: .6; }
+  100% { transform: translateY(4px);  opacity: .95; }
+}
 header {
-  background: var(--header-grad);
+  background: linear-gradient(-40deg, #0267C4, #2784d8, #56A4D6, #7ec5e5, #56A4D6, #BA7579, #FE9CA2, #0267C4);
+  background-size: 500% 500%;
+  animation: hdr-shift 10s ease infinite;
   padding: 18px 24px;
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
   position: relative; overflow: hidden;
-  box-shadow: 0 4px 20px #0267C433;
+  image-rendering: pixelated;
 }
-.header-deco {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+/* Pixel particle layer 1 — white & cotton-candy squares */
+header::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 3px; background: transparent;
   pointer-events: none; z-index: 0;
+  box-shadow:
+    42px 12px 0 0 rgba(255,255,255,.9),   100px  5px 0 0 rgba(254,156,162,.85),
+    178px 22px 0 0 rgba(255,255,255,.75), 255px  8px 0 0 rgba(86,164,214,.9),
+    338px 30px 0 0 rgba(255,255,255,.8),  415px 14px 0 0 rgba(254,156,162,.9),
+    498px  3px 0 0 rgba(255,255,255,.7),  578px 24px 0 0 rgba(86,164,214,.8),
+    658px 10px 0 0 rgba(255,255,255,.9),  735px 34px 0 0 rgba(254,156,162,.7),
+    818px  7px 0 0 rgba(255,255,255,.8),  898px 18px 0 0 rgba(86,164,214,.9),
+    978px 29px 0 0 rgba(255,255,255,.7), 1058px 11px 0 0 rgba(254,156,162,.8),
+   1138px  4px 0 0 rgba(255,255,255,.9), 1218px 26px 0 0 rgba(86,164,214,.75),
+   1298px 16px 0 0 rgba(255,255,255,.7),  70px 38px 0 0 rgba(254,156,162,.6),
+    152px 42px 0 0 rgba(255,255,255,.5),  232px 28px 0 0 rgba(86,164,214,.7),
+    312px 18px 0 0 rgba(255,255,255,.65), 392px 40px 0 0 rgba(254,156,162,.55),
+    472px 32px 0 0 rgba(255,255,255,.75), 552px 44px 0 0 rgba(86,164,214,.6);
+  animation: px-drift 3.5s ease-in-out infinite alternate;
 }
-header > *:not(.header-deco) { position: relative; z-index: 1; }
+/* Pixel particle layer 2 — offset timing */
+header::after {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 3px; background: transparent;
+  pointer-events: none; z-index: 0;
+  box-shadow:
+    22px 38px 0 0 rgba(255,255,255,.7),  138px 28px 0 0 rgba(254,156,162,.8),
+    218px 42px 0 0 rgba(255,255,255,.6),  298px 16px 0 0 rgba(86,164,214,.75),
+    378px  6px 0 0 rgba(255,255,255,.85), 458px 38px 0 0 rgba(254,156,162,.65),
+    538px 22px 0 0 rgba(255,255,255,.7),  618px 44px 0 0 rgba(86,164,214,.55),
+    698px 30px 0 0 rgba(255,255,255,.8),  778px  8px 0 0 rgba(254,156,162,.9),
+    858px 40px 0 0 rgba(255,255,255,.6),  938px 20px 0 0 rgba(86,164,214,.8),
+   1018px 36px 0 0 rgba(255,255,255,.75),1098px 14px 0 0 rgba(254,156,162,.7),
+   1178px 44px 0 0 rgba(255,255,255,.6), 1258px 24px 0 0 rgba(86,164,214,.85),
+   1338px 10px 0 0 rgba(255,255,255,.9);
+  animation: px-drift2 4.2s ease-in-out infinite alternate;
+}
+header > * { position: relative; z-index: 1; }
 .logo {
   font-size: 22px; font-weight: 900; letter-spacing: -.5px; color: #fff;
   text-shadow: 0 0 16px #ffffff55, 0 2px 6px #00000055;
@@ -266,31 +317,6 @@ footer a:hover { color: var(--blue-bell); }
 <body>
 
 <header>
-  <!-- Clouds + palm leaves -->
-  <svg class="header-deco" viewBox="0 0 1400 88" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <!-- Clouds -->
-    <g fill="#fff" opacity=".52">
-      <ellipse cx="185" cy="26" rx="74" ry="18"/><ellipse cx="152" cy="36" rx="44" ry="15"/><ellipse cx="218" cy="35" rx="54" ry="16"/>
-      <ellipse cx="630" cy="19" rx="92" ry="20"/><ellipse cx="592" cy="30" rx="56" ry="16"/><ellipse cx="668" cy="28" rx="62" ry="18"/>
-      <ellipse cx="1060" cy="24" rx="82" ry="19"/><ellipse cx="1022" cy="35" rx="50" ry="14"/><ellipse cx="1098" cy="34" rx="56" ry="15"/>
-      <ellipse cx="390" cy="13" rx="52" ry="12"/><ellipse cx="366" cy="19" rx="32" ry="10"/><ellipse cx="414" cy="18" rx="37" ry="11"/>
-      <ellipse cx="870" cy="15" rx="46" ry="12"/><ellipse cx="848" cy="22" rx="28" ry="9"/><ellipse cx="892" cy="21" rx="33" ry="10"/>
-    </g>
-    <!-- Left palm leaves -->
-    <g>
-      <path d="M-35,90 C18,62 82,32 168,7 C108,28 44,58 -35,90Z" fill="#6FAD56" opacity=".88"/>
-      <path d="M-18,72 C38,56 112,48 200,56 C140,48 58,58 -18,72Z" fill="#9EC189" opacity=".82"/>
-      <path d="M22,90 C20,53 27,16 54,-14 C38,16 24,53 22,90Z" fill="#3D7030" opacity=".78"/>
-      <path d="M-10,52 C28,35 78,14 118,0 C80,18 30,38 -10,52Z" fill="#9EC189" opacity=".58"/>
-    </g>
-    <!-- Right palm leaves -->
-    <g transform="translate(1400,0) scale(-1,1)">
-      <path d="M-35,90 C18,62 82,32 168,7 C108,28 44,58 -35,90Z" fill="#6FAD56" opacity=".88"/>
-      <path d="M-18,72 C38,56 112,48 200,56 C140,48 58,58 -18,72Z" fill="#9EC189" opacity=".82"/>
-      <path d="M22,90 C20,53 27,16 54,-14 C38,16 24,53 22,90Z" fill="#3D7030" opacity=".78"/>
-      <path d="M-10,52 C28,35 78,14 118,0 C80,18 30,38 -10,52Z" fill="#9EC189" opacity=".58"/>
-    </g>
-  </svg>
   <div class="logo">Худсовет</div>
   <div class="site-title">Рейтинг арт-ню фотографов России</div>
   <nav>
@@ -309,7 +335,7 @@ footer a:hover { color: var(--blue-bell); }
       <button class="algo-btn active" onclick="setAlgo('score')">По оценке</button>
       <button class="algo-btn" onclick="setAlgo('activity')">По активности</button>
       <button class="algo-btn" onclick="setAlgo('platforms')">По охвату</button>
-      <button class="algo-btn" onclick="setAlgo('questionnaire')">Моя анкета</button>
+      <button class="algo-btn" onclick="setAlgo('questionnaire')">Свой фильтр</button>
     </div>
     <span class="algo-desc" id="algo-desc">Сортировка по оценке худсовета (0–10)</span>
   </div>
@@ -437,7 +463,7 @@ const STYLE_LABELS = {
   classic:      { name: 'Классика',      desc: 'Классическое художественное ню — академическая школа, работа с формой, светом и пропорциями' },
   conceptual:   { name: 'Концепт',       desc: 'Концептуальное арт-ню — идея первична, тело как художественный нарратив' },
   dramatic:     { name: 'Драма',         desc: 'Драматический свет, брутальная или контрастная эстетика' },
-  fantastic:    { name: 'Фантастическое',desc: 'Фантастический ню с активной цифровой гиперболизацией и ретушью' },
+  fantastic:    { name: 'Крафтовый гиперреализм', desc: 'Активная цифровая гиперболизация тела: форма доведена до идеала, выходящего за рамки реальности' },
   natural:      { name: 'Натуральный',   desc: 'Естественный ню без постановочности, повседневная эстетика' },
   naturalistic: { name: 'Натурализм',    desc: 'Натуралистичное ню, работа с реальной природой тела без прикрас' },
   fashion:      { name: 'Фэшн',          desc: 'Фэшн-ню с международным стилем, работа с образом и брендом' },
@@ -526,7 +552,7 @@ const RATING_DATA = [
   { pos: 3,  star: true,  name: 'Георгий Чернядьев', style: 'Драматический свет, брутальная эстетика', platforms: '35photo, YouTube, сайт', limits: 'Специфическая стилистика' },
   { pos: 4,  star: true,  name: 'Марат Сафин',       style: 'Известный авторский стиль', platforms: 'Instagram, Flickr, сайт', limits: 'Устаревающий стиль 2010-х' },
   { pos: 5,  star: false, name: 'Павел Киселёв',     style: 'Классический ню, работа с формой', platforms: 'YouTube, персональный сайт', limits: 'Меньше активности в соцсетях' },
-  { pos: 6,  star: false, name: 'Дима Борисов',      style: 'Фантастический ню (цифровая гиперболизация тела), портрет', platforms: 'Instagram', limits: 'Ограниченное присутствие, спорный реализм' },
+  { pos: 6,  star: false, name: 'Дима Борисов',      style: 'Крафтовый гиперреализм, портрет', platforms: 'Instagram', limits: 'Ограниченное присутствие; расхождение с реальностью тела' },
   { pos: 7,  star: true,  name: 'Андрей Разумовский',style: 'Естественный ню, повседневная эстетика', platforms: 'VK, YouTube', limits: 'Локальная аудитория' },
   { pos: 8,  star: true,  name: 'Вадим Штейн',       style: 'Арт-ню, концептуальная эстетика', platforms: 'La Personne', limits: 'Нишевость, узкая аудитория' },
   { pos: 9,  star: false, name: 'Mecuro B Cotto',    style: 'Изящная женская красота, художественный ню', platforms: 'Cameralabs, сайт', limits: 'Меньше массового признания' },
@@ -538,14 +564,14 @@ const RATING_DATA = [
   { pos: 15, star: true,  name: 'Андрей Растегаев',  style: 'Стилизованный ню, работа с цветом', platforms: 'Instagram', limits: 'Ограниченность одной платформой' },
   { pos: 16, star: false, name: 'Дмитрий Чапала',   style: 'Пейзажный ню, слияние с природой', platforms: '35photo, Sammen', limits: 'Узкая ниша' },
   { pos: 17, star: false, name: 'Alexander Mavrin',  style: 'Гламурный ню, коммерческая эстетика', platforms: 'VK, TheCityCeleb', limits: 'Коммерческий уклон' },
-  { pos: 18, star: false, name: 'Алиса Вернер',      style: 'Женский взгляд, деликатная эстетика', platforms: 'Beautifulrus, сайт', limits: 'Меньше представленности в соцсетях; трактовка стиля вызывает дискуссии' },
+  { pos: 18, star: false, name: 'Алиса Вернер',      style: 'Мужской взгляд, деликатная эстетика', platforms: 'Beautifulrus, сайт', limits: 'Меньше представленности в соцсетях' },
   { pos: 19, star: false, name: 'Дима Игнатов',      style: 'Арт-ню, живописные композиции', platforms: 'VK', limits: 'Локальная аудитория' },
   { pos: 20, star: false, name: 'Иван Ковалёв',      style: 'Интимный арт-ню, психологичный подход', platforms: 'Photar, Dzen, Instagram', limits: 'Меньше галерейного признания' },
   { pos: 21, star: false, name: 'Алексей Гудвин',    style: 'Практический ню, образовательный контент', platforms: 'Dzen, Telegram', limits: 'Русскоязычная аудитория' },
   { pos: 22, star: false, name: 'Сергей Смейлов',    style: 'Техничный ню, работа со светом', platforms: 'Telegram', limits: 'Ограниченность одной платформой' },
   { pos: 23, star: false, name: 'Владимир Николаев', style: 'Альтернативный ню, нестандартные ракурсы', platforms: 'Joyreactor, VK', limits: 'Нишевость стиля' },
   { pos: 24, star: false, name: 'Stakis Laus',       style: 'Экспериментальный ню, игра с фактурами', platforms: 'VK', limits: 'Локальная аудитория' },
-  { pos: 25, star: false, name: 'Илья Милорадов',    style: 'Графичность, живописный свет, эстетика тела', platforms: '35photo, 500px, Kavyar', limits: 'Формирующаяся международная аудитория' },
+  { pos: 25, star: false, name: 'Илья Милорадов',    style: 'Графичность, живописный свет, эстетика тела', platforms: '35photo, 500px, Kavyar', limits: 'Неустоявшийся авторский стиль' },
 ];
 
 // ─── METRICS ──────────────────────────────────────────────────────
@@ -654,7 +680,7 @@ const ALGO_DESCS = {
   score:       'Сортировка по оценке худсовета (0–10)',
   activity:    'Взвешенный балл: оценка × коэффициент активности + бонус за платформы',
   platforms:   'TIOBE-style: вес = оценка × 0.5 + охват платформ × 0.5',
-  questionnaire: 'Персональная оценка на основе ваших предпочтений',
+  questionnaire: 'Свой фильтр — настройте веса по своим предпочтениям',
 };
 
 function scoreByScore(p) { return parseFloat(p['Оценка']) || 0; }
