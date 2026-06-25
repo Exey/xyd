@@ -52,7 +52,7 @@ body {
 header {
   background: linear-gradient(-40deg, #1E1514, #5A2A20, #C4706A, #FE9CA2, #C4706A, #7EA869, #1E1514);
   background-size: 500% 500%;
-  animation: hdr-shift 40s ease infinite;
+  animation: hdr-shift 160s ease infinite;
   padding: 18px 24px;
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
   position: relative; overflow: hidden;
@@ -103,6 +103,12 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .algo-btn:hover { background: var(--bg); border-color: var(--rose); color: var(--rose); }
 .algo-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
 .algo-desc { font-size: 11px; color: var(--muted); max-width: 420px; }
+.add-ph-btn {
+  margin-left: auto; background: transparent; border: 1.5px solid var(--rose);
+  color: var(--rose); font-size: 12px; font-weight: 700; padding: 5px 14px;
+  border-radius: 5px; text-decoration: none; transition: all .15s; white-space: nowrap;
+}
+.add-ph-btn:hover { background: var(--rose); color: #fff; }
 
 /* QUESTIONNAIRE */
 #questionnaire {
@@ -275,11 +281,10 @@ footer a:hover { color: var(--ink); }
   <div class="algo-panel">
     <span class="algo-label">Алгоритм</span>
     <div class="algo-btns">
-      <button class="algo-btn" onclick="setAlgo('score')">По оценке</button>
       <button class="algo-btn active" onclick="setAlgo('activity')">По активности</button>
-      <button class="algo-btn" onclick="setAlgo('platforms')">По охвату</button>
       <button class="algo-btn" onclick="setAlgo('questionnaire')">Свой фильтр</button>
     </div>
+    <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Сайт%3A**%20%0A**Платформы%3A**%20%0A**Стиль%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener">+ Добавить фотографа</a>
     <span class="algo-desc" id="algo-desc">Взвешенный балл: оценка × коэффициент активности + бонус за платформы</span>
   </div>
 
@@ -385,7 +390,7 @@ const META = {
   'Георгий Чернядьев':     { style: 'dramatic',     fashion: false, intl: false, conceptual: false, education: false },
   'Марат Сафин':            { style: 'crafted',      fashion: false, intl: false, conceptual: false, education: false },
   'Павел Киселёв':          { style: 'classic',      fashion: false, intl: false, conceptual: false, education: true  },
-  'Дима Борисов':           { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
+  'Дима Борисов':           { style: 'crafted',      fashion: false, intl: false, conceptual: false, education: false },
   'Андрей Разумовский':     { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
   'Вадим Штейн':            { style: 'conceptual',   fashion: false, intl: false, conceptual: true,  education: false },
   'Mecuro B Cotto':         { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
@@ -402,25 +407,25 @@ const META = {
   'Иван Ковалев':           { style: 'academism',    fashion: false, intl: false, conceptual: false, education: false },
   'Иван Ковалёв':           { style: 'academism',    fashion: false, intl: false, conceptual: false, education: false },
   'Алексей Гудвин':         { style: 'academism',    fashion: false, intl: false, conceptual: false, education: true  },
-  'Сергей Смейлов':         { style: 'academism',    fashion: false, intl: false, conceptual: false, education: false },
-  'Владимир Николаев':      { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
-  'Stakis Laus':            { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
+  'Сергей Смейлов':         { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
+  'Владимир Николаев':      { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
+  'Stakis Laus':            { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Илья Милорадов':         { style: 'glamour',      fashion: false, intl: true,  conceptual: false, education: false },
-  'Денис Егоров':           { style: 'conceptual',   fashion: false, intl: false, conceptual: false, education: false },
+  'Денис Егоров':           { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Кар Григорян':           { style: 'crafted',      fashion: false, intl: false, conceptual: false, education: false },
   'Владимир Стефанович':    { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
   'Лиза Шабурова':          { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
   'Дмитрий Плотников':      { style: 'glamour',      fashion: true,  intl: false, conceptual: false, education: false },
   'Максим Густарев':        { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Георгий Казанцев (GAK)': { style: 'thug',         fashion: false, intl: false, conceptual: false, education: false },
-  'Gene Oryx':              { style: 'experimental', fashion: false, intl: false, conceptual: true,  education: false },
-  'Марина Щеглова':         { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
-  'Рома Рома':              { style: 'conceptual',   fashion: false, intl: false, conceptual: false, education: false },
+  'Gene Oryx':              { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
+  'Марина Щеглова':         { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
+  'Рома Рома':              { style: 'thug',         fashion: false, intl: false, conceptual: false, education: false },
   'Александр Татуевский':   { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
   'Алекс Талюка':           { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
-  'Максим Чуприн':          { style: 'experimental', fashion: false, intl: false, conceptual: false, education: false },
+  'Максим Чуприн':          { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Пётр Че':                { style: 'intimate',     fashion: false, intl: false, conceptual: false, education: false },
-  'Игорь Куприянов':        { style: 'classic',      fashion: false, intl: false, conceptual: false, education: false },
+  'Игорь Куприянов':        { style: 'glamour',      fashion: false, intl: false, conceptual: false, education: false },
   'Dmitry Romanoff':        { style: 'dramatic',     fashion: false, intl: false, conceptual: false, education: false },
 };
 
