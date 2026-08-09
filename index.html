@@ -123,11 +123,13 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 }
 .rank-table td { padding: 10px 10px; border-bottom: 1px solid var(--border2); vertical-align: middle; }
 .rank-table tr:hover td { background: #F5EDEA44; }
+.rank-table th.sortable { cursor: pointer; user-select: none; }
+.rank-table th.sortable:hover { color: var(--rose); }
+.rank-table th.sorted { color: var(--text); }
 .rank-num { color: var(--muted); font-weight: 900; font-size: 15px; min-width: 32px; }
 .ph-name { font-weight: 700; color: var(--text); font-size: 14px; }
 .ph-name a { color: inherit; text-decoration: none; }
 .ph-name a:hover { color: var(--rose); }
-.ph-style { font-size: 11px; margin-top: 4px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
 .ph-style-tag {
   font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
   border: 1.5px solid; display: inline-block; cursor: default;
@@ -150,6 +152,11 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   padding: 10px 24px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
 }
 .legend-label { font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: .8px; text-transform: uppercase; margin-right: 4px; }
+.style-tag.clickable { cursor: pointer; transition: transform .1s, box-shadow .1s; }
+.style-tag.clickable:hover { transform: translateY(-1px); }
+.style-tag.clickable.active { box-shadow: 0 0 0 2px var(--ink) inset; }
+.style-tag.legend-all { background: var(--card); border-color: var(--border); color: var(--text); }
+.style-tag.legend-all.active { box-shadow: 0 0 0 2px var(--ink) inset; }
 
 /* RATING 2025 TAB */
 .rating-wrap { padding: 20px 24px; }
@@ -203,8 +210,7 @@ footer a { color: var(--rose); text-decoration: none; font-weight: 700; }
 footer a:hover { color: var(--ink); }
 
 @media (max-width: 700px) {
-  .rank-table th:nth-child(5), .rank-table td:nth-child(5) { display: none; }
-  .rank-table th:nth-child(6), .rank-table td:nth-child(6) { display: none; }
+  .rank-table th.col-hide-narrow, .rank-table td.col-hide-narrow { display: none; }
   .table-wrap { padding: 12px; }
   .shortlist-intro { padding: 12px; }
   .shortlist-col { padding: 12px; }
@@ -239,32 +245,14 @@ footer a:hover { color: var(--ink); }
       <div class="shortlist-col">
         <h3>Фотографы</h3>
         <table class="rank-table" id="ph-table">
-          <thead>
-            <tr>
-              <th style="width:32px">#</th>
-              <th>Фотограф</th>
-              <th>Rating</th>
-              <th>Подписчики</th>
-              <th>Просмотры</th>
-              <th>Виральность</th>
-            </tr>
-          </thead>
+          <thead><tr id="ph-head"></tr></thead>
           <tbody id="ph-body"></tbody>
         </table>
       </div>
       <div class="shortlist-col">
         <h3>Модели</h3>
         <table class="rank-table" id="model-table">
-          <thead>
-            <tr>
-              <th style="width:32px">#</th>
-              <th>Модель</th>
-              <th>Rating</th>
-              <th>Подписчики</th>
-              <th>Просмотры</th>
-              <th>Виральность</th>
-            </tr>
-          </thead>
+          <thead><tr id="model-head"></tr></thead>
           <tbody id="model-body"></tbody>
         </table>
       </div>
@@ -421,48 +409,111 @@ function ratingSortVal(raw) {
   return Number.isNaN(num) ? -1 : num;
 }
 
-function renderLegend() {
-  const bar = document.getElementById('style-legend-bar');
-  bar.innerHTML = '<span class="legend-label">Поджанры ню:</span>' +
-    Object.values(allTags).map(v =>
-      `<span class="style-tag" title="${v.desc}" style="background:${v.bg};border-color:${v.border};color:${v.text}">${v.name}</span>`
-    ).join('');
+function parseNumeric(raw) {
+  const cleaned = (raw || '').replace(/[^\d.,-]/g, '').replace(',', '.');
+  if (!cleaned) return null;
+  const num = parseFloat(cleaned);
+  return Number.isNaN(num) ? null : num;
 }
 
-function renderShortlistRow(p, rank, showTag) {
-  const { display, link } = parseTelegramName(p['ID/Username']);
-  const nameHtml = link ? `<a href="${link}" target="_blank" rel="noopener">${display}</a>` : display;
+function tagMetaFor(p) {
   const tag = (p['Tag'] || '').trim();
-  const tagMeta = tag ? (allTags[tag] || { name: tag, ...DEFAULT_TAG_COLOR, desc: '' }) : null;
-  const tagHtml = showTag && tagMeta
-    ? `<div class="ph-style"><span class="ph-style-tag" title="${tagMeta.desc || ''}" style="background:${tagMeta.bg};border-color:${tagMeta.border};color:${tagMeta.text}">${tagMeta.name}</span></div>`
-    : '';
+  if (!tag) return null;
+  return allTags[tag] || { name: tag, ...DEFAULT_TAG_COLOR, desc: '' };
+}
+
+function tagCellHtml(p) {
+  const meta = tagMetaFor(p);
+  if (!meta) return '';
+  return `<span class="ph-style-tag" title="${meta.desc || ''}" style="background:${meta.bg};border-color:${meta.border};color:${meta.text}">${meta.name}</span>`;
+}
+
+function nameCellHtml(p) {
+  const { display, link } = parseTelegramName(p['ID/Username']);
+  const html = link ? `<a href="${link}" target="_blank" rel="noopener">${display}</a>` : display;
+  return `<div class="ph-name">${html}</div>`;
+}
+
+function ratingCellHtml(p) {
   const ratingRaw = (p['Rating'] || '').trim();
   const ratingNum = parseFloat(ratingRaw);
   const hasRating = !Number.isNaN(ratingNum);
-  const fillPct = hasRating ? Math.min(ratingNum / 0.8 * 100, 100).toFixed(0) : 0;
-  const ratingHtml = hasRating
-    ? `<div class="score-bar-wrap"><span class="score-val">${ratingRaw}</span><div class="score-bar"><div class="score-fill" style="width:${fillPct}%"></div></div></div>`
-    : `<span class="score-val" style="color:var(--muted)">—</span>`;
-  return `<tr>
-    <td class="rank-num">${rank}</td>
-    <td>
-      <div class="ph-name">${nameHtml}</div>
-      ${tagHtml}
-    </td>
-    <td>${ratingHtml}</td>
-    <td>${p['Followers'] || '—'}</td>
-    <td>${p['Views'] || '—'}</td>
-    <td>${p['Viral share'] || '—'}</td>
-  </tr>`;
+  if (!hasRating) return `<span class="score-val" style="color:var(--muted)">—</span>`;
+  const fillPct = Math.min(ratingNum / 0.8 * 100, 100).toFixed(0);
+  return `<div class="score-bar-wrap"><span class="score-val">${ratingRaw}</span><div class="score-bar"><div class="score-fill" style="width:${fillPct}%"></div></div></div>`;
+}
+
+const PH_COLUMNS = [
+  { key: 'tag',       label: 'Поджанр',    sortVal: p => (tagMetaFor(p)?.name || '').toLowerCase(), cell: tagCellHtml },
+  { key: 'name',      label: 'Фотограф',   sortVal: p => parseTelegramName(p['ID/Username']).display.toLowerCase(), cell: nameCellHtml },
+  { key: 'rating',    label: 'Rating',     sortVal: p => ratingSortVal(p['Rating']), cell: ratingCellHtml },
+  { key: 'followers', label: 'Подписчики', sortVal: p => parseNumeric(p['Followers']) ?? -1, cell: p => p['Followers'] || '—' },
+  { key: 'views',     label: 'Просмотры',  sortVal: p => parseNumeric(p['Views']) ?? -1, cell: p => p['Views'] || '—', hideNarrow: true },
+  { key: 'viral',     label: 'Виральность',sortVal: p => parseNumeric(p['Viral share']) ?? -1, cell: p => p['Viral share'] || '—', hideNarrow: true },
+];
+const MODEL_COLUMNS = PH_COLUMNS.filter(c => c.key !== 'tag').map(c => c.key === 'name' ? { ...c, label: 'Модель' } : c);
+
+let phSort = { key: 'rating', dir: 'desc' };
+let modelSort = { key: 'rating', dir: 'desc' };
+let activeTagFilter = null;
+const TEXT_SORT_KEYS = new Set(['tag', 'name']);
+
+function sortTable(which, key) {
+  const state = which === 'ph' ? phSort : modelSort;
+  if (state.key === key) {
+    state.dir = state.dir === 'desc' ? 'asc' : 'desc';
+  } else {
+    state.key = key;
+    state.dir = TEXT_SORT_KEYS.has(key) ? 'asc' : 'desc';
+  }
+  renderShortlistTables();
+}
+
+function filterByTag(tagName) {
+  activeTagFilter = tagName;
+  renderLegend();
+  renderShortlistTables();
+}
+
+function renderLegend() {
+  const bar = document.getElementById('style-legend-bar');
+  const tagsHtml = Object.values(allTags).map(v => {
+    const active = activeTagFilter === v.name ? ' active' : '';
+    return `<span class="style-tag clickable${active}" title="${v.desc}" style="background:${v.bg};border-color:${v.border};color:${v.text}" onclick="filterByTag('${v.name.replace(/'/g, "\\'")}')">${v.name}</span>`;
+  }).join('');
+  const allActive = activeTagFilter === null ? ' active' : '';
+  bar.innerHTML = `<span class="legend-label">Поджанры ню:</span>${tagsHtml}<span class="style-tag clickable legend-all${allActive}" onclick="filterByTag(null)">Все</span>`;
+}
+
+function renderHead(rowId, columns, sortState) {
+  const row = document.getElementById(rowId);
+  row.innerHTML = '<th style="width:32px">#</th>' + columns.map(c => {
+    const isSorted = sortState.key === c.key;
+    const arrow = isSorted ? (sortState.dir === 'desc' ? ' ▼' : ' ▲') : '';
+    const cls = ['sortable', c.hideNarrow ? 'col-hide-narrow' : '', isSorted ? 'sorted' : ''].filter(Boolean).join(' ');
+    return `<th class="${cls}" onclick="sortTable('${rowId === 'ph-head' ? 'ph' : 'model'}','${c.key}')">${c.label}${arrow}</th>`;
+  }).join('');
+}
+
+function renderRows(data, columns, sortState) {
+  const col = columns.find(c => c.key === sortState.key) || columns[0];
+  const sorted = [...data].sort((a, b) => {
+    const av = col.sortVal(a), bv = col.sortVal(b);
+    const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), 'ru');
+    return sortState.dir === 'desc' ? -cmp : cmp;
+  });
+  return sorted.map((p, i) => `<tr>
+    <td class="rank-num">${i + 1}</td>
+    ${columns.map(c => `<td${c.hideNarrow ? ' class="col-hide-narrow"' : ''}>${c.cell(p)}</td>`).join('')}
+  </tr>`).join('');
 }
 
 function renderShortlistTables() {
-  const sortFn = (a, b) => ratingSortVal(b['Rating']) - ratingSortVal(a['Rating']);
-  const phSorted = [...allPhotographers].sort(sortFn);
-  const modelSorted = [...allModels].sort(sortFn);
-  document.getElementById('ph-body').innerHTML = phSorted.map((p, i) => renderShortlistRow(p, i + 1, true)).join('');
-  document.getElementById('model-body').innerHTML = modelSorted.map((p, i) => renderShortlistRow(p, i + 1, false)).join('');
+  const phData = activeTagFilter ? allPhotographers.filter(p => (p['Tag'] || '').trim() === activeTagFilter) : allPhotographers;
+  renderHead('ph-head', PH_COLUMNS, phSort);
+  renderHead('model-head', MODEL_COLUMNS, modelSort);
+  document.getElementById('ph-body').innerHTML = renderRows(phData, PH_COLUMNS, phSort);
+  document.getElementById('model-body').innerHTML = renderRows(allModels, MODEL_COLUMNS, modelSort);
   document.getElementById('shortlist-cols').style.display = 'grid';
 }
 
