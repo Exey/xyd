@@ -46,7 +46,7 @@
 | photographers | 3 198 | @nualexon | Raw | 0.082 | 324 826 | 2.3% |
 | photographers | 3 050 | @max_kaftorman | Raw | 0.041 | 244 241 | 0.6% |
 | photographers | 2 871 | @dmitry_arhar | Гламур | 0.055 | 382 633 | 0.0% |
-| photographers | 2 821 | @alex_izyumovphoto | Классика / Академизм | 0.002 | 21 717 | 0.0% |
+| photographers | 2 821 | @alex_izyumovphoto | Классика | 0.002 | 21 717 | 0.0% |
 | photographers | 2 779 | @lermak_art | Символизм | 0.069 | 114 353 | 3.3% |
 | photographers | 2 725 | @artsproekt | Raw | 0.033 | 266 751 | 0.0% |
 | photographers | 2 676 | @justfcknrawww | Гламур | — | — | — |
