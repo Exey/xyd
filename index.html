@@ -163,7 +163,10 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .style-tag.legend-all.active { box-shadow: 0 0 0 2px var(--ink) inset; }
 
 /* TOP 250 POSTS TAB */
-.hitmakers-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 20px 24px 6px; }
+.hitmakers-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  max-width: 1008px; margin: 0 auto; padding: 20px 24px 6px;
+}
 .hitmakers-card {
   background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
   padding: 18px 20px; box-shadow: 0 4px 18px rgba(30,21,20,0.06);
@@ -187,6 +190,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 
 .posts-sort-bar {
   padding: 4px 24px 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  justify-content: center;
 }
 .posts-sort-btns { display: flex; gap: 6px; }
 .sort-btn {
@@ -197,30 +201,38 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .sort-btn:hover { border-color: var(--rose); color: var(--rose); }
 .sort-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
 
-.posts-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.posts-list { max-width: 1008px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
 .post-item {
   background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
-  padding: 14px 18px; box-shadow: 0 3px 14px rgba(30,21,20,0.05);
+  padding: 14px 20px; box-shadow: 0 3px 14px rgba(30,21,20,0.05);
   transition: box-shadow .15s, transform .15s;
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  column-gap: 16px;
 }
 .post-item:hover { box-shadow: 0 8px 24px rgba(30,21,20,0.12); transform: translateY(-1px); }
-.post-item-top { display: flex; align-items: center; gap: 12px; }
-.post-place { font-size: 26px; font-weight: 900; color: var(--muted); min-width: 40px; text-align: center; }
+.post-place-title { grid-column: 1; grid-row: 2; display: flex; align-items: baseline; gap: 10px; }
+.post-place { font-size: 34px; font-weight: 900; color: var(--muted); }
 .post-place a { color: inherit; text-decoration: none; }
 .post-place a:hover { color: var(--rose); }
-.post-channel { font-size: 17px; font-weight: 800; color: var(--text); text-decoration: none; flex: 1; }
+.post-channel { font-size: 17px; font-weight: 800; color: var(--text); text-decoration: none; white-space: nowrap; }
 .post-channel:hover { color: var(--rose); }
-.post-thumb { width: 52px; height: 52px; object-fit: cover; border-radius: 10px; display: block; border: 1.5px solid var(--border); flex-shrink: 0; }
-.post-media { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.post-media { grid-column: 1; grid-row: 3; font-size: 13px; color: var(--muted); white-space: nowrap; }
+.stat-score, .stat-views, .stat-shares { grid-column: 2; justify-self: end; white-space: nowrap; }
+.stat-score { grid-row: 1; font-size: 12px; font-weight: 600; color: var(--muted); }
+.stat-views { grid-row: 2; font-size: 15px; font-weight: 800; color: var(--text); }
+.stat-shares { grid-row: 3; font-size: 15px; font-weight: 800; color: var(--text); }
+.stat-score .stat-label, .stat-views .stat-label, .stat-shares .stat-label { font-weight: 600; color: var(--muted); margin-right: 4px; }
+.post-thumb-cell { grid-column: 3; grid-row: 1 / 4; align-self: center; }
+.post-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; display: block; border: 1.5px solid var(--border); }
 .post-text {
-  display: block; margin-top: 10px;
+  grid-column: 4; grid-row: 1 / 4; align-self: center;
   -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; overflow: hidden;
   font-size: 14px; color: var(--muted); line-height: 1.4; text-decoration: none;
 }
 .post-text:hover { color: var(--rose); }
-.post-stats { display: flex; gap: 16px; margin-top: 10px; }
-.post-stats span { font-size: 14px; font-weight: 800; color: var(--text); white-space: nowrap; }
-.post-stats .stat-label { font-weight: 600; color: var(--muted); margin-right: 3px; }
 .post-item.place-highlight { box-shadow: 0 0 0 3px var(--cotton-candy); }
 
 /* RATING 2025 TAB */
@@ -727,20 +739,19 @@ function truncateText(text, max) {
 function renderPostItem(p) {
   const thumbSrc = extractThumbSrc(p['Thumbnail']);
   const link = p['Link'] || '#';
-  const text = truncateText(p['Text'], 120);
+  const text = truncateText(p['Text'], 160);
+  const title = truncateText(p['Channel'], 18);
   return `<div class="post-item" id="place-${p._place}">
-    <div class="post-item-top">
+    <div class="post-place-title">
       <span class="post-place"><a href="#place-${p._place}">${p._place}</a></span>
-      <a class="post-channel" href="${link}" target="_blank" rel="noopener">${p['Channel'] || ''}</a>
-      <a href="${link}" target="_blank" rel="noopener">${thumbSrc ? `<img class="post-thumb" src="${thumbSrc}" alt="">` : ''}</a>
-      <span class="post-media">${p['Media'] || ''}</span>
+      <a class="post-channel" href="${link}" target="_blank" rel="noopener">${title}</a>
     </div>
-    ${text ? `<a class="post-text" href="${link}" target="_blank" rel="noopener">${text}</a>` : ''}
-    <div class="post-stats">
-      <span><span class="stat-label">Score</span>${p['Score CQI'] || '—'}</span>
-      <span><span class="stat-label">Views</span>${p['Views'] || '—'}</span>
-      <span><span class="stat-label">Shares</span>${p['Shares'] || '—'}</span>
-    </div>
+    <span class="post-media">${p['Media'] || ''}</span>
+    <span class="stat-score"><span class="stat-label">Score</span>${p['Score CQI'] || '—'}</span>
+    <span class="stat-views"><span class="stat-label">Views</span>${p['Views'] || '—'}</span>
+    <span class="stat-shares"><span class="stat-label">Shares</span>${p['Shares'] || '—'}</span>
+    <span class="post-thumb-cell"><a href="${link}" target="_blank" rel="noopener">${thumbSrc ? `<img class="post-thumb" src="${thumbSrc}" alt="">` : ''}</a></span>
+    ${text ? `<a class="post-text" href="${link}" target="_blank" rel="noopener">${text}</a>` : '<span class="post-text"></span>'}
   </div>`;
 }
 
