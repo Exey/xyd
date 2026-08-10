@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Худсовет — Рейтинг арт-ню фотографов</title>
+<meta name="description" content="Объективный рейтинг ню-моделей и фотографов: поджанры и продуманная система скоринга навыков фотографа.">
+<meta property="og:title" content="Худсовет — Рейтинг арт-ню фотографов">
+<meta property="og:description" content="Объективный рейтинг ню-моделей и фотографов: поджанры и продуманная система скоринга навыков фотографа.">
+<meta property="og:type" content="website">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
 
@@ -504,6 +508,7 @@ const PH_COLUMNS = [
   { key: 'followers', label: 'Подписчики', sortVal: p => parseNumeric(p['Followers']) ?? -1, cell: p => p['Followers'] || '—' },
   { key: 'views',     label: 'Просмотры',  sortVal: p => parseNumeric(p['Views']) ?? -1, cell: p => p['Views'] || '—', hideNarrow: true },
   { key: 'viral',     label: 'Виральность',sortVal: p => parseNumeric(p['Viral share']) ?? -1, cell: p => p['Viral share'] || '—', hideNarrow: true },
+  { key: 'interest',  label: 'Интерес',    sortVal: p => parseNumeric(p['Post Quality']) ?? -1, cell: p => p['Post Quality'] || '—', hideNarrow: true },
 ];
 const MODEL_COLUMNS = PH_COLUMNS.filter(c => c.key !== 'tag').map(c => c.key === 'name' ? { ...c, label: 'Модель' } : c);
 
