@@ -163,28 +163,65 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .style-tag.legend-all.active { box-shadow: 0 0 0 2px var(--ink) inset; }
 
 /* TOP 250 POSTS TAB */
-.hitmakers-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
-.hitmakers-list li { display: flex; align-items: baseline; gap: 8px; font-size: 12px; padding: 4px 0; border-bottom: 1px solid var(--border2); }
-.hm-rank { font-weight: 900; color: var(--muted); min-width: 16px; }
-.hm-count { font-weight: 800; color: var(--rose); min-width: 20px; text-align: right; }
-.hm-name { color: var(--text); font-weight: 600; }
+.hitmakers-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 20px 24px 6px; }
+.hitmakers-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 18px 20px; box-shadow: 0 4px 18px rgba(30,21,20,0.06);
+}
+.hitmakers-card h3 {
+  font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text); margin-bottom: 12px;
+}
+.hitmakers-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.hitmakers-list li {
+  display: flex; align-items: baseline; gap: 10px; font-size: 16px; padding: 7px 4px;
+  border-bottom: 1px solid var(--border2);
+}
+.hitmakers-list li:last-child { border-bottom: none; }
+.hm-rank { font-weight: 900; color: var(--muted); min-width: 20px; }
+.hm-count { font-weight: 900; color: var(--rose); min-width: 26px; text-align: right; font-size: 15px; }
+.hm-name { color: var(--text); font-weight: 700; }
 .hm-name a { color: inherit; text-decoration: none; }
 .hm-name a:hover { color: var(--rose); }
-.posts-table tr { height: 50px; }
-.posts-table td { vertical-align: middle; }
-.post-place { font-size: 20px; font-weight: 900; color: var(--muted); text-align: center; }
+@media (max-width: 800px) { .hitmakers-wrap { grid-template-columns: 1fr; } }
+
+.posts-sort-bar {
+  padding: 4px 24px 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+}
+.posts-sort-btns { display: flex; gap: 6px; }
+.sort-btn {
+  background: var(--card); border: 1.5px solid var(--border); color: var(--text);
+  font-size: 12px; font-weight: 800; padding: 6px 16px; border-radius: 20px;
+  cursor: pointer; transition: all .15s;
+}
+.sort-btn:hover { border-color: var(--rose); color: var(--rose); }
+.sort-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+.posts-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.post-item {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 14px 18px; box-shadow: 0 3px 14px rgba(30,21,20,0.05);
+  transition: box-shadow .15s, transform .15s;
+}
+.post-item:hover { box-shadow: 0 8px 24px rgba(30,21,20,0.12); transform: translateY(-1px); }
+.post-item-top { display: flex; align-items: center; gap: 12px; }
+.post-place { font-size: 26px; font-weight: 900; color: var(--muted); min-width: 40px; text-align: center; }
 .post-place a { color: inherit; text-decoration: none; }
 .post-place a:hover { color: var(--rose); }
-.post-thumb { width: 42px; height: 42px; object-fit: cover; border-radius: 6px; display: block; border: 1.5px solid var(--border); }
-.post-title { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.25; }
-.post-media { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.post-channel { font-size: 17px; font-weight: 800; color: var(--text); text-decoration: none; flex: 1; }
+.post-channel:hover { color: var(--rose); }
+.post-thumb { width: 52px; height: 52px; object-fit: cover; border-radius: 10px; display: block; border: 1.5px solid var(--border); flex-shrink: 0; }
+.post-media { font-size: 13px; color: var(--muted); white-space: nowrap; }
 .post-text {
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-  font-size: 11px; color: var(--muted); line-height: 1.35; text-decoration: none;
+  display: block; margin-top: 10px;
+  -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; overflow: hidden;
+  font-size: 14px; color: var(--muted); line-height: 1.4; text-decoration: none;
 }
 .post-text:hover { color: var(--rose); }
-.post-score, .post-views, .post-shares { font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap; }
-tr.place-highlight td { background: #FE9CA233 !important; transition: background .3s; }
+.post-stats { display: flex; gap: 16px; margin-top: 10px; }
+.post-stats span { font-size: 14px; font-weight: 800; color: var(--text); white-space: nowrap; }
+.post-stats .stat-label { font-weight: 600; color: var(--muted); margin-right: 3px; }
+.post-item.place-highlight { box-shadow: 0 0 0 3px var(--cotton-candy); }
 
 /* RATING 2025 TAB */
 .rating-wrap { padding: 20px 24px; }
@@ -292,29 +329,28 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ TOP 250 POSTS 2025 ══════════════════ -->
 <div id="tab-posts" class="tab-content">
   <div class="shortlist-intro">
-    <span class="algo-desc">Топ-250 постов 2025 года по Score CQI. Клик по превью или тексту открывает пост в Telegram.</span>
+    <span class="algo-desc">Топ-250 постов 2025 года по Score CQI. Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
   </div>
 
-  <div class="shortlist-cols">
-    <div class="shortlist-col">
+  <div class="hitmakers-wrap">
+    <div class="hitmakers-card">
       <h3>Топ-10 фотографов</h3>
       <ol class="hitmakers-list" id="top10-photographers"></ol>
     </div>
-    <div class="shortlist-col">
+    <div class="hitmakers-card">
       <h3>Топ-10 моделей</h3>
       <ol class="hitmakers-list" id="top10-models"></ol>
     </div>
   </div>
 
+  <div class="posts-sort-bar">
+    <span class="legend-label">Сортировка:</span>
+    <div class="posts-sort-btns" id="posts-sort-btns"></div>
+  </div>
+
   <div class="table-wrap">
     <div class="loading" id="posts-loading">Загрузка posts2025.md…</div>
-    <table class="rank-table posts-table" id="posts-table" style="display:none">
-      <colgroup>
-        <col style="width:52px"><col style="width:56px"><col><col style="width:30%"><col style="width:64px"><col style="width:84px"><col style="width:64px">
-      </colgroup>
-      <thead><tr id="posts-head"></tr></thead>
-      <tbody id="posts-body"></tbody>
-    </table>
+    <div class="posts-list" id="posts-list" style="display:none"></div>
   </div>
 </div>
 
@@ -453,13 +489,15 @@ function parseMarkdownTable(md) {
   }).filter(r => r[headers[0]]);
 }
 
+const LINK_OVERRIDES = { 'xenaexsa': 'https://t.me/+u2LCuReui8pkMzJi' };
+
 function parseTelegramName(raw) {
   const s = (raw || '').trim();
   if (!s) return { display: '—', link: null };
   if (s.startsWith('@')) return { display: s, link: `https://t.me/${s.slice(1)}` };
   const m = s.match(/^(.*)\((\d+)\)$/);
-  if (m) return { display: m[1].trim(), link: null };
-  return { display: s, link: null };
+  const display = m ? m[1].trim() : s;
+  return { display, link: LINK_OVERRIDES[display] || null };
 }
 
 function ratingSortVal(raw) {
@@ -650,6 +688,7 @@ function parseHitmakers(text) {
 
 function linkifyHandle(name) {
   if (name.startsWith('@')) return `<a href="https://t.me/${name.slice(1)}" target="_blank" rel="noopener">${name}</a>`;
+  if (LINK_OVERRIDES[name]) return `<a href="${LINK_OVERRIDES[name]}" target="_blank" rel="noopener">${name}</a>`;
   return name;
 }
 
@@ -664,49 +703,49 @@ function extractThumbSrc(raw) {
   return m ? m[1] : '';
 }
 
-function renderPostsHead() {
-  const cols = [
-    { key: null, label: '' },
-    { key: null, label: 'Пост' },
-    { key: null, label: 'Текст' },
-    { key: 'score', label: 'Score' },
-    { key: 'views', label: 'Views' },
-    { key: 'shares', label: 'Shares', hideNarrow: true },
-  ];
-  document.getElementById('posts-head').innerHTML = '<th style="width:52px">#</th>' + cols.map(c => {
-    if (!c.key) return `<th${c.hideNarrow ? ' class="col-hide-narrow"' : ''}>${c.label}</th>`;
-    const isSorted = postsSort.key === c.key;
-    const arrow = isSorted ? (postsSort.dir === 'desc' ? ' ▼' : ' ▲') : '';
-    const cls = ['sortable', c.hideNarrow ? 'col-hide-narrow' : '', isSorted ? 'sorted' : ''].filter(Boolean).join(' ');
-    return `<th class="${cls}" onclick="sortPosts('${c.key}')">${c.label}${arrow}</th>`;
+function renderPostsSortBar() {
+  const opts = [{ key: 'score', label: 'Score' }, { key: 'views', label: 'Views' }, { key: 'shares', label: 'Shares' }];
+  document.getElementById('posts-sort-btns').innerHTML = opts.map(o => {
+    const active = postsSort.key === o.key;
+    const arrow = active ? (postsSort.dir === 'desc' ? ' ▼' : ' ▲') : '';
+    return `<button class="sort-btn${active ? ' active' : ''}" onclick="sortPosts('${o.key}')">${o.label}${arrow}</button>`;
   }).join('');
 }
 
 function sortPosts(key) {
   if (postsSort.key === key) postsSort.dir = postsSort.dir === 'desc' ? 'asc' : 'desc';
   else { postsSort.key = key; postsSort.dir = 'desc'; }
-  renderPostsTable();
+  renderPostsList();
 }
 
-function renderPostRow(p) {
+function truncateText(text, max) {
+  const s = (text || '').trim();
+  if (s.length <= max) return s;
+  return s.slice(0, max).trim() + '…';
+}
+
+function renderPostItem(p) {
   const thumbSrc = extractThumbSrc(p['Thumbnail']);
   const link = p['Link'] || '#';
-  return `<tr id="place-${p._place}">
-    <td class="post-place"><a href="#place-${p._place}">${p._place}</a></td>
-    <td><a href="${link}" target="_blank" rel="noopener">${thumbSrc ? `<img class="post-thumb" src="${thumbSrc}" alt="">` : ''}</a></td>
-    <td>
-      <div class="post-title">${p['Channel'] || ''}</div>
-      <div class="post-media">${p['Media'] || ''}</div>
-    </td>
-    <td><a class="post-text" href="${link}" target="_blank" rel="noopener">${p['Text'] || ''}</a></td>
-    <td class="post-score">${p['Score CQI'] || '—'}</td>
-    <td class="post-views">${p['Views'] || '—'}</td>
-    <td class="post-shares col-hide-narrow">${p['Shares'] || '—'}</td>
-  </tr>`;
+  const text = truncateText(p['Text'], 120);
+  return `<div class="post-item" id="place-${p._place}">
+    <div class="post-item-top">
+      <span class="post-place"><a href="#place-${p._place}">${p._place}</a></span>
+      <a class="post-channel" href="${link}" target="_blank" rel="noopener">${p['Channel'] || ''}</a>
+      <a href="${link}" target="_blank" rel="noopener">${thumbSrc ? `<img class="post-thumb" src="${thumbSrc}" alt="">` : ''}</a>
+      <span class="post-media">${p['Media'] || ''}</span>
+    </div>
+    ${text ? `<a class="post-text" href="${link}" target="_blank" rel="noopener">${text}</a>` : ''}
+    <div class="post-stats">
+      <span><span class="stat-label">Score</span>${p['Score CQI'] || '—'}</span>
+      <span><span class="stat-label">Views</span>${p['Views'] || '—'}</span>
+      <span><span class="stat-label">Shares</span>${p['Shares'] || '—'}</span>
+    </div>
+  </div>`;
 }
 
-function renderPostsTable() {
-  renderPostsHead();
+function renderPostsList() {
+  renderPostsSortBar();
   const field = POSTS_FIELD_MAP[postsSort.key];
   const sorted = [...allPosts].sort((a, b) => {
     const av = parseNumeric(a[field]) ?? -1;
@@ -714,7 +753,7 @@ function renderPostsTable() {
     const cmp = av - bv;
     return postsSort.dir === 'desc' ? -cmp : cmp;
   });
-  document.getElementById('posts-body').innerHTML = sorted.map(renderPostRow).join('');
+  document.getElementById('posts-list').innerHTML = sorted.map(renderPostItem).join('');
 }
 
 function handlePlaceHash() {
@@ -739,8 +778,8 @@ async function loadPosts() {
     renderHitmakers(models, 'top10-models');
     allPosts = parseMarkdownTable(text).map((r, i) => ({ ...r, _place: i + 1 }));
     document.getElementById('posts-loading').style.display = 'none';
-    document.getElementById('posts-table').style.display = 'table';
-    renderPostsTable();
+    document.getElementById('posts-list').style.display = 'flex';
+    renderPostsList();
     handlePlaceHash();
   } catch (e) {
     document.getElementById('posts-loading').textContent = 'Ошибка загрузки posts2025.md: ' + e.message;
