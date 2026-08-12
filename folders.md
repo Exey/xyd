@@ -28,7 +28,7 @@
 | photographers | 6 333 | @my_fuckin_sky | Гламур | 0.092 | 291 401 | 0.0% | 155 |
 | photographers | 6 261 | @denbut_photoart | Гламур | 0.183 | 497 527 | 0.0% | 321 |
 | photographers | 6 085 | StasyQ 😈(1134980243) | Thug | 0.049 | 317 430 | 0.0% | 141 |
-| photographers | 6 082 | ROMA ROMA  PHOTO  (2255233240) | Thug | 0.500 | 1 327 399 | 11.8% | 600 |
+| photographers | 6 082 | @artofroma | Thug | 0.500 | 1 327 399 | 11.8% | 600 |
 | photographers | 5 707 | @reider_photo | Драма | 0.161 | 253 212 | 0.0% | 329 |
 | photographers | 5 707 | @baevm | Фэшн | 0.247 | 407 528 | 0.0% | 486 |
 | photographers | 4 081 | Те самые фото что (1391449855) | Кинк | 0.204 | 809 219 | 0.0% | 292 |
