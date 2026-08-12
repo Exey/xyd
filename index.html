@@ -235,7 +235,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .post-block-text { flex: 0 0 408px; }
 .post-text {
   text-align: left;
-  -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; overflow: hidden;
+  -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 3; overflow: hidden;
   font-size: 14px; color: var(--muted); line-height: 1.4; text-decoration: none;
 }
 .post-text:hover { color: var(--rose); }
@@ -768,7 +768,7 @@ function truncateText(text, max) {
 function renderPostItem(p) {
   const thumbSrc = extractThumbSrc(p['Thumbnail']);
   const link = p['Link'] || '#';
-  const text = truncateText(p['Text'], 160);
+  const text = truncateText(p['Text'], 240);
   const title = truncateText(p['Channel'], 18);
   return `<div class="post-item" id="place-${p._place}">
     <div class="post-block-identity">
