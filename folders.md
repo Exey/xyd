@@ -3,7 +3,7 @@
 | photographers | 64 574 | @maratsafinvapas | Крафт | 0.828 | 4 940 876 | 0.0% | 306 |
 | photographers | 37 599 | @smeilov_photo | Raw | 0.541 | 3 253 843 | 0.0% | 500 |
 | photographers | 33 392 | @photokravchenko | Крафт | 0.439 | 2 775 755 | 0.0% | 345 |
-| photographers | 24 615 | @geekography | Концепт | 0.186 | 970 025 | 0.0% | 233 |
+| photographers | 24 643 | @geekography | Концепт | 0.200 | 1 009 851 | 0.0% | 260 |
 | photographers | 23 704 | @pocrovi | Крафт | 0.394 | 1 340 519 | 0.0% | 543 |
 | photographers | 19 594 | Фотограф Гудвин 18(1417817444) | Raw | 0.374 | 2 139 765 | 0.0% | 375 |
 | photographers | 16 424 | @elishanudes | Кинк | 0.487 | 1 885 592 | 2.3% | 616 |
@@ -38,12 +38,14 @@
 | photographers | 3 794 | @nu_home | Raw | 0.224 | 286 835 | 1.2% | 483 |
 | photographers | 3 788 | @svuph | Кинк | 0.222 | 431 631 | 0.0% | 409 |
 | photographers | 3 726 | @my_antibodies_photo | Raw | 0.159 | 122 385 | 5.4% | 299 |
+| photographers | 3 613 | @Tretekov_nu | Крафт | 0.215 | 30 530 | 0.0% | 554 |
 | photographers | 3 420 | @vladisyaro | Концепт | 0.220 | 227 962 | 6.4% | 362 |
 | photographers | 3 344 | @nu_photo_art | Кинк | 0.122 | 248 180 | 0.0% | 251 |
 | photographers | 3 310 | @msfantasyph | Кинк | 0.129 | 232 188 | 0.0% | 271 |
 | photographers | 3 269 | @art_nude_photos | Raw | 0.043 | 254 655 | 0.0% | 127 |
 | photographers | 3 198 | @nualexon | Raw | 0.250 | 324 826 | 2.3% | 530 |
 | photographers | 3 050 | @max_kaftorman | Raw | 0.128 | 244 241 | 0.6% | 255 |
+| photographers | 2 940 | Melons_Fans(1630836463) | Гламур | 0.062 | 116 866 | 0.0% | 131 |
 | photographers | 2 871 | @dmitry_arhar | Гламур | 0.087 | 382 633 | 0.0% | 290 |
 | photographers | 2 821 | @alex_izyumovphoto | Классика | 0.072 | 21 717 | 0.0% | 179 |
 | photographers | 2 779 | @lermak_art | Символизм | 0.170 | 114 353 | 3.3% | 373 |
@@ -80,9 +82,9 @@
 | photographers | 1 356 | @BLVPH14 |  | 0.014 | 161 902 | 0.0% | 31 |
 | photographers | 1 258 | @nudephotographer_vl |  | 0.035 | 139 974 | 0.0% | 122 |
 | photographers | 1 236 | @rashap_blog |  | — | — | — | — |
+| photographers | 1 232 | @kostromin_art |  | 0.392 | 93 830 | 24.3% | 509 |
 | photographers | 1 193 | @laninsphoto |  | 0.093 | 33 893 | 0.0% | 236 |
 | photographers | 1 178 | @cldsnl |  | 0.075 | 70 908 | 0.0% | 174 |
-| photographers | 1 021 | @chepetrph |  | 0.147 | 66 293 | 0.0% | 367 |
 | photographers | 961 | @kirill25b |  | 0.051 | 38 547 | 0.0% | 123 |
 | photographers | 812 | JakobArt(1789951798) |  | 0.010 | 186 550 | 0.0% | 0 |
 | photographers | 752 | @pochti_blog |  | 0.148 | 72 664 | 2.8% | 339 |
@@ -131,18 +133,20 @@
 | models | 2 476 | @IevaModel |  | 0.102 | 457 049 | 0.0% | 343 |
 | models | 2 336 | @vixy_rea |  | 0.191 | 333 135 | 0.0% | 393 |
 | models | 2 315 | @sugar_maple |  | 0.057 | 85 355 | 0.0% | 157 |
-| models | 2 293 | @NeKikimora7 |  | — | — | — | — |
+| models | 2 301 | @NeKikimora7 |  | — | — | — | — |
 | models | 2 262 | @nat_flame |  | 0.178 | 271 917 | 0.8% | 361 |
 | models | 2 203 | @ArgatBellaD |  | 0.192 | 323 599 | 0.0% | 361 |
 | models | 2 202 | @dardarkpirs |  | 0.245 | 356 590 | 1.0% | 513 |
 | models | 2 194 | @ana_grin |  | 0.110 | 264 245 | 0.0% | 176 |
 | models | 2 141 | @ivolga_ashoo |  | 0.080 | 448 538 | 0.0% | 249 |
+| models | 2 135 | @totototonightkissyou |  | 0.142 | 145 971 | 0.0% | 392 |
 | models | 2 027 | 🍑Сосочки можно 18+(1570446534) |  | 0.112 | 113 444 | 2.3% | 270 |
 | models | 2 013 | @artchos |  | 0.120 | 87 211 | 2.2% | 304 |
 | models | 1 940 | 💜 Iris 💜(1891097394) |  | 0.138 | 119 390 | 0.0% | 332 |
 | models | 1 935 | @n_mels |  | 0.250 | 468 945 | 1.6% | 438 |
 | models | 1 723 | @juliasemenkova84 |  | 0.036 | 146 159 | 0.0% | 143 |
 | models | 1 607 | @youcansayyes12 |  | 0.014 | 111 754 | 0.0% | 47 |
+| models | 1 544 | Helen Helen 🔥(2790941270) |  | 0.070 | 173 896 | 0.0% | 126 |
 | models | 1 493 | @Mal_vi_na11 |  | 0.003 | 27 826 | 0.0% | 33 |
 | models | 1 330 | TaBo(1994163041) |  | 0.052 | 118 451 | 0.0% | 111 |
 | models | 1 181 | @Alia_Shakirova |  | 0.176 | 184 431 | 0.0% | 453 |
