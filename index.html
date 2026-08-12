@@ -183,6 +183,8 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .hitmakers-list li:last-child { border-bottom: none; }
 .hm-rank { font-weight: 900; color: var(--muted); min-width: 20px; }
 .hm-count { font-weight: 900; color: var(--rose); min-width: 26px; text-align: right; font-size: 15px; }
+.hm-count.clickable { cursor: pointer; transition: transform .1s; }
+.hm-count.clickable:hover { transform: translateY(-1px); text-decoration: underline; }
 .hm-name { color: var(--text); font-weight: 700; }
 .hm-name a { color: inherit; text-decoration: none; }
 .hm-name a:hover { color: var(--rose); }
@@ -360,6 +362,7 @@ footer a:hover { color: var(--ink); }
   </div>
 
   <div class="posts-sort-bar">
+    <span class="style-tag clickable legend-all" id="posts-channel-chip"></span>
     <span class="legend-label">Сортировка:</span>
     <div class="posts-sort-btns" id="posts-sort-btns"></div>
   </div>
@@ -679,6 +682,8 @@ function showTab(name) {
 // ─── TOP 250 POSTS 2025 ───────────────────────────────────────────────
 let allPosts = [];
 let postsSort = { key: 'score', dir: 'desc' };
+let activeChannelFilter = null;
+let activeChannelCount = null;
 const POSTS_FIELD_MAP = { score: 'Score CQI', views: 'Views', shares: 'Shares' };
 
 function parseHitmakers(text) {
@@ -709,9 +714,29 @@ function linkifyHandle(name) {
 }
 
 function renderHitmakers(list, containerId) {
-  document.getElementById(containerId).innerHTML = list.map(item =>
-    `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count">${item.count}</span><span class="hm-name">${linkifyHandle(item.name)}</span></li>`
-  ).join('');
+  document.getElementById(containerId).innerHTML = list.map(item => {
+    const safeName = item.name.replace(/'/g, "\\'");
+    return `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count clickable" title="Показать посты этого канала" onclick="filterByChannel('${safeName}', '${item.count}')">📰${item.count}</span><span class="hm-name">${linkifyHandle(item.name)}</span></li>`;
+  }).join('');
+}
+
+function filterByChannel(name, count) {
+  activeChannelFilter = name;
+  activeChannelCount = name ? count : null;
+  renderPostsList();
+}
+
+function renderChannelChip() {
+  const chip = document.getElementById('posts-channel-chip');
+  if (!chip) return;
+  if (activeChannelFilter) {
+    chip.innerHTML = `📰${activeChannelCount != null ? activeChannelCount : ''} ${activeChannelFilter}`;
+    chip.classList.add('active');
+  } else {
+    chip.textContent = 'ВСЕ КАНАЛЫ';
+    chip.classList.remove('active');
+  }
+  chip.onclick = () => filterByChannel(null);
 }
 
 function extractThumbSrc(raw) {
@@ -765,8 +790,10 @@ function renderPostItem(p) {
 
 function renderPostsList() {
   renderPostsSortBar();
+  renderChannelChip();
   const field = POSTS_FIELD_MAP[postsSort.key];
-  const sorted = [...allPosts].sort((a, b) => {
+  const filtered = activeChannelFilter ? allPosts.filter(p => (p['Channel'] || '').trim() === activeChannelFilter) : allPosts;
+  const sorted = [...filtered].sort((a, b) => {
     const av = parseNumeric(a[field]) ?? -1;
     const bv = parseNumeric(b[field]) ?? -1;
     const cmp = av - bv;
