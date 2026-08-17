@@ -469,7 +469,8 @@ const TAG_COLORS = {
   'Кинк':                 { bg: '#F8E8F2', border: '#9C3060', text: '#6A1040' },
   'Фэшн':                 { bg: '#F5F5F5', border: '#1E1514', text: '#1E1514' },
   'Thug':                 { bg: '#F0E8F5', border: '#4A1560', text: '#4A1560' },
-  'Символизм':            { bg: '#E8F5F2', border: '#2C8C77', text: '#1A5C4A' },
+  // цвет как у Концепта — поджанр планируется слить с ним
+  'Символизм':            { bg: '#F0EBF8', border: '#8E5CB5', text: '#5E3A85' },
 };
 const DEFAULT_TAG_COLOR = { bg: '#F5F5F5', border: '#888', text: '#555' };
 
@@ -761,7 +762,7 @@ function rowsFitInCircle(rows, r) {
 
 function prepareGenreNode(nd) {
   const titleFs = Math.min(21, 11 + 5 * Math.sqrt(nd.sum));
-  const titleText = `${nd.meta.name}   ${nd.sum.toFixed(2)} · ${nd.count}`;
+  const titleText = `${nd.meta.name}   ${nd.shareLabel} · ${nd.count}`;
   const title = { kind: 'title', fs: titleFs, h: titleFs * 1.6, w: measureTextWidth(titleText, titleFs, 900) };
   const names = nd.members.map(m => {
     const fs = 9.5 + 17 * Math.min(m.rating, 0.9);
@@ -886,7 +887,8 @@ function genreRowHtml(row, nd, scale) {
   const style = `top:${top.toFixed(1)}px;height:${h.toFixed(1)}px;font-size:${(row.fs * scale).toFixed(1)}px`;
   if (row.kind === 'title') {
     const arg = activeTagFilter === nd.tag ? 'null' : `'${nd.tag.replace(/'/g, "\\'")}'`;
-    return `<div class="grow" style="${style}"><span class="gtitle" style="color:${nd.meta.text}" title="${nd.meta.desc || ''}" onclick="filterByTag(${arg})">${nd.meta.name}<span class="gsum">${nd.sum.toFixed(2)} · ${nd.count}</span></span></div>`;
+    const hint = `${nd.meta.desc || ''} — Rating ${nd.sum.toFixed(2)} из ${nd.total.toFixed(2)}, фотографов: ${nd.count}`;
+    return `<div class="grow" style="${style}"><span class="gtitle" style="color:${nd.meta.text}" title="${hint}" onclick="filterByTag(${arg})">${nd.meta.name}<span class="gsum">${nd.shareLabel} · ${nd.count}</span></span></div>`;
   }
   const m = row.m;
   const inner = m.link
@@ -901,6 +903,12 @@ function renderGenreMap() {
   const nodes = buildGenreNodes();
   if (!nodes.length) { inner.innerHTML = ''; return; }
 
+  const total = nodes.reduce((s, n) => s + n.sum, 0);
+  nodes.forEach(n => {
+    n.total = total;
+    n.share = total ? n.sum / total * 100 : 0;
+    n.shareLabel = (n.share >= 10 ? n.share.toFixed(0) : n.share.toFixed(1)) + '%';
+  });
   nodes.forEach(prepareGenreNode);
   relaxGenreNodes(nodes);
 
@@ -936,8 +944,7 @@ function renderGenreMap() {
   inner.style.height = H.toFixed(0) + 'px';
   inner.innerHTML = `<svg width="${W.toFixed(0)}" height="${H.toFixed(0)}" viewBox="0 0 ${W.toFixed(0)} ${H.toFixed(0)}">${circles}</svg>${labels}`;
 
-  const total = nodes.reduce((s, n) => s + n.sum, 0);
-  caption.innerHTML = `Размер круга — суммарный Rating поджанра (всего ${total.toFixed(2)} по ${allPhotographers.length} фотографам), число внутри — Rating · количество.
+  caption.innerHTML = `Размер круга — суммарный Rating поджанра (всего ${total.toFixed(2)} по ${allPhotographers.length} фотографам), число внутри — доля поджанра в общем Rating · количество фотографов.
     Размер имени — Rating фотографа, имя кликабельно. Пересечение кругов — близость поджанров: пересекаются только пары с совместимостью ≥ ${OVERLAP_MIN}%, глубина пересечения уменьшена для читаемости. Клик по названию поджанра — фильтр.`;
 }
 
@@ -948,7 +955,7 @@ function setShortlistView(view) {
   const isMap = view === 'map';
   map.style.display = isMap ? 'block' : 'none';
   btn.classList.toggle('active', isMap);
-  btn.textContent = isMap ? '▤ Поджанры таблицей' : '◉ Поджанры схемой';
+  btn.textContent = isMap ? '▤ Поджанры таблицей' : '◉ Поджанры облаком';
   document.getElementById('shortlist-cols').style.display = isMap ? 'none' : 'grid';
   if (isMap) renderGenreMap();
 }
