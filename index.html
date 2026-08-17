@@ -116,6 +116,40 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   .shortlist-col + .shortlist-col { border-left: none; border-top: 2px solid var(--border2); }
 }
 
+/* SUBGENRE MAP (ПОДЖАНРЫ СХЕМОЙ) */
+.view-toggle-btn {
+  background: transparent; border: 1.5px solid var(--ink); color: var(--ink);
+  font-size: 12px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 5px; cursor: pointer; transition: all .15s; white-space: nowrap;
+}
+.view-toggle-btn:hover { background: var(--ink); color: #fff; }
+.view-toggle-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.genre-map-scroll { overflow-x: auto; }
+.genre-map-caption { font-size: 11px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+.genre-map-inner { position: relative; margin: 0 auto; }
+.genre-map-inner > svg { position: absolute; left: 0; top: 0; display: block; }
+.gcircle { mix-blend-mode: multiply; transition: opacity .15s; }
+.gcircle.dim { opacity: .12; }
+.gnode { position: absolute; pointer-events: none; transition: opacity .15s; }
+.gnode.dim { opacity: .16; }
+.grow {
+  position: absolute; left: 0; width: 100%; display: flex; align-items: center;
+  justify-content: center; white-space: nowrap; line-height: 1;
+}
+.gtitle {
+  font-weight: 900; letter-spacing: .5px; text-transform: uppercase;
+  pointer-events: auto; cursor: pointer; text-shadow: 0 1px 0 #ffffffaa;
+}
+.gtitle:hover { text-decoration: underline; }
+.gtitle .gsum { font-weight: 700; opacity: .72; margin-left: 7px; letter-spacing: 0; }
+.gname {
+  color: var(--ink); font-weight: 700; text-decoration: none;
+  pointer-events: auto; text-shadow: 0 1px 0 #ffffff99;
+}
+.gname:hover { color: var(--mahogany); text-decoration: underline; }
+.gname.nolink { pointer-events: none; }
+.tag-count { font-weight: 900; margin-left: 5px; opacity: .65; font-variant-numeric: tabular-nums; }
+
 /* MAIN TABLE */
 .table-wrap { padding: 18px 24px; }
 .loading { color: var(--muted); padding: 40px 24px; font-size: 14px; }
@@ -317,6 +351,7 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ SHORTLIST 2026 ══════════════════ -->
 <div id="tab-shortlist" class="tab-content active">
   <div class="shortlist-intro">
+    <button class="view-toggle-btn" id="view-toggle-btn" onclick="toggleShortlistView()">◉ Поджанры схемой</button>
     <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener">+ Добавить модель/фотографа</a>
     <span class="algo-desc" id="algo-desc">Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.</span>
   </div>
@@ -339,6 +374,12 @@ footer a:hover { color: var(--ink); }
           <thead><tr id="model-head"></tr></thead>
           <tbody id="model-body"></tbody>
         </table>
+      </div>
+    </div>
+    <div class="genre-map" id="genre-map" style="display:none">
+      <div class="genre-map-caption" id="genre-map-caption"></div>
+      <div class="genre-map-scroll" id="genre-map-scroll">
+        <div class="genre-map-inner" id="genre-map-inner"></div>
       </div>
     </div>
   </div>
@@ -405,7 +446,7 @@ footer a:hover { color: var(--ink); }
     </div>
     <div class="scale-section">
       <h3>Поджанры ню</h3>
-      <p class="criteria-intro" style="margin-bottom:14px">Расшифровка поджанров. Наведите на тег — увидите описание.</p>
+      <p class="criteria-intro" style="margin-bottom:14px">Расшифровка поджанров.</p>
       <div class="metric-grid" id="styles-grid"></div>
     </div>
   </div>
@@ -431,6 +472,20 @@ const TAG_COLORS = {
   'Символизм':            { bg: '#E8F5F2', border: '#2C8C77', text: '#1A5C4A' },
 };
 const DEFAULT_TAG_COLOR = { bg: '#F5F5F5', border: '#888', text: '#555' };
+
+// ─── Близость поджанров, % (стилистическая совместимость) ────────────
+const TAG_AFFINITY = {
+  'Крафт':     { 'Классика': 55, 'Фэшн': 60, 'Драма': 35, 'Концепт': 40, 'Кинк': 40, 'Символизм': 40, 'Гламур': 30, 'Thug': 30, 'Raw': 10 },
+  'Драма':     { 'Thug': 65, 'Концепт': 60, 'Кинк': 55, 'Фэшн': 45, 'Классика': 45, 'Символизм': 40, 'Крафт': 35, 'Raw': 30, 'Гламур': 15 },
+  'Raw':       { 'Thug': 60, 'Кинк': 40, 'Концепт': 40, 'Фэшн': 35, 'Драма': 30, 'Крафт': 10, 'Классика': 10, 'Гламур': 5,  'Символизм': 15 },
+  'Классика':  { 'Фэшн': 60, 'Крафт': 55, 'Гламур': 50, 'Драма': 45, 'Концепт': 45, 'Символизм': 40, 'Кинк': 35, 'Raw': 10, 'Thug': 10 },
+  'Концепт':   { 'Символизм': 75, 'Драма': 60, 'Кинк': 55, 'Фэшн': 50, 'Классика': 45, 'Крафт': 40, 'Raw': 40, 'Thug': 40, 'Гламур': 20 },
+  'Гламур':    { 'Фэшн': 75, 'Классика': 50, 'Кинк': 45, 'Крафт': 30, 'Концепт': 20, 'Драма': 15, 'Thug': 10, 'Raw': 5, 'Символизм': 15 },
+  'Кинк':      { 'Фэшн': 65, 'Драма': 55, 'Концепт': 55, 'Thug': 50, 'Гламур': 45, 'Крафт': 40, 'Raw': 40, 'Классика': 35, 'Символизм': 35 },
+  'Фэшн':      { 'Гламур': 75, 'Кинк': 65, 'Крафт': 60, 'Классика': 60, 'Thug': 55, 'Концепт': 50, 'Драма': 45, 'Raw': 35, 'Символизм': 20 },
+  'Thug':      { 'Драма': 65, 'Raw': 60, 'Фэшн': 55, 'Кинк': 50, 'Концепт': 40, 'Крафт': 30, 'Символизм': 20, 'Классика': 10, 'Гламур': 10 },
+  'Символизм': { 'Концепт': 75, 'Крафт': 40, 'Классика': 40, 'Драма': 40, 'Кинк': 35, 'Thug': 20, 'Фэшн': 20, 'Гламур': 15, 'Raw': 15 },
+};
 
 const RATING_DATA = [
   { pos: 1,  star: true,  name: 'Илья Рашап',       style: 'Драматический ню, fashion-нарратив',             platforms: 'Wikipedia, персональный сайт',  limits: 'Меньше активности в соцсетях' },
@@ -589,16 +644,30 @@ function filterByTag(tagName) {
   activeTagFilter = tagName;
   renderLegend();
   renderShortlistTables();
+  if (shortlistView === 'map') renderGenreMap();
+}
+
+function tagCounts() {
+  const counts = {};
+  allPhotographers.forEach(p => {
+    const t = (p['Tag'] || '').trim();
+    if (t) counts[t] = (counts[t] || 0) + 1;
+  });
+  return counts;
 }
 
 function renderLegend() {
   const bar = document.getElementById('style-legend-bar');
+  const counts = tagCounts();
   const tagsHtml = Object.values(allTags).map(v => {
     const active = activeTagFilter === v.name ? ' active' : '';
-    return `<span class="style-tag clickable${active}" title="${v.desc}" style="background:${v.bg};border-color:${v.border};color:${v.text}" onclick="filterByTag('${v.name.replace(/'/g, "\\'")}')">${v.name}</span>`;
+    const n = counts[v.name] || 0;
+    const title = `${v.desc}${n ? ` — фотографов: ${n}` : ''}`;
+    return `<span class="style-tag clickable${active}" title="${title}" style="background:${v.bg};border-color:${v.border};color:${v.text}" onclick="filterByTag('${v.name.replace(/'/g, "\\'")}')">${v.name}<span class="tag-count">${n}</span></span>`;
   }).join('');
   const allActive = activeTagFilter === null ? ' active' : '';
-  bar.innerHTML = `<span class="legend-label">Поджанры ню:</span>${tagsHtml}<span class="style-tag clickable legend-all${allActive}" onclick="filterByTag(null)">Все</span>`;
+  const total = allPhotographers.length;
+  bar.innerHTML = `<span class="legend-label">Поджанры ню:</span>${tagsHtml}<span class="style-tag clickable legend-all${allActive}" onclick="filterByTag(null)">Все<span class="tag-count">${total}</span></span>`;
 }
 
 function renderHead(rowId, columns, sortState) {
@@ -630,8 +699,270 @@ function renderShortlistTables() {
   renderHead('model-head', MODEL_COLUMNS, modelSort);
   document.getElementById('ph-body').innerHTML = renderRows(phData, PH_COLUMNS, phSort);
   document.getElementById('model-body').innerHTML = renderRows(allModels, MODEL_COLUMNS, modelSort);
-  document.getElementById('shortlist-cols').style.display = 'grid';
+  document.getElementById('shortlist-cols').style.display = shortlistView === 'map' ? 'none' : 'grid';
 }
+
+// ─── ПОДЖАНРЫ СХЕМОЙ: карта поджанров кругами ─────────────────────────
+let shortlistView = 'table';
+
+const OVERLAP_MIN = 40;     // ниже этого порога круги не пересекаются
+const OVERLAP_DAMP = 0.55;  // визуально пересечение уменьшено для читаемости
+
+function tagAffinity(a, b) {
+  const x = (TAG_AFFINITY[a] || {})[b];
+  const y = (TAG_AFFINITY[b] || {})[a];
+  if (x == null && y == null) return 0;
+  if (x == null) return y;
+  if (y == null) return x;
+  return (x + y) / 2;
+}
+
+let measureCtx = null;
+function measureTextWidth(text, fs, weight) {
+  if (!measureCtx) measureCtx = document.createElement('canvas').getContext('2d');
+  measureCtx.font = `${weight} ${fs}px Nunito, 'Segoe UI', system-ui, sans-serif`;
+  return measureCtx.measureText(text).width * 1.03 + 6;
+}
+
+function buildGenreNodes() {
+  const groups = {};
+  allPhotographers.forEach(p => {
+    const t = (p['Tag'] || '').trim();
+    if (!t) return;
+    (groups[t] = groups[t] || []).push(p);
+  });
+  const order = Object.keys(allTags).filter(t => groups[t]).concat(Object.keys(groups).filter(t => !allTags[t]));
+  return order.map(tag => {
+    const meta = allTags[tag] || { name: tag, desc: '', ...DEFAULT_TAG_COLOR };
+    const members = groups[tag].map(p => {
+      const r = ratingSortVal(p['Rating']);
+      return { ...parseTelegramName(p['ID/Username']), rating: r < 0 ? 0 : r };
+    }).sort((a, b) => b.rating - a.rating);
+    const sum = members.reduce((s, m) => s + m.rating, 0);
+    return { tag, meta, members, sum, count: members.length };
+  });
+}
+
+function stackRows(rows) {
+  const total = rows.reduce((s, r) => s + r.h, 0);
+  let y = -total / 2;
+  rows.forEach(r => { r.y0 = y; r.cy = y + r.h / 2; y += r.h; r.y1 = y; });
+}
+
+function rowsFitInCircle(rows, r) {
+  stackRows(rows);
+  return rows.every(row => {
+    const far = Math.max(Math.abs(row.y0), Math.abs(row.y1));
+    if (far > r * 0.97) return false;
+    const chord = 2 * Math.sqrt(Math.max(0, r * r - far * far));
+    return row.w <= chord * 0.94;
+  });
+}
+
+function prepareGenreNode(nd) {
+  const titleFs = Math.min(21, 11 + 5 * Math.sqrt(nd.sum));
+  const titleText = `${nd.meta.name}   ${nd.sum.toFixed(2)} · ${nd.count}`;
+  const title = { kind: 'title', fs: titleFs, h: titleFs * 1.6, w: measureTextWidth(titleText, titleFs, 900) };
+  const names = nd.members.map(m => {
+    const fs = 9.5 + 17 * Math.min(m.rating, 0.9);
+    return { kind: 'name', m, fs, h: fs * 1.34, w: measureTextWidth(m.display, fs, 700) };
+  });
+  // самые крупные имена — ближе к центру круга, где хорда шире
+  const above = [], below = [];
+  names.forEach((row, i) => (i % 2 ? above : below).push(row));
+  above.reverse();
+  nd.rows = [...above, title, ...below];
+  let r = Math.max(26, 100 * Math.sqrt(nd.sum));  // площадь ∝ суммарному Rating
+  for (let i = 0; i < 90 && !rowsFitInCircle(nd.rows, r); i++) r *= 1.035;
+  stackRows(nd.rows);
+  nd.r = r;
+  nd.m = r * r;
+}
+
+function separateGenreNodes(pairs, passes) {
+  for (let p = 0; p < passes; p++) {
+    pairs.forEach(pr => {
+      const a = pr.a, b = pr.b;
+      let dx = b.x - a.x, dy = b.y - a.y;
+      let dist = Math.hypot(dx, dy);
+      if (dist < 1e-3) { dx = 1; dy = 0.3; dist = Math.hypot(dx, dy); }
+      if (dist >= pr.min) return;
+      const def = pr.min - dist, ux = dx / dist, uy = dy / dist;
+      const wa = b.m / (a.m + b.m), wb = a.m / (a.m + b.m);
+      a.x -= ux * def * wa; a.y -= uy * def * wa;
+      b.x += ux * def * wb; b.y += uy * def * wb;
+    });
+  }
+}
+
+function rowRects(nd) {
+  return nd.rows.map(row => ({
+    x0: nd.x - row.w / 2 - 7, x1: nd.x + row.w / 2 + 7,
+    y0: nd.y + row.y0 + row.h * 0.1, y1: nd.y + row.y1 - row.h * 0.1,
+  }));
+}
+
+function textsCollide(a, b) {
+  const ra = rowRects(a), rb = rowRects(b);
+  return ra.some(p => rb.some(q => p.x0 < q.x1 && q.x0 < p.x1 && p.y0 < q.y1 && q.y0 < p.y1));
+}
+
+// Пересечение кругов уменьшается ровно настолько, чтобы подписи не сталкивались
+function resolveTextCollisions(nodes, pairs) {
+  for (let pass = 0; pass < 80; pass++) {
+    let moved = false;
+    pairs.forEach(pr => {
+      const a = pr.a, b = pr.b;
+      let dx = b.x - a.x, dy = b.y - a.y;
+      let dist = Math.hypot(dx, dy);
+      const maxD = a.r + b.r;                 // предел: круги только касаются
+      if (dist > maxD - 0.5) return;
+      if (dist < 1e-3) { dx = 1; dy = 0.3; dist = Math.hypot(dx, dy); }
+      if (!textsCollide(a, b)) return;
+      const step = Math.min(5, maxD - dist);
+      const ux = dx / dist, uy = dy / dist;
+      const wa = b.m / (a.m + b.m), wb = a.m / (a.m + b.m);
+      a.x -= ux * step * wa; a.y -= uy * step * wa;
+      b.x += ux * step * wb; b.y += uy * step * wb;
+      moved = true;
+    });
+    separateGenreNodes(pairs, 2);
+    if (!moved) break;
+  }
+}
+
+function relaxGenreNodes(nodes) {
+  const rMax = Math.max(...nodes.map(n => n.r));
+  // крупные круги стремятся в центр, мелкие — на внешнее кольцо
+  nodes.forEach(nd => { nd.ring = rMax * 1.7 * (1 - nd.r / rMax); });
+  [...nodes].sort((a, b) => b.r - a.r).forEach((nd, i) => {
+    const ang = i * 2.39996, rad = i === 0 ? 0 : Math.max(nd.ring, rMax * 0.6);
+    nd.x = Math.cos(ang) * rad;
+    nd.y = Math.sin(ang) * rad;
+  });
+  const pairs = [];
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i], b = nodes[j], sum = a.r + b.r;
+      const o = tagAffinity(a.tag, b.tag);
+      let d, min;
+      if (o < OVERLAP_MIN) {
+        d = sum * (1 + 0.12 * (OVERLAP_MIN - o) / OVERLAP_MIN);  // касание + зазор
+        min = sum;
+      } else {
+        d = sum * (1 - (o - OVERLAP_MIN) / 100 * OVERLAP_DAMP);  // мягкое пересечение
+        min = Math.max(d * 0.9, Math.abs(a.r - b.r) + Math.min(a.r, b.r) * 0.55);
+      }
+      pairs.push({ a, b, d, min, o });
+    }
+  }
+  const ITER = 900;
+  for (let it = 0; it < ITER; it++) {
+    const cool = 1 - 0.75 * (it / ITER);
+    nodes.forEach(nd => {
+      const dist = Math.hypot(nd.x, nd.y) || 1e-3;
+      const k = (nd.ring - dist) / dist * 0.11 * cool;   // радиальная пружина к своему кольцу
+      nd.x += nd.x * k; nd.y += nd.y * k;
+    });
+    pairs.forEach(pr => {
+      const a = pr.a, b = pr.b;
+      let dx = b.x - a.x, dy = b.y - a.y;
+      let dist = Math.hypot(dx, dy);
+      if (dist < 1e-3) { dx = 0.7; dy = 0.4; dist = Math.hypot(dx, dy); }
+      const k = (dist - pr.d) / dist * 0.35 * cool;
+      const wa = b.m / (a.m + b.m), wb = a.m / (a.m + b.m);
+      a.x += dx * k * wa; a.y += dy * k * wa;
+      b.x -= dx * k * wb; b.y -= dy * k * wb;
+    });
+    separateGenreNodes(pairs, 2);
+  }
+  separateGenreNodes(pairs, 14);
+  resolveTextCollisions(nodes, pairs);
+}
+
+function genreRowHtml(row, nd, scale) {
+  const top = (nd.r + row.y0) * scale;
+  const h = row.h * scale;
+  const style = `top:${top.toFixed(1)}px;height:${h.toFixed(1)}px;font-size:${(row.fs * scale).toFixed(1)}px`;
+  if (row.kind === 'title') {
+    const arg = activeTagFilter === nd.tag ? 'null' : `'${nd.tag.replace(/'/g, "\\'")}'`;
+    return `<div class="grow" style="${style}"><span class="gtitle" style="color:${nd.meta.text}" title="${nd.meta.desc || ''}" onclick="filterByTag(${arg})">${nd.meta.name}<span class="gsum">${nd.sum.toFixed(2)} · ${nd.count}</span></span></div>`;
+  }
+  const m = row.m;
+  const inner = m.link
+    ? `<a class="gname" href="${m.link}" target="_blank" rel="noopener" title="Rating ${m.rating.toFixed(3)}">${m.display}</a>`
+    : `<span class="gname nolink" title="Rating ${m.rating.toFixed(3)}">${m.display}</span>`;
+  return `<div class="grow" style="${style}">${inner}</div>`;
+}
+
+function renderGenreMap() {
+  const inner = document.getElementById('genre-map-inner');
+  const caption = document.getElementById('genre-map-caption');
+  const nodes = buildGenreNodes();
+  if (!nodes.length) { inner.innerHTML = ''; return; }
+
+  nodes.forEach(prepareGenreNode);
+  relaxGenreNodes(nodes);
+
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  nodes.forEach(n => {
+    minX = Math.min(minX, n.x - n.r); maxX = Math.max(maxX, n.x + n.r);
+    minY = Math.min(minY, n.y - n.r); maxY = Math.max(maxY, n.y + n.r);
+  });
+  const pad = 6;
+  const bw = maxX - minX, bh = maxY - minY;
+  const avail = Math.max(320, (document.getElementById('genre-map-scroll').clientWidth || 900) - 2 * pad - 2);
+  const scale = Math.min(1.3, Math.max(0.85, avail / bw));  // узкие экраны — горизонтальный скролл, а не мелкий шрифт
+  const W = bw * scale + 2 * pad, H = bh * scale + 2 * pad;
+  nodes.forEach(n => {
+    n.sx = (n.x - minX) * scale + pad;
+    n.sy = (n.y - minY) * scale + pad;
+  });
+
+  const circles = [...nodes].sort((a, b) => b.r - a.r).map(n => {
+    const dim = activeTagFilter && activeTagFilter !== n.tag ? ' dim' : '';
+    return `<circle class="gcircle${dim}" cx="${n.sx.toFixed(1)}" cy="${n.sy.toFixed(1)}" r="${(n.r * scale).toFixed(1)}" fill="${n.meta.bg}" fill-opacity="0.78" stroke="${n.meta.border}" stroke-width="1.75" />`;
+  }).join('');
+
+  const labels = nodes.map(n => {
+    const dim = activeTagFilter && activeTagFilter !== n.tag ? ' dim' : '';
+    const side = 2 * n.r * scale;
+    return `<div class="gnode${dim}" style="left:${(n.sx - n.r * scale).toFixed(1)}px;top:${(n.sy - n.r * scale).toFixed(1)}px;width:${side.toFixed(1)}px;height:${side.toFixed(1)}px">
+      ${n.rows.map(row => genreRowHtml(row, n, scale)).join('')}
+    </div>`;
+  }).join('');
+
+  inner.style.width = W.toFixed(0) + 'px';
+  inner.style.height = H.toFixed(0) + 'px';
+  inner.innerHTML = `<svg width="${W.toFixed(0)}" height="${H.toFixed(0)}" viewBox="0 0 ${W.toFixed(0)} ${H.toFixed(0)}">${circles}</svg>${labels}`;
+
+  const total = nodes.reduce((s, n) => s + n.sum, 0);
+  caption.innerHTML = `Размер круга — суммарный Rating поджанра (всего ${total.toFixed(2)} по ${allPhotographers.length} фотографам), число внутри — Rating · количество.
+    Размер имени — Rating фотографа, имя кликабельно. Пересечение кругов — близость поджанров: пересекаются только пары с совместимостью ≥ ${OVERLAP_MIN}%, глубина пересечения уменьшена для читаемости. Клик по названию поджанра — фильтр.`;
+}
+
+function setShortlistView(view) {
+  shortlistView = view;
+  const btn = document.getElementById('view-toggle-btn');
+  const map = document.getElementById('genre-map');
+  const isMap = view === 'map';
+  map.style.display = isMap ? 'block' : 'none';
+  btn.classList.toggle('active', isMap);
+  btn.textContent = isMap ? '▤ Поджанры таблицей' : '◉ Поджанры схемой';
+  document.getElementById('shortlist-cols').style.display = isMap ? 'none' : 'grid';
+  if (isMap) renderGenreMap();
+}
+
+function toggleShortlistView() {
+  setShortlistView(shortlistView === 'map' ? 'table' : 'map');
+}
+
+let mapResizeTimer = null;
+window.addEventListener('resize', () => {
+  if (shortlistView !== 'map') return;
+  clearTimeout(mapResizeTimer);
+  mapResizeTimer = setTimeout(renderGenreMap, 180);
+});
 
 function renderRating() {
   document.getElementById('rating-body').innerHTML = RATING_DATA.map(r => `
@@ -861,7 +1192,12 @@ async function init() {
     allPhotographers = rows.filter(r => r['Folder'] === 'photographers' && (r['Tag'] || '').trim());
     allModels = rows.filter(r => r['Folder'] === 'models');
     document.getElementById('loading').style.display = 'none';
+    renderLegend();
     renderShortlistTables();
+    if (params.get('view') === 'map') setShortlistView('map');
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { if (shortlistView === 'map') renderGenreMap(); });
+    }
   } catch (e) {
     document.getElementById('loading').textContent = 'Ошибка загрузки folders.md: ' + e.message;
   }
