@@ -10,21 +10,21 @@
 | photographers | 16 387 | @ph_miloradov | Raw | 0.548 | 2 204 263 | 0.4% | 462 |
 | photographers | 14 185 | @raziltwo | Крафт | 0.355 | 1 174 457 | 0.0% | 457 |
 | photographers | 13 858 | @EgorovD_PhotoArt | Гламур | 0.304 | 1 172 554 | 0.0% | 400 |
-| photographers | 13 549 | @geneoryxx | Кинк | 0.368 | 1 490 017 | 1.5% | 454 |
+| photographers | 13 505 | @geneoryxx | Кинк | 0.370 | 1 508 435 | 1.5% | 455 |
 | photographers | 12 304 | @erotica_fantasies | Raw | 0.204 | 776 836 | 0.0% | 338 |
-| photographers | 10 691 | @art_nu_k | Гламур | 0.278 | 699 332 | 4.5% | 411 |
+| photographers | 10 925 | @art_nu_k | Гламур | 0.281 | 706 229 | 4.5% | 417 |
 | photographers | 9 426 | @callmepleasegirl | Крафт | 0.157 | 332 045 | 0.0% | 308 |
 | photographers | 8 473 | @ph_naf_public | Гламур | 0.473 | 1 950 057 | 0.3% | 382 |
 | photographers | 8 143 | G.A.K. Production(1571189561) | Thug | 0.023 | 195 710 | 0.0% | 0 |
-| photographers | 7 740 | @krasnovTG | Крафт | 0.079 | 174 203 | 0.0% | 144 |
+| photographers | 7 828 | @krasnovTG | Крафт | 0.071 | 180 157 | 0.0% | 122 |
 | photographers | 7 411 | @tgadore | Крафт | 0.257 | 518 330 | 2.5% | 503 |
 | photographers | 7 274 | @mchuprin_ph | Гламур | 0.230 | 553 185 | 0.8% | 420 |
+| photographers | 7 149 | Anna's secrets(2160513495) | Крафт | 0.310 | 869 485 | 2.8% | 562 |
 | photographers | 7 019 | ❤️‍🔥Фотограф Алла (1665991400) | Raw | 0.030 | 111 978 | 0.0% | 106 |
-| photographers | 6 969 | Anna's secrets(2160513495) | Крафт | 0.295 | 856 843 | 3.2% | 519 |
+| photographers | 6 911 | @nudocaffe | Крафт | 0.344 | 595 840 | 6.1% | 606 |
 | photographers | 6 806 | @lukcarefully | Raw | 0.191 | 608 023 | 0.0% | 305 |
-| photographers | 6 727 | @nudocaffe | Крафт | 0.322 | 568 790 | 3.7% | 604 |
 | photographers | 6 698 | Плотниковъ(1101651230) | Raw | 0.434 | 1 147 520 | 6.5% | 598 |
-| photographers | 6 678 | @potaninfoto | Гламур | 0.107 | 147 855 | 0.0% | 226 |
+| photographers | 6 655 | @potaninfoto | Гламур | 0.068 | 153 833 | 0.0% | 122 |
 | photographers | 6 366 | Max Fayst📸😈(2778995761) | Raw | 0.373 | 1 166 037 | 1.8% | 508 |
 | photographers | 6 333 | @my_fuckin_sky | Гламур | 0.091 | 291 401 | 0.0% | 155 |
 | photographers | 6 261 | @denbut_photoart | Гламур | 0.183 | 497 527 | 0.0% | 321 |
@@ -104,59 +104,59 @@
 | photographers | 419 | Ignatovich(1677660321) |  | 0.156 | 11 366 | 0.0% | 403 |
 | photographers | 298 | @romansilentium |  | 0.032 | 10 748 | 0.0% | 83 |
 | photographers | 247 | @deshousemagazine |  | 0.089 | 29 862 | 0.0% | 225 |
-| models | 24 437 | @AlinaaNeuer |  | 0.197 | 762 870 | 0.0% | 259 |
-| models | 14 454 | @anastasiarenz |  | 0.474 | 1 371 023 | 0.8% | 547 |
-| models | 13 768 | @m0llbzero |  | 0.688 | 1 403 913 | 1.6% | 603 |
+| models | 24 437 | @AlinaaNeuer |  | 0.198 | 762 870 | 0.0% | 259 |
+| models | 14 454 | @anastasiarenz |  | 0.475 | 1 371 023 | 0.8% | 547 |
+| models | 13 768 | @m0llbzero |  | 0.689 | 1 403 913 | 1.6% | 603 |
 | models | 12 932 | @good_girls_love_sex |  | 0.195 | 233 957 | 0.0% | 437 |
 | models | 11 396 | @alicelismagi |  | 0.443 | 1 229 273 | 0.0% | 375 |
-| models | 9 996 | @uaniliza |  | 0.444 | 1 101 475 | 1.1% | 492 |
-| models | 9 850 | Sumiko☀️(2243340856) |  | 0.357 | 3 291 879 | 3.7% | 403 |
-| models | 9 668 | @sexxxylesya |  | 0.484 | 1 453 677 | 0.0% | 287 |
-| models | 9 109 | @vechereyet2 |  | 0.439 | 981 846 | 0.0% | 395 |
+| models | 9 996 | @uaniliza |  | 0.445 | 1 101 475 | 1.1% | 492 |
+| models | 9 850 | Sumiko☀️(2243340856) |  | 0.358 | 3 291 879 | 3.7% | 403 |
+| models | 9 755 | @sexxxylesya |  | 0.487 | 1 465 330 | 0.0% | 286 |
+| models | 9 109 | @vechereyet2 |  | 0.440 | 981 846 | 0.0% | 395 |
 | models | 8 990 | @bluekroovy_live |  | 0.120 | 698 526 | 0.0% | 290 |
 | models | 7 908 | xenaexsa(2128476425) |  | 0.382 | 709 686 | 1.1% | 540 |
 | models | 7 840 | @asmodeus_model |  | 0.229 | 690 869 | 0.0% | 209 |
-| models | 7 485 | @dishashemetova2 |  | 0.461 | 855 021 | 1.8% | 575 |
-| models | 6 997 | @olyaaster |  | 0.317 | 371 965 | 7.5% | 546 |
-| models | 6 963 | @orvientte |  | 0.659 | 1 506 686 | 96.1% | 714 |
+| models | 7 485 | @dishashemetova2 |  | 0.462 | 855 021 | 1.8% | 575 |
+| models | 7 361 | @orvientte |  | 0.663 | 1 536 407 | 95.7% | 711 |
+| models | 6 997 | @olyaaster |  | 0.318 | 371 965 | 7.5% | 546 |
 | models | 6 854 | @Juliatimoro |  | 0.435 | 1 038 419 | 1.9% | 499 |
 | models | 6 520 | @tatianamodel |  | 0.091 | 406 233 | 0.0% | 85 |
 | models | 6 342 | @amwiiiiiii |  | 0.320 | 820 107 | 3.9% | 494 |
 | models | 5 247 | @northern_lights_model |  | 0.458 | 1 468 271 | 3.6% | 618 |
 | models | 5 053 | @nakedtoffee |  | 0.234 | 620 196 | 0.0% | 355 |
-| models | 4 796 | @just_me_not_more |  | 0.288 | 532 658 | 0.9% | 450 |
+| models | 4 796 | @just_me_not_more |  | 0.289 | 532 658 | 0.9% | 450 |
 | models | 4 447 | Elf_sonya(1450108147) |  | 0.199 | 181 808 | 0.0% | 396 |
 | models | 4 440 | @bonniewoods2306 |  | 0.259 | 469 350 | 1.1% | 566 |
 | models | 4 373 | @darnikmodel |  | 0.239 | 81 571 | 38.5% | 621 |
 | models | 4 167 | @pollyrumntsva |  | 0.301 | 669 732 | 0.0% | 356 |
 | models | 3 946 | @skinny_may |  | 0.169 | 285 407 | 1.6% | 351 |
 | models | 3 919 | @na_licooo |  | 0.280 | 470 520 | 0.9% | 490 |
-| models | 3 899 | @madmaurafree |  | 0.110 | 288 334 | 2.6% | 147 |
+| models | 3 899 | @madmaurafree |  | 0.111 | 288 334 | 2.6% | 147 |
 | models | 3 899 | @gotomargosha |  | 0.082 | 192 980 | 0.0% | 158 |
-| models | 3 715 | @harismaimportrant |  | 0.397 | 1 101 939 | 2.8% | 596 |
-| models | 3 654 | @LizkinPip |  | 0.226 | 281 691 | 1.7% | 530 |
-| models | 3 616 | @neu_ling_free |  | 0.151 | 244 828 | 0.0% | 359 |
+| models | 3 733 | @harismaimportrant |  | 0.400 | 1 113 948 | 2.8% | 596 |
+| models | 3 654 | @LizkinPip |  | 0.227 | 281 691 | 1.7% | 530 |
+| models | 3 616 | @neu_ling_free |  | 0.152 | 244 828 | 0.0% | 359 |
 | models | 3 588 | @alice_lt |  | 0.028 | 225 041 | 0.0% | 62 |
-| models | 3 322 | @arishestova |  | 0.158 | 457 075 | 0.0% | 276 |
+| models | 3 322 | @arishestova |  | 0.159 | 457 075 | 0.0% | 276 |
 | models | 3 075 | @nudelobve |  | 0.158 | 499 083 | 0.0% | 269 |
 | models | 3 062 | @ioannova_a |  | 0.035 | 119 587 | 0.0% | 152 |
 | models | 2 845 | @ksjuha_live |  | 0.115 | 124 061 | 0.0% | 298 |
-| models | 2 829 | @fieryli |  | 0.264 | 127 143 | 10.5% | 439 |
+| models | 2 829 | @fieryli |  | 0.265 | 127 143 | 10.5% | 439 |
 | models | 2 476 | @IevaModel |  | 0.102 | 457 049 | 0.0% | 343 |
 | models | 2 349 | Mentol💋vaya_Pastil(1644866500) |  | 0.164 | 124 622 | 3.0% | 406 |
 | models | 2 336 | @vixy_rea |  | 0.191 | 333 135 | 0.0% | 393 |
 | models | 2 324 | @ArgatBellaD |  | 0.190 | 327 741 | 0.0% | 351 |
 | models | 2 315 | @sugar_maple |  | 0.057 | 85 355 | 0.0% | 157 |
 | models | 2 301 | @NeKikimora7 |  | — | — | — | — |
-| models | 2 202 | @dardarkpirs |  | 0.245 | 356 590 | 1.0% | 513 |
+| models | 2 202 | @dardarkpirs |  | 0.246 | 356 590 | 1.0% | 513 |
 | models | 2 194 | @ana_grin |  | 0.110 | 264 245 | 0.0% | 176 |
 | models | 2 141 | @ivolga_ashoo |  | 0.080 | 448 538 | 0.0% | 249 |
-| models | 2 135 | @totototonightkissyou |  | 0.142 | 145 971 | 0.0% | 392 |
+| models | 2 135 | @totototonightkissyou |  | 0.143 | 145 971 | 0.0% | 392 |
 | models | 2 027 | 🍑Сосочки можно 18+(1570446534) |  | 0.112 | 113 444 | 2.3% | 270 |
 | models | 2 013 | @artchos |  | 0.120 | 87 211 | 2.2% | 304 |
 | models | 1 940 | 💜 Iris 💜(1891097394) |  | 0.138 | 119 390 | 0.0% | 332 |
-| models | 1 935 | @n_mels |  | 0.250 | 468 945 | 1.6% | 438 |
-| models | 1 769 | @antonia_astart |  | 0.131 | 114 027 | 0.0% | 368 |
+| models | 1 935 | @n_mels |  | 0.251 | 468 945 | 1.6% | 438 |
+| models | 1 769 | @antonia_astart |  | 0.132 | 114 027 | 0.0% | 368 |
 | models | 1 723 | @juliasemenkova84 |  | 0.036 | 146 159 | 0.0% | 143 |
 | models | 1 607 | @youcansayyes12 |  | 0.014 | 111 754 | 0.0% | 47 |
 | models | 1 544 | Helen Helen 🔥(2790941270) |  | 0.070 | 173 896 | 0.0% | 126 |
@@ -167,4 +167,4 @@
 | models | 699 | @ChristalMayRoom |  | 0.007 | 12 784 | 0.0% | 53 |
 | models | 576 | @ingridxproject |  | 0.048 | 91 919 | 0.0% | 135 |
 | models | 307 | @lolly15molly |  | — | — | — | — |
-| models | 277 | @WolflingEverett |  | 0.059 | 8 512 | 0.0% | 203 |
+| models | 277 | @WolflingEverett |  | 0.060 | 8 512 | 0.0% | 203 |
