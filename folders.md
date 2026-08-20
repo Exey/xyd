@@ -60,13 +60,13 @@
 | photographers | 2 453 | aleksandrsavichevo(1893898354) | Кинк | 0.047 | 229 248 | 0.0% | 151 |
 | photographers | 2 442 | @ne_dumali | Гламур | 0.103 | 76 126 | 0.0% | 245 |
 | photographers | 2 414 | @shurixNeo | Raw | 0.295 | 367 685 | 5.0% | 606 |
-| photographers | 2 275 | @frolkinanude | Кинк | 0.394 | 328 967 | 12.1% | 615 |
+| photographers | 2 287 | @frolkinanude | Кинк | 0.361 | 337 218 | 10.3% | 609 |
 | photographers | 2 261 | @nat_flame | Гламур | 0.170 | 273 362 | 0.8% | 362 |
 | photographers | 2 237 | @analog_nudes | Крафт | 0.043 | 44 184 | 0.0% | 101 |
 | photographers | 2 224 | @lobanov_free | Гламур | 0.027 | 24 087 | 0.0% | 66 |
 | photographers | 2 222 | @ura_pechen | Thug | 0.352 | 1 202 145 | 0.0% | 548 |
 | photographers | 2 214 | @Marginal_Art_1 | Кинк | 0.238 | 437 405 | 0.0% | 501 |
-| photographers | 2 058 | @mirploti | Кинк | 0.407 | 488 736 | 37.5% | 481 |
+| photographers | 2 049 | @mirploti | Кинк | 0.406 | 491 454 | 37.5% | 479 |
 | photographers | 2 035 | @IvanAnanyinNu | Крафт | 0.070 | 40 586 | 0.0% | 168 |
 | photographers | 2 034 | Soulful Nude(1494235171) | Фэшн | 0.064 | 15 530 | 0.0% | 163 |
 | photographers | 2 009 | @photokrafter83 | Гламур | 0.180 | 206 337 | 0.0% | 415 |
