@@ -97,7 +97,7 @@
 | photographers | 752 | @pochti_blog |  | 0.148 | 72 664 | 2.8% | 339 |
 | photographers | 738 | @kak_by_photographer |  | 0.010 | 11 392 | 0.0% | 42 |
 | photographers | 668 | @fonarick_ru |  | 0.094 | 40 073 | 1.1% | 228 |
-| photographers | 624 | @tatooevskiyphoto | Гламур | 0.207 | 67 687 | 0.0% | 520 |
+| photographers | 624 | @tatooevskiyphoto |  | 0.207 | 67 687 | 0.0% | 520 |
 | photographers | 612 | @DidukArt |  | 0.154 | 25 496 | 9.1% | 162 |
 | photographers | 601 | @photovavaca |  | 0.185 | 39 913 | 2.8% | 447 |
 | photographers | 564 | @rylskyartofficial |  | 0.047 | 68 328 | 0.0% | 187 |
