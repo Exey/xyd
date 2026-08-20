@@ -172,10 +172,16 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
   border: 1.5px solid; display: inline-block; cursor: default;
 }
-.score-bar-wrap { display: flex; align-items: center; gap: 8px; }
 .score-val { font-size: 17px; font-weight: 900; color: var(--rose); min-width: 34px; }
-.score-bar { flex: 1; height: 4px; background: var(--border2); border-radius: 2px; max-width: 80px; }
-.score-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--ink), var(--rose), var(--cotton-candy)); }
+.trend {
+  display: inline-flex; align-items: baseline; gap: 3px; font-size: 13px; font-weight: 900;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.trend .trend-arrow { font-size: 11px; }
+.trend.up   { color: var(--up); }
+.trend.down { color: var(--down); }
+.trend.flat { color: var(--blue); }
+.trend.new  { color: #C9A227; }
 .style-tag {
   font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
   border: 1.5px solid var(--border); cursor: default; position: relative; display: inline-block;
@@ -607,11 +613,48 @@ function ratingCellHtml(p) {
   const ratingNum = parseFloat(ratingRaw);
   const hasRating = !Number.isNaN(ratingNum);
   if (!hasRating) return `<span class="score-val" style="color:var(--muted)">—</span>`;
-  const fillPct = Math.min(ratingNum / 0.8 * 100, 100).toFixed(0);
-  return `<div class="score-bar-wrap"><span class="score-val">${ratingRaw}</span><div class="score-bar"><div class="score-fill" style="width:${fillPct}%"></div></div></div>`;
+  return `<span class="score-val">${ratingRaw}</span>`;
+}
+
+// ─── TREND: изменение места относительно folders_old.md ───────────────
+let hasPrevData = false;
+
+function entityKey(r) {
+  return parseTelegramName(r['ID/Username']).display.trim().toLowerCase();
+}
+
+function ratingRankMap(rows) {
+  const map = new Map();
+  [...rows]
+    .sort((a, b) => ratingSortVal(b['Rating']) - ratingSortVal(a['Rating']))
+    .forEach((r, i) => map.set(entityKey(r), i + 1));
+  return map;
+}
+
+// место считается по Rating desc — не зависит от текущей сортировки таблицы
+function annotateTrend(rows, prevRows) {
+  const cur = ratingRankMap(rows);
+  const prev = prevRows ? ratingRankMap(prevRows) : null;
+  rows.forEach(r => {
+    const k = entityKey(r);
+    r._place = cur.get(k);
+    const was = prev ? prev.get(k) : undefined;
+    r._trend = was == null ? null : was - r._place;   // > 0 — поднялся
+  });
+}
+
+const TREND_NEW_SORT = 1e6;
+
+function trendCellHtml(p) {
+  const d = p._trend;
+  if (d == null) return `<span class="trend new" title="Новый в рейтинге"><span class="trend-arrow">✦</span>NEW</span>`;
+  if (d > 0) return `<span class="trend up" title="Было место ${p._place + d}, стало ${p._place}"><span class="trend-arrow">▲</span>+${d}</span>`;
+  if (d < 0) return `<span class="trend down" title="Было место ${p._place + d}, стало ${p._place}"><span class="trend-arrow">▼</span>−${-d}</span>`;
+  return `<span class="trend flat" title="Место не изменилось: ${p._place}"><span class="trend-arrow">→</span>0</span>`;
 }
 
 const PH_COLUMNS = [
+  { key: 'trend',     label: 'Trend',      sortVal: p => p._trend == null ? TREND_NEW_SORT : p._trend, cell: trendCellHtml },
   { key: 'tag',       label: 'Поджанр',    sortVal: p => (tagMetaFor(p)?.name || '').toLowerCase(), cell: tagCellHtml },
   { key: 'name',      label: 'Фотограф',   sortVal: p => parseTelegramName(p['ID/Username']).display.toLowerCase(), cell: nameCellHtml },
   { key: 'rating',    label: 'Rating',     sortVal: p => ratingSortVal(p['Rating']), cell: ratingCellHtml },
@@ -691,12 +734,17 @@ function renderRows(data, columns, sortState) {
   </tr>`).join('');
 }
 
+function visibleColumns(columns) {
+  return columns.filter(c => c.key !== 'trend' || hasPrevData);
+}
+
 function renderShortlistTables() {
   const phData = activeTagFilter ? allPhotographers.filter(p => (p['Tag'] || '').trim() === activeTagFilter) : allPhotographers;
-  renderHead('ph-head', PH_COLUMNS, phSort);
-  renderHead('model-head', MODEL_COLUMNS, modelSort);
-  document.getElementById('ph-body').innerHTML = renderRows(phData, PH_COLUMNS, phSort);
-  document.getElementById('model-body').innerHTML = renderRows(allModels, MODEL_COLUMNS, modelSort);
+  const phCols = visibleColumns(PH_COLUMNS), modelCols = visibleColumns(MODEL_COLUMNS);
+  renderHead('ph-head', phCols, phSort);
+  renderHead('model-head', modelCols, modelSort);
+  document.getElementById('ph-body').innerHTML = renderRows(phData, phCols, phSort);
+  document.getElementById('model-body').innerHTML = renderRows(allModels, modelCols, modelSort);
   document.getElementById('shortlist-cols').style.display = shortlistView === 'map' ? 'none' : 'grid';
 }
 
@@ -1195,6 +1243,18 @@ async function init() {
     const rows = parseMarkdownTable(await foldersRes.text());
     allPhotographers = rows.filter(r => r['Folder'] === 'photographers' && (r['Tag'] || '').trim());
     allModels = rows.filter(r => r['Folder'] === 'models');
+
+    let prevRows = null;
+    try {
+      const prevRes = await fetch('folders_old.md');
+      if (prevRes.ok) prevRows = parseMarkdownTable(await prevRes.text());
+    } catch (e) {
+      console.warn('folders_old.md недоступен, колонка Trend скрыта:', e.message);
+    }
+    hasPrevData = !!(prevRows && prevRows.length);
+    annotateTrend(allPhotographers, prevRows && prevRows.filter(r => r['Folder'] === 'photographers' && (r['Tag'] || '').trim()));
+    annotateTrend(allModels, prevRows && prevRows.filter(r => r['Folder'] === 'models'));
+
     document.getElementById('loading').style.display = 'none';
     renderLegend();
     renderShortlistTables();
