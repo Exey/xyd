@@ -44,6 +44,7 @@
 | photographers | 3 344 | @nu_photo_art | Кинк | 0.122 | 248 180 | 0.0% | 251 |
 | photographers | 3 310 | @msfantasyph | Кинк | 0.129 | 232 188 | 0.0% | 271 |
 | photographers | 3 269 | @art_nude_photos | Raw | 0.043 | 254 655 | 0.0% | 127 |
+| photographers | 3 205 | @bsaphoto | Крафт | 0.219 | 98 518 | 6.7% | 425 |
 | photographers | 3 198 | @nualexon | Raw | 0.250 | 324 826 | 2.3% | 530 |
 | photographers | 3 050 | @max_kaftorman | Raw | 0.128 | 244 241 | 0.6% | 255 |
 | photographers | 2 940 | Melons_Fans(1630836463) | Гламур | 0.062 | 116 866 | 0.0% | 131 |
@@ -53,7 +54,6 @@
 | photographers | 2 725 | @artsproekt | Raw | 0.047 | 266 751 | 0.0% | 151 |
 | photographers | 2 676 | @justfcknrawww | Гламур | — | — | — | — |
 | photographers | 2 635 | @paramonovnu | Гламур | 0.180 | 106 223 | 0.0% | 434 |
-| photographers | 2 538 | @bsaphoto | Крафт | 0.200 | 93 089 | 6.7% | 373 |
 | photographers | 2 521 | Leica Erotica(1903204438) | Thug | 0.061 | 36 619 | 0.0% | 148 |
 | photographers | 2 512 | @dallasgorben | Raw | 0.221 | 438 312 | 0.0% | 473 |
 | photographers | 2 469 | @NudeAbandon | Концепт | 0.145 | 200 750 | 0.0% | 321 |
@@ -112,14 +112,14 @@
 | models | 11 396 | @alicelismagi |  | 0.441 | 1 229 273 | 0.0% | 375 |
 | models | 9 996 | @uaniliza |  | 0.443 | 1 101 475 | 1.1% | 492 |
 | models | 9 755 | @sexxxylesya |  | 0.485 | 1 465 330 | 0.0% | 286 |
-| models | 9 419 | Sumiko☀️(2243340856) |  | 0.358 | 3 338 467 | 3.7% | 403 |
+| models | 9 405 | Sumiko☀️(2243340856) |  | 0.358 | 3 339 542 | 3.5% | 402 |
 | models | 9 109 | @vechereyet2 |  | 0.438 | 981 846 | 0.0% | 395 |
 | models | 8 990 | @bluekroovy_live |  | 0.119 | 698 526 | 0.0% | 290 |
 | models | 7 908 | xenaexsa(2128476425) |  | 0.381 | 709 686 | 1.1% | 540 |
 | models | 7 840 | @asmodeus_model |  | 0.228 | 690 869 | 0.0% | 209 |
 | models | 7 485 | @dishashemetova2 |  | 0.460 | 855 021 | 1.8% | 575 |
 | models | 7 361 | @orvientte |  | 0.661 | 1 536 407 | 95.7% | 711 |
-| models | 6 997 | @olyaaster |  | 0.317 | 371 965 | 7.5% | 546 |
+| models | 7 320 | @olyaaster |  | 0.299 | 388 933 | 7.5% | 479 |
 | models | 6 854 | @Juliatimoro |  | 0.434 | 1 038 419 | 1.9% | 499 |
 | models | 6 520 | @tatianamodel |  | 0.091 | 406 233 | 0.0% | 85 |
 | models | 6 428 | @amwiiiiiii |  | 0.319 | 826 493 | 3.9% | 490 |
