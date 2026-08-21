@@ -8,7 +8,7 @@
 | photographers | 19 505 | Фотограф Гудвин 18(1417817444) | Raw | 0.374 | 2 152 536 | 0.0% | 381 |
 | photographers | 16 424 | @elishanudes | Кинк | 0.486 | 1 898 959 | 2.8% | 615 |
 | photographers | 16 387 | @ph_miloradov | Raw | 0.548 | 2 204 263 | 0.4% | 462 |
-| photographers | 14 185 | @raziltwo | Крафт | 0.355 | 1 174 457 | 0.0% | 457 |
+| photographers | 14 360 | @raziltwo | Крафт | 0.363 | 1 194 184 | 0.0% | 473 |
 | photographers | 13 858 | @EgorovD_PhotoArt | Гламур | 0.304 | 1 172 554 | 0.0% | 400 |
 | photographers | 13 505 | @geneoryxx | Кинк | 0.370 | 1 508 435 | 1.5% | 455 |
 | photographers | 12 304 | @erotica_fantasies | Raw | 0.204 | 776 836 | 0.0% | 338 |
@@ -57,9 +57,9 @@
 | photographers | 2 521 | Leica Erotica(1903204438) | Thug | 0.061 | 36 619 | 0.0% | 148 |
 | photographers | 2 512 | @dallasgorben | Raw | 0.221 | 438 312 | 0.0% | 473 |
 | photographers | 2 469 | @NudeAbandon | Концепт | 0.145 | 200 750 | 0.0% | 321 |
+| photographers | 2 455 | @shurixNeo | Raw | 0.306 | 372 554 | 6.2% | 602 |
 | photographers | 2 453 | aleksandrsavichevo(1893898354) | Кинк | 0.047 | 229 248 | 0.0% | 151 |
 | photographers | 2 442 | @ne_dumali | Гламур | 0.103 | 76 126 | 0.0% | 245 |
-| photographers | 2 414 | @shurixNeo | Raw | 0.295 | 367 685 | 5.0% | 606 |
 | photographers | 2 287 | @frolkinanude | Кинк | 0.361 | 337 218 | 10.3% | 609 |
 | photographers | 2 261 | @nat_flame | Гламур | 0.170 | 273 362 | 0.8% | 362 |
 | photographers | 2 237 | @analog_nudes | Крафт | 0.043 | 44 184 | 0.0% | 101 |
@@ -83,9 +83,9 @@
 | photographers | 1 531 | @gerachernyadyev | Драма | 0.022 | 37 563 | 0.0% | 90 |
 | photographers | 1 500 | @xottabphoto | Кинк | 0.010 | 82 424 | 0.0% | 27 |
 | photographers | 1 458 | @tesi_f | Крафт | 0.073 | 27 936 | 0.0% | 182 |
+| photographers | 1 435 | @nuancefluent | Крафт | 0.138 | 82 557 | 1.9% | 321 |
 | photographers | 1 362 | @prozvitsky_ph |  | 0.179 | 255 565 | 0.0% | 389 |
 | photographers | 1 356 | @BLVPH14 |  | 0.014 | 161 902 | 0.0% | 31 |
-| photographers | 1 334 | @nuancefluent |  | 0.139 | 78 551 | 1.9% | 324 |
 | photographers | 1 258 | @nudephotographer_vl |  | 0.035 | 139 974 | 0.0% | 122 |
 | photographers | 1 236 | @rashap_blog |  | — | — | — | — |
 | photographers | 1 232 | @kostromin_art |  | 0.393 | 93 830 | 24.3% | 509 |
@@ -165,6 +165,7 @@
 | models | 1 314 | TaBo(1994163041) |  | 0.057 | 119 143 | 0.0% | 123 |
 | models | 1 181 | @Alia_Shakirova |  | 0.176 | 184 431 | 0.0% | 453 |
 | models | 1 164 | @polly_boom777 |  | 0.034 | 48 160 | 0.0% | 109 |
+| models | 986 | your sun 18+(2914105331) |  | 0.095 | 337 758 | 0.0% | 169 |
 | models | 699 | @ChristalMayRoom |  | 0.007 | 12 784 | 0.0% | 53 |
 | models | 576 | @ingridxproject |  | 0.048 | 91 919 | 0.0% | 135 |
 | models | 277 | @WolflingEverett |  | 0.060 | 8 512 | 0.0% | 203 |
