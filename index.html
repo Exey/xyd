@@ -151,13 +151,13 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .tag-count { font-weight: 900; margin-left: 5px; opacity: .65; font-variant-numeric: tabular-nums; }
 
 /* MAIN TABLE */
-.table-wrap { padding: 18px 24px; }
+.table-wrap { padding: 18px 0; }
 .loading { color: var(--muted); padding: 40px 24px; font-size: 14px; }
 .rank-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .rank-table th {
   text-align: left; padding: 8px 10px; color: var(--muted);
   font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--border); white-space: nowrap;
 }
 .rank-table td { padding: 10px 10px; border-bottom: 1px solid var(--border2); vertical-align: middle; }
 .rank-table tr:hover td { background: #F5EDEA44; }
@@ -334,7 +334,7 @@ footer a:hover { color: var(--ink); }
 
 @media (max-width: 700px) {
   .rank-table th.col-hide-narrow, .rank-table td.col-hide-narrow { display: none; }
-  .table-wrap { padding: 12px; }
+  .table-wrap { padding: 12px 0; }
   .shortlist-intro { padding: 12px; }
   .shortlist-col { padding: 12px; }
 }
@@ -658,7 +658,7 @@ const PH_COLUMNS = [
   { key: 'tag',       label: 'Поджанр',    sortVal: p => (tagMetaFor(p)?.name || '').toLowerCase(), cell: tagCellHtml },
   { key: 'name',      label: 'Фотограф',   sortVal: p => parseTelegramName(p['ID/Username']).display.toLowerCase(), cell: nameCellHtml },
   { key: 'rating',    label: 'Rating',     sortVal: p => ratingSortVal(p['Rating']), cell: ratingCellHtml },
-  { key: 'followers', label: 'Подписчики', sortVal: p => parseNumeric(p['Followers']) ?? -1, cell: p => p['Followers'] || '—' },
+  { key: 'followers', label: 'Members', sortVal: p => parseNumeric(p['Followers']) ?? -1, cell: p => p['Followers'] || '—' },
   { key: 'views',     label: 'Просмотры',  sortVal: p => parseNumeric(p['Views']) ?? -1, cell: p => p['Views'] || '—', hideNarrow: true },
   { key: 'viral',     label: 'Виральность',sortVal: p => parseNumeric(p['Viral share']) ?? -1, cell: p => p['Viral share'] || '—', hideNarrow: true },
   { key: 'interest',  label: 'Интерес',    sortVal: p => parseNumeric(p['Post Quality']) ?? -1, cell: p => p['Post Quality'] || '—', hideNarrow: true },
