@@ -1274,20 +1274,43 @@ function moneyShort(v) {
   return money(v);
 }
 
+// mutual_pr.md выгружается то с английскими, то с русскими заголовками
+const ADS_FIELDS = {
+  followers: ['Followers', 'Подписчики'],
+  title:     ['Title', 'Название'],
+  d1:        ['24h forecast', 'Прогноз 24ч'],
+  d2:        ['48h forecast', 'Прогноз 48ч'],
+  d3:        ['72h forecast', 'Прогноз 72ч'],
+  wk:        ['Week forecast', 'Прогноз неделя'],
+  mo:        ['Month forecast', 'Прогноз месяц'],
+  best:      ['Best days to post', 'Лучшие дни для поста'],
+  repeat:    ['Repeat in Month', 'Повтор через месяц'],
+  folder:    ['Folder', 'Папка'],
+};
+
+function adsField(row, key) {
+  for (const name of ADS_FIELDS[key]) {
+    const v = row[name];
+    if (v != null && v !== '') return v;
+  }
+  return '';
+}
+
 const ADS_PERIODS = [
-  { key: 'd1', label: '24ч',    field: '24h forecast' },
-  { key: 'd2', label: '48ч',    field: '48h forecast', hideNarrow: true },
-  { key: 'd3', label: '72ч',    field: '72h forecast', hideNarrow: true },
-  { key: 'wk', label: 'Неделя', field: 'Week forecast' },
-  { key: 'mo', label: 'Месяц',  field: 'Month forecast' },
+  { key: 'd1', label: '24ч' },
+  { key: 'd2', label: '48ч', hideNarrow: true },
+  { key: 'd3', label: '72ч', hideNarrow: true },
+  { key: 'wk', label: 'Неделя' },
+  { key: 'mo', label: 'Месяц' },
 ];
 
 function annotateAds(rows) {
   rows.forEach(r => {
-    r._f = parseNumeric(r['Followers']) ?? 0;
-    r._name = (r['Title'] || '').trim();
+    r._f = parseNumeric(adsField(r, 'followers')) ?? 0;
+    r._name = adsField(r, 'title').trim();
+    r._best = adsField(r, 'best');
     r._price = {};
-    ADS_PERIODS.forEach(p => { r._price[p.key] = (parseNumeric(r[p.field]) ?? 0) * AD_RUB_PER_SUB; });
+    ADS_PERIODS.forEach(p => { r._price[p.key] = (parseNumeric(adsField(r, p.key)) ?? 0) * AD_RUB_PER_SUB; });
     // оценка канала: база по подписчикам, скорректированная фактической рекламной выручкой
     const base = r._f * VALUE_RUB_PER_SUB;
     r._adsMonthly = r._price.d1 * AD_SLOTS_PER_MONTH;
@@ -1322,8 +1345,8 @@ const ADS_COLUMNS = [
     sortVal: r => r._price[p.key],
     cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}">${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
   })),
-  { key: 'best', label: 'Лучшие дни', sortVal: r => (r['Best days to post'] || '').toLowerCase(),
-    cell: r => `<span class="ads-best">${r['Best days to post'] || '—'}</span>` },
+  { key: 'best', label: 'Лучшие дни', sortVal: r => (r._best || '').toLowerCase(),
+    cell: r => `<span class="ads-best">${r._best || '—'}</span>` },
   { key: 'value', label: 'Оценка стоимости канала', num: true, sortVal: r => r._value, cell: adsValueCell },
 ];
 
