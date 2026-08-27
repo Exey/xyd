@@ -281,6 +281,29 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .post-text:hover { color: var(--rose); }
 .post-item.place-highlight { box-shadow: 0 0 0 3px var(--cotton-candy); }
 
+/* ADS TAB */
+.ads-wrap { padding: 0 24px; }
+.ads-table th.num, .ads-table td.num { text-align: right; }
+.ads-money { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ads-money.muted { color: var(--muted); font-weight: 600; }
+.ads-value { font-weight: 900; color: var(--rose); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ads-mult { font-size: 11px; font-weight: 800; margin-left: 6px; font-variant-numeric: tabular-nums; }
+.ads-mult.up { color: var(--up); }
+.ads-mult.down { color: var(--down); }
+.ads-mult.flat { color: var(--blue); }
+.ads-best { font-size: 12px; color: var(--text); white-space: nowrap; }
+.ads-name { font-weight: 700; font-size: 14px; }
+.ads-name a { color: inherit; text-decoration: none; }
+.ads-name a:hover { color: var(--rose); }
+.ads-name .private { color: var(--muted); font-weight: 600; }
+.ads-group th {
+  border-bottom: none; padding-bottom: 2px; font-size: 10px; color: var(--muted);
+}
+.ads-group th.ads-group-cell {
+  text-align: center; color: var(--rose); border-bottom: 1.5px solid var(--border2);
+}
+@media (max-width: 700px) { .ads-wrap { padding: 0 12px; } }
+
 /* RATING 2025 TAB */
 .rating-wrap { padding: 20px 24px; }
 .rating-wrap h2 { font-size: 20px; font-weight: 900; background: var(--header-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; }
@@ -349,6 +372,7 @@ footer a:hover { color: var(--ink); }
     <button class="tab-btn active" data-tab="shortlist" onclick="showTab('shortlist')">SHORTLIST 2026</button>
     <button class="tab-btn" data-tab="posts" onclick="showTab('posts')">TOP 250 POSTS 2025</button>
     <button class="tab-btn" data-tab="rating" onclick="showTab('rating')">RATING 2025</button>
+    <button class="tab-btn" data-tab="ads" onclick="showTab('ads')">ADS</button>
     <button class="tab-btn" data-tab="criteria" onclick="showTab('criteria')">Критерии</button>
     <a class="tg-btn" href="https://t.me/XYDpodcast" target="_blank">▶ Telegram</a>
   </nav>
@@ -437,6 +461,23 @@ footer a:hover { color: var(--ink); }
       </thead>
       <tbody id="rating-body"></tbody>
     </table>
+  </div>
+</div>
+
+<!-- ══════════════════ ADS ══════════════════ -->
+<div id="tab-ads" class="tab-content">
+  <div class="shortlist-intro">
+    <span class="algo-desc" id="ads-desc">Прайс взаимного пиара и оценка каналов по данным mutual_pr.md.</span>
+  </div>
+
+  <div class="table-wrap">
+    <div class="loading" id="ads-loading">Загрузка mutual_pr.md…</div>
+    <div class="ads-wrap" id="ads-wrap" style="display:none">
+      <table class="rank-table ads-table" id="ads-table">
+        <thead id="ads-head"></thead>
+        <tbody id="ads-body"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -556,7 +597,8 @@ let allModels = [];
 function parseMarkdownTable(md) {
   const lines = md.split('\n').filter(l => l.trim().startsWith('|'));
   if (lines.length < 3) return [];
-  const parseRow = line => line.trim().split('|').slice(1, -1).map(s => s.trim());
+  // экранированные \| внутри ячеек не считаются разделителями
+  const parseRow = line => line.trim().split(/(?<!\\)\|/).slice(1, -1).map(s => s.replace(/\\\|/g, '|').trim());
   const headers = parseRow(lines[0]);
   const dataLines = lines.slice(2);
   return dataLines.map(line => {
@@ -671,14 +713,14 @@ let activeTagFilter = null;
 const TEXT_SORT_KEYS = new Set(['tag', 'name']);
 
 function sortTable(which, key) {
-  const state = which === 'ph' ? phSort : modelSort;
+  const state = which === 'ph' ? phSort : which === 'ads' ? adsSort : modelSort;
   if (state.key === key) {
     state.dir = state.dir === 'desc' ? 'asc' : 'desc';
   } else {
     state.key = key;
     state.dir = TEXT_SORT_KEYS.has(key) ? 'asc' : 'desc';
   }
-  renderShortlistTables();
+  if (which === 'ads') renderAdsTable(); else renderShortlistTables();
 }
 
 function filterByTag(tagName) {
@@ -1215,12 +1257,136 @@ async function loadPosts() {
   }
 }
 
+// ─── ADS: прайс взаимного пиара и оценка каналов (mutual_pr.md) ───────
+const AD_RUB_PER_SUB = 22;        // ₽ за одного пришедшего подписчика
+const VALUE_RUB_PER_SUB = 133;    // ₽ за подписчика — базовая оценка канала
+const VALUE_MONTHS = 24;          // канал ≈ 2 года рекламы
+const AD_SLOTS_PER_MONTH = 30;    // суточный слот каждый день месяца
+const VALUE_MULT_RANGE = 0.2;     // поправка по рекламе — не более ±20%
+
+let allAds = [];
+let adsSort = { key: 'value', dir: 'desc' };
+
+const fmtRub = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+function money(v) { return fmtRub.format(Math.round(v)) + ' ₽'; }
+function moneyShort(v) {
+  if (v >= 1e6) return (v / 1e6).toFixed(2).replace('.', ',') + ' млн ₽';
+  return money(v);
+}
+
+const ADS_PERIODS = [
+  { key: 'd1', label: '24ч',    field: '24h forecast' },
+  { key: 'd2', label: '48ч',    field: '48h forecast', hideNarrow: true },
+  { key: 'd3', label: '72ч',    field: '72h forecast', hideNarrow: true },
+  { key: 'wk', label: 'Неделя', field: 'Week forecast' },
+  { key: 'mo', label: 'Месяц',  field: 'Month forecast' },
+];
+
+function annotateAds(rows) {
+  rows.forEach(r => {
+    r._f = parseNumeric(r['Followers']) ?? 0;
+    r._name = (r['Title'] || '').trim();
+    r._price = {};
+    ADS_PERIODS.forEach(p => { r._price[p.key] = (parseNumeric(r[p.field]) ?? 0) * AD_RUB_PER_SUB; });
+    // оценка канала: база по подписчикам, скорректированная фактической рекламной выручкой
+    const base = r._f * VALUE_RUB_PER_SUB;
+    r._adsMonthly = r._price.d1 * AD_SLOTS_PER_MONTH;
+    const adsBased = r._adsMonthly * VALUE_MONTHS;
+    const ratio = base > 0 ? adsBased / base : 1;
+    r._mult = Math.min(1 + VALUE_MULT_RANGE, Math.max(1 - VALUE_MULT_RANGE, ratio));
+    r._value = base * r._mult;
+  });
+}
+
+function adsNameCell(r) {
+  const linked = linkifyHandle(r._name);
+  const isPublic = linked !== r._name;
+  return `<span class="ads-name">${linked}</span>` +
+    (isPublic ? '' : ' <span class="private" title="Канал без публичной ссылки">•</span>');
+}
+
+function adsValueCell(r) {
+  const m = r._mult;
+  const cls = m > 1.001 ? 'up' : m < 0.999 ? 'down' : 'flat';
+  const hint = `База ${money(r._f * VALUE_RUB_PER_SUB)} (${VALUE_RUB_PER_SUB} ₽ × подписчик). ` +
+    `Реклама ${money(r._adsMonthly)}/мес × ${VALUE_MONTHS} мес = ${money(r._adsMonthly * VALUE_MONTHS)}. ` +
+    `Поправка ×${m.toFixed(2)} (максимум ±${VALUE_MULT_RANGE * 100}%).`;
+  return `<span class="ads-value" title="${hint}">${moneyShort(r._value)}</span><span class="ads-mult ${cls}">×${m.toFixed(2)}</span>`;
+}
+
+const ADS_COLUMNS = [
+  { key: 'members', label: 'Members', num: true, sortVal: r => r._f, cell: r => fmtRub.format(r._f) },
+  { key: 'channel', label: 'Канал', sortVal: r => r._name.toLowerCase(), cell: adsNameCell },
+  ...ADS_PERIODS.map(p => ({
+    key: p.key, label: p.label, num: true, hideNarrow: p.hideNarrow,
+    sortVal: r => r._price[p.key],
+    cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}">${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
+  })),
+  { key: 'best', label: 'Лучшие дни', sortVal: r => (r['Best days to post'] || '').toLowerCase(),
+    cell: r => `<span class="ads-best">${r['Best days to post'] || '—'}</span>` },
+  { key: 'value', label: 'Оценка стоимости канала', num: true, sortVal: r => r._value, cell: adsValueCell },
+];
+
+function renderAdsHead() {
+  const group = `<tr class="ads-group">
+    <th colspan="3"></th>
+    <th colspan="${ADS_PERIODS.length}" class="ads-group-cell">Реклама — ${AD_RUB_PER_SUB} ₽ за подписчика</th>
+    <th colspan="2"></th>
+  </tr>`;
+  const head = '<tr><th style="width:32px">#</th>' + ADS_COLUMNS.map(c => {
+    const isSorted = adsSort.key === c.key;
+    const arrow = isSorted ? (adsSort.dir === 'desc' ? ' ▼' : ' ▲') : '';
+    const cls = ['sortable', c.num ? 'num' : '', c.hideNarrow ? 'col-hide-narrow' : '', isSorted ? 'sorted' : ''].filter(Boolean).join(' ');
+    return `<th class="${cls}" onclick="sortTable('ads','${c.key}')">${c.label}${arrow}</th>`;
+  }).join('') + '</tr>';
+  document.getElementById('ads-head').innerHTML = group + head;
+}
+
+function renderAdsTable() {
+  renderAdsHead();
+  const col = ADS_COLUMNS.find(c => c.key === adsSort.key) || ADS_COLUMNS[0];
+  const sorted = [...allAds].sort((a, b) => {
+    const av = col.sortVal(a), bv = col.sortVal(b);
+    const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), 'ru');
+    return adsSort.dir === 'desc' ? -cmp : cmp;
+  });
+  document.getElementById('ads-body').innerHTML = sorted.map((r, i) => `<tr>
+    <td class="rank-num">${i + 1}</td>
+    ${ADS_COLUMNS.map(c => {
+      const cls = [c.num ? 'num' : '', c.hideNarrow ? 'col-hide-narrow' : ''].filter(Boolean).join(' ');
+      return `<td${cls ? ` class="${cls}"` : ''}>${c.cell(r)}</td>`;
+    }).join('')}
+  </tr>`).join('');
+
+  const subs = allAds.reduce((s, r) => s + r._f, 0);
+  const val = allAds.reduce((s, r) => s + r._value, 0);
+  document.getElementById('ads-desc').innerHTML =
+    `${allAds.length} каналов · ${fmtRub.format(subs)} подписчиков · суммарная оценка ${moneyShort(val)}. ` +
+    `Цена размещения — прогноз прироста подписчиков × ${AD_RUB_PER_SUB} ₽. ` +
+    `Оценка канала — ${VALUE_RUB_PER_SUB} ₽ × подписчик с поправкой до ±${VALUE_MULT_RANGE * 100}% по рекламной выручке (канал ≈ ${VALUE_MONTHS} месяцев рекламы).`;
+}
+
+async function loadAds() {
+  try {
+    const res = await fetch('mutual_pr.md');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    allAds = parseMarkdownTable(await res.text());
+    annotateAds(allAds);
+    document.getElementById('ads-loading').style.display = 'none';
+    document.getElementById('ads-wrap').style.display = 'block';
+    renderAdsTable();
+  } catch (e) {
+    document.getElementById('ads-loading').textContent = 'Ошибка загрузки mutual_pr.md: ' + e.message;
+  }
+}
+
 async function init() {
   renderRating();
   renderCriteria();
 
   const params = new URLSearchParams(location.search);
   if (params.get('p') === 'posts2025' || /^#place-\d+$/.test(location.hash)) showTab('posts');
+  if (params.get('p') === 'ads') showTab('ads');
 
   try {
     const tagsRes = await fetch('tags.md');
@@ -1267,6 +1433,7 @@ async function init() {
   }
 
   loadPosts();
+  loadAds();
 }
 
 init();
