@@ -1258,11 +1258,33 @@ async function loadPosts() {
 }
 
 // ─── ADS: прайс взаимного пиара и оценка каналов (mutual_pr.md) ───────
-const AD_RUB_PER_SUB = 22;        // ₽ за одного пришедшего подписчика
-const VALUE_RUB_PER_SUB = 133;    // ₽ за подписчика — базовая оценка канала
-const VALUE_MONTHS = 24;          // канал ≈ 2 года рекламы
-const AD_SLOTS_PER_MONTH = 30;    // суточный слот каждый день месяца
-const VALUE_MULT_RANGE = 0.2;     // поправка по рекламе — не более ±20%
+const AD_RUB_PER_SUB = 22;         // ₽ за одного пришедшего подписчика
+const AD_ROUND_TO = 10;            // цены округляются вниз до 10 ₽
+const AD_MODELS_MARKUP = 1.1;      // реклама у моделей на 10% дороже
+const SMALL_CHANNEL_LIMIT = 7000;  // каналы меньше 7 000 подписчиков
+const SMALL_CHANNEL_MULT = 0.66;   // ...оцениваются с понижающим множителем
+
+// 100 ₽ за подписчика, дальше −10 ₽ за каждые следующие 10 000 и стоп на 50 ₽
+const VALUE_TIERS = [
+  { upTo: 10000,    rate: 100 },
+  { upTo: 20000,    rate: 90 },
+  { upTo: 30000,    rate: 80 },
+  { upTo: 40000,    rate: 70 },
+  { upTo: 50000,    rate: 60 },
+  { upTo: Infinity, rate: 50 },
+];
+
+function subscribersValue(f) {
+  let prev = 0, total = 0;
+  for (const t of VALUE_TIERS) {
+    if (f <= prev) break;
+    total += (Math.min(f, t.upTo) - prev) * t.rate;
+    prev = t.upTo;
+  }
+  return total;
+}
+
+function floorTo(v, step) { return Math.floor(v / step) * step; }
 
 let allAds = [];
 let adsSort = { key: 'value', dir: 'desc' };
@@ -1309,15 +1331,18 @@ function annotateAds(rows) {
     r._f = parseNumeric(adsField(r, 'followers')) ?? 0;
     r._name = adsField(r, 'title').trim();
     r._best = adsField(r, 'best');
+    r._isModel = adsField(r, 'folder').trim().toLowerCase() === 'models';
+    // цена размещения: прогноз прироста × 22 ₽, у моделей +10%, вниз до 10 ₽
+    const markup = r._isModel ? AD_MODELS_MARKUP : 1;
     r._price = {};
-    ADS_PERIODS.forEach(p => { r._price[p.key] = (parseNumeric(adsField(r, p.key)) ?? 0) * AD_RUB_PER_SUB; });
-    // оценка канала: база по подписчикам, скорректированная фактической рекламной выручкой
-    const base = r._f * VALUE_RUB_PER_SUB;
-    r._adsMonthly = r._price.d1 * AD_SLOTS_PER_MONTH;
-    const adsBased = r._adsMonthly * VALUE_MONTHS;
-    const ratio = base > 0 ? adsBased / base : 1;
-    r._mult = Math.min(1 + VALUE_MULT_RANGE, Math.max(1 - VALUE_MULT_RANGE, ratio));
-    r._value = base * r._mult;
+    ADS_PERIODS.forEach(p => {
+      const subs = parseNumeric(adsField(r, p.key)) ?? 0;
+      r._price[p.key] = floorTo(subs * AD_RUB_PER_SUB * markup, AD_ROUND_TO);
+    });
+    // оценка канала: прогрессивная шкала по подписчикам, наценка моделей не учитывается
+    r._base = subscribersValue(r._f);
+    r._smallMult = r._f < SMALL_CHANNEL_LIMIT ? SMALL_CHANNEL_MULT : 1;
+    r._value = r._base * r._smallMult;
   });
 }
 
@@ -1329,12 +1354,11 @@ function adsNameCell(r) {
 }
 
 function adsValueCell(r) {
-  const m = r._mult;
-  const cls = m > 1.001 ? 'up' : m < 0.999 ? 'down' : 'flat';
-  const hint = `База ${money(r._f * VALUE_RUB_PER_SUB)} (${VALUE_RUB_PER_SUB} ₽ × подписчик). ` +
-    `Реклама ${money(r._adsMonthly)}/мес × ${VALUE_MONTHS} мес = ${money(r._adsMonthly * VALUE_MONTHS)}. ` +
-    `Поправка ×${m.toFixed(2)} (максимум ±${VALUE_MULT_RANGE * 100}%).`;
-  return `<span class="ads-value" title="${hint}">${moneyShort(r._value)}</span><span class="ads-mult ${cls}">×${m.toFixed(2)}</span>`;
+  const avg = r._f ? r._base / r._f : 0;
+  let hint = `${fmtRub.format(r._f)} подписчиков по прогрессивной шкале = ${money(r._base)} (в среднем ${avg.toFixed(1)} ₽ за подписчика).`;
+  if (r._smallMult !== 1) hint += ` Канал меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)} — множитель ×${SMALL_CHANNEL_MULT}.`;
+  const badge = r._smallMult !== 1 ? `<span class="ads-mult down">×${SMALL_CHANNEL_MULT}</span>` : '';
+  return `<span class="ads-value" title="${hint}">${moneyShort(r._value)}</span>${badge}`;
 }
 
 const ADS_COLUMNS = [
@@ -1343,7 +1367,7 @@ const ADS_COLUMNS = [
   ...ADS_PERIODS.map(p => ({
     key: p.key, label: p.label, num: true, hideNarrow: p.hideNarrow,
     sortVal: r => r._price[p.key],
-    cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}">${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
+    cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}"${r._isModel ? ' title="Модель: +10% к рекламе"' : ''}>${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
   })),
   { key: 'best', label: 'Лучшие дни', sortVal: r => (r._best || '').toLowerCase(),
     cell: r => `<span class="ads-best">${r._best || '—'}</span>` },
@@ -1385,8 +1409,9 @@ function renderAdsTable() {
   const val = allAds.reduce((s, r) => s + r._value, 0);
   document.getElementById('ads-desc').innerHTML =
     `${allAds.length} каналов · ${fmtRub.format(subs)} подписчиков · суммарная оценка ${moneyShort(val)}. ` +
-    `Цена размещения — прогноз прироста подписчиков × ${AD_RUB_PER_SUB} ₽. ` +
-    `Оценка канала — ${VALUE_RUB_PER_SUB} ₽ × подписчик с поправкой до ±${VALUE_MULT_RANGE * 100}% по рекламной выручке (канал ≈ ${VALUE_MONTHS} месяцев рекламы).`;
+    `Реклама — прогноз прироста подписчиков × ${AD_RUB_PER_SUB} ₽, округление вниз до ${AD_ROUND_TO} ₽; у моделей +${Math.round((AD_MODELS_MARKUP - 1) * 100)}%. ` +
+    `Оценка канала — первые 10 000 подписчиков по 100 ₽, дальше −10 ₽ за каждые следующие 10 000 и 50 ₽ после 50 000; ` +
+    `каналы меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)} — ×${SMALL_CHANNEL_MULT}. Наценка моделей на оценку канала не влияет.`;
 }
 
 async function loadAds() {
