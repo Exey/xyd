@@ -1294,11 +1294,6 @@ let adsSort = { key: 'value', dir: 'desc' };
 
 const fmtRub = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
 function money(v) { return fmtRub.format(Math.round(v)) + ' ₽'; }
-function moneyShort(v) {
-  if (v >= 1e6) return (v / 1e6).toFixed(2).replace('.', ',') + ' млн ₽';
-  return money(v);
-}
-
 // mutual_pr.md выгружается то с английскими, то с русскими заголовками
 const ADS_FIELDS = {
   followers: ['Followers', 'Подписчики'],
@@ -1354,11 +1349,15 @@ function annotateAds(rows) {
   });
 }
 
+const ADS_NAME_MAX = 26;
+
 function adsNameCell(r) {
-  const linked = linkifyHandle(r._name);
-  const isPublic = linked !== r._name;
-  return `<span class="ads-name">${linked}</span>` +
-    (isPublic ? '' : ' <span class="private" title="Канал без публичной ссылки">•</span>');
+  const full = r._name;
+  const shown = truncateText(full, ADS_NAME_MAX);
+  const link = full.startsWith('@') ? `https://t.me/${full.slice(1)}` : (LINK_OVERRIDES[full] || null);
+  const inner = link ? `<a href="${link}" target="_blank" rel="noopener">${shown}</a>` : shown;
+  return `<span class="ads-name" title="${full}">${inner}</span>` +
+    (link ? '' : ' <span class="private" title="Канал без публичной ссылки">•</span>');
 }
 
 function adsValueCell(r) {
@@ -1367,10 +1366,7 @@ function adsValueCell(r) {
   let hint = `${fmtRub.format(r._f)} подписчиков по прогрессивной шкале = ${money(r._base)} (в среднем ${avg.toFixed(1)} ₽ за подписчика). ` +
     `Реклама ${money(r._adsMonthly)}/мес × ${VALUE_MONTHS} мес = ${money(r._adsMonthly * VALUE_MONTHS)} → поправка ×${m.toFixed(2)} (максимум ±${VALUE_MULT_RANGE * 100}%).`;
   if (r._smallMult !== 1) hint += ` Канал меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)} — ещё ×${SMALL_CHANNEL_MULT}.`;
-  const adsCls = m > 1.001 ? 'up' : m < 0.999 ? 'down' : 'flat';
-  const badges = `<span class="ads-mult ${adsCls}">×${m.toFixed(2)}</span>` +
-    (r._smallMult !== 1 ? `<span class="ads-mult down">×${SMALL_CHANNEL_MULT}</span>` : '');
-  return `<span class="ads-value" title="${hint}">${moneyShort(r._value)}</span>${badges}`;
+  return `<span class="ads-value" title="${hint}">${money(r._value)}</span>`;
 }
 
 const ADS_COLUMNS = [
@@ -1381,7 +1377,7 @@ const ADS_COLUMNS = [
     sortVal: r => r._price[p.key],
     cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}"${r._isModel ? ' title="Модель: +10% к рекламе"' : ''}>${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
   })),
-  { key: 'best', label: 'Лучшие дни', sortVal: r => (r._best || '').toLowerCase(),
+  { key: 'best', label: 'Лучшие дни рекламы', sortVal: r => (r._best || '').toLowerCase(),
     cell: r => `<span class="ads-best">${r._best || '—'}</span>` },
   { key: 'value', label: 'Оценка стоимости канала', num: true, sortVal: r => r._value, cell: adsValueCell },
 ];
@@ -1420,7 +1416,7 @@ function renderAdsTable() {
   const subs = allAds.reduce((s, r) => s + r._f, 0);
   const val = allAds.reduce((s, r) => s + r._value, 0);
   document.getElementById('ads-desc').innerHTML =
-    `${allAds.length} каналов · ${fmtRub.format(subs)} подписчиков · суммарная оценка ${moneyShort(val)}. ` +
+    `${allAds.length} каналов · ${fmtRub.format(subs)} подписчиков · суммарная оценка ${money(val)}. ` +
     `Реклама — прогноз прироста подписчиков × ${AD_RUB_PER_SUB} ₽, округление вниз до ${AD_ROUND_TO} ₽; у моделей +${Math.round((AD_MODELS_MARKUP - 1) * 100)}%. ` +
     `Оценка канала — первые 10 000 подписчиков по 100 ₽, дальше −10 ₽ за каждые следующие 10 000 и 50 ₽ после 50 000; ` +
     `плюс поправка до ±${VALUE_MULT_RANGE * 100}% по рекламной выручке (канал ≈ ${VALUE_MONTHS} месяцев рекламы) ` +
