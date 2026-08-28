@@ -1263,6 +1263,9 @@ const AD_ROUND_TO = 10;            // цены округляются вниз �
 const AD_MODELS_MARKUP = 1.1;      // реклама у моделей на 10% дороже
 const SMALL_CHANNEL_LIMIT = 7000;  // каналы меньше 7 000 подписчиков
 const SMALL_CHANNEL_MULT = 0.66;   // ...оцениваются с понижающим множителем
+const VALUE_MONTHS = 24;           // канал ≈ 2 года рекламы
+const AD_SLOTS_PER_MONTH = 30;     // суточный слот каждый день месяца
+const VALUE_MULT_RANGE = 0.2;      // поправка по рекламной выручке — не более ±20%
 
 // 100 ₽ за подписчика, дальше −10 ₽ за каждые следующие 10 000 и стоп на 50 ₽
 const VALUE_TIERS = [
@@ -1341,8 +1344,13 @@ function annotateAds(rows) {
     });
     // оценка канала: прогрессивная шкала по подписчикам, наценка моделей не учитывается
     r._base = subscribersValue(r._f);
+    // поправка по рекламной выручке: 2 года размещений против базы, не более ±20%
+    const rawDaily = (parseNumeric(adsField(r, 'd1')) ?? 0) * AD_RUB_PER_SUB;
+    r._adsMonthly = rawDaily * AD_SLOTS_PER_MONTH;
+    const ratio = r._base > 0 ? r._adsMonthly * VALUE_MONTHS / r._base : 1;
+    r._adsMult = Math.min(1 + VALUE_MULT_RANGE, Math.max(1 - VALUE_MULT_RANGE, ratio));
     r._smallMult = r._f < SMALL_CHANNEL_LIMIT ? SMALL_CHANNEL_MULT : 1;
-    r._value = r._base * r._smallMult;
+    r._value = r._base * r._adsMult * r._smallMult;
   });
 }
 
@@ -1355,10 +1363,14 @@ function adsNameCell(r) {
 
 function adsValueCell(r) {
   const avg = r._f ? r._base / r._f : 0;
-  let hint = `${fmtRub.format(r._f)} подписчиков по прогрессивной шкале = ${money(r._base)} (в среднем ${avg.toFixed(1)} ₽ за подписчика).`;
-  if (r._smallMult !== 1) hint += ` Канал меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)} — множитель ×${SMALL_CHANNEL_MULT}.`;
-  const badge = r._smallMult !== 1 ? `<span class="ads-mult down">×${SMALL_CHANNEL_MULT}</span>` : '';
-  return `<span class="ads-value" title="${hint}">${moneyShort(r._value)}</span>${badge}`;
+  const m = r._adsMult;
+  let hint = `${fmtRub.format(r._f)} подписчиков по прогрессивной шкале = ${money(r._base)} (в среднем ${avg.toFixed(1)} ₽ за подписчика). ` +
+    `Реклама ${money(r._adsMonthly)}/мес × ${VALUE_MONTHS} мес = ${money(r._adsMonthly * VALUE_MONTHS)} → поправка ×${m.toFixed(2)} (максимум ±${VALUE_MULT_RANGE * 100}%).`;
+  if (r._smallMult !== 1) hint += ` Канал меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)} — ещё ×${SMALL_CHANNEL_MULT}.`;
+  const adsCls = m > 1.001 ? 'up' : m < 0.999 ? 'down' : 'flat';
+  const badges = `<span class="ads-mult ${adsCls}">×${m.toFixed(2)}</span>` +
+    (r._smallMult !== 1 ? `<span class="ads-mult down">×${SMALL_CHANNEL_MULT}</span>` : '');
+  return `<span class="ads-value" title="${hint}">${moneyShort(r._value)}</span>${badges}`;
 }
 
 const ADS_COLUMNS = [
@@ -1411,7 +1423,8 @@ function renderAdsTable() {
     `${allAds.length} каналов · ${fmtRub.format(subs)} подписчиков · суммарная оценка ${moneyShort(val)}. ` +
     `Реклама — прогноз прироста подписчиков × ${AD_RUB_PER_SUB} ₽, округление вниз до ${AD_ROUND_TO} ₽; у моделей +${Math.round((AD_MODELS_MARKUP - 1) * 100)}%. ` +
     `Оценка канала — первые 10 000 подписчиков по 100 ₽, дальше −10 ₽ за каждые следующие 10 000 и 50 ₽ после 50 000; ` +
-    `каналы меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)} — ×${SMALL_CHANNEL_MULT}. Наценка моделей на оценку канала не влияет.`;
+    `плюс поправка до ±${VALUE_MULT_RANGE * 100}% по рекламной выручке (канал ≈ ${VALUE_MONTHS} месяцев рекламы) ` +
+    `и ×${SMALL_CHANNEL_MULT} для каналов меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)}. Наценка моделей на оценку канала не влияет.`;
 }
 
 async function loadAds() {
