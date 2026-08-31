@@ -1527,7 +1527,6 @@ function renderAdsTable() {
 let allPairs = [];
 let pairChannels = [];
 let selectedPair = null;
-const PARTNERS_SHOWN = 10;
 
 function parseChannelCell(cell) {
   const m = (cell || '').trim().match(/^\[([^\]]+)\]\(([^)]+)\)\s*(?:\(([^)]*)\))?/);
@@ -1584,13 +1583,20 @@ function renderPairsLeft() {
     </div>`).join('');
 }
 
+function plural(n, one, few, many) {
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+  return many;
+}
+
 function renderPairsRight() {
   const c = pairChannels.find(x => x.name === selectedPair);
   const box = document.getElementById('pairs-right');
   const title = document.getElementById('pairs-right-title');
   if (!c) { box.innerHTML = '<div class="pairs-empty">Выберите канал слева</div>'; return; }
-  title.innerHTML = `Лучшие пары<span class="pairs-sub">для ${c.name} — ${Math.min(PARTNERS_SHOWN, c.partners.length)} из ${c.partners.length}</span>`;
-  box.innerHTML = c.partners.slice(0, PARTNERS_SHOWN).map(p => `
+  title.innerHTML = `Лучшие пары<span class="pairs-sub">для ${c.name} — ${c.partners.length} ${plural(c.partners.length, 'пара', 'пары', 'пар')}</span>`;
+  box.innerHTML = c.partners.map(p => `
     <div class="pair-card partner">
       <span class="pc-body">
         <span class="pc-name">${pairChannelLink(p.ch, p.ch.name)}</span>
