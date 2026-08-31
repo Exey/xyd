@@ -310,13 +310,13 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   gap: 0; padding: 0 24px; align-items: start;
 }
 .pairs-col { min-width: 0; }
-.pairs-col-right { grid-column: 3; }
+.pairs-col-right { grid-column: 3; position: sticky; top: 12px; align-self: start; }
 .pairs-title {
   font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
   margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px;
 }
 .pairs-sub { font-size: 10px; font-weight: 600; letter-spacing: .4px; color: var(--muted); text-transform: none; }
-.pairs-list { display: flex; flex-direction: column; gap: 6px; max-height: 640px; overflow-y: auto; padding-right: 4px; }
+.pairs-list { display: flex; flex-direction: column; gap: 6px; }
 .pair-card {
   background: var(--card); border: 1.5px solid var(--border2); border-radius: 10px;
   padding: 8px 12px; display: flex; align-items: center; gap: 10px; cursor: pointer;
@@ -1617,6 +1617,11 @@ function drawPairArrows() {
   const sr = sel.getBoundingClientRect();
   const x1 = sr.right - br.left + 4, y1 = sr.top + sr.height / 2 - br.top;
   const parts = c.partners.slice(0, cards.length);
+  // цвет от зелёного (лучшая пара) к жёлтому (десятая)
+  const arrowColor = (i, n) => {
+    const t = n > 1 ? i / (n - 1) : 0;
+    return `hsl(${(122 - t * 76).toFixed(0)}, ${(45 + t * 25).toFixed(0)}%, ${(34 + t * 8).toFixed(0)}%)`;
+  };
   // подписи разносим по своей кривой, чтобы не наезжали друг на друга
   const bez = (a, b, c, d, t) => {
     const u = 1 - t;
@@ -1627,18 +1632,19 @@ function drawPairArrows() {
     const rr = el.getBoundingClientRect();
     const x2 = rr.left - br.left - 9, y2 = rr.top + rr.height / 2 - br.top;
     const mx = (x1 + x2) / 2;
-    const op = (0.85 - i * 0.05).toFixed(2);
+    const color = arrowColor(i, cards.length);
     const label = `${p.days ? '★ ' + p.days + ' · ' : ''}+${fmtRub.format(p.gives)}`;
     const t = 0.28 + (i % 4) * 0.16;
     const lx = bez(x1, mx, mx, x2, t), ly = bez(y1, y1, y2, y2, t);
     return `<path d="M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}" fill="none"
-              stroke="var(--rose)" stroke-width="${(2 - i * 0.09).toFixed(2)}" opacity="${op}" marker-end="url(#pair-arrow)" />
+              stroke="${color}" stroke-width="${(2.2 - i * 0.09).toFixed(2)}" marker-end="url(#pair-arrow-${i})" />
             <text x="${lx.toFixed(1)}" y="${(ly - 5).toFixed(1)}" text-anchor="middle"
-              font-size="10" font-weight="800" fill="var(--ink)" opacity="${op}"
+              font-size="10" font-weight="800" fill="${color}"
               stroke="var(--bg)" stroke-width="3" paint-order="stroke">${label}</text>`;
   }).join('');
-  svg.innerHTML = `<defs><marker id="pair-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 8 4 L 0 8 z" fill="var(--rose)" /></marker></defs>${paths}`;
+  const markers = cards.map((el, i) => `<marker id="pair-arrow-${i}" viewBox="0 0 8 8" refX="7" refY="4"
+      markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="${arrowColor(i, cards.length)}" /></marker>`).join('');
+  svg.innerHTML = `<defs>${markers}</defs>${paths}`;
 }
 
 function selectPairChannel(name) {
@@ -1666,13 +1672,14 @@ function renderPairs() {
   requestAnimationFrame(drawPairArrows);
 }
 
-let pairsRedrawTimer = null;
-['resize', 'scroll'].forEach(ev => window.addEventListener(ev, () => {
-  if (document.getElementById('tab-matches').classList.contains('active')) {
-    clearTimeout(pairsRedrawTimer);
-    pairsRedrawTimer = setTimeout(drawPairArrows, 60);
-  }
-}, true));
+let pairsRedrawPending = false;
+function schedulePairArrows() {
+  if (pairsRedrawPending) return;
+  if (!document.getElementById('tab-matches').classList.contains('active')) return;
+  pairsRedrawPending = true;
+  requestAnimationFrame(() => { pairsRedrawPending = false; drawPairArrows(); });
+}
+['resize', 'scroll'].forEach(ev => window.addEventListener(ev, schedulePairArrows, { capture: true, passive: true }));
 
 async function loadAds() {
   try {
