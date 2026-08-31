@@ -1622,11 +1622,6 @@ function drawPairArrows() {
     const t = n > 1 ? i / (n - 1) : 0;
     return `hsl(${(122 - t * 76).toFixed(0)}, ${(45 + t * 25).toFixed(0)}%, ${(34 + t * 8).toFixed(0)}%)`;
   };
-  // подписи разносим по своей кривой, чтобы не наезжали друг на друга
-  const bez = (a, b, c, d, t) => {
-    const u = 1 - t;
-    return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d;
-  };
   const paths = cards.map((el, i) => {
     const p = parts[i];
     const rr = el.getBoundingClientRect();
@@ -1634,11 +1629,10 @@ function drawPairArrows() {
     const mx = (x1 + x2) / 2;
     const color = arrowColor(i, cards.length);
     const label = `${p.days ? '★ ' + p.days + ' · ' : ''}+${fmtRub.format(p.gives)}`;
-    const t = 0.28 + (i % 4) * 0.16;
-    const lx = bez(x1, mx, mx, x2, t), ly = bez(y1, y1, y2, y2, t);
+    // подпись у самого острия стрелки
     return `<path d="M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}" fill="none"
               stroke="${color}" stroke-width="${(2.2 - i * 0.09).toFixed(2)}" marker-end="url(#pair-arrow-${i})" />
-            <text x="${lx.toFixed(1)}" y="${(ly - 5).toFixed(1)}" text-anchor="middle"
+            <text x="${(x2 - 7).toFixed(1)}" y="${(y2 - 5).toFixed(1)}" text-anchor="end"
               font-size="10" font-weight="800" fill="${color}"
               stroke="var(--bg)" stroke-width="3" paint-order="stroke">${label}</text>`;
   }).join('');
