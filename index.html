@@ -1634,7 +1634,8 @@ function drawPairArrows() {
     const x2 = rr.left - br.left - 9, y2 = rr.top + rr.height / 2 - br.top;
     const mx = (x1 + x2) / 2;
     const color = arrowColor(i, cards.length);
-    const label = `${p.days ? '★ ' + p.days + ' · ' : ''}+${fmtRub.format(p.gives)}`;
+    // на стрелке: лучший день, что канал даёт партнёру / что получает в ответ
+    const label = `${p.days ? '★ ' + p.days + ' · ' : ''}+${fmtRub.format(p.gives)} / +${fmtRub.format(p.gets)}`;
     // подпись у самого острия стрелки
     return `<path d="M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}" fill="none"
               stroke="${color}" stroke-width="${(2.2 - i * 0.09).toFixed(2)}" marker-end="url(#pair-arrow-${i})" />
