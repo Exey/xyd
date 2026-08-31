@@ -22,7 +22,7 @@
 | 9 109 | @vechereyet2 | 111 | 171 | 177 | 182 | 228 | ☀️Сб(+29%) ☀️Вс(+11%) | 59 | models |
 | 12 932 | @good_girls_love_sex | 111 | 186 | 200 | 216 | 296 | ☀️Сб(+30%) ☀️Вс(+23%) | 79 | models |
 | 9 996 | @uaniliza | 111 | 170 | 177 | 181 | 226 | ☀️Сб(+18%) ☀️Вс(+15%) | 46 | models |
-| 6 911 | @nudocaffe | 109 | 166 | 173 | 177 | 222 | ☀️Вс(+26%) ☀️Сб(+17%) | 47 | photographers |
+| 6 911 | @nudocaffe | 108 | 166 | 172 | 177 | 221 | ☀️Вс(+26%) ☀️Сб(+17%) | 46 | photographers |
 | 9 755 | @sexxxylesya | 104 | 159 | 165 | 169 | 212 | ☀️Вс(+22%) ⚖️Чт(+9%) | 35 | models |
 | 16 590 | @ph_miloradov | 99 | 151 | 157 | 161 | 201 | 🎉Пт(+19%) ☀️Сб(+18%) | 24 | photographers |
 | 4 796 | @just_me_not_more | 97 | 148 | 154 | 158 | 197 | ⚖️Чт(+17%) ⚖️Ср(+8%) | 33 | models |
@@ -30,7 +30,7 @@
 | 7 411 | @tgadore | 94 | 145 | 151 | 155 | 195 | 🚀Вт(+11%) ⚖️Ср(+10%) | 51 | photographers |
 | 8 990 | @bluekroovy_live | 91 | 139 | 145 | 148 | 185 | ☀️Вс(+23%) 🎉Пт(+16%) | 38 | models |
 | 5 707 | @reider_photo | 87 | 134 | 140 | 145 | 184 | ☀️Сб(+20%) ⚖️Чт(+5%) | 49 | photographers |
-| 7 840 | @asmodeus_model | 85 | 129 | 135 | 138 | 173 | ☀️Вс(+33%) ☀️Сб(+8%) | 32 | models |
+| 7 840 | @asmodeus_model | 85 | 130 | 135 | 138 | 173 | ☀️Вс(+33%) ☀️Сб(+8%) | 32 | models |
 | 6 854 | @Juliatimoro | 85 | 129 | 135 | 138 | 172 | 🎉Пт(+18%) ⚖️Чт(+12%) | 26 | models |
 | 12 304 | @erotica_fantasies | 83 | 127 | 132 | 135 | 169 | 🚀Вт(+9%) ☀️Вс(+8%) | 36 | photographers |
 | 6 082 | ROMA ROMA \| PHOTO \| LIFESTYLE \| VIXEN | 81 | 124 | 129 | 133 | 166 | ☀️Сб(+6%) 🎉Пт(+5%) | 17 | photographers |
@@ -42,7 +42,7 @@
 | 4 373 | @darnikmodel | 69 | 107 | 111 | 114 | 143 | ⚖️Ср(+21%) ⚖️Чт(+13%) | 37 | models |
 | 3 794 | @nu_home | 69 | 106 | 111 | 114 | 143 | ⚖️Ср(+20%) 🚀Пн(+9%) | 37 | photographers |
 | 6 261 | @denbut_photoart | 69 | 105 | 109 | 112 | 140 | ⚖️Ср(+17%) ⚖️Чт(+14%) | 34 | photographers |
-| 6 806 | @lukcarefully | 67 | 104 | 108 | 112 | 142 | ⚖️Ср(+19%) 🚀Пн(+5%) | 38 | photographers |
+| 6 806 | @lukcarefully | 67 | 103 | 107 | 111 | 140 | ⚖️Ср(+19%) 🚀Пн(+5%) | 38 | photographers |
 | 5 707 | @baevm | 64 | 98 | 102 | 105 | 131 | 🎉Пт(+24%) ☀️Вс(+21%) | 25 | photographers |
 | 5 053 | @nakedtoffee | 64 | 98 | 102 | 104 | 130 | ☀️Вс(+26%) 🚀Пн(+8%) | 24 | models |
 | 9 426 | @callmepleasegirl | 63 | 113 | 125 | 140 | 203 | ⚖️Ср(+13%) ☀️Сб(+13%) | 50 | photographers |
@@ -51,17 +51,17 @@
 | 2 301 | @NeKikimora7 | 53 | 82 | 85 | 87 | 109 | ⚖️Чт(+9%) 🚀Вт(+7%) | 14 | models |
 | 5 247 | @northern_lights_model | 51 | 78 | 81 | 84 | 104 | ☀️Сб(+36%) 🎉Пт(+15%) | 12 | models |
 | 3 723 | @my_antibodies_photo | 49 | 75 | 78 | 80 | 100 | ☀️Сб(+19%) ☀️Вс(+10%) | 19 | photographers |
-| 6 366 | Max Fayst📸😈 | 48 | 74 | 77 | 79 | 99 | 🎉Пт(+9%) ☀️Сб(+8%) | 9 | photographers |
+| 6 366 | Max Fayst📸😈 | 48 | 74 | 77 | 79 | 98 | 🎉Пт(+9%) ☀️Сб(+8%) | 9 | photographers |
 | 3 075 | @nudelobve | 48 | 73 | 76 | 78 | 98 | 🎉Пт(+20%) ⚖️Чт(+18%) | 20 | models |
 | 7 828 | @krasnovTG | 47 | 89 | 100 | 115 | 173 | 🚀Вт(+32%) ⚖️Ср(+13%) | 39 | photographers |
 | 6 642 | Плотниковъ | 46 | 71 | 74 | 76 | 95 | ⚖️Чт(+16%) 🎉Пт(+12%) | 9 | photographers |
-| 6 655 | @potaninfoto | 45 | 80 | 89 | 100 | 145 | ☀️Вс(+28%) ⚖️Чт(+24%) | 35 | photographers |
-| 4 167 | @pollyrumntsva | 44 | 68 | 71 | 72 | 91 | ☀️Сб(+41%) ⚖️Чт(+19%) | 22 | models |
+| 4 167 | @pollyrumntsva | 44 | 68 | 70 | 72 | 90 | ☀️Сб(+41%) ⚖️Чт(+19%) | 22 | models |
+| 6 655 | @potaninfoto | 44 | 80 | 88 | 99 | 143 | ☀️Вс(+28%) ⚖️Чт(+24%) | 35 | photographers |
 | 7 149 | Anna's secrets | 44 | 67 | 70 | 72 | 89 | ☀️Сб(+27%) ☀️Вс(+17%) | 11 | photographers |
 | 3 198 | @nualexon | 44 | 67 | 69 | 71 | 89 | 🚀Вт(+14%) 🚀Пн(+10%) | 15 | photographers |
 | 3 322 | @arishestova | 43 | 67 | 69 | 71 | 89 | 🚀Пн(+14%) ⚖️Чт(+14%) | 22 | models |
 | 7 019 | ❤️‍🔥Фотограф Алла Топорская 🔞 | 43 | 67 | 70 | 73 | 92 | ⚖️Чт(+34%) ⚖️Ср(+14%) | 25 | photographers |
-| 3 062 | @ioannova_a | 43 | 70 | 74 | 78 | 104 | ☀️Сб(+32%) ☀️Вс(+23%) | 28 | models |
+| 3 062 | @ioannova_a | 43 | 70 | 74 | 79 | 104 | ☀️Сб(+32%) ☀️Вс(+23%) | 28 | models |
 | 2 287 | @frolkinanude | 42 | 64 | 67 | 69 | 86 | ☀️Сб(+29%) ☀️Вс(+14%) | 15 | photographers |
 | 8 473 | @ph_naf_public | 42 | 64 | 67 | 68 | 85 | ⚖️Ср(+35%) ☀️Вс(+14%) | 6 | photographers |
 | 3 733 | @harismaimportrant | 41 | 62 | 65 | 67 | 83 | ☀️Вс(+40%) ⚖️Ср(+22%) | 7 | models |
@@ -110,8 +110,8 @@
 | 2 635 | @paramonovnu | 22 | 36 | 39 | 41 | 56 | ☀️Вс(+11%) 🚀Вт(+8%) | 15 | photographers |
 | 2 027 | 🍑Сосочки можно 18+ | 21 | 33 | 34 | 35 | 43 | 🎉Пт(+30%) ⚖️Чт(+10%) | 10 | models |
 | 2 222 | @ura_pechen | 21 | 33 | 34 | 35 | 43 | 🚀Пн(+28%) 🚀Вт(+17%) | 4 | photographers |
-| 1 978 | @lierootphoto | 21 | 32 | 34 | 35 | 44 | ⚖️Чт(+30%) ☀️Сб(+13%) | 12 | photographers |
 | 4 440 | @bonniewoods2306 | 21 | 32 | 33 | 34 | 43 | ⚖️Чт(+13%) 🚀Пн(+8%) | 5 | models |
+| 1 978 | @lierootphoto | 21 | 32 | 33 | 35 | 44 | ⚖️Чт(+30%) ☀️Сб(+13%) | 12 | photographers |
 | 3 205 | @bsaphoto | 20 | 38 | 42 | 47 | 70 | 🎉Пт(+14%) 🚀Пн(+9%) | 17 | photographers |
 | 2 845 | @ksjuha_live | 20 | 35 | 38 | 41 | 57 | ☀️Вс(+32%) ☀️Сб(+29%) | 15 | models |
 | 2 453 | aleksandrsavichevofficial | 20 | 31 | 32 | 33 | 41 | ☀️Сб(+57%) ⚖️Чт(+6%) | 7 | photographers |
@@ -134,7 +134,7 @@
 | 1 435 | @nuancefluent | 15 | 24 | 25 | 26 | 34 | 🚀Пн(+17%) ⚖️Чт(+10%) | 9 | photographers |
 | 1 544 | Helen Helen 🔥 | 15 | 22 | 23 | 24 | 30 | 🎉Пт(+31%) 🚀Пн(+22%) | 5 | models |
 | 1 607 | @youcansayyes12 | 15 | 23 | 24 | 24 | 31 | ☀️Вс(+42%) ⚖️Ср(+13%) | 8 | models |
-| 1 940 | 💜 Iris 💜 | 14 | 21 | 22 | 23 | 28 | ⚖️Ср(+29%) ⚖️Чт(+25%) | 3 | models |
+| 1 940 | 💜 Iris 💜 | 14 | 22 | 22 | 23 | 29 | ⚖️Ср(+29%) ⚖️Чт(+25%) | 3 | models |
 | 1 181 | @Alia_Shakirova | 14 | 21 | 22 | 22 | 28 | ⚖️Чт(+13%) ⚖️Ср(+11%) | 7 | models |
 | 1 728 | @alisa_verner_tg | 13 | 23 | 26 | 29 | 41 | ⚖️Чт(+25%) 🚀Пн(+17%) | 10 | photographers |
 | 1 236 | @rashap_blog | 13 | 20 | 21 | 21 | 26 | ⚖️Ср(+7%) ⚖️Чт(+7%) | 7 | photographers |
@@ -148,10 +148,10 @@
 | 1 493 | @Mal_vi_na11 | 11 | 19 | 20 | 22 | 32 | ⚖️Ср(+23%) ☀️Вс(+15%) | 8 | models |
 | 1 232 | @kostromin_art | 11 | 18 | 20 | 22 | 31 | 🚀Вт(+19%) ⚖️Чт(+11%) | 8 | photographers |
 | 812 | JakobArt | 11 | 16 | 17 | 17 | 21 | 🚀Вт(+32%) ⚖️Ср(+15%) | 2 | photographers |
-| 1 193 | @laninsphoto | 10 | 17 | 18 | 19 | 24 | ⚖️Ср(+26%) 🚀Пн(+15%) | 7 | photographers |
+| 1 193 | @laninsphoto | 10 | 16 | 17 | 18 | 24 | ⚖️Ср(+26%) 🚀Пн(+15%) | 7 | photographers |
 | 1 500 | @xottabphoto | 9 | 16 | 18 | 19 | 27 | ☀️Вс(+25%) ☀️Сб(+22%) | 7 | photographers |
-| 986 | your sun 18+ | 9 | 14 | 14 | 15 | 18 | 🚀Вт(+19%) 🎉Пт(+12%) | 3 | models |
 | 1 164 | @polly_boom777 | 9 | 15 | 16 | 17 | 22 | ☀️Вс(+27%) ⚖️Чт(+15%) | 6 | models |
+| 986 | your sun 18+ | 9 | 14 | 14 | 15 | 18 | 🚀Вт(+19%) 🎉Пт(+12%) | 3 | models |
 | 2 940 | Melons_Fans | 9 | 13 | 14 | 14 | 18 | ☀️Вс(+30%) 🚀Пн(+12%) | 3 | photographers |
 | 2 035 | @IvanAnanyinNu | 8 | 19 | 22 | 27 | 44 | 🚀Вт(+10%) ☀️Вс(+10%) | 8 | photographers |
 | 1 458 | @tesi_f | 7 | 14 | 16 | 20 | 32 | 🚀Пн(+14%) ⚖️Чт(+14%) | 6 | photographers |
@@ -171,3 +171,138 @@
 | 419 | Ignatovich | 2 | 4 | 5 | 5 | 9 | 🚀Вт(+27%) ⚖️Ср(+13%) | 2 | photographers |
 | 247 | @deshousemagazine | 2 | 3 | 3 | 4 | 5 | ☀️Вс(+14%) ⚖️Ср(+8%) | 1 | photographers |
 | 564 | @rylskyartofficial | 1 | 2 | 2 | 2 | 3 | ⚖️Чт(+17%) 🚀Вт(+12%) | 0 | photographers |
+
+## Пары ВП
+
+| № | Канал A | Канал B | Рейтинг | Лучшие дни для поста | Прогноз 24ч (A / B) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | [@dardarkpirs](https://t.me/dardarkpirs) (2.2K) | [@ana_grin](https://t.me/ana_grin) (2.2K) | 1.00 | ★ Ср, Сб · A: Ср, Сб · B: Ср, Сб | +22 / +23 |
+| 2 | [@vechereyet2](https://t.me/vechereyet2) (9.1K) | [@uaniliza](https://t.me/uaniliza) (10.0K) | 0.99 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +111 / +111 |
+| 3 | [@alice_lt](https://t.me/alice_lt) (3.6K) | [@madmaurafree](https://t.me/madmaurafree) (3.9K) | 0.99 | ★ Вс, Пн · A: Вс, Пн · B: Вс, Пн | +34 / +34 |
+| 4 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | 0.99 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +25 |
+| 5 | [@neu_ling_free](https://t.me/neu_ling_free) (3.6K) | [@gotomargosha](https://t.me/gotomargosha) (3.9K) | 0.99 | ★ Ср, Пт · A: Пт, Ср · B: Ср, Пт | +37 / +35 |
+| 6 | [@msfantasyph](https://t.me/msfantasyph) (3.3K) | [@dmitry_arhar](https://t.me/dmitry_arhar) (2.9K) | 0.99 | ★ Сб, Ср · A: Сб, Ср · B: Сб, Ср | +26 / +25 |
+| 7 | [@nuartofche](https://t.me/nuartofche) (3.8K) | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | 0.99 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +24 / +24 |
+| 8 | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | [@svuph](https://t.me/svuph) (3.8K) | 0.99 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +33 / +30 |
+| 9 | [@bsaphoto](https://t.me/bsaphoto) (3.2K) | [@Tretekov_nu](https://t.me/Tretekov_nu) (3.6K) | 0.98 | ★ Пт, Пн · A: Пт, Пн · B: Пн, Пт | +20 / +19 |
+| 10 | [@good_girls_love_sex](https://t.me/good_girls_love_sex) (12.9K) | [@uaniliza](https://t.me/uaniliza) (10.0K) | 0.98 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +111 / +111 |
+| 11 | [aleksandrsavichevofficial](https://t.me/c/1893898354) (2.5K) | [@lierootphoto](https://t.me/lierootphoto) (2.0K) | 0.98 | ★ Сб, Чт · A: Сб, Чт · B: Чт, Сб | +20 / +21 |
+| 12 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@saortoto](https://t.me/saortoto) (2.0K) | 0.98 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +24 |
+| 13 | [@paramonovnu](https://t.me/paramonovnu) (2.6K) | [@NudeAbandon](https://t.me/NudeAbandon) (2.5K) | 0.98 | ★ Вс, Вт · A: Вс, Вт · B: Вс, Вт | +22 / +24 |
+| 14 | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | 0.98 | ★ Вс, Сб · A: Сб, Вс · B: Вс, Сб | +24 / +25 |
+| 15 | [@good_girls_love_sex](https://t.me/good_girls_love_sex) (12.9K) | [@vechereyet2](https://t.me/vechereyet2) (9.1K) | 0.98 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +111 / +111 |
+| 16 | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | [@saortoto](https://t.me/saortoto) (2.0K) | 0.98 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +24 |
+| 17 | [@good_girls_love_sex](https://t.me/good_girls_love_sex) (12.9K) | [@alicelismagi](https://t.me/alicelismagi) (11.4K) | 0.98 | ★ Вс, Сб · A: Сб, Вс · B: Вс, Сб | +111 / +124 |
+| 18 | [@mirploti](https://t.me/mirploti) (2.0K) | [Leica Erotica](https://t.me/c/1903204438) (2.5K) | 0.98 | ★ Вс, Пт · A: Пт, Вс · B: Вс, Пт | +17 / +16 |
+| 19 | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.98 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +33 / +35 |
+| 20 | [@alicelismagi](https://t.me/alicelismagi) (11.4K) | [@uaniliza](https://t.me/uaniliza) (10.0K) | 0.98 | ★ Сб, Вс · A: Вс, Сб · B: Сб, Вс | +124 / +111 |
+| 21 | [@smeilov_photo](https://t.me/smeilov_photo) (43.0K) | [@photokravchenko](https://t.me/photokravchenko) (33.5K) | 0.97 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +228 / +244 |
+| 22 | [@ioannova_a](https://t.me/ioannova_a) (3.1K) | [@skinny_may](https://t.me/skinny_may) (3.9K) | 0.97 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +43 / +41 |
+| 23 | [Sumiko☀️](https://t.me/c/2243340856) (9.4K) | [@amwiiiiiii](https://t.me/amwiiiiiii) (6.4K) | 0.97 | ★ Ср, Чт · A: Ср, Чт · B: Ср, Чт | +137 / +133 |
+| 24 | [@alicelismagi](https://t.me/alicelismagi) (11.4K) | [@vechereyet2](https://t.me/vechereyet2) (9.1K) | 0.97 | ★ Сб, Вс · A: Вс, Сб · B: Сб, Вс | +124 / +111 |
+| 25 | [@nuancefluent](https://t.me/nuancefluent) (1.4K) | [@alisa_verner_tg](https://t.me/alisa_verner_tg) (1.7K) | 0.97 | ★ Пн, Чт · A: Пн, Чт · B: Чт, Пн | +15 / +13 |
+| 26 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | 0.97 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +25 / +24 |
+| 27 | [@vladisyaro](https://t.me/vladisyaro) (3.4K) | [@Yakubov_group](https://t.me/Yakubov_group) (4.0K) | 0.97 | ★ Сб, Пн · A: Сб, Пн · B: Пн, Сб | +30 / +25 |
+| 28 | [@tatooevskiyphoto](https://t.me/tatooevskiyphoto) (624) | [@ps_Nude](https://t.me/ps_Nude) (862) | 0.97 | ★ Пт, Чт · A: Пт, Чт · B: Пт, Чт | +6 / +5 |
+| 29 | [aleksandrsavichevofficial](https://t.me/c/1893898354) (2.5K) | [@artsproekt](https://t.me/artsproekt) (2.7K) | 0.97 | ★ Сб, Чт · A: Сб, Чт · B: Сб, Чт | +20 / +24 |
+| 30 | [@svuph](https://t.me/svuph) (3.8K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.97 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +30 / +35 |
+| 31 | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | [@saortoto](https://t.me/saortoto) (2.0K) | 0.97 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +24 / +24 |
+| 32 | [@nuartofche](https://t.me/nuartofche) (3.8K) | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | 0.96 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +24 / +25 |
+| 33 | [@totototonightkissyou](https://t.me/totototonightkissyou) (2.3K) | [@artchos](https://t.me/artchos) (2.0K) | 0.96 | ★ Вт, Сб · A: Вт, Сб · B: Вт, Сб | +23 / +27 |
+| 34 | [💜 Iris 💜](https://t.me/c/1891097394) (1.9K) | [@Alia_Shakirova](https://t.me/Alia_Shakirova) (1.2K) | 0.96 | ★ Чт, Ср · A: Ср, Чт · B: Чт, Ср | +14 / +14 |
+| 35 | [@nuartofche](https://t.me/nuartofche) (3.8K) | [@svuph](https://t.me/svuph) (3.8K) | 0.96 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +24 / +30 |
+| 36 | [@hkhndgrls](https://t.me/hkhndgrls) (1.9K) | [@ne_dumali](https://t.me/ne_dumali) (2.4K) | 0.96 | ★ Чт, Вс · A: Чт, Вс · B: Чт, Вс | +20 / +17 |
+| 37 | [@fieryli](https://t.me/fieryli) (2.8K) | [@ana_grin](https://t.me/ana_grin) (2.2K) | 0.96 | ★ Ср, Сб · A: Ср, Сб · B: Ср, Сб | +27 / +23 |
+| 38 | [@nu_photo_art](https://t.me/nu_photo_art) (3.3K) | [@prokolgotki_pub](https://t.me/prokolgotki_pub) (2.0K) | 0.96 | ★ Чт, Пн · A: Чт, Пн · B: Чт, Пн | +28 / +30 |
+| 39 | [❤️‍🔥Фотограф Алла Топорская 🔞](https://t.me/c/1665991400) (7.0K) | [@my_fuckin_sky](https://t.me/my_fuckin_sky) (6.3K) | 0.96 | ★ Чт, Ср · A: Чт, Ср · B: Чт, Ср | +43 / +34 |
+| 40 | [@photokrafter83](https://t.me/photokrafter83) (2.0K) | [@plasmon_ph](https://t.me/plasmon_ph) (2.0K) | 0.96 | ★ Сб, Пн · A: Сб, Пн · B: Сб, Пн | +19 / +25 |
+| 41 | [@lukcarefully](https://t.me/lukcarefully) (6.8K) | [@nu_home](https://t.me/nu_home) (3.8K) | 0.96 | ★ Ср, Пн · A: Ср, Пн · B: Ср, Пн | +67 / +69 |
+| 42 | [@paramonovnu](https://t.me/paramonovnu) (2.6K) | [@analog_nudes](https://t.me/analog_nudes) (2.2K) | 0.96 | ★ Вс, Вт · A: Вс, Вт · B: Вс, Вт | +22 / +18 |
+| 43 | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | [@svuph](https://t.me/svuph) (3.8K) | 0.96 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +24 / +30 |
+| 44 | [@artsproekt](https://t.me/artsproekt) (2.7K) | [@lierootphoto](https://t.me/lierootphoto) (2.0K) | 0.96 | ★ Сб, Чт · A: Сб, Чт · B: Чт, Сб | +24 / +21 |
+| 45 | [@nuartofche](https://t.me/nuartofche) (3.8K) | [@saortoto](https://t.me/saortoto) (2.0K) | 0.95 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +24 / +24 |
+| 46 | [@dardarkpirs](https://t.me/dardarkpirs) (2.2K) | [@fieryli](https://t.me/fieryli) (2.8K) | 0.95 | ★ Ср, Сб · A: Ср, Сб · B: Ср, Сб | +22 / +27 |
+| 47 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@nuartofche](https://t.me/nuartofche) (3.8K) | 0.95 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +24 |
+| 48 | [G.A.K. Production](https://t.me/c/1571189561) (8.2K) | [@callmepleasegirl](https://t.me/callmepleasegirl) (9.4K) | 0.95 | ★ Сб, Ср · A: Сб, Ср · B: Ср, Сб | +81 / +63 |
+| 49 | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.95 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +42 / +35 |
+| 50 | [@prokolgotki_pub](https://t.me/prokolgotki_pub) (2.0K) | [@Marginal_Art_1](https://t.me/Marginal_Art_1) (2.2K) | 0.95 | ★ Чт, Пн · A: Чт, Пн · B: Чт, Пн | +30 / +23 |
+| 51 | [@nudocaffe](https://t.me/nudocaffe) (6.9K) | [@mchuprin_ph](https://t.me/mchuprin_ph) (7.3K) | 0.95 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +108 / +80 |
+| 52 | [@Yakubov_group](https://t.me/Yakubov_group) (4.0K) | [@plasmon_ph](https://t.me/plasmon_ph) (2.0K) | 0.95 | ★ Пн, Сб · A: Пн, Сб · B: Сб, Пн | +25 / +25 |
+| 53 | [Ornella Life 🌶](https://t.me/c/1732545480) (4.2K) | [@nudelobve](https://t.me/nudelobve) (3.1K) | 0.95 | ★ Пт, Чт · A: Пт, Чт · B: Пт, Чт | +40 / +48 |
+| 54 | [@asmodeus_model](https://t.me/asmodeus_model) (7.8K) | [@vechereyet2](https://t.me/vechereyet2) (9.1K) | 0.95 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +85 / +111 |
+| 55 | [🍑Сосочки можно 18+](https://t.me/c/1570446534) (2.0K) | [@vixy_rea](https://t.me/vixy_rea) (2.3K) | 0.95 | ★ Пт, Чт · A: Пт, Чт · B: Чт, Пт | +21 / +28 |
+| 56 | [@Mal_vi_na11](https://t.me/Mal_vi_na11) (1.5K) | [@youcansayyes12](https://t.me/youcansayyes12) (1.6K) | 0.95 | ★ Вс, Ср · A: Ср, Вс · B: Вс, Ср | +11 / +15 |
+| 57 | [@nuartofche](https://t.me/nuartofche) (3.8K) | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | 0.95 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +24 / +33 |
+| 58 | [@bluekroovy_live](https://t.me/bluekroovy_live) (9.0K) | [@tatianamodel](https://t.me/tatianamodel) (6.5K) | 0.95 | ★ Вс, Пт · A: Вс, Пт · B: Вс, Пт | +91 / +73 |
+| 59 | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | [@my_antibodies_photo](https://t.me/my_antibodies_photo) (3.7K) | 0.95 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +42 / +49 |
+| 60 | [@just_me_not_more](https://t.me/just_me_not_more) (4.8K) | [@darnikmodel](https://t.me/darnikmodel) (4.4K) | 0.94 | ★ Чт, Ср · A: Чт, Ср · B: Ср, Чт | +97 / +69 |
+| 61 | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | [@svuph](https://t.me/svuph) (3.8K) | 0.94 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +25 / +30 |
+| 62 | [@dishashemetova2](https://t.me/dishashemetova2) (7.5K) | [@skinny_may](https://t.me/skinny_may) (3.9K) | 0.94 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +37 / +41 |
+| 63 | [@na_licooo](https://t.me/na_licooo) (3.9K) | [@pollyrumntsva](https://t.me/pollyrumntsva) (4.2K) | 0.94 | ★ Чт, Сб · A: Чт, Сб · B: Сб, Чт | +63 / +44 |
+| 64 | [@AdamRainPhoto18](https://t.me/AdamRainPhoto18) (1.9K) | [@p_d_s_m](https://t.me/p_d_s_m) (1.9K) | 0.94 | ★ Сб, Пт · A: Сб, Пт · B: Сб, Пт | +32 / +22 |
+| 65 | [@asmodeus_model](https://t.me/asmodeus_model) (7.8K) | [@uaniliza](https://t.me/uaniliza) (10.0K) | 0.94 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +85 / +111 |
+| 66 | [@NudeAbandon](https://t.me/NudeAbandon) (2.5K) | [@analog_nudes](https://t.me/analog_nudes) (2.2K) | 0.94 | ★ Вс, Вт · A: Вс, Вт · B: Вс, Вт | +24 / +18 |
+| 67 | [@nufotog](https://t.me/nufotog) (1.7K) | [@laninsphoto](https://t.me/laninsphoto) (1.2K) | 0.94 | ★ Ср, Пн · A: Ср, Пн · B: Ср, Пн | +13 / +10 |
+| 68 | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | 0.94 | ★ Вс, Сб · A: Сб, Вс · B: Вс, Сб | +24 / +33 |
+| 69 | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.94 | ★ Вс, Сб · A: Сб, Вс · B: Вс, Сб | +24 / +35 |
+| 70 | [Anna's secrets](https://t.me/c/2160513495) (7.1K) | [@my_antibodies_photo](https://t.me/my_antibodies_photo) (3.7K) | 0.94 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +44 / +49 |
+| 71 | [@nu_photo_art](https://t.me/nu_photo_art) (3.3K) | [@Marginal_Art_1](https://t.me/Marginal_Art_1) (2.2K) | 0.94 | ★ Чт, Пн · A: Чт, Пн · B: Чт, Пн | +28 / +23 |
+| 72 | [@mirploti](https://t.me/mirploti) (2.0K) | [Soulful Nude](https://t.me/c/1494235171) (2.0K) | 0.94 | ★ Пт, Вс · A: Пт, Вс · B: Пт, Вс | +17 / +11 |
+| 73 | [@p_d_s_m](https://t.me/p_d_s_m) (1.9K) | [@alex_izyumovphoto](https://t.me/alex_izyumovphoto) (2.8K) | 0.94 | ★ Сб, Пт · A: Сб, Пт · B: Пт, Сб | +22 / +17 |
+| 74 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@svuph](https://t.me/svuph) (3.8K) | 0.94 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +25 / +30 |
+| 75 | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.94 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +35 |
+| 76 | [Elf_sonya](https://t.me/c/1450108147) (4.5K) | [@sexxxylesya](https://t.me/sexxxylesya) (9.8K) | 0.94 | ★ Вс, Чт · A: Чт, Вс · B: Вс, Чт | +96 / +104 |
+| 77 | [@vladisyaro](https://t.me/vladisyaro) (3.4K) | [@plasmon_ph](https://t.me/plasmon_ph) (2.0K) | 0.94 | ★ Сб, Пн · A: Сб, Пн · B: Сб, Пн | +30 / +25 |
+| 78 | [@my_antibodies_photo](https://t.me/my_antibodies_photo) (3.7K) | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | 0.94 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +49 / +33 |
+| 79 | [Leica Erotica](https://t.me/c/1903204438) (2.5K) | [Soulful Nude](https://t.me/c/1494235171) (2.0K) | 0.94 | ★ Вс, Пт · A: Вс, Пт · B: Пт, Вс | +16 / +11 |
+| 80 | [@tgadore](https://t.me/tgadore) (7.4K) | [Те самые фото что банит инстаграм](https://t.me/c/1391449855) (4.1K) | 0.94 | ★ Ср, Вт · A: Вт, Ср · B: Ср, Вт | +94 / +80 |
+| 81 | [@my_antibodies_photo](https://t.me/my_antibodies_photo) (3.7K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.94 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +49 / +35 |
+| 82 | [@amwiiiiiii](https://t.me/amwiiiiiii) (6.4K) | [@just_me_not_more](https://t.me/just_me_not_more) (4.8K) | 0.93 | ★ Чт, Ср · A: Ср, Чт · B: Чт, Ср | +133 / +97 |
+| 83 | [@ruslanpanovphoto](https://t.me/ruslanpanovphoto) (2.0K) | [@artsproekt](https://t.me/artsproekt) (2.7K) | 0.93 | ★ Сб, Чт · A: Сб, Чт · B: Сб, Чт | +33 / +24 |
+| 84 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.93 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +35 |
+| 85 | [@LizkinPip](https://t.me/LizkinPip) (3.5K) | [@gotomargosha](https://t.me/gotomargosha) (3.9K) | 0.93 | ★ Ср, Пт · A: Ср, Пт · B: Ср, Пт | +23 / +35 |
+| 86 | [@LizkinPip](https://t.me/LizkinPip) (3.5K) | [@neu_ling_free](https://t.me/neu_ling_free) (3.6K) | 0.93 | ★ Пт, Ср · A: Ср, Пт · B: Пт, Ср | +23 / +37 |
+| 87 | [@ruslanpanovphoto](https://t.me/ruslanpanovphoto) (2.0K) | [@lierootphoto](https://t.me/lierootphoto) (2.0K) | 0.93 | ★ Чт, Сб · A: Сб, Чт · B: Чт, Сб | +33 / +21 |
+| 88 | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | 0.93 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +33 / +25 |
+| 89 | [@my_antibodies_photo](https://t.me/my_antibodies_photo) (3.7K) | [@svuph](https://t.me/svuph) (3.8K) | 0.93 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +49 / +30 |
+| 90 | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | 0.93 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +42 / +33 |
+| 91 | [@nuartofche](https://t.me/nuartofche) (3.8K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.93 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +24 / +35 |
+| 92 | [@asmodeus_model](https://t.me/asmodeus_model) (7.8K) | [@good_girls_love_sex](https://t.me/good_girls_love_sex) (12.9K) | 0.93 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +85 / +111 |
+| 93 | [❤️‍🔥Фотограф Алла Топорская 🔞](https://t.me/c/1665991400) (7.0K) | [@denbut_photoart](https://t.me/denbut_photoart) (6.3K) | 0.92 | ★ Чт, Ср · A: Чт, Ср · B: Ср, Чт | +43 / +69 |
+| 94 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | 0.92 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +25 / +42 |
+| 95 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | 0.92 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +33 |
+| 96 | [xenaexsa](https://t.me/c/2128476425) (8.4K) | [@Juliatimoro](https://t.me/Juliatimoro) (6.9K) | 0.92 | ★ Пт, Чт · A: Пт, Чт · B: Пт, Чт | +130 / +85 |
+| 97 | [@saortoto](https://t.me/saortoto) (2.0K) | [@svuph](https://t.me/svuph) (3.8K) | 0.92 | ★ Сб, Вс · A: Вс, Сб · B: Сб, Вс | +24 / +30 |
+| 98 | [@prozvitsky_ph](https://t.me/prozvitsky_ph) (1.5K) | [@photokrafter83](https://t.me/photokrafter83) (2.0K) | 0.92 | ★ Сб, Пн · A: Сб, Пн · B: Сб, Пн | +13 / +19 |
+| 99 | [@nudocaffe](https://t.me/nudocaffe) (6.9K) | [Фотограф Гудвин 18+](https://t.me/c/1417817444) (19.5K) | 0.92 | ★ Вс, Сб · A: Вс, Сб · B: Сб, Вс | +108 / +117 |
+| 100 | [ROMA ROMA \| PHOTO \| LIFESTYLE \| VIXEN](https://t.me/c/2255233240) (6.1K) | [Max Fayst📸😈](https://t.me/c/2778995761) (6.4K) | 0.92 | ★ Сб, Пт · A: Сб, Пт · B: Пт, Сб | +81 / +48 |
+| 101 | [@asmodeus_model](https://t.me/asmodeus_model) (7.8K) | [@alicelismagi](https://t.me/alicelismagi) (11.4K) | 0.92 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +85 / +124 |
+| 102 | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | [Anna's secrets](https://t.me/c/2160513495) (7.1K) | 0.92 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +42 / +44 |
+| 103 | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | [@justfcknrawww](https://t.me/justfcknrawww) (2.7K) | 0.92 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +15 |
+| 104 | [Anna's secrets](https://t.me/c/2160513495) (7.1K) | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | 0.92 | ★ Вс, Сб · A: Сб, Вс · B: Вс, Сб | +44 / +33 |
+| 105 | [@art_nu_k](https://t.me/art_nu_k) (11.2K) | [@photokravchenko](https://t.me/photokravchenko) (33.5K) | 0.92 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +228 / +244 |
+| 106 | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | [@svuph](https://t.me/svuph) (3.8K) | 0.92 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +42 / +30 |
+| 107 | [@dishashemetova2](https://t.me/dishashemetova2) (7.5K) | [@ioannova_a](https://t.me/ioannova_a) (3.1K) | 0.92 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +37 / +43 |
+| 108 | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | [@dallasgorben](https://t.me/dallasgorben) (2.5K) | 0.92 | ★ Вс, Сб · A: Сб, Вс · B: Вс, Сб | +42 / +25 |
+| 109 | [@art_nude_photos](https://t.me/art_nude_photos) (3.3K) | [@justfcknrawww](https://t.me/justfcknrawww) (2.7K) | 0.92 | ★ Вс, Сб · A: Сб, Вс · B: Вс, Сб | +24 / +15 |
+| 110 | [@saortoto](https://t.me/saortoto) (2.0K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.92 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +24 / +35 |
+| 111 | [aleksandrsavichevofficial](https://t.me/c/1893898354) (2.5K) | [@ruslanpanovphoto](https://t.me/ruslanpanovphoto) (2.0K) | 0.91 | ★ Сб, Чт · A: Сб, Чт · B: Сб, Чт | +20 / +33 |
+| 112 | [@art_nu_k](https://t.me/art_nu_k) (11.2K) | [@smeilov_photo](https://t.me/smeilov_photo) (43.0K) | 0.91 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +228 / +228 |
+| 113 | [Ornella Life 🌶](https://t.me/c/1732545480) (4.2K) | [@vixy_rea](https://t.me/vixy_rea) (2.3K) | 0.91 | ★ Чт, Пт · A: Пт, Чт · B: Чт, Пт | +40 / +28 |
+| 114 | [@Yakubov_group](https://t.me/Yakubov_group) (4.0K) | [@photokrafter83](https://t.me/photokrafter83) (2.0K) | 0.91 | ★ Пн, Сб · A: Пн, Сб · B: Сб, Пн | +25 / +19 |
+| 115 | [Anna's secrets](https://t.me/c/2160513495) (7.1K) | [@mchuprin_ph](https://t.me/mchuprin_ph) (7.3K) | 0.91 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +44 / +80 |
+| 116 | [@harismaimportrant](https://t.me/harismaimportrant) (3.7K) | [@antonia_astart](https://t.me/antonia_astart) (1.8K) | 0.91 | ★ Ср, Вс · A: Вс, Ср · B: Ср, Вс | +41 / +31 |
+| 117 | [@nat_flame](https://t.me/nat_flame) (2.2K) | [@justfcknrawww](https://t.me/justfcknrawww) (2.7K) | 0.91 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +25 / +15 |
+| 118 | [@saortoto](https://t.me/saortoto) (2.0K) | [@justfcknrawww](https://t.me/justfcknrawww) (2.7K) | 0.91 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +24 / +15 |
+| 119 | [Anna's secrets](https://t.me/c/2160513495) (7.1K) | [@max_kaftorman](https://t.me/max_kaftorman) (3.0K) | 0.91 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +44 / +35 |
+| 120 | [@nuartofche](https://t.me/nuartofche) (3.8K) | [@justfcknrawww](https://t.me/justfcknrawww) (2.7K) | 0.91 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +24 / +15 |
+| 121 | [@nuancefluent](https://t.me/nuancefluent) (1.4K) | [@Marginal_Art_1](https://t.me/Marginal_Art_1) (2.2K) | 0.91 | ★ Пн, Чт · A: Пн, Чт · B: Чт, Пн | +15 / +23 |
+| 122 | [@frolkinanude](https://t.me/frolkinanude) (2.3K) | [@saortoto](https://t.me/saortoto) (2.0K) | 0.91 | ★ Сб, Вс · A: Сб, Вс · B: Вс, Сб | +42 / +24 |
+| 123 | [@bazilev_ph](https://t.me/bazilev_ph) (3.9K) | [@saortoto](https://t.me/saortoto) (2.0K) | 0.91 | ★ Вс, Сб · A: Вс, Сб · B: Вс, Сб | +33 / +24 |
+| 124 | [@ph_miloradov](https://t.me/ph_miloradov) (16.6K) | [ROMA ROMA \| PHOTO \| LIFESTYLE \| VIXEN](https://t.me/c/2255233240) (6.1K) | 0.91 | ★ Сб, Пт · A: Пт, Сб · B: Сб, Пт | +99 / +81 |
+| 125 | [@nudelobve](https://t.me/nudelobve) (3.1K) | [@vixy_rea](https://t.me/vixy_rea) (2.3K) | 0.90 | ★ Чт, Пт · A: Пт, Чт · B: Чт, Пт | +48 / +28 |
+| 126 | [Anna's secrets](https://t.me/c/2160513495) (7.1K) | [@svuph](https://t.me/svuph) (3.8K) | 0.90 | ★ Сб, Вс · A: Сб, Вс · B: Сб, Вс | +44 / +30 |
+| 127 | [Sumiko☀️](https://t.me/c/2243340856) (9.4K) | [@just_me_not_more](https://t.me/just_me_not_more) (4.8K) | 0.90 | ★ Чт, Ср · A: Ср, Чт · B: Чт, Ср | +137 / +97 |
+| 128 | [@Marginal_Art_1](https://t.me/Marginal_Art_1) (2.2K) | [@alisa_verner_tg](https://t.me/alisa_verner_tg) (1.7K) | 0.90 | ★ Чт, Пн · A: Чт, Пн · B: Чт, Пн | +23 / +13 |
+| 129 | [@kostromin_art](https://t.me/kostromin_art) (1.2K) | [@ana_demchenko](https://t.me/ana_demchenko) (1.9K) | 0.90 | ★ Вт, Чт · A: Вт, Чт · B: Вт, Чт | +11 / +17 |
+| 130 | [Melons_Fans](https://t.me/c/1630836463) (2.9K) | [@nudephotographer_vl](https://t.me/nudephotographer_vl) (1.3K) | 0.90 | ★ Вс, Пн · A: Вс, Пн · B: Вс, Пн | +9 / +11 |
