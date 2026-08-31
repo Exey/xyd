@@ -1,4 +1,4 @@
-| Folder | Followers | ID/Username | Tag | Rating | Views | Viral share | Post Quality |
+| Папка | Подписчики | ID/Юзернейм | Тег | Рейтинг | Просмотры | Доля виральных | Качество постов |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | photographers | 66 325 | @maratsafinvapas | Крафт | 0.874 | 5 025 020 | 0.0% | 425 |
 | photographers | 42 967 | @smeilov_photo | Raw | 0.532 | 3 452 306 | 1.3% | 469 |
@@ -19,7 +19,7 @@
 | photographers | 7 828 | @krasnovTG | Крафт | 0.071 | 180 157 | 0.0% | 122 |
 | photographers | 7 411 | @tgadore | Крафт | 0.257 | 518 330 | 2.5% | 503 |
 | photographers | 7 274 | @mchuprin_ph | Гламур | 0.230 | 553 185 | 0.8% | 420 |
-| photographers | 7 149 | Anna's secrets(2160513495) | Крафт | 0.311 | 869 485 | 2.8% | 562 |
+| photographers | 7 204 | Anna's secrets(2160513495) | Крафт | 0.317 | 872 537 | 2.4% | 584 |
 | photographers | 7 019 | ❤️‍🔥Фотограф Алла (1665991400) | Raw | 0.030 | 111 978 | 0.0% | 106 |
 | photographers | 6 911 | @nudocaffe | Крафт | 0.344 | 595 840 | 6.1% | 606 |
 | photographers | 6 806 | @lukcarefully | Raw | 0.191 | 608 023 | 0.0% | 305 |
@@ -119,9 +119,9 @@
 | models | 8 990 | @bluekroovy_live |  | 0.120 | 698 526 | 0.0% | 290 |
 | models | 8 450 | xenaexsa(2128476425) |  | 0.385 | 726 587 | 1.1% | 537 |
 | models | 7 840 | @asmodeus_model |  | 0.229 | 690 869 | 0.0% | 209 |
+| models | 7 612 | @Juliatimoro |  | 0.447 | 1 091 294 | 1.9% | 497 |
 | models | 7 485 | @dishashemetova2 |  | 0.462 | 855 021 | 1.8% | 575 |
 | models | 7 320 | @olyaaster |  | 0.300 | 388 933 | 7.5% | 479 |
-| models | 6 854 | @Juliatimoro |  | 0.435 | 1 038 419 | 1.9% | 499 |
 | models | 6 520 | @tatianamodel |  | 0.091 | 406 233 | 0.0% | 85 |
 | models | 6 428 | @amwiiiiiii |  | 0.320 | 826 493 | 3.9% | 490 |
 | models | 5 247 | @northern_lights_model |  | 0.458 | 1 468 271 | 3.6% | 618 |
