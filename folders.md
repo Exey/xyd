@@ -9,7 +9,7 @@
 | photographers | 16 590 | @ph_miloradov | Raw | 0.546 | 2 214 756 | 0.4% | 453 |
 | photographers | 16 424 | @elishanudes | Кинк | 0.486 | 1 898 959 | 2.8% | 615 |
 | photographers | 14 360 | @raziltwo | Крафт | 0.363 | 1 194 184 | 0.0% | 473 |
-| photographers | 13 858 | @EgorovD_PhotoArt | Гламур | 0.304 | 1 172 554 | 0.0% | 400 |
+| photographers | 13 968 | @EgorovD_PhotoArt | Гламур | 0.310 | 1 185 972 | 0.0% | 413 |
 | photographers | 13 505 | @geneoryxx | Кинк | 0.370 | 1 508 435 | 1.5% | 455 |
 | photographers | 12 304 | @erotica_fantasies | Raw | 0.204 | 776 836 | 0.0% | 338 |
 | photographers | 11 243 | @art_nu_k | Гламур | 0.282 | 713 688 | 4.5% | 416 |
