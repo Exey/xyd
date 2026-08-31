@@ -1,4 +1,4 @@
-| Папка | Подписчики | ID/Юзернейм | Тег | Рейтинг | Просмотры | Доля виральных | Качество постов |
+| Folder | Followers | ID/Username | Tag | Rating | Views | Viral share | Post Quality |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | photographers | 66 325 | @maratsafinvapas | Крафт | 0.874 | 5 025 020 | 0.0% | 425 |
 | photographers | 42 967 | @smeilov_photo | Raw | 0.532 | 3 452 306 | 1.3% | 469 |
