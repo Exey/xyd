@@ -82,11 +82,11 @@
 | photographers | 1 890 | @ana_demchenko | Концепт | 0.065 | 105 068 | 0.0% | 137 |
 | photographers | 1 730 | @alisa_verner_tg | Гламур | 0.120 | 55 534 | 0.0% | 291 |
 | photographers | 1 691 | @nufotog | Классика | 0.279 | 494 950 | 0.3% | 586 |
+| photographers | 1 639 | @nuancefluent | Крафт | 0.133 | 82 557 | 1.9% | 304 |
 | photographers | 1 531 | @gerachernyadyev | Драма | 0.022 | 37 563 | 0.0% | 90 |
 | photographers | 1 500 | @xottabphoto | Кинк | 0.010 | 82 424 | 0.0% | 27 |
 | photographers | 1 467 | @prozvitsky_ph | Гламур | 0.180 | 262 455 | 0.0% | 387 |
 | photographers | 1 447 | @tesi_f | Крафт | 0.073 | 27 936 | 0.0% | 182 |
-| photographers | 1 435 | @nuancefluent | Крафт | 0.139 | 82 557 | 1.9% | 321 |
 | photographers | 1 372 | @BLVPH14 |  | 0.014 | 161 902 | 0.0% | 31 |
 | photographers | 1 258 | @nudephotographer_vl |  | 0.035 | 139 974 | 0.0% | 122 |
 | photographers | 1 236 | @rashap_blog |  | — | — | — | — |
