@@ -92,7 +92,7 @@
 | photographers | 1 236 | @rashap_blog |  | — | — | — | — |
 | photographers | 1 232 | @kostromin_art |  | 0.393 | 93 830 | 24.3% | 509 |
 | photographers | 1 193 | @laninsphoto |  | 0.094 | 33 893 | 0.0% | 236 |
-| photographers | 1 019 | @KotovPictures | Raw | 0.093 | 109 683 | 0.0% | 380 |
+| photographers | 1 019 | @KotovPictures |  | 0.093 | 109 683 | 0.0% | 380 |
 | photographers | 982 | @kirill25b |  | 0.033 | 42 296 | 0.0% | 75 |
 | photographers | 862 | @ps_Nude |  | 0.041 | 22 717 | 0.0% | 102 |
 | photographers | 809 | JakobArt(1789951798) |  | 0.010 | 186 550 | 0.0% | 0 |
