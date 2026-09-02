@@ -408,7 +408,8 @@ footer a:hover { color: var(--ink); }
   <div class="site-title">Рейтинг арт-ню фотографов</div>
   <nav>
     <button class="tab-btn active" data-tab="shortlist" onclick="showTab('shortlist')">SHORTLIST 2026</button>
-    <button class="tab-btn" data-tab="posts" onclick="showTab('posts')">TOP 250 POSTS 2025</button>
+    <button class="tab-btn" data-tab="hits2026" onclick="showTab('hits2026')">250 HITS 2026</button>
+    <button class="tab-btn" data-tab="hits2025" onclick="showTab('hits2025')">250 HITS 2025</button>
     <button class="tab-btn" data-tab="rating" onclick="showTab('rating')">RATING 2025</button>
     <button class="tab-btn" data-tab="ads" onclick="showTab('ads')">ADS</button>
     <button class="tab-btn" data-tab="matches" onclick="showTab('matches')">ВП Пары</button>
@@ -454,8 +455,37 @@ footer a:hover { color: var(--ink); }
   </div>
 </div>
 
-<!-- ══════════════════ TOP 250 POSTS 2025 ══════════════════ -->
-<div id="tab-posts" class="tab-content">
+<!-- ══════════════════ 250 HITS 2026 ══════════════════ -->
+<div id="tab-hits2026" class="tab-content">
+  <div class="shortlist-intro">
+    <span class="algo-desc">Топ-250 постов 2026 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
+  </div>
+
+  <div class="hitmakers-wrap">
+    <div class="hitmakers-card">
+      <h3>Топ-10 хитмейкеров-фотографов</h3>
+      <ol class="hitmakers-list" id="top10-photographers-2026"></ol>
+    </div>
+    <div class="hitmakers-card">
+      <h3>Топ-10 хитмейкеров-моделей</h3>
+      <ol class="hitmakers-list" id="top10-models-2026"></ol>
+    </div>
+  </div>
+
+  <div class="posts-sort-bar">
+    <span class="style-tag clickable legend-all" id="posts-channel-chip-2026"></span>
+    <span class="legend-label">Сортировка:</span>
+    <div class="posts-sort-btns" id="posts-sort-btns-2026"></div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="loading" id="posts-loading-2026">Загрузка posts2026.md…</div>
+    <div class="posts-list" id="posts-list-2026" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ 250 HITS 2025 ══════════════════ -->
+<div id="tab-hits2025" class="tab-content">
   <div class="shortlist-intro">
     <span class="algo-desc">Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
   </div>
@@ -463,23 +493,23 @@ footer a:hover { color: var(--ink); }
   <div class="hitmakers-wrap">
     <div class="hitmakers-card">
       <h3>Топ-10 хитмейкеров-фотографов</h3>
-      <ol class="hitmakers-list" id="top10-photographers"></ol>
+      <ol class="hitmakers-list" id="top10-photographers-2025"></ol>
     </div>
     <div class="hitmakers-card">
       <h3>Топ-10 хитмейкеров-моделей</h3>
-      <ol class="hitmakers-list" id="top10-models"></ol>
+      <ol class="hitmakers-list" id="top10-models-2025"></ol>
     </div>
   </div>
 
   <div class="posts-sort-bar">
-    <span class="style-tag clickable legend-all" id="posts-channel-chip"></span>
+    <span class="style-tag clickable legend-all" id="posts-channel-chip-2025"></span>
     <span class="legend-label">Сортировка:</span>
-    <div class="posts-sort-btns" id="posts-sort-btns"></div>
+    <div class="posts-sort-btns" id="posts-sort-btns-2025"></div>
   </div>
 
   <div class="table-wrap">
-    <div class="loading" id="posts-loading">Загрузка posts2025.md…</div>
-    <div class="posts-list" id="posts-list" style="display:none"></div>
+    <div class="loading" id="posts-loading-2025">Загрузка posts2025.md…</div>
+    <div class="posts-list" id="posts-list-2025" style="display:none"></div>
   </div>
 </div>
 
@@ -1198,11 +1228,12 @@ function showTab(name) {
   if (btn) btn.classList.add('active');
 }
 
-// ─── TOP 250 POSTS 2025 ───────────────────────────────────────────────
-let allPosts = [];
-let postsSort = { key: 'score', dir: 'desc' };
-let activeChannelFilter = null;
-let activeChannelCount = null;
+// ─── 250 HITS: одинаковая страница для каждого года ───────────────────
+const HITS_YEARS = [2026, 2025];
+const hits = {};
+HITS_YEARS.forEach(year => {
+  hits[year] = { year, file: `posts${year}.md`, posts: [], sort: { key: 'score', dir: 'desc' }, channel: null, channelCount: null };
+});
 const POSTS_FIELD_MAP = { score: 'Score CQI', views: 'Views', shares: 'Shares' };
 
 function parseHitmakers(text) {
@@ -1232,30 +1263,32 @@ function linkifyHandle(name) {
   return name;
 }
 
-function renderHitmakers(list, containerId) {
+function renderHitmakers(year, list, containerId) {
   document.getElementById(containerId).innerHTML = list.map(item => {
     const safeName = item.name.replace(/'/g, "\\'");
-    return `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count clickable" title="Показать посты этого канала" onclick="filterByChannel('${safeName}', '${item.count}')">📰${item.count}</span><span class="hm-name">${linkifyHandle(item.name)}</span></li>`;
+    return `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count clickable" title="Показать посты этого канала" onclick="filterByChannel(${year}, '${safeName}', '${item.count}')">📰${item.count}</span><span class="hm-name">${linkifyHandle(item.name)}</span></li>`;
   }).join('');
 }
 
-function filterByChannel(name, count) {
-  activeChannelFilter = name;
-  activeChannelCount = name ? count : null;
-  renderPostsList();
+function filterByChannel(year, name, count) {
+  const h = hits[year];
+  h.channel = name;
+  h.channelCount = name ? count : null;
+  renderPostsList(year);
 }
 
-function renderChannelChip() {
-  const chip = document.getElementById('posts-channel-chip');
+function renderChannelChip(year) {
+  const h = hits[year];
+  const chip = document.getElementById('posts-channel-chip-' + year);
   if (!chip) return;
-  if (activeChannelFilter) {
-    chip.innerHTML = `📰${activeChannelCount != null ? activeChannelCount : ''} ${activeChannelFilter}`;
+  if (h.channel) {
+    chip.innerHTML = `📰${h.channelCount != null ? h.channelCount : ''} ${h.channel}`;
     chip.classList.add('active');
   } else {
     chip.textContent = 'ВСЕ КАНАЛЫ';
     chip.classList.remove('active');
   }
-  chip.onclick = () => filterByChannel(null);
+  chip.onclick = () => filterByChannel(year, null);
 }
 
 function extractThumbSrc(raw) {
@@ -1263,19 +1296,21 @@ function extractThumbSrc(raw) {
   return m ? m[1] : '';
 }
 
-function renderPostsSortBar() {
+function renderPostsSortBar(year) {
+  const h = hits[year];
   const opts = [{ key: 'score', label: 'Score' }, { key: 'views', label: 'Views' }, { key: 'shares', label: 'Shares' }];
-  document.getElementById('posts-sort-btns').innerHTML = opts.map(o => {
-    const active = postsSort.key === o.key;
-    const arrow = active ? (postsSort.dir === 'desc' ? ' ▼' : ' ▲') : '';
-    return `<button class="sort-btn${active ? ' active' : ''}" onclick="sortPosts('${o.key}')">${o.label}${arrow}</button>`;
+  document.getElementById('posts-sort-btns-' + year).innerHTML = opts.map(o => {
+    const active = h.sort.key === o.key;
+    const arrow = active ? (h.sort.dir === 'desc' ? ' ▼' : ' ▲') : '';
+    return `<button class="sort-btn${active ? ' active' : ''}" onclick="sortPosts(${year},'${o.key}')">${o.label}${arrow}</button>`;
   }).join('');
 }
 
-function sortPosts(key) {
-  if (postsSort.key === key) postsSort.dir = postsSort.dir === 'desc' ? 'asc' : 'desc';
-  else { postsSort.key = key; postsSort.dir = 'desc'; }
-  renderPostsList();
+function sortPosts(year, key) {
+  const h = hits[year];
+  if (h.sort.key === key) h.sort.dir = h.sort.dir === 'desc' ? 'asc' : 'desc';
+  else { h.sort.key = key; h.sort.dir = 'desc'; }
+  renderPostsList(year);
 }
 
 function truncateText(text, max) {
@@ -1284,14 +1319,15 @@ function truncateText(text, max) {
   return s.slice(0, max).trim() + '…';
 }
 
-function renderPostItem(p) {
+function renderPostItem(year, p) {
   const thumbSrc = extractThumbSrc(p['Thumbnail']);
   const link = p['Link'] || '#';
   const text = truncateText(p['Text'], 240);
   const title = truncateText(p['Channel'], 18);
-  return `<div class="post-item" id="place-${p._place}">
+  const anchor = `place-${year}-${p._place}`;
+  return `<div class="post-item" id="${anchor}">
     <div class="post-block-identity">
-      <span class="post-place"><a href="#place-${p._place}">${p._place}</a></span>
+      <span class="post-place"><a href="#${anchor}">${p._place}</a></span>
       <a class="post-channel" href="${link}" target="_blank" rel="noopener">${title}</a>
     </div>
     <div class="post-block-stats">
@@ -1307,47 +1343,51 @@ function renderPostItem(p) {
   </div>`;
 }
 
-function renderPostsList() {
-  renderPostsSortBar();
-  renderChannelChip();
-  const field = POSTS_FIELD_MAP[postsSort.key];
-  const filtered = activeChannelFilter ? allPosts.filter(p => (p['Channel'] || '').trim() === activeChannelFilter) : allPosts;
+function renderPostsList(year) {
+  const h = hits[year];
+  renderPostsSortBar(year);
+  renderChannelChip(year);
+  const field = POSTS_FIELD_MAP[h.sort.key];
+  const filtered = h.channel ? h.posts.filter(p => (p['Channel'] || '').trim() === h.channel) : h.posts;
   const sorted = [...filtered].sort((a, b) => {
     const av = parseNumeric(a[field]) ?? -1;
     const bv = parseNumeric(b[field]) ?? -1;
     const cmp = av - bv;
-    return postsSort.dir === 'desc' ? -cmp : cmp;
+    return h.sort.dir === 'desc' ? -cmp : cmp;
   });
-  document.getElementById('posts-list').innerHTML = sorted.map(renderPostItem).join('');
+  document.getElementById('posts-list-' + year).innerHTML = sorted.map(p => renderPostItem(year, p)).join('');
 }
 
 function handlePlaceHash() {
-  const m = location.hash.match(/^#place-(\d+)$/);
+  // #place-2026-12 — новый формат, #place-12 — старые ссылки на 2025
+  const m = location.hash.match(/^#place-(?:(\d{4})-)?(\d+)$/);
   if (!m) return;
-  const el = document.getElementById('place-' + m[1]);
+  const year = m[1] || 2025;
+  const el = document.getElementById(`place-${year}-${m[2]}`);
   if (!el) return;
-  showTab('posts');
+  showTab('hits' + year);
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   el.classList.add('place-highlight');
   setTimeout(() => el.classList.remove('place-highlight'), 2000);
 }
 window.addEventListener('hashchange', handlePlaceHash);
 
-async function loadPosts() {
+async function loadHits(year) {
+  const h = hits[year];
   try {
-    const res = await fetch('posts2025.md');
+    const res = await fetch(h.file);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
     const { photographers, models } = parseHitmakers(text);
-    renderHitmakers(photographers, 'top10-photographers');
-    renderHitmakers(models, 'top10-models');
-    allPosts = parseMarkdownTable(text).map((r, i) => ({ ...r, _place: i + 1 }));
-    document.getElementById('posts-loading').style.display = 'none';
-    document.getElementById('posts-list').style.display = 'flex';
-    renderPostsList();
+    renderHitmakers(year, photographers, 'top10-photographers-' + year);
+    renderHitmakers(year, models, 'top10-models-' + year);
+    h.posts = parseMarkdownTable(text).map((r, i) => ({ ...r, _place: i + 1 }));
+    document.getElementById('posts-loading-' + year).style.display = 'none';
+    document.getElementById('posts-list-' + year).style.display = 'flex';
+    renderPostsList(year);
     handlePlaceHash();
   } catch (e) {
-    document.getElementById('posts-loading').textContent = 'Ошибка загрузки posts2025.md: ' + e.message;
+    document.getElementById('posts-loading-' + year).textContent = `Ошибка загрузки ${h.file}: ` + e.message;
   }
 }
 
@@ -1705,7 +1745,10 @@ async function init() {
   renderCriteria();
 
   const params = new URLSearchParams(location.search);
-  if (params.get('p') === 'posts2025' || /^#place-\d+$/.test(location.hash)) showTab('posts');
+  const pageParam = params.get('p');
+  if (pageParam === 'hits2026') showTab('hits2026');
+  // posts2025 — старое имя параметра
+  if (pageParam === 'hits2025' || pageParam === 'posts2025' || /^#place-(\d{4}-)?\d+$/.test(location.hash)) showTab('hits2025');
   if (params.get('p') === 'ads') showTab('ads');
   if (params.get('p') === 'matches') showTab('matches');
 
@@ -1753,7 +1796,7 @@ async function init() {
     document.getElementById('loading').textContent = 'Ошибка загрузки folders.md: ' + e.message;
   }
 
-  loadPosts();
+  HITS_YEARS.forEach(loadHits);
   loadAds();
 }
 
