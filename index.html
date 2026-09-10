@@ -830,9 +830,11 @@ const ETHICS_HINT =
   'Если имён, упомянутых без ссылки, больше, чем честных ссылок, — результат делится пополам.';
 const ETHICS_NO_DATA_HINT = 'Недостаточно данных: у канала нет ни честных, ни фейковых ссылок для оценки.\n\n' + ETHICS_HINT;
 
+const ETHICS_EMPTY = /^(|[—–-]+|n\/?a|no ?data|нет данных)$/i;
+
 function ethicsCellHtml(p) {
   const v = (p['Ethics'] || '').trim();
-  if (!v) return `<span class="ethics-val no-data" title="${ETHICS_NO_DATA_HINT}">no data</span>`;
+  if (ETHICS_EMPTY.test(v)) return `<span class="ethics-val no-data" title="${ETHICS_NO_DATA_HINT}">no data</span>`;
   return `<span class="ethics-val" title="${ETHICS_HINT}">${v}</span>`;
 }
 
