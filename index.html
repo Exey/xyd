@@ -173,6 +173,8 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   border: 1.5px solid; display: inline-block; cursor: default;
 }
 .score-val { font-size: 17px; font-weight: 900; color: var(--rose); min-width: 34px; }
+.ethics-val { font-variant-numeric: tabular-nums; cursor: help; }
+.ethics-val.no-data { color: var(--muted); font-size: 11px; font-style: italic; }
 .trend {
   display: inline-flex; align-items: baseline; gap: 3px; font-size: 13px; font-weight: 900;
   font-variant-numeric: tabular-nums; white-space: nowrap;
@@ -819,6 +821,21 @@ function trendCellHtml(p) {
   return `<span class="trend flat" title="Место не изменилось: ${p._place}">―</span>`;
 }
 
+const ETHICS_HINT =
+  'Этика — насколько честно канал указывает тех, кого упоминает.\n' +
+  'Все ссылки канала делятся на: честные (ссылка на Telegram-канал упомянутого человека), ' +
+  'фейковые (внешняя веб-ссылка на имя — считается один раз на имя), ' +
+  'нераспознанные (Telegram-ссылки, ещё не сопоставленные) и промо (самореклама — не учитывается).\n' +
+  'Этика = честные / (честные + фейковые) × 100%.\n' +
+  'Если имён, упомянутых без ссылки, больше, чем честных ссылок, — результат делится пополам.';
+const ETHICS_NO_DATA_HINT = 'Недостаточно данных: у канала нет ни честных, ни фейковых ссылок для оценки.\n\n' + ETHICS_HINT;
+
+function ethicsCellHtml(p) {
+  const v = (p['Ethics'] || '').trim();
+  if (!v) return `<span class="ethics-val no-data" title="${ETHICS_NO_DATA_HINT}">no data</span>`;
+  return `<span class="ethics-val" title="${ETHICS_HINT}">${v}</span>`;
+}
+
 const PH_COLUMNS = [
   { key: 'trend',     label: 'Trend',      sortVal: p => p._trend == null ? TREND_NEW_SORT : p._trend, cell: trendCellHtml },
   { key: 'tag',       label: 'Поджанр',    sortVal: p => (tagMetaFor(p)?.name || '').toLowerCase(), cell: tagCellHtml },
@@ -826,10 +843,12 @@ const PH_COLUMNS = [
   { key: 'rating',    label: 'Rating',     sortVal: p => ratingSortVal(p['Rating']), cell: ratingCellHtml },
   { key: 'followers', label: 'Members', sortVal: p => parseNumeric(p['Followers']) ?? -1, cell: p => p['Followers'] || '—' },
   { key: 'views',     label: 'Просмотры',  sortVal: p => parseNumeric(p['Views']) ?? -1, cell: p => p['Views'] || '—', hideNarrow: true },
-  { key: 'viral',     label: 'Виральность',sortVal: p => parseNumeric(p['Viral share']) ?? -1, cell: p => p['Viral share'] || '—', hideNarrow: true },
+  { key: 'viral',     label: 'Вирал',      sortVal: p => parseNumeric(p['Viral share']) ?? -1, cell: p => p['Viral share'] || '—', hideNarrow: true },
   { key: 'interest',  label: 'Интерес',    sortVal: p => parseNumeric(p['Post Quality']) ?? -1, cell: p => p['Post Quality'] || '—', hideNarrow: true },
+  { key: 'ethics',    label: 'Этика',      sortVal: p => parseNumeric(p['Ethics']) ?? -1, cell: ethicsCellHtml, hint: ETHICS_HINT, hideNarrow: true },
 ];
-const MODEL_COLUMNS = PH_COLUMNS.filter(c => c.key !== 'tag').map(c => c.key === 'name' ? { ...c, label: 'Модель' } : c);
+// этика считается только для фотографов
+const MODEL_COLUMNS = PH_COLUMNS.filter(c => c.key !== 'tag' && c.key !== 'ethics').map(c => c.key === 'name' ? { ...c, label: 'Модель' } : c);
 
 let phSort = { key: 'rating', dir: 'desc' };
 let modelSort = { key: 'rating', dir: 'desc' };
@@ -883,7 +902,8 @@ function renderHead(rowId, columns, sortState) {
     const isSorted = sortState.key === c.key;
     const arrow = isSorted ? (sortState.dir === 'desc' ? ' ▼' : ' ▲') : '';
     const cls = ['sortable', c.hideNarrow ? 'col-hide-narrow' : '', isSorted ? 'sorted' : ''].filter(Boolean).join(' ');
-    return `<th class="${cls}" onclick="sortTable('${rowId === 'ph-head' ? 'ph' : 'model'}','${c.key}')">${c.label}${arrow}</th>`;
+    const hint = c.hint ? ` title="${c.hint}"` : '';
+    return `<th class="${cls}"${hint} onclick="sortTable('${rowId === 'ph-head' ? 'ph' : 'model'}','${c.key}')">${c.label}${arrow}</th>`;
   }).join('');
 }
 
