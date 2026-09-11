@@ -237,6 +237,23 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   justify-content: center;
 }
 .posts-sort-btns { display: flex; gap: 6px; }
+.channel-picker { position: relative; display: inline-block; }
+.channel-menu {
+  position: absolute; top: calc(100% + 6px); left: 0; z-index: 60;
+  min-width: 240px; max-height: 320px; overflow-y: auto;
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(30,21,20,.16); padding: 4px;
+}
+.channel-item {
+  width: 100%; display: flex; align-items: center; gap: 10px; justify-content: space-between;
+  background: none; border: none; border-radius: 6px; cursor: pointer;
+  padding: 6px 8px; font: inherit; font-size: 12px; font-weight: 700; color: var(--text); text-align: left;
+}
+.channel-item:hover { background: var(--card2); color: var(--rose); }
+.channel-item.reset { border-bottom: 1px solid var(--border2); border-radius: 6px 6px 0 0; margin-bottom: 2px; }
+.channel-item .ch-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.channel-item .ch-count { color: var(--muted); font-weight: 900; white-space: nowrap; }
+.channel-empty { padding: 8px; font-size: 11px; color: var(--muted); }
 .sort-btn {
   background: var(--card); border: 1.5px solid var(--border); color: var(--text);
   font-size: 12px; font-weight: 800; padding: 6px 16px; border-radius: 20px;
@@ -475,7 +492,10 @@ footer a:hover { color: var(--ink); }
   </div>
 
   <div class="posts-sort-bar">
-    <span class="style-tag clickable legend-all" id="posts-channel-chip-2026"></span>
+    <span class="channel-picker">
+      <span class="style-tag clickable legend-all" id="posts-channel-chip-2026"></span>
+      <div class="channel-menu" id="channel-menu-2026" hidden></div>
+    </span>
     <span class="legend-label">Сортировка:</span>
     <div class="posts-sort-btns" id="posts-sort-btns-2026"></div>
   </div>
@@ -504,7 +524,10 @@ footer a:hover { color: var(--ink); }
   </div>
 
   <div class="posts-sort-bar">
-    <span class="style-tag clickable legend-all" id="posts-channel-chip-2025"></span>
+    <span class="channel-picker">
+      <span class="style-tag clickable legend-all" id="posts-channel-chip-2025"></span>
+      <div class="channel-menu" id="channel-menu-2025" hidden></div>
+    </span>
     <span class="legend-label">Сортировка:</span>
     <div class="posts-sort-btns" id="posts-sort-btns-2025"></div>
   </div>
@@ -1310,8 +1333,69 @@ function renderChannelChip(year) {
     chip.textContent = 'ВСЕ КАНАЛЫ';
     chip.classList.remove('active');
   }
-  chip.onclick = () => filterByChannel(year, null);
+  chip.innerHTML += ' <span class="ch-caret">▾</span>';
+  chip.onclick = () => toggleChannelMenu(year);
 }
+
+function escAttr(v) {
+  return String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// каналы вне топ-10 хитмейкеров, по числу постов в топ-250
+function restChannels(year) {
+  const h = hits[year];
+  const counts = new Map();
+  h.posts.forEach(p => {
+    const c = (p['Channel'] || '').trim();
+    if (c) counts.set(c, (counts.get(c) || 0) + 1);
+  });
+  return [...counts.entries()]
+    .filter(([name]) => !(h.top10 && h.top10.has(name)))
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ru'));
+}
+
+function renderChannelMenu(year) {
+  const h = hits[year];
+  const menu = document.getElementById('channel-menu-' + year);
+  const rest = restChannels(year);
+  const reset = h.channel
+    ? `<button class="channel-item reset" data-name=""><span class="ch-name">Все каналы</span><span class="ch-count">📰${h.posts.length}</span></button>`
+    : '';
+  const items = rest.length
+    ? rest.map(([name, n]) => `<button class="channel-item" data-name="${escAttr(name)}" data-count="${n}">
+        <span class="ch-name">${escAttr(name)}</span><span class="ch-count">📰${n}</span></button>`).join('')
+    : '<div class="channel-empty">Остальных каналов нет — все в топ-10</div>';
+  menu.innerHTML = reset + items;
+  menu.onclick = e => {
+    const btn = e.target.closest('.channel-item');
+    if (!btn) return;
+    filterByChannel(year, btn.dataset.name || null, btn.dataset.count);
+    closeChannelMenus();
+  };
+}
+
+function closeChannelMenus() {
+  HITS_YEARS.forEach(y => {
+    const m = document.getElementById('channel-menu-' + y);
+    if (m) m.hidden = true;
+  });
+}
+
+function toggleChannelMenu(year) {
+  const menu = document.getElementById('channel-menu-' + year);
+  const wasOpen = !menu.hidden;
+  closeChannelMenus();
+  if (wasOpen) return;
+  renderChannelMenu(year);
+  menu.hidden = false;
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.channel-picker')) closeChannelMenus();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeChannelMenus();
+});
 
 function extractThumbSrc(raw) {
   const m = (raw || '').match(/\((data:image\/[^)]+)\)/);
@@ -1401,6 +1485,7 @@ async function loadHits(year) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
     const { photographers, models } = parseHitmakers(text);
+    h.top10 = new Set([...photographers, ...models].map(i => i.name));
     renderHitmakers(year, photographers, 'top10-photographers-' + year);
     renderHitmakers(year, models, 'top10-models-' + year);
     h.posts = parseMarkdownTable(text).map((r, i) => ({ ...r, _place: i + 1 }));
