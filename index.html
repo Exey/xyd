@@ -159,14 +159,6 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 }
 .tab-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
 .tab-btn.active { background: var(--tab-on-bg); border-color: var(--tab-on-line); color: var(--tab-on-fg); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-.tg-btn {
-  background: rgba(255,255,255,0.10);
-  border: 1.5px solid rgba(255,255,255,0.45);
-  color: #fff;
-  padding: 7px 14px; border-radius: 6px; text-decoration: none;
-  font-size: 12px; font-weight: 700; transition: all .15s;
-}
-.tg-btn:hover { background: rgba(255,255,255,0.22); }
 
 .tab-content { display: none; }
 .tab-content.active { display: block; }
@@ -525,6 +517,12 @@ footer .add-ph-btn { margin-left: 0; }
   border-radius: 5px; cursor: pointer; transition: all .15s; white-space: nowrap;
 }
 .design-btn:hover { border-color: var(--rose); color: var(--rose); }
+.tg-btn {
+  background: transparent; border: 1.5px solid var(--border); color: var(--text);
+  font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 5px;
+  text-decoration: none; white-space: nowrap; transition: all .15s;
+}
+.tg-btn:hover { border-color: var(--rose); color: var(--rose); }
 
 /* ═══ ФОТО-ДИЗАЙН ═══════════════════════════════════════════════════════
    Монохром: чёрный и серый, тонкие линии, журнальная типографика.
@@ -661,11 +659,6 @@ footer .add-ph-btn { margin-left: 0; }
 }
 :where([data-design="photo"]) .tab-btn:hover { background: none; color: #FFFFFF; }
 :where([data-design="photo"]) .tab-btn.active { background: none; color: #FFFFFF; border-bottom-color: #FFFFFF; box-shadow: none; }
-:where([data-design="photo"]) .tg-btn {
-  background: none; border: 1px solid #4A4A4A; border-radius: 0; padding: 7px 14px;
-  font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #C8C8C8;
-}
-:where([data-design="photo"]) .tg-btn:hover { background: #FFFFFF; border-color: #FFFFFF; color: #0B0B0B; }
 
 /* подзаголовки, легенда, кнопки: тонкие линии, прямые углы */
 :where([data-design="photo"]) .shortlist-intro { background: transparent; border-bottom: 1px solid var(--border2); padding: 14px 32px; }
@@ -676,6 +669,7 @@ footer .add-ph-btn { margin-left: 0; }
 :where([data-design="photo"]) .legend-label { font-size: 9.5px; letter-spacing: .2em; }
 :where([data-design="photo"]) .view-toggle-btn,
 :where([data-design="photo"]) .add-ph-btn,
+:where([data-design="photo"]) .tg-btn,
 :where([data-design="photo"]) .design-btn {
   border-width: 1px; border-radius: 0; padding: 7px 16px;
   font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
@@ -761,7 +755,8 @@ footer .add-ph-btn { margin-left: 0; }
 :where([data-design="photo"]) footer { background: transparent; border-top: 1px solid var(--border2); padding: 28px 32px; gap: 18px 32px; }
 :where([data-design="photo"]) footer p { font-size: 10.5px; letter-spacing: .04em; }
 :where([data-design="photo"]) footer a { font-weight: 600; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
-:where([data-design="photo"]) footer a.add-ph-btn { text-decoration: none; }
+:where([data-design="photo"]) footer a.add-ph-btn,
+:where([data-design="photo"]) footer a.tg-btn { text-decoration: none; }
 :where([data-design="photo"]) footer a:hover { color: var(--text); text-decoration-color: var(--text); }
 :where([data-design="photo"]) footer a.add-ph-btn:hover { color: var(--on-ink); }
 
@@ -784,6 +779,104 @@ footer .add-ph-btn { margin-left: 0; }
   .shortlist-intro { padding: 12px; }
   .shortlist-col { padding: 12px; }
 }
+
+/* ═══ ТЕЛЕФОН (≤700px) ═══════════════════════════════════════════════════
+   Страница не должна ездить вбок: шрифты и отступы мельче, шапка — одна строка
+   с прокруткой вкладок, карточки хитов и строки рейтинга складываются столбиком.
+   Внутри своего блока прокручивается только то, что по смыслу широкое (ADS).
+   Идёт после блока фото-дизайна, поэтому перекрывает его на равных. */
+@media (max-width: 700px) {
+  html { -webkit-text-size-adjust: 100%; }
+
+  /* шапка: логотип и полоса вкладок, которую листают пальцем */
+  header { padding: 12px 14px 0; gap: 8px; }
+  .logo { font-size: 20px; }
+  .site-title { display: none; }
+  nav {
+    flex: 1 0 100%; flex-wrap: nowrap; overflow-x: auto; gap: 6px;
+    margin: 0 -14px; padding: 0 14px 12px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: 0 0 auto; white-space: nowrap; padding: 6px 10px; font-size: 11px; }
+  :where([data-design="photo"]) nav { gap: 6px 18px; }
+  :where([data-design="photo"]) .tab-btn { padding: 6px 0; font-size: 10px; letter-spacing: .14em; }
+
+  /* подзаголовки и легенда */
+  .shortlist-intro { padding: 10px 14px; gap: 8px; }
+  .algo-desc { font-size: 12px; }
+  .style-legend-bar { padding: 8px 14px; }
+
+  /* шортлист: таблицы по ширине экрана; если имя длинное — обрезается */
+  .shortlist-col { padding: 12px 10px; overflow-x: auto; }
+  .shortlist-col h3, .hitmakers-card h3 { font-size: 14px; }
+  :where([data-design="photo"]) .shortlist-col h3,
+  :where([data-design="photo"]) .hitmakers-card h3 { font-size: 16px; letter-spacing: .18em; }
+  .rank-table { font-size: 12px; }
+  .rank-table th { padding: 6px 4px; font-size: 9.5px; letter-spacing: .05em; }
+  .rank-table td { padding: 8px 4px; }
+  .rank-num { font-size: 13px; min-width: 18px; }
+  .score-val { font-size: 15px; min-width: 0; }
+  .ph-name { font-size: 12px; max-width: 30vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ph-style-tag, .style-tag { font-size: 9px; padding: 1px 5px; letter-spacing: .06em; }
+  .trend { font-size: 11px; }
+
+  /* хиты: карточка складывается — ряд с местом и каналом, ниже цифры с превью, ниже текст */
+  .hitmakers-wrap { padding: 12px 10px 0; gap: 10px; }
+  .hitmakers-card { padding: 12px 14px; }
+  .hitmakers-list li { font-size: 14px; padding: 6px 2px; }
+  .posts-sort-bar { margin-top: 16px; padding: 4px 10px 12px; }
+  .posts-list { padding: 0 10px; gap: 10px; }
+  .post-item { flex-wrap: wrap; align-items: flex-start; padding: 12px; gap: 8px 12px; }
+  .post-block-identity { flex: 1 1 100%; min-width: 0; }
+  .post-place { font-size: 26px; }
+  .post-channel { font-size: 15px; min-width: 0; }
+  /* цифры — одной полосой: Score | Views | Shares | превью */
+  .post-block-stats {
+    flex: 1 1 100%; grid-template-columns: 1fr 1fr 1fr 56px; grid-template-rows: auto;
+    column-gap: 8px; align-items: start;
+  }
+  .stat-score, .stat-views, .stat-shares { grid-row: 1; justify-self: start; display: flex; flex-direction: column; font-size: 16px; line-height: 1.25; }
+  .stat-score { grid-column: 1; }
+  .stat-views { grid-column: 2; }
+  .stat-shares { grid-column: 3; }
+  .stat-score .stat-label, .stat-views .stat-label, .stat-shares .stat-label {
+    margin: 0 0 1px; font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .post-thumb-cell { grid-column: 4; grid-row: 1; align-self: start; justify-self: end; }
+  .post-thumb { width: 56px; height: 56px; }
+  /* значок «×N + тип медиа» — на углу превью, а не отдельной строкой */
+  .post-media {
+    grid-column: 4; grid-row: 1; align-self: end; justify-self: end; z-index: 1;
+    margin: 0 3px 3px 0; padding: 0 4px; border-radius: 3px;
+    background: rgba(0,0,0,.62); color: #fff; font-size: 11px; line-height: 1.5;
+  }
+  .post-block-text { flex: 1 1 100%; }
+  .post-text { font-size: 13px; }
+
+  /* рейтинг 2025: строка таблицы → карточка (место слева, остальное друг под другом) */
+  .rating-wrap, .criteria-wrap { padding: 16px 14px; }
+  .rating-wrap h2, .criteria-wrap h2 { font-size: 22px; }
+  .rating-table, .rating-table tbody { display: block; }
+  .rating-table thead { display: none; }
+  .rating-table tr { display: grid; grid-template-columns: 44px 1fr; column-gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--border2); }
+  .rating-table td { display: block; grid-column: 2; padding: 0; border: none; }
+  .rating-table td:first-child { grid-column: 1; grid-row: 1 / span 4; }
+  .rating-table tr:hover td { background: none; }
+
+  /* ADS: колонок много по смыслу — таблица листается внутри блока */
+  .ads-wrap { padding: 0 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .ads-table { font-size: 11.5px; }
+  .ads-table th, .ads-table td { padding: 8px 5px; }
+
+  /* критерии */
+  .metric-grid { grid-template-columns: 1fr; }
+  .scale-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+  /* футер */
+  footer { padding: 16px 14px; gap: 14px; }
+  .footer-actions { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -799,7 +892,6 @@ footer .add-ph-btn { margin-left: 0; }
     <button class="tab-btn" data-tab="ads" onclick="showTab('ads')">ADS</button>
     <button class="tab-btn" data-tab="matches" onclick="showTab('matches')" data-i18n>ВП Пары</button>
     <button class="tab-btn" data-tab="criteria" onclick="showTab('criteria')" data-i18n>Критерии</button>
-    <a class="tg-btn" href="https://t.me/XYDpodcast" target="_blank">▶ Telegram</a>
   </nav>
 </header>
 
@@ -990,6 +1082,7 @@ footer .add-ph-btn { margin-left: 0; }
   </div>
   <div class="footer-actions">
     <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener" data-i18n>+ Добавить модель/фотографа</a>
+    <a class="tg-btn" href="https://t.me/XYD_su" target="_blank" rel="noopener">▶ Telegram</a>
     <button class="design-btn" id="design-btn" onclick="toggleDesign()"></button>
   </div>
 </footer>
@@ -2035,7 +2128,11 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btn = document.querySelector(`.tab-btn[data-tab="${name}"]`);
-  if (btn) btn.classList.add('active');
+  if (btn) {
+    btn.classList.add('active');
+    // на телефоне вкладки — прокручиваемая полоса: показываем выбранную
+    btn.scrollIntoView({ block: 'nearest', inline: 'center' });
+  }
 }
 
 // ─── 250 HITS: одинаковая страница для каждого года ───────────────────
