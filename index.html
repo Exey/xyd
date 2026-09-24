@@ -806,7 +806,6 @@ footer .add-ph-btn { margin-left: 0; }
 <div id="tab-shortlist" class="tab-content active">
   <div class="shortlist-intro">
     <button class="view-toggle-btn" id="view-toggle-btn"  data-i18n onclick="toggleShortlistView()">◉ Поджанры облаком</button>
-    <span class="algo-desc" id="algo-desc" data-i18n>Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.</span>
   </div>
 
   <div class="style-legend-bar" id="style-legend-bar"></div>
@@ -984,9 +983,8 @@ footer .add-ph-btn { margin-left: 0; }
 
 <footer>
   <div class="footer-links">
-    <p data-i18n="footer.cc0">CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a></p>
-    <p data-i18n="footer.data">Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a></p>
-    <p data-i18n="footer.stats">Аналитика собрана через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a></p>
+    <p data-i18n="footer.cc0">CC0 — данные свободны для использования</p>
+    <p data-i18n="footer.stats">Объективно собрано через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a></p>
   </div>
   <div class="footer-actions">
     <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener" data-i18n>+ Добавить модель/фотографа</a>
@@ -1098,7 +1096,7 @@ function renderSwitches() {
 function renderDesignBtn() {
   const btn = document.getElementById('design-btn');
   if (!btn) return;
-  btn.textContent = t(isPhoto() ? '◐ Классический дизайн' : '◐ Фото-дизайн');
+  btn.textContent = t(isPhoto() ? '◐ K-pop дизайн' : '◐ Фото-дизайн');
   btn.title = t(isPhoto() ? 'Вернуть прежний дизайн' : 'Монохромный фото-дизайн');
 }
 function toggleDesign() {
@@ -1136,13 +1134,13 @@ function initPrefs() {
       if (themeMode === 'auto') { applyTheme(); renderAll(); }
     });
   }
-  // переключатели — в каждую строку-подзаголовок, слева от описания
+  // переключатели — в каждую строку-подзаголовок, слева от описания (нет описания — в конец строки)
   document.querySelectorAll('.shortlist-intro').forEach(intro => {
     if (intro.querySelector('.ui-switch')) return;
     const box = document.createElement('span');
     box.className = 'ui-switch';
     const desc = intro.querySelector('.algo-desc');
-    intro.insertBefore(box, desc || intro.firstChild);
+    intro.insertBefore(box, desc);
   });
 }
 
@@ -1151,17 +1149,15 @@ function initPrefs() {
 const TR_RU = {
   'hits.desc.2026': 'Топ-250 постов 2026 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.',
   'hits.desc.2025': 'Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.',
-  'footer.cc0': 'CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a>',
-  'footer.data': 'Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a>',
-  'footer.stats': 'Аналитика собрана через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
+  'footer.cc0': 'CC0 — данные свободны для использования',
+  'footer.stats': 'Объективно собрано через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
 };
 
 const TR_EN = {
   'hits.desc.2026': 'Top 250 posts of 2026 by Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Click the channel name, preview or text to open the post in Telegram.',
   'hits.desc.2025': 'Top 250 posts of 2025 by Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Click the channel name, preview or text to open the post in Telegram.',
-  'footer.cc0': 'CC0 — the data is free to use. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Suggest an edit</a>',
-  'footer.data': 'Data: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a>',
-  'footer.stats': 'Analytics collected via <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
+  'footer.cc0': 'CC0 — the data is free to use',
+  'footer.stats': 'Objectively collected via <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
 
   // шапка и вкладки
   'Худсовет — Рейтинг арт-ню фотографов': 'Hudsovet — Art nude photographer ranking',
@@ -1176,11 +1172,10 @@ const TR_EN = {
   '◉ Поджанры облаком': '◉ Subgenre cloud',
   '▤ Поджанры таблицей': '▤ Subgenre table',
   '+ Добавить модель/фотографа': '+ Add model/photographer',
-  '◐ Классический дизайн': '◐ Classic design',
+  '◐ K-pop дизайн': '◐ K-pop design',
   '◐ Фото-дизайн': '◐ Photo design',
   'Вернуть прежний дизайн': 'Switch back to the previous design',
   'Монохромный фото-дизайн': 'Monochrome photo design',
-  'Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.': 'Telegram channel data for H1 2026. Sorted by Rating.',
   'Загрузка folders.md…': 'Loading folders.md…',
   'Загрузка posts2026.md…': 'Loading posts2026.md…',
   'Загрузка posts2025.md…': 'Loading posts2025.md…',
