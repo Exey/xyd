@@ -8,8 +8,16 @@
 <meta property="og:title" content="Худсовет — Рейтинг арт-ню фотографов">
 <meta property="og:description" content="Объективный рейтинг ню-моделей и фотографов: поджанры и продуманная система скоринга навыков фотографа.">
 <meta property="og:type" content="website">
+<script>
+// дизайн выбираем до первой отрисовки, чтобы не мигал другой вид: ?design=classic|photo, иначе сохранённый, иначе photo
+(function () {
+  var d = 'photo';
+  try { d = new URLSearchParams(location.search).get('design') || localStorage.getItem('xyd-design') || d; } catch (e) {}
+  document.documentElement.setAttribute('data-design', d === 'classic' ? 'classic' : 'photo');
+})();
+</script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700;900&display=swap');
 
 :root {
   --rose:          #C4706A;
@@ -39,6 +47,17 @@
   --shadow-sm: rgba(30,21,20,0.06);
   --header-grad: linear-gradient(160deg, #1E1514 0%, #6B3028 55%, #C4706A 85%, #7EA869 100%);
   --accent-grad: linear-gradient(135deg, #C4706A, #FE9CA2, #7EA869);
+  --header-bg:   linear-gradient(-40deg, #1E1514, #5A2A20, #C4706A, #FE9CA2, #C4706A, #7EA869, #1E1514);
+  --header-line: var(--ink);
+  --tab-line:    rgba(255,255,255,0.55);
+  --tab-on-bg:   #FFFFFF;
+  --tab-on-fg:   var(--ink);
+  --tab-on-line: #FFFFFF;
+  --body-image:
+    radial-gradient(ellipse at 0% 100%, #7EA86910 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, #C4706A08 0%, transparent 40%);
+  --font-ui:      'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-display: var(--font-ui);
 }
 
 /* тёмная тема: по настройке ОС, либо принудительно data-theme на <html> */
@@ -47,8 +66,8 @@
     --bg:        #14100F;
     --card:      #1D1817;
     --card2:     #241D1B;
-    --border:    #E3D6CC;
-    --border2:   #392F2C;
+    --border:    #4A3D39;
+    --border2:   #2E2624;
     --text:      #F2E9E2;
     --muted:     #A5928A;
     --ink:       #E3D6CC;
@@ -61,14 +80,23 @@
     --up:        #6FBF55;
     --down:      #E4635C;
     --blue:      #7FAEDC;
+    --header-bg:   linear-gradient(-40deg, #140E0D, #2C1611, #5E3530, #7D504B, #5E3530, #46603C, #140E0D);
+    --header-line: var(--border);
+    --tab-line:    rgba(255,255,255,0.26);
+    --tab-on-bg:   rgba(255,255,255,0.16);
+    --tab-on-fg:   #FFFFFF;
+    --tab-on-line: rgba(255,255,255,0.6);
+    --body-image:
+      radial-gradient(ellipse at 0% 100%, #7EA86908 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 0%, #C4706A06 0%, transparent 40%);
   }
 }
 :root[data-theme="dark"] {
   --bg:        #14100F;
   --card:      #1D1817;
   --card2:     #241D1B;
-  --border:    #E3D6CC;
-  --border2:   #392F2C;
+  --border:    #4A3D39;
+  --border2:   #2E2624;
   --text:      #F2E9E2;
   --muted:     #A5928A;
   --ink:       #E3D6CC;
@@ -81,17 +109,24 @@
   --up:        #6FBF55;
   --down:      #E4635C;
   --blue:      #7FAEDC;
+  --header-bg:   linear-gradient(-40deg, #140E0D, #2C1611, #5E3530, #7D504B, #5E3530, #46603C, #140E0D);
+  --header-line: var(--border);
+  --tab-line:    rgba(255,255,255,0.26);
+  --tab-on-bg:   rgba(255,255,255,0.16);
+  --tab-on-fg:   #FFFFFF;
+  --tab-on-line: rgba(255,255,255,0.6);
+  --body-image:
+    radial-gradient(ellipse at 0% 100%, #7EA86908 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, #C4706A06 0%, transparent 40%);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);
-  background-image:
-    radial-gradient(ellipse at 0% 100%, #7EA86910 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 0%, #C4706A08 0%, transparent 40%);
+  background-image: var(--body-image);
   background-attachment: fixed;
   color: var(--text);
-  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-ui);
   min-height: 100vh;
 }
 
@@ -101,13 +136,13 @@ body {
   100% { background-position: 0% 50%; }
 }
 header {
-  background: linear-gradient(-40deg, #1E1514, #5A2A20, #C4706A, #FE9CA2, #C4706A, #7EA869, #1E1514);
+  background: var(--header-bg);
   background-size: 500% 500%;
   animation: hdr-shift 160s ease infinite;
   padding: 18px 24px;
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
   position: relative; overflow: hidden;
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--header-line);
 }
 .logo {
   font-size: 22px; font-weight: 900; letter-spacing: -.5px; color: #fff;
@@ -117,13 +152,13 @@ header {
 nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .tab-btn {
   background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.55);
+  border: 1.5px solid var(--tab-line);
   color: #fff;
   padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 12px;
   font-weight: 700; letter-spacing: .3px; transition: all .15s;
 }
 .tab-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
-.tab-btn.active { background: #fff; border-color: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.tab-btn.active { background: var(--tab-on-bg); border-color: var(--tab-on-line); color: var(--tab-on-fg); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 .tg-btn {
   background: rgba(255,255,255,0.10);
   border: 1.5px solid rgba(255,255,255,0.45);
@@ -143,6 +178,8 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   padding: 14px 24px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
 }
 .shortlist-intro .algo-desc { font-size: 13px; color: var(--muted); max-width: 700px; }
+.algo-desc a { color: var(--rose); font-weight: 700; text-decoration: none; }
+.algo-desc a:hover { color: var(--ink); }
 .add-ph-btn {
   margin-left: auto; background: transparent; border: 1.5px solid var(--rose);
   color: var(--rose); font-size: 12px; font-weight: 700; padding: 5px 14px;
@@ -173,7 +210,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 
 /* SUBGENRE MAP (ПОДЖАНРЫ ОБЛАКОМ) */
 .view-toggle-btn {
-  background: transparent; border: 1.5px solid var(--ink); color: var(--ink);
+  background: transparent; border: 1.5px solid var(--border); color: var(--ink);
   font-size: 12px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase;
   padding: 5px 14px; border-radius: 5px; cursor: pointer; transition: all .15s; white-space: nowrap;
 }
@@ -478,6 +515,267 @@ footer {
 footer p { font-size: 11px; color: var(--muted); }
 footer a { color: var(--rose); text-decoration: none; font-weight: 700; }
 footer a:hover { color: var(--ink); }
+.footer-links { display: flex; flex-direction: column; gap: 6px; }
+.footer-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+footer .add-ph-btn { margin-left: 0; }
+.design-btn {
+  background: transparent; border: 1.5px solid var(--border); color: var(--text);
+  font: inherit; font-size: 12px; font-weight: 700; padding: 5px 14px;
+  border-radius: 5px; cursor: pointer; transition: all .15s; white-space: nowrap;
+}
+.design-btn:hover { border-color: var(--rose); color: var(--rose); }
+
+/* ═══ ФОТО-ДИЗАЙН ═══════════════════════════════════════════════════════
+   Монохром: чёрный и серый, тонкие линии, журнальная типографика.
+   Включён по умолчанию; кнопка в футере возвращает прежний (classic) вид.
+   Структурные правила — через :where(), чтобы весить столько же, сколько
+   базовые селекторы, и не ломать их :hover / медиазапросы. */
+:root[data-design="photo"] {
+  --font-ui:      'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --rose:         #111111;
+  --rose-light:   #7A7A7A;
+  --olive:        #6E6E6E;
+  --olive-light:  #BDBDBD;
+  --cotton-candy: #9A9A9A;
+  --ink:          #111111;
+  --ink-mid:      #2A2A2A;
+  --blue:         #6E6E6E;
+  --mahogany:     #000000;
+  --bg:       #E6E6E6;
+  --card:     #F4F4F4;
+  --card2:    #ECECEC;
+  --border:   #BDBDBD;
+  --border2:  #D6D6D6;
+  --text:     #141414;
+  --muted:    #6E6E6E;
+  --up:       #141414;
+  --down:     #8A8A8A;
+  --neutral:  #B0B0B0;
+  --on-ink:   #F4F4F4;
+  --row-hover: #00000008;
+  --halo:      #ffffffaa;
+  --shadow:    rgba(0,0,0,0.14);
+  --shadow-sm: rgba(0,0,0,0.05);
+  --radius: 2px;
+  --header-grad: linear-gradient(160deg, #141414, #7A7A7A);
+  --accent-grad: linear-gradient(135deg, #141414, #8A8A8A);
+  --header-bg:   linear-gradient(180deg, #181818, #0B0B0B);
+  --header-line: #0B0B0B;
+  --tab-line:    transparent;
+  --tab-on-bg:   transparent;
+  --tab-on-fg:   #FFFFFF;
+  --tab-on-line: #FFFFFF;
+  --body-image: none;
+  --grain-opacity: .055;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.7 0 0 0 -.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-design="photo"]:not([data-theme="light"]) {
+    --rose:         #FFFFFF;
+    --rose-light:   #8A8A8A;
+    --olive:        #8A8A8A;
+    --olive-light:  #3A3A3A;
+    --cotton-candy: #7A7A7A;
+    --ink:          #E6E6E6;
+    --ink-mid:      #C8C8C8;
+    --blue:         #A6A6A6;
+    --mahogany:     #FFFFFF;
+    --bg:       #0A0A0A;
+    --card:     #111111;
+    --card2:    #161616;
+    --border:   #303030;
+    --border2:  #202020;
+    --text:     #E6E6E6;
+    --muted:    #8A8A8A;
+    --up:       #E6E6E6;
+    --down:     #7D7D7D;
+    --neutral:  #555555;
+    --on-ink:   #0A0A0A;
+    --row-hover: #FFFFFF08;
+    --halo:      #000000aa;
+    --shadow:    rgba(0,0,0,0.6);
+    --shadow-sm: rgba(0,0,0,0.4);
+    --header-grad: linear-gradient(160deg, #FFFFFF, #7A7A7A);
+    --accent-grad: linear-gradient(135deg, #FFFFFF, #7A7A7A);
+    --header-bg:   linear-gradient(180deg, #151515, #0A0A0A);
+    --header-line: #262626;
+    --grain-opacity: .1;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.7 0 0 0 -.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+:root[data-design="photo"][data-theme="dark"] {
+  --rose:         #FFFFFF;
+  --rose-light:   #8A8A8A;
+  --olive:        #8A8A8A;
+  --olive-light:  #3A3A3A;
+  --cotton-candy: #7A7A7A;
+  --ink:          #E6E6E6;
+  --ink-mid:      #C8C8C8;
+  --blue:         #A6A6A6;
+  --mahogany:     #FFFFFF;
+  --bg:       #0A0A0A;
+  --card:     #111111;
+  --card2:    #161616;
+  --border:   #303030;
+  --border2:  #202020;
+  --text:     #E6E6E6;
+  --muted:    #8A8A8A;
+  --up:       #E6E6E6;
+  --down:     #7D7D7D;
+  --neutral:  #555555;
+  --on-ink:   #0A0A0A;
+  --row-hover: #FFFFFF08;
+  --halo:      #000000aa;
+  --shadow:    rgba(0,0,0,0.6);
+  --shadow-sm: rgba(0,0,0,0.4);
+  --header-grad: linear-gradient(160deg, #FFFFFF, #7A7A7A);
+  --accent-grad: linear-gradient(135deg, #FFFFFF, #7A7A7A);
+  --header-bg:   linear-gradient(180deg, #151515, #0A0A0A);
+  --header-line: #262626;
+  --grain-opacity: .1;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.7 0 0 0 -.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* плёночное зерно поверх страницы */
+:root[data-design="photo"] body::before {
+  content: ''; position: fixed; inset: 0; z-index: 1000; pointer-events: none;
+  background-image: var(--grain); opacity: var(--grain-opacity, .1);
+}
+:where([data-design="photo"]) body { -webkit-font-smoothing: antialiased; }
+
+/* шапка: строгая чёрная планка, вкладки — текст с подчёркиванием */
+:where([data-design="photo"]) header { animation: none; background-size: auto; padding: 22px 32px; border-bottom-width: 1px; gap: 18px 28px; }
+:where([data-design="photo"]) .logo {
+  font-family: var(--font-display); font-size: 27px; font-weight: 600;
+  letter-spacing: .3em; text-transform: uppercase; text-shadow: none;
+}
+:where([data-design="photo"]) .site-title {
+  font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: #8C8C8C; white-space: nowrap;
+}
+:where([data-design="photo"]) nav { gap: 8px 20px; }
+:where([data-design="photo"]) .tab-btn {
+  border: none; border-bottom: 1px solid transparent; border-radius: 0; padding: 6px 0;
+  font-size: 10.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #8C8C8C;
+}
+:where([data-design="photo"]) .tab-btn:hover { background: none; color: #FFFFFF; }
+:where([data-design="photo"]) .tab-btn.active { background: none; color: #FFFFFF; border-bottom-color: #FFFFFF; box-shadow: none; }
+:where([data-design="photo"]) .tg-btn {
+  background: none; border: 1px solid #4A4A4A; border-radius: 0; padding: 7px 14px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #C8C8C8;
+}
+:where([data-design="photo"]) .tg-btn:hover { background: #FFFFFF; border-color: #FFFFFF; color: #0B0B0B; }
+
+/* подзаголовки, легенда, кнопки: тонкие линии, прямые углы */
+:where([data-design="photo"]) .shortlist-intro { background: transparent; border-bottom: 1px solid var(--border2); padding: 14px 32px; }
+:where([data-design="photo"]) .style-legend-bar { background: transparent; border-bottom: 1px solid var(--border2); padding: 12px 32px; }
+:where([data-design="photo"]) .algo-desc { font-size: 11px; letter-spacing: .04em; }
+:where([data-design="photo"]) .algo-desc a { color: var(--text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+:where([data-design="photo"]) .algo-desc a:hover { text-decoration-color: var(--text); }
+:where([data-design="photo"]) .legend-label { font-size: 9.5px; letter-spacing: .2em; }
+:where([data-design="photo"]) .view-toggle-btn,
+:where([data-design="photo"]) .add-ph-btn,
+:where([data-design="photo"]) .design-btn {
+  border-width: 1px; border-radius: 0; padding: 7px 16px;
+  font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+}
+:where([data-design="photo"]) .sort-btn,
+:where([data-design="photo"]) .size-btn,
+:where([data-design="photo"]) .ui-btn { border-width: 1px; border-radius: 0; }
+:where([data-design="photo"]) .sort-btn { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; padding: 7px 16px; }
+:where([data-design="photo"]) .ph-style-tag,
+:where([data-design="photo"]) .style-tag {
+  border-width: 1px; border-radius: 0; padding: 3px 8px;
+  font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  background: transparent; border-color: var(--border); color: var(--text);
+}
+:where([data-design="photo"]) .style-tag.clickable.active { background: var(--ink); border-color: var(--ink); color: var(--on-ink); box-shadow: none; }
+:where([data-design="photo"]) .style-tag.clickable:hover { transform: none; border-color: var(--text); }
+
+/* заголовки секций — антиква (цифры прямые: Cormorant по умолчанию рисует «10» как «1o») */
+:where([data-design="photo"]) .shortlist-col h3,
+:where([data-design="photo"]) .hitmakers-card h3,
+:where([data-design="photo"]) .scale-section h3,
+:where([data-design="photo"]) .pairs-title {
+  font-family: var(--font-display); font-size: 19px; font-weight: 600; letter-spacing: .24em; font-feature-settings: 'lnum' 1;
+}
+:where([data-design="photo"]) .pairs-sub { font-family: var(--font-ui); font-size: 10px; letter-spacing: .06em; }
+:where([data-design="photo"]) .shortlist-col + .shortlist-col { border-left: 1px solid var(--border2); }
+:where([data-design="photo"]) .rating-wrap h2,
+:where([data-design="photo"]) .criteria-wrap h2 {
+  font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-feature-settings: 'lnum' 1;
+}
+
+/* таблицы */
+:where([data-design="photo"]) .rank-table th,
+:where([data-design="photo"]) .rating-table th {
+  font-size: 10px; font-weight: 600; letter-spacing: .18em; border-bottom: 1px solid var(--border);
+}
+:where([data-design="photo"]) .rank-table td,
+:where([data-design="photo"]) .rating-table td { border-bottom: 1px solid var(--border2); padding: 11px 10px; }
+:where([data-design="photo"]) .rank-num,
+:where([data-design="photo"]) .pos-num,
+:where([data-design="photo"]) .post-place,
+:where([data-design="photo"]) .scale-score {
+  font-family: var(--font-display); font-weight: 500; font-feature-settings: 'lnum' 1;
+}
+:where([data-design="photo"]) .rank-num { font-size: 21px; }
+:where([data-design="photo"]) .score-val {
+  font-family: var(--font-display); font-size: 23px; font-weight: 600; color: var(--text); font-feature-settings: 'lnum' 1;
+}
+:where([data-design="photo"]) .ph-name { font-size: 13px; font-weight: 500; letter-spacing: .01em; }
+:where([data-design="photo"]) .trend.new { color: var(--text); }
+
+/* карточки: плоские, без теней, тонкий контур */
+:where([data-design="photo"]) .hitmakers-card,
+:where([data-design="photo"]) .post-item,
+:where([data-design="photo"]) .pair-card,
+:where([data-design="photo"]) .metric-card,
+:where([data-design="photo"]) .scale-card,
+:where([data-design="photo"]) .channel-menu { border: 1px solid var(--border2); border-radius: 2px; box-shadow: none; }
+:where([data-design="photo"]) .channel-menu { border-color: var(--border); box-shadow: 0 8px 24px var(--shadow); }
+:where([data-design="photo"]) .post-item:hover { border-color: var(--border); box-shadow: none; transform: none; }
+:where([data-design="photo"]) .pair-card.active { border-color: var(--ink); box-shadow: none; }
+:where([data-design="photo"]) .metric-card:nth-child(even) { border-left-color: var(--border2); }
+:where([data-design="photo"]) .metric-card:hover,
+:where([data-design="photo"]) .scale-card:hover { box-shadow: none; transform: none; border-color: var(--border); }
+:where([data-design="photo"]) .post-place { font-size: 38px; }
+:where([data-design="photo"]) .post-channel { font-size: 15px; font-weight: 600; letter-spacing: .02em; }
+
+/* превью — чёрно-белые, цвет возвращается при наведении */
+:where([data-design="photo"]) .post-thumb {
+  border-radius: 0; border: 1px solid var(--border2);
+  filter: grayscale(1) contrast(1.08); transition: filter .4s ease;
+}
+:where([data-design="photo"]) .post-item:hover .post-thumb { filter: none; }
+
+/* облако поджанров: монохромные круги, пересечения проступают темнее/светлее */
+:where([data-design="photo"]) .gcircle {
+  mix-blend-mode: normal; fill: var(--text); fill-opacity: .07;
+  stroke: var(--text); stroke-opacity: .5; stroke-width: 1;
+}
+:where([data-design="photo"]) .gtitle { font-family: var(--font-display); font-weight: 700; letter-spacing: .18em; font-feature-settings: 'lnum' 1; }
+
+/* футер */
+:where([data-design="photo"]) footer { background: transparent; border-top: 1px solid var(--border2); padding: 28px 32px; gap: 18px 32px; }
+:where([data-design="photo"]) footer p { font-size: 10.5px; letter-spacing: .04em; }
+:where([data-design="photo"]) footer a { font-weight: 600; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+:where([data-design="photo"]) footer a.add-ph-btn { text-decoration: none; }
+:where([data-design="photo"]) footer a:hover { color: var(--text); text-decoration-color: var(--text); }
+:where([data-design="photo"]) footer a.add-ph-btn:hover { color: var(--on-ink); }
+
+@media (max-width: 800px) {
+  :where([data-design="photo"]) .shortlist-col + .shortlist-col { border-left: none; border-top: 1px solid var(--border2); }
+}
+@media (max-width: 700px) {
+  :where([data-design="photo"]) header { padding: 16px 16px; }
+  :where([data-design="photo"]) .site-title { white-space: normal; }
+  :where([data-design="photo"]) .rank-table th,
+  :where([data-design="photo"]) .rating-table th { letter-spacing: .1em; }
+  :where([data-design="photo"]) .style-legend-bar,
+  :where([data-design="photo"]) footer { padding-left: 16px; padding-right: 16px; }
+  :where([data-design="photo"]) .logo { font-size: 22px; }
+}
 
 @media (max-width: 700px) {
   .rank-table th.col-hide-narrow, .rank-table td.col-hide-narrow { display: none; }
@@ -508,7 +806,6 @@ footer a:hover { color: var(--ink); }
 <div id="tab-shortlist" class="tab-content active">
   <div class="shortlist-intro">
     <button class="view-toggle-btn" id="view-toggle-btn"  data-i18n onclick="toggleShortlistView()">◉ Поджанры облаком</button>
-    <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener" data-i18n>+ Добавить модель/фотографа</a>
     <span class="algo-desc" id="algo-desc" data-i18n>Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.</span>
   </div>
 
@@ -686,17 +983,26 @@ footer a:hover { color: var(--ink); }
 </div>
 
 <footer>
-  <p data-i18n="footer.cc0">CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a></p>
-  <p data-i18n="footer.data">Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a></p>
+  <div class="footer-links">
+    <p data-i18n="footer.cc0">CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a></p>
+    <p data-i18n="footer.data">Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a></p>
+    <p data-i18n="footer.stats">Аналитика собрана через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a></p>
+  </div>
+  <div class="footer-actions">
+    <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener" data-i18n>+ Добавить модель/фотографа</a>
+    <button class="design-btn" id="design-btn" onclick="toggleDesign()"></button>
+  </div>
 </footer>
 
 <script>
 // ─── Поджанры ню: цвета для тегов из tags.md (источник правды) ───────
 
 // ─── ТЕМА И ЯЗЫК: по умолчанию из настроек ОС, с ручным переключением ──
-const THEME_KEY = 'xyd-theme', LANG_KEY = 'xyd-lang';
+const THEME_KEY = 'xyd-theme', LANG_KEY = 'xyd-lang', DESIGN_KEY = 'xyd-design';
 const THEME_MODES = ['auto', 'light', 'dark'], LANG_MODES = ['auto', 'ru', 'en'];
 let themeMode = 'auto', langMode = 'auto', LANG = 'ru';
+// дизайн выбирает скрипт в <head> (до отрисовки) — здесь только читаем результат
+let designMode = document.documentElement.getAttribute('data-design') === 'classic' ? 'classic' : 'photo';
 
 function hexMix(hex, target, k) {
   const h = hex.replace('#', '');
@@ -707,11 +1013,23 @@ function hexMix(hex, target, k) {
 }
 const lighten = (hex, k) => hexMix(hex, '#FFFFFF', k);
 
-// в тёмной теме пастельные плашки заменяем на подсвеченные контуры
+const isPhoto = () => designMode === 'photo';
+
+// в тёмной теме пастельные плашки заменяем на подсвеченные контуры;
+// в фото-дизайне поджанры монохромные — вид плашек целиком в CSS
 function chipStyle(meta) {
+  if (isPhoto()) return '';
   return isDark()
     ? `background:${meta.border}26;border-color:${lighten(meta.border, 0.3)};color:${lighten(meta.border, 0.55)}`
     : `background:${meta.bg};border-color:${meta.border};color:${meta.text}`;
+}
+
+// цвет текста и левой линии карточки поджанра
+function tagInk(meta) {
+  return isPhoto() ? 'var(--text)' : isDark() ? lighten(meta.border, 0.45) : meta.text;
+}
+function tagLine(meta) {
+  return isPhoto() ? 'var(--border)' : meta.border;
 }
 
 function systemDark() {
@@ -774,8 +1092,21 @@ function renderSwitches() {
       `<button class="ui-btn" onclick="cycleTheme()" title="${t('Тема: {mode}. Клик — следующая', { mode: t(themeMode === 'auto' ? 'по системе' : themeMode === 'light' ? 'светлая' : 'тёмная') })}">${themeIcon}</button>` +
       `<button class="ui-btn" onclick="cycleLang()" title="${t('Язык: {mode}. Клик — следующий', { mode: langMode === 'auto' ? t('по системе') : LANG.toUpperCase() })}">${langLabel}</button>`;
   });
+  renderDesignBtn();
 }
 
+function renderDesignBtn() {
+  const btn = document.getElementById('design-btn');
+  if (!btn) return;
+  btn.textContent = t(isPhoto() ? '◐ Классический дизайн' : '◐ Фото-дизайн');
+  btn.title = t(isPhoto() ? 'Вернуть прежний дизайн' : 'Монохромный фото-дизайн');
+}
+function toggleDesign() {
+  designMode = isPhoto() ? 'classic' : 'photo';
+  try { localStorage.setItem(DESIGN_KEY, designMode); } catch (e) {}
+  document.documentElement.setAttribute('data-design', designMode);
+  renderAll();
+}
 function cycleTheme() {
   themeMode = THEME_MODES[(THEME_MODES.indexOf(themeMode) + 1) % THEME_MODES.length];
   try { localStorage.setItem(THEME_KEY, themeMode); } catch (e) {}
@@ -822,6 +1153,7 @@ const TR_RU = {
   'hits.desc.2025': 'Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.',
   'footer.cc0': 'CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a>',
   'footer.data': 'Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a>',
+  'footer.stats': 'Аналитика собрана через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
 };
 
 const TR_EN = {
@@ -829,6 +1161,7 @@ const TR_EN = {
   'hits.desc.2025': 'Top 250 posts of 2025 by Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Click the channel name, preview or text to open the post in Telegram.',
   'footer.cc0': 'CC0 — the data is free to use. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Suggest an edit</a>',
   'footer.data': 'Data: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a>',
+  'footer.stats': 'Analytics collected via <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
 
   // шапка и вкладки
   'Худсовет — Рейтинг арт-ню фотографов': 'Hudsovet — Art nude photographer ranking',
@@ -843,6 +1176,10 @@ const TR_EN = {
   '◉ Поджанры облаком': '◉ Subgenre cloud',
   '▤ Поджанры таблицей': '▤ Subgenre table',
   '+ Добавить модель/фотографа': '+ Add model/photographer',
+  '◐ Классический дизайн': '◐ Classic design',
+  '◐ Фото-дизайн': '◐ Photo design',
+  'Вернуть прежний дизайн': 'Switch back to the previous design',
+  'Монохромный фото-дизайн': 'Monochrome photo design',
   'Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.': 'Telegram channel data for H1 2026. Sorted by Rating.',
   'Загрузка folders.md…': 'Loading folders.md…',
   'Загрузка posts2026.md…': 'Loading posts2026.md…',
@@ -1575,7 +1912,7 @@ function genreRowHtml(row, nd, scale) {
   if (row.kind === 'title') {
     const arg = activeTagFilter === nd.tag ? 'null' : `'${nd.tag.replace(/'/g, "\\'")}'`;
     const hint = t('{desc} — Rating {sum} из {total}, фотографов: {n}', { desc: t(nd.meta.desc || ''), sum: nd.sum.toFixed(2), total: nd.total.toFixed(2), n: nd.count });
-    const titleColor = isDark() ? lighten(nd.meta.border, 0.45) : nd.meta.text;
+    const titleColor = tagInk(nd.meta);
     return `<div class="grow" style="${style}"><span class="gtitle" style="color:${titleColor}" title="${hint}" onclick="filterByTag(${arg})">${t(nd.meta.name)}<span class="gsum">${nd.shareLabel} · ${nd.count}</span></span></div>`;
   }
   const m = row.m;
@@ -1690,8 +2027,8 @@ function renderCriteria() {
 
 function renderTagsGrid() {
   document.getElementById('styles-grid').innerHTML = Object.values(allTags).map(v => `
-    <div class="metric-card" style="border-left-color:${v.border}">
-      <div class="metric-num" style="background:none;-webkit-text-fill-color:${isDark() ? lighten(v.border, 0.45) : v.text};color:${isDark() ? lighten(v.border, 0.45) : v.text};font-size:13px">${t(v.name)}</div>
+    <div class="metric-card" style="border-left-color:${tagLine(v)}">
+      <div class="metric-num" style="background:none;-webkit-text-fill-color:${tagInk(v)};color:${tagInk(v)};font-size:13px">${t(v.name)}</div>
       <div class="metric-desc">${v.longTag ? `<em>${v.longTag}</em><br>` : ''}${t(v.desc)}</div>
     </div>
   `).join('');
