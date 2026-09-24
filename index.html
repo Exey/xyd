@@ -32,8 +32,55 @@
   --down:     #B21D17;
   --neutral:  #B5ADAA;
   --radius: 8px;
+  --on-ink:    #FFFFFF;
+  --row-hover: #F5EDEA44;
+  --halo:      #ffffffaa;
+  --shadow:    rgba(30,21,20,0.12);
+  --shadow-sm: rgba(30,21,20,0.06);
   --header-grad: linear-gradient(160deg, #1E1514 0%, #6B3028 55%, #C4706A 85%, #7EA869 100%);
   --accent-grad: linear-gradient(135deg, #C4706A, #FE9CA2, #7EA869);
+}
+
+/* тёмная тема: по настройке ОС, либо принудительно data-theme на <html> */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #14100F;
+    --card:      #1D1817;
+    --card2:     #241D1B;
+    --border:    #E3D6CC;
+    --border2:   #392F2C;
+    --text:      #F2E9E2;
+    --muted:     #A5928A;
+    --ink:       #E3D6CC;
+    --on-ink:    #191312;
+    --rose:      #E09A94;
+    --row-hover: #2A211F66;
+    --halo:      #00000099;
+    --shadow:    rgba(0,0,0,0.55);
+    --shadow-sm: rgba(0,0,0,0.35);
+    --up:        #6FBF55;
+    --down:      #E4635C;
+    --blue:      #7FAEDC;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #14100F;
+  --card:      #1D1817;
+  --card2:     #241D1B;
+  --border:    #E3D6CC;
+  --border2:   #392F2C;
+  --text:      #F2E9E2;
+  --muted:     #A5928A;
+  --ink:       #E3D6CC;
+  --on-ink:    #191312;
+  --rose:      #E09A94;
+  --row-hover: #2A211F66;
+  --halo:      #00000099;
+  --shadow:    rgba(0,0,0,0.55);
+  --shadow-sm: rgba(0,0,0,0.35);
+  --up:        #6FBF55;
+  --down:      #E4635C;
+  --blue:      #7FAEDC;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -101,7 +148,15 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   color: var(--rose); font-size: 12px; font-weight: 700; padding: 5px 14px;
   border-radius: 5px; text-decoration: none; transition: all .15s; white-space: nowrap;
 }
-.add-ph-btn:hover { background: var(--rose); color: #fff; }
+.add-ph-btn:hover { background: var(--rose); color: var(--on-ink); }
+.ui-switch { display: inline-flex; gap: 4px; align-items: center; }
+.ui-btn {
+  background: var(--card); border: 1.5px solid var(--border2); color: var(--text);
+  font: inherit; font-size: 11px; font-weight: 800; line-height: 1;
+  padding: 5px 9px; border-radius: 6px; cursor: pointer; transition: all .12s;
+  min-width: 34px; text-align: center;
+}
+.ui-btn:hover { border-color: var(--rose); color: var(--rose); }
 
 /* SHORTLIST TWO-COLUMN LAYOUT */
 .shortlist-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
@@ -122,13 +177,15 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   font-size: 12px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase;
   padding: 5px 14px; border-radius: 5px; cursor: pointer; transition: all .15s; white-space: nowrap;
 }
-.view-toggle-btn:hover { background: var(--ink); color: #fff; }
-.view-toggle-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.view-toggle-btn:hover { background: var(--ink); color: var(--on-ink); }
+.view-toggle-btn.active { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
 .genre-map-scroll { overflow-x: auto; }
 .genre-map-caption { font-size: 11px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
 .genre-map-inner { position: relative; margin: 0 auto; }
 .genre-map-inner > svg { position: absolute; left: 0; top: 0; display: block; }
 .gcircle { mix-blend-mode: multiply; transition: opacity .15s; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .gcircle { mix-blend-mode: normal; } }
+:root[data-theme="dark"] .gcircle { mix-blend-mode: normal; }
 .gcircle.dim { opacity: .12; }
 .gnode { position: absolute; pointer-events: none; transition: opacity .15s; }
 .gnode.dim { opacity: .16; }
@@ -138,13 +195,13 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 }
 .gtitle {
   font-weight: 900; letter-spacing: .5px; text-transform: uppercase;
-  pointer-events: auto; cursor: pointer; text-shadow: 0 1px 0 #ffffffaa;
+  pointer-events: auto; cursor: pointer; text-shadow: 0 1px 0 var(--halo);
 }
 .gtitle:hover { text-decoration: underline; }
 .gtitle .gsum { font-weight: 700; opacity: .72; margin-left: 7px; letter-spacing: 0; }
 .gname {
   color: var(--ink); font-weight: 700; text-decoration: none;
-  pointer-events: auto; text-shadow: 0 1px 0 #ffffff99;
+  pointer-events: auto; text-shadow: 0 1px 0 var(--halo);
 }
 .gname:hover { color: var(--mahogany); text-decoration: underline; }
 .gname.nolink { pointer-events: none; }
@@ -160,7 +217,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   border-bottom: 2px solid var(--border); white-space: nowrap;
 }
 .rank-table td { padding: 10px 10px; border-bottom: 1px solid var(--border2); vertical-align: middle; }
-.rank-table tr:hover td { background: #F5EDEA44; }
+.rank-table tr:hover td { background: var(--row-hover); }
 .rank-table th.sortable { cursor: pointer; user-select: none; }
 .rank-table th.sortable:hover { color: var(--rose); }
 .rank-table th.sorted { color: var(--text); }
@@ -190,7 +247,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 }
 .style-tag[title]:hover::after {
   content: attr(title); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
-  background: var(--ink); color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 5px;
+  background: var(--ink); color: var(--on-ink); font-size: 10px; padding: 4px 8px; border-radius: 5px;
   white-space: nowrap; z-index: 99; pointer-events: none; font-weight: 400;
 }
 .style-legend-bar {
@@ -211,7 +268,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 }
 .hitmakers-card {
   background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
-  padding: 18px 20px; box-shadow: 0 4px 18px rgba(30,21,20,0.06);
+  padding: 18px 20px; box-shadow: 0 4px 18px var(--shadow-sm);
 }
 .hitmakers-card h3 {
   font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
@@ -242,7 +299,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   position: absolute; top: calc(100% + 6px); left: 0; z-index: 60;
   min-width: 240px; max-height: 320px; overflow-y: auto;
   background: var(--card); border: 1.5px solid var(--border); border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(30,21,20,.16); padding: 4px;
+  box-shadow: 0 8px 24px var(--shadow); padding: 4px;
 }
 .channel-item {
   width: 100%; display: flex; align-items: center; gap: 10px; justify-content: space-between;
@@ -260,16 +317,16 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   cursor: pointer; transition: all .15s;
 }
 .sort-btn:hover { border-color: var(--rose); color: var(--rose); }
-.sort-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.sort-btn.active { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
 
 .posts-list { max-width: 1008px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
 .post-item {
   background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
-  padding: 14px 20px; box-shadow: 0 3px 14px rgba(30,21,20,0.05);
+  padding: 14px 20px; box-shadow: 0 3px 14px var(--shadow-sm);
   transition: box-shadow .15s, transform .15s;
   display: flex; align-items: center; gap: 16px;
 }
-.post-item:hover { box-shadow: 0 8px 24px rgba(30,21,20,0.12); transform: translateY(-1px); }
+.post-item:hover { box-shadow: 0 8px 24px var(--shadow); transform: translateY(-1px); }
 
 .post-block-identity { flex: 0 0 320px; display: flex; align-items: center; gap: 10px; }
 .post-place { font-size: 34px; font-weight: 900; color: var(--muted); line-height: 1; }
@@ -289,7 +346,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .stat-shares { grid-row: 3; }
 .stat-score .stat-label, .stat-views .stat-label, .stat-shares .stat-label { font-weight: 600; color: var(--muted); margin-right: 4px; }
 .post-thumb-cell { grid-column: 2; grid-row: 1 / 3; align-self: center; justify-self: center; }
-.post-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; display: block; border: 1.5px solid var(--border); }
+.post-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; display: block; border: 1.5px solid var(--border); background: var(--card2); }
 
 .post-block-text { flex: 0 0 408px; }
 .post-text {
@@ -342,7 +399,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   cursor: pointer; white-space: nowrap; transition: all .12s;
 }
 .size-btn:hover { border-color: var(--rose); color: var(--rose); }
-.size-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.size-btn.active { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
 .size-btn .size-count { opacity: .6; margin-left: 3px; font-variant-numeric: tabular-nums; }
 .pairs-sub { font-size: 10px; font-weight: 600; letter-spacing: .4px; color: var(--muted); text-transform: none; }
 .pairs-list { display: flex; flex-direction: column; gap: 6px; }
@@ -352,7 +409,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   transition: border-color .12s, box-shadow .12s, transform .12s;
 }
 .pair-card:hover { border-color: var(--rose); transform: translateX(1px); }
-.pair-card.active { border-color: var(--ink); box-shadow: 0 3px 12px rgba(30,21,20,.12); }
+.pair-card.active { border-color: var(--ink); box-shadow: 0 3px 12px var(--shadow); }
 .pair-card.partner { cursor: default; }
 .pair-card.partner:hover { transform: none; }
 .pc-rank { font-size: 12px; font-weight: 900; color: var(--muted); min-width: 20px; }
@@ -378,7 +435,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .rating-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .rating-table th { text-align: left; padding: 8px 10px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; border-bottom: 2px solid var(--border); }
 .rating-table td { padding: 10px 10px; border-bottom: 1px solid var(--border2); vertical-align: top; }
-.rating-table tr:hover td { background: #F5EDEA44; }
+.rating-table tr:hover td { background: var(--row-hover); }
 .pos-num { font-size: 18px; font-weight: 900; color: var(--muted); }
 .pos-star { font-size: 14px; color: var(--rose); margin-left: 2px; }
 .r-name { font-weight: 800; font-size: 14px; color: var(--text); }
@@ -434,15 +491,15 @@ footer a:hover { color: var(--ink); }
 
 <header>
   <div class="logo">Худсовет</div>
-  <div class="site-title">Рейтинг арт-ню фотографов</div>
+  <div class="site-title" data-i18n>Рейтинг арт-ню фотографов</div>
   <nav>
     <button class="tab-btn active" data-tab="shortlist" onclick="showTab('shortlist')">SHORTLIST 2026</button>
     <button class="tab-btn" data-tab="hits2026" onclick="showTab('hits2026')">250 HITS 2026</button>
     <button class="tab-btn" data-tab="hits2025" onclick="showTab('hits2025')">250 HITS 2025</button>
     <button class="tab-btn" data-tab="rating" onclick="showTab('rating')">RATING 2025</button>
     <button class="tab-btn" data-tab="ads" onclick="showTab('ads')">ADS</button>
-    <button class="tab-btn" data-tab="matches" onclick="showTab('matches')">ВП Пары</button>
-    <button class="tab-btn" data-tab="criteria" onclick="showTab('criteria')">Критерии</button>
+    <button class="tab-btn" data-tab="matches" onclick="showTab('matches')" data-i18n>ВП Пары</button>
+    <button class="tab-btn" data-tab="criteria" onclick="showTab('criteria')" data-i18n>Критерии</button>
     <a class="tg-btn" href="https://t.me/XYDpodcast" target="_blank">▶ Telegram</a>
   </nav>
 </header>
@@ -450,25 +507,25 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ SHORTLIST 2026 ══════════════════ -->
 <div id="tab-shortlist" class="tab-content active">
   <div class="shortlist-intro">
-    <button class="view-toggle-btn" id="view-toggle-btn" onclick="toggleShortlistView()">◉ Поджанры облаком</button>
-    <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener">+ Добавить модель/фотографа</a>
-    <span class="algo-desc" id="algo-desc">Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.</span>
+    <button class="view-toggle-btn" id="view-toggle-btn"  data-i18n onclick="toggleShortlistView()">◉ Поджанры облаком</button>
+    <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener" data-i18n>+ Добавить модель/фотографа</a>
+    <span class="algo-desc" id="algo-desc" data-i18n>Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.</span>
   </div>
 
   <div class="style-legend-bar" id="style-legend-bar"></div>
 
   <div class="table-wrap">
-    <div class="loading" id="loading">Загрузка folders.md…</div>
+    <div class="loading" id="loading" data-i18n>Загрузка folders.md…</div>
     <div class="shortlist-cols" id="shortlist-cols" style="display:none">
       <div class="shortlist-col">
-        <h3>Фотографы</h3>
+        <h3 data-i18n>Фотографы</h3>
         <table class="rank-table" id="ph-table">
           <thead><tr id="ph-head"></tr></thead>
           <tbody id="ph-body"></tbody>
         </table>
       </div>
       <div class="shortlist-col">
-        <h3>Модели</h3>
+        <h3 data-i18n>Модели</h3>
         <table class="rank-table" id="model-table">
           <thead><tr id="model-head"></tr></thead>
           <tbody id="model-body"></tbody>
@@ -487,16 +544,16 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ 250 HITS 2026 ══════════════════ -->
 <div id="tab-hits2026" class="tab-content">
   <div class="shortlist-intro">
-    <span class="algo-desc">Топ-250 постов 2026 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
+    <span class="algo-desc" data-i18n="hits.desc.2026">Топ-250 постов 2026 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
   </div>
 
   <div class="hitmakers-wrap">
     <div class="hitmakers-card">
-      <h3>Топ-10 хитмейкеров-фотографов</h3>
+      <h3 data-i18n>Топ-10 хитмейкеров-фотографов</h3>
       <ol class="hitmakers-list" id="top10-photographers-2026"></ol>
     </div>
     <div class="hitmakers-card">
-      <h3>Топ-10 хитмейкеров-моделей</h3>
+      <h3 data-i18n>Топ-10 хитмейкеров-моделей</h3>
       <ol class="hitmakers-list" id="top10-models-2026"></ol>
     </div>
   </div>
@@ -506,12 +563,12 @@ footer a:hover { color: var(--ink); }
       <span class="style-tag clickable legend-all" id="posts-channel-chip-2026"></span>
       <div class="channel-menu" id="channel-menu-2026" hidden></div>
     </span>
-    <span class="legend-label">Сортировка:</span>
+    <span class="legend-label" data-i18n>Сортировка:</span>
     <div class="posts-sort-btns" id="posts-sort-btns-2026"></div>
   </div>
 
   <div class="table-wrap">
-    <div class="loading" id="posts-loading-2026">Загрузка posts2026.md…</div>
+    <div class="loading" id="posts-loading-2026" data-i18n>Загрузка posts2026.md…</div>
     <div class="posts-list" id="posts-list-2026" style="display:none"></div>
   </div>
 </div>
@@ -519,16 +576,16 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ 250 HITS 2025 ══════════════════ -->
 <div id="tab-hits2025" class="tab-content">
   <div class="shortlist-intro">
-    <span class="algo-desc">Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
+    <span class="algo-desc" data-i18n="hits.desc.2025">Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
   </div>
 
   <div class="hitmakers-wrap">
     <div class="hitmakers-card">
-      <h3>Топ-10 хитмейкеров-фотографов</h3>
+      <h3 data-i18n>Топ-10 хитмейкеров-фотографов</h3>
       <ol class="hitmakers-list" id="top10-photographers-2025"></ol>
     </div>
     <div class="hitmakers-card">
-      <h3>Топ-10 хитмейкеров-моделей</h3>
+      <h3 data-i18n>Топ-10 хитмейкеров-моделей</h3>
       <ol class="hitmakers-list" id="top10-models-2025"></ol>
     </div>
   </div>
@@ -538,12 +595,12 @@ footer a:hover { color: var(--ink); }
       <span class="style-tag clickable legend-all" id="posts-channel-chip-2025"></span>
       <div class="channel-menu" id="channel-menu-2025" hidden></div>
     </span>
-    <span class="legend-label">Сортировка:</span>
+    <span class="legend-label" data-i18n>Сортировка:</span>
     <div class="posts-sort-btns" id="posts-sort-btns-2025"></div>
   </div>
 
   <div class="table-wrap">
-    <div class="loading" id="posts-loading-2025">Загрузка posts2025.md…</div>
+    <div class="loading" id="posts-loading-2025" data-i18n>Загрузка posts2025.md…</div>
     <div class="posts-list" id="posts-list-2025" style="display:none"></div>
   </div>
 </div>
@@ -552,15 +609,15 @@ footer a:hover { color: var(--ink); }
 <div id="tab-rating" class="tab-content">
   <div class="rating-wrap">
     <h2>RATING 2025</h2>
-    <p class="subtitle">Итоговый рейтинг по 10 метрикам. ★ — вошёл в топ по совокупности критериев.</p>
+    <p class="subtitle" data-i18n>Итоговый рейтинг по 10 метрикам. ★ — вошёл в топ по совокупности критериев.</p>
     <table class="rating-table" id="rating-table">
       <thead>
         <tr>
-          <th style="width:60px">Место</th>
-          <th>Имя</th>
-          <th>Стиль / сильные стороны</th>
-          <th>Платформы</th>
-          <th>Ограничения</th>
+          <th style="width:60px" data-i18n>Место</th>
+          <th data-i18n>Имя</th>
+          <th data-i18n>Стиль / сильные стороны</th>
+          <th data-i18n>Платформы</th>
+          <th data-i18n>Ограничения</th>
         </tr>
       </thead>
       <tbody id="rating-body"></tbody>
@@ -571,11 +628,11 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ ADS ══════════════════ -->
 <div id="tab-ads" class="tab-content">
   <div class="shortlist-intro">
-    <span class="algo-desc" id="ads-desc">Прайс взаимного пиара и оценка каналов по данным mutual_pr.md.</span>
+    <span class="algo-desc" id="ads-desc" data-i18n>Прайс взаимного пиара и оценка каналов по данным mutual_pr.md.</span>
   </div>
 
   <div class="table-wrap">
-    <div class="loading" id="ads-loading">Загрузка mutual_pr.md…</div>
+    <div class="loading" id="ads-loading" data-i18n>Загрузка mutual_pr.md…</div>
     <div class="ads-wrap" id="ads-wrap" style="display:none">
       <table class="rank-table ads-table" id="ads-table">
         <thead id="ads-head"></thead>
@@ -588,22 +645,22 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ ВП ПАРЫ ══════════════════ -->
 <div id="tab-matches" class="tab-content">
   <div class="shortlist-intro">
-    <span class="algo-desc" id="matches-desc">Пары взаимного пиара из mutual_pr.md.</span>
+    <span class="algo-desc" id="matches-desc" data-i18n>Пары взаимного пиара из mutual_pr.md.</span>
   </div>
 
   <div class="table-wrap">
-    <div class="loading" id="matches-loading">Загрузка mutual_pr.md…</div>
+    <div class="loading" id="matches-loading" data-i18n>Загрузка mutual_pr.md…</div>
     <div class="pairs-board" id="pairs-board" style="display:none">
       <svg class="pairs-arrows" id="pairs-arrows"></svg>
       <div class="pairs-col">
         <div class="pairs-head">
-          <h3 class="pairs-title">Лучшие каналы для ВП<span class="pairs-sub">сумма рейтинга по всем парам</span></h3>
+          <h3 class="pairs-title"><span data-i18n>Лучшие каналы для ВП</span><span class="pairs-sub" data-i18n>сумма рейтинга по всем парам</span></h3>
           <div class="pairs-size-filter" id="pairs-size-filter"></div>
         </div>
         <div class="pairs-list" id="pairs-left"></div>
       </div>
       <div class="pairs-col pairs-col-right">
-        <h3 class="pairs-title" id="pairs-right-title">Лучшие пары</h3>
+        <h3 class="pairs-title" id="pairs-right-title" data-i18n>Лучшие пары</h3>
         <div class="pairs-list" id="pairs-right"></div>
       </div>
     </div>
@@ -613,28 +670,384 @@ footer a:hover { color: var(--ink); }
 <!-- ══════════════════ CRITERIA ══════════════════ -->
 <div id="tab-criteria" class="tab-content">
   <div class="criteria-wrap">
-    <h2>Критерии оценки</h2>
-    <p class="criteria-intro">Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.</p>
+    <h2 data-i18n>Критерии оценки</h2>
+    <p class="criteria-intro" data-i18n>Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.</p>
     <div class="metric-grid" id="metrics-grid"></div>
     <div class="scale-section">
-      <h3>Шкала уровней</h3>
+      <h3 data-i18n>Шкала уровней</h3>
       <div class="scale-grid" id="scale-grid"></div>
     </div>
     <div class="scale-section">
-      <h3>Поджанры ню</h3>
-      <p class="criteria-intro" style="margin-bottom:14px">Расшифровка поджанров.</p>
+      <h3 data-i18n>Поджанры ню</h3>
+      <p class="criteria-intro" style="margin-bottom:14px" data-i18n>Расшифровка поджанров.</p>
       <div class="metric-grid" id="styles-grid"></div>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a></p>
-  <p>Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a></p>
+  <p data-i18n="footer.cc0">CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a></p>
+  <p data-i18n="footer.data">Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a></p>
 </footer>
 
 <script>
 // ─── Поджанры ню: цвета для тегов из tags.md (источник правды) ───────
+
+// ─── ТЕМА И ЯЗЫК: по умолчанию из настроек ОС, с ручным переключением ──
+const THEME_KEY = 'xyd-theme', LANG_KEY = 'xyd-lang';
+const THEME_MODES = ['auto', 'light', 'dark'], LANG_MODES = ['auto', 'ru', 'en'];
+let themeMode = 'auto', langMode = 'auto', LANG = 'ru';
+
+function hexMix(hex, target, k) {
+  const h = hex.replace('#', '');
+  const full = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+  const t2 = target.replace('#', '');
+  const ch = i => Math.round(parseInt(full.substr(i * 2, 2), 16) * (1 - k) + parseInt(t2.substr(i * 2, 2), 16) * k);
+  return '#' + [0, 1, 2].map(i => ch(i).toString(16).padStart(2, '0')).join('');
+}
+const lighten = (hex, k) => hexMix(hex, '#FFFFFF', k);
+
+// в тёмной теме пастельные плашки заменяем на подсвеченные контуры
+function chipStyle(meta) {
+  return isDark()
+    ? `background:${meta.border}26;border-color:${lighten(meta.border, 0.3)};color:${lighten(meta.border, 0.55)}`
+    : `background:${meta.bg};border-color:${meta.border};color:${meta.text}`;
+}
+
+function systemDark() {
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function systemLang() {
+  const l = (navigator.language || navigator.userLanguage || 'ru').toLowerCase();
+  return l.startsWith('ru') ? 'ru' : 'en';
+}
+function isDark() {
+  return themeMode === 'dark' || (themeMode === 'auto' && systemDark());
+}
+
+function applyTheme() {
+  const root = document.documentElement;
+  if (themeMode === 'auto') root.removeAttribute('data-theme');
+  else root.setAttribute('data-theme', themeMode);
+}
+function applyLang() {
+  LANG = langMode === 'auto' ? systemLang() : langMode;
+  document.documentElement.lang = LANG;
+  if (typeof refreshFormats === 'function') refreshFormats();
+}
+
+// словарь: ключ — исходная русская строка, {x} — подстановка
+function t(ru, vars) {
+  let out = LANG === 'en' ? (TR_EN[ru] !== undefined ? TR_EN[ru] : ru)
+                          : (TR_RU[ru] !== undefined ? TR_RU[ru] : ru);
+  if (vars) Object.keys(vars).forEach(k => { out = out.split('{' + k + '}').join(vars[k]); });
+  return out;
+}
+function plur(n, ruOne, ruFew, ruMany, enOne, enMany) {
+  if (LANG === 'en') return n === 1 ? enOne : enMany;
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return ruOne;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return ruFew;
+  return ruMany;
+}
+function localeTag() { return LANG === 'en' ? 'en-US' : 'ru-RU'; }
+
+// статические надписи: оригинал запоминаем, чтобы переводить при каждом переключении
+function applyStaticI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const explicit = el.getAttribute('data-i18n');
+    if (el.dataset.ruHtml === undefined) el.dataset.ruHtml = explicit || el.innerHTML.trim();
+    el.innerHTML = t(el.dataset.ruHtml);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    if (el.dataset.ruTitle === undefined) el.dataset.ruTitle = el.getAttribute('title') || '';
+    el.setAttribute('title', t(el.dataset.ruTitle));
+  });
+  document.title = t('Худсовет — Рейтинг арт-ню фотографов');
+}
+
+function renderSwitches() {
+  const themeIcon = { auto: '🌓', light: '☀️', dark: '🌙' }[themeMode];
+  const langLabel = langMode === 'auto' ? '🌐 ' + LANG.toUpperCase() : LANG.toUpperCase();
+  document.querySelectorAll('.ui-switch').forEach(box => {
+    box.innerHTML =
+      `<button class="ui-btn" onclick="cycleTheme()" title="${t('Тема: {mode}. Клик — следующая', { mode: t(themeMode === 'auto' ? 'по системе' : themeMode === 'light' ? 'светлая' : 'тёмная') })}">${themeIcon}</button>` +
+      `<button class="ui-btn" onclick="cycleLang()" title="${t('Язык: {mode}. Клик — следующий', { mode: langMode === 'auto' ? t('по системе') : LANG.toUpperCase() })}">${langLabel}</button>`;
+  });
+}
+
+function cycleTheme() {
+  themeMode = THEME_MODES[(THEME_MODES.indexOf(themeMode) + 1) % THEME_MODES.length];
+  try { localStorage.setItem(THEME_KEY, themeMode); } catch (e) {}
+  applyTheme();
+  renderAll();
+}
+function cycleLang() {
+  langMode = LANG_MODES[(LANG_MODES.indexOf(langMode) + 1) % LANG_MODES.length];
+  try { localStorage.setItem(LANG_KEY, langMode); } catch (e) {}
+  applyLang();
+  renderAll();
+}
+
+function initPrefs() {
+  const params = new URLSearchParams(location.search);
+  try {
+    themeMode = params.get('theme') || localStorage.getItem(THEME_KEY) || 'auto';
+    langMode = params.get('lang') || localStorage.getItem(LANG_KEY) || 'auto';
+  } catch (e) {}
+  if (!THEME_MODES.includes(themeMode)) themeMode = 'auto';
+  if (!LANG_MODES.includes(langMode)) langMode = 'auto';
+  applyTheme();
+  applyLang();
+  // следим за настройками ОС, пока переключатели в режиме «авто»
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (themeMode === 'auto') { applyTheme(); renderAll(); }
+    });
+  }
+  // переключатели — в каждую строку-подзаголовок, слева от описания
+  document.querySelectorAll('.shortlist-intro').forEach(intro => {
+    if (intro.querySelector('.ui-switch')) return;
+    const box = document.createElement('span');
+    box.className = 'ui-switch';
+    const desc = intro.querySelector('.algo-desc');
+    intro.insertBefore(box, desc || intro.firstChild);
+  });
+}
+
+
+// ─── Словарь EN. Ключ — русская строка (или id для кусков с разметкой) ──
+const TR_RU = {
+  'hits.desc.2026': 'Топ-250 постов 2026 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.',
+  'hits.desc.2025': 'Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.',
+  'footer.cc0': 'CC0 — данные свободны для использования. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Предложить правку</a>',
+  'footer.data': 'Данные: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a>',
+};
+
+const TR_EN = {
+  'hits.desc.2026': 'Top 250 posts of 2026 by Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Click the channel name, preview or text to open the post in Telegram.',
+  'hits.desc.2025': 'Top 250 posts of 2025 by Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Click the channel name, preview or text to open the post in Telegram.',
+  'footer.cc0': 'CC0 — the data is free to use. <a href="https://github.com/Exey/xyd" target="_blank">GitHub</a> · <a href="https://github.com/Exey/xyd/issues/new" target="_blank">Suggest an edit</a>',
+  'footer.data': 'Data: <a href="folders.md">folders.md</a> · <a href="tags.md">tags.md</a> · <a href="RATING.md">RATING.md</a>',
+
+  // шапка и вкладки
+  'Худсовет — Рейтинг арт-ню фотографов': 'Hudsovet — Art nude photographer ranking',
+  'Рейтинг арт-ню фотографов': 'Art nude photographer ranking',
+  'ВП Пары': 'PR Pairs',
+  'Критерии': 'Criteria',
+  'Тема: {mode}. Клик — следующая': 'Theme: {mode}. Click for the next one',
+  'Язык: {mode}. Клик — следующий': 'Language: {mode}. Click for the next one',
+  'по системе': 'system', 'светлая': 'light', 'тёмная': 'dark',
+
+  // шортлист
+  '◉ Поджанры облаком': '◉ Subgenre cloud',
+  '▤ Поджанры таблицей': '▤ Subgenre table',
+  '+ Добавить модель/фотографа': '+ Add model/photographer',
+  'Данные Telegram-каналов за первую половину 2026 года. Сортировка по Rating.': 'Telegram channel data for H1 2026. Sorted by Rating.',
+  'Загрузка folders.md…': 'Loading folders.md…',
+  'Загрузка posts2026.md…': 'Loading posts2026.md…',
+  'Загрузка posts2025.md…': 'Loading posts2025.md…',
+  'Загрузка mutual_pr.md…': 'Loading mutual_pr.md…',
+  'Ошибка загрузки {f}: {e}': 'Failed to load {f}: {e}',
+  'Ошибка загрузки folders.md: {e}': 'Failed to load folders.md: {e}',
+  'Фотографы': 'Photographers', 'Модели': 'Models',
+  'Поджанр': 'Subgenre', 'Фотограф': 'Photographer', 'Модель': 'Model',
+  'Просмотры': 'Views', 'Вирал': 'Viral', 'Интерес': 'Interest', 'Этика': 'Ethics',
+  'Поджанры ню:': 'Nude subgenres:', 'Все': 'All',
+  '{desc} — фотографов: {n}': '{desc} — photographers: {n}',
+
+  // тренд
+  'Новый в рейтинге': 'New in the ranking',
+  'Было место {a}, стало {b}': 'Was #{a}, now #{b}',
+  'Место не изменилось: {n}': 'Position unchanged: #{n}',
+
+  // этика
+  'Этика — насколько честно канал указывает тех, кого упоминает.': 'Ethics — how honestly the channel credits the people it mentions.',
+  'Все ссылки канала делятся на: честные (ссылка на Telegram-канал упомянутого человека), фейковые (внешняя веб-ссылка на имя — считается один раз на имя), нераспознанные (Telegram-ссылки, ещё не сопоставленные) и промо (самореклама — не учитывается).': 'Every link is bucketed as: fair (a Telegram link to the credited person’s own channel), fake (an external web link on a name — counted once per name), unresolved (Telegram links not yet matched) and promo (self-promotion — excluded).',
+  'Этика = честные / (честные + фейковые) × 100%.': 'Ethics = fair / (fair + fake) × 100%.',
+  'Если имён, упомянутых без ссылки, больше, чем честных ссылок, — результат делится пополам.': 'If names mentioned without any link outnumber the fair links, the result is halved.',
+  'Недостаточно данных: у канала нет ни честных, ни фейковых ссылок для оценки.': 'Not enough data: the channel has neither fair nor fake links to score.',
+
+  // карта поджанров
+  'Крафт': 'Craft', 'Драма': 'Drama', 'Классика': 'Classic', 'Концепт': 'Concept',
+  'Гламур': 'Glamour', 'Кинк': 'Kink', 'Фэшн': 'Fashion',
+  'Тщательно выстроенный ню — ручная режиссура, авторская обработка, часто плёнка': 'Carefully staged nude — hands-on direction, signature retouching, often shot on film',
+  'Драматический свет, брутальная или контрастная эстетика': 'Dramatic light, brutal or high-contrast aesthetics',
+  'Сырая полу/документальная эстетика': 'Raw semi-documentary aesthetics',
+  'Академическая школа, работа с формой, светом и пропорциями тела': 'Academic school: form, light and body proportions',
+  'Концептуальное арт-ню — идея первична, тело как художественный нарратив': 'Conceptual art nude — the idea comes first, the body carries the narrative',
+  'Коммерческая гламурная эстетика, акцент на идеализированной красоте': 'Commercial glamour aesthetics, focused on idealised beauty',
+  'Чувственная эстетика: игра с психологией тела, напряжение': 'Sensual aesthetics: body psychology and tension',
+  'Фэшн-ню с международным стилем, работа с образом и брендом': 'Fashion nude with international styling, image and brand work',
+  'Тёмная эстетика, уличная культура, маскулинная брутальность в ню': 'Dark aesthetics, street culture, masculine brutality',
+  '{desc} — Rating {sum} из {total}, фотографов: {n}': '{desc} — Rating {sum} of {total}, photographers: {n}',
+  'Размер круга — суммарный Rating поджанра (всего {total} по {n} фотографам), число внутри — доля поджанра в общем Rating · количество фотографов. Размер имени — Rating фотографа, имя кликабельно. Пересечение кругов — близость поджанров: пересекаются только пары с совместимостью ≥ {min}%, глубина пересечения уменьшена для читаемости. Клик по названию поджанра — фильтр.':
+    'Circle size — the subgenre’s total Rating ({total} across {n} photographers); the number inside is its share of the overall Rating · photographer count. Name size — the photographer’s Rating; names are clickable. Overlapping circles mean related subgenres: only pairs with ≥ {min}% affinity overlap, and the overlap is shallower than the real figure for readability. Click a subgenre name to filter.',
+
+  // 250 HITS
+  'Топ-10 хитмейкеров-фотографов': 'Top 10 hitmaker photographers',
+  'Топ-10 хитмейкеров-моделей': 'Top 10 hitmaker models',
+  'Сортировка:': 'Sort:',
+  'Показать посты этого канала': 'Show posts from this channel',
+  'ВСЕ КАНАЛЫ': 'ALL CHANNELS', 'Все каналы': 'All channels',
+  'Остальных каналов нет — все в топ-10': 'No other channels — all are in the top 10',
+
+  // RATING 2025
+  'Итоговый рейтинг по 10 метрикам. ★ — вошёл в топ по совокупности критериев.': 'Final ranking across 10 metrics. ★ — top tier by combined criteria.',
+  'Место': 'Place', 'Имя': 'Name', 'Стиль / сильные стороны': 'Style / strengths',
+  'Платформы': 'Platforms', 'Ограничения': 'Limitations',
+
+  // ADS
+  'Прайс взаимного пиара и оценка каналов по данным mutual_pr.md.': 'Cross-promo pricing and channel valuation from mutual_pr.md.',
+  'Канал': 'Channel', 'Неделя': 'Week', 'Месяц': 'Month',
+  '24ч': '24h', '48ч': '48h', '72ч': '72h',
+  'Лучшие дни рекламы': 'Best ad days', 'Оценка стоимости канала': 'Channel value estimate',
+  'Реклама — {n} ₽ за подписчика': 'Ads — {n} ₽ per subscriber',
+  'Модель: +10% к рекламе': 'Model: +10% on ads',
+  'Канал без публичной ссылки': 'Channel without a public link',
+  '{f} подписчиков по прогрессивной шкале = {base} (в среднем {avg} ₽ за подписчика).': '{f} subscribers on the progressive scale = {base} (averaging {avg} ₽ per subscriber).',
+  'Реклама {m}/мес × {months} мес = {total} → поправка ×{mult} (максимум ±{range}%).': 'Ads {m}/mo × {months} mo = {total} → adjustment ×{mult} (capped at ±{range}%).',
+  'Канал меньше {limit} — ещё ×{mult}.': 'Channel below {limit} — a further ×{mult}.',
+  '{n} каналов · {subs} подписчиков · суммарная оценка {val}. ': '{n} channels · {subs} subscribers · total valuation {val}. ',
+
+  // ВП Пары
+  'Пары взаимного пиара из mutual_pr.md.': 'Cross-promo pairs from mutual_pr.md.',
+  'Лучшие каналы для ВП': 'Best channels for cross-promo',
+  'сумма рейтинга по всем парам': 'sum of ratings across all pairs',
+  'Лучшие пары': 'Best pairs',
+  'Выберите канал слева': 'Pick a channel on the left',
+  'для {name} — {n} {word}': 'for {name} — {n} {word}',
+  'пар: {n}': 'pairs: {n}',
+  'в ответ +{n}': 'back +{n}',
+  'рейтинг': 'rating', 'пара': 'pair',
+  'до 3K': 'under 3K',
+  'Нет каналов такого размера': 'No channels of this size',
+  '{pairs} пар · {ch} каналов. Слева — каналы по сумме рейтинга всех своих пар, справа — лучшие партнёры выбранного канала. На стрелке: лучший день для поста и прогноз прироста, который канал даёт партнёру.':
+    '{pairs} pairs · {ch} channels. On the left, channels ranked by the sum of all their pair ratings; on the right, the best partners for the selected channel. On each arrow: the best day to post and the growth forecast this channel delivers to its partner.',
+
+  'В mutual_pr.md нет раздела «Пары ВП».': 'mutual_pr.md has no «Пары ВП» section.',
+  'Ошибка загрузки mutual_pr.md: {e}': 'Failed to load mutual_pr.md: {e}',
+
+
+  "Vogue, Harper's Bazaar, персональные выставки в топ-галереях.": "Vogue, Harper's Bazaar, solo shows at top galleries.",
+
+  // RATING 2025 — стиль / платформы / ограничения
+  'Драматический ню, fashion-нарратив': 'Dramatic nude, fashion narrative',
+  'Символизм, концептуальные проекты': 'Symbolism, conceptual projects',
+  'Драматический свет, брутальная эстетика': 'Dramatic light, brutal aesthetics',
+  'Крафтовый ню, тщательная режиссура кадра': 'Craft nude, meticulously directed frames',
+  'Классический ню, работа с формой': 'Classical nude, work with form',
+  'Экспериментальный, постановочный портрет': 'Experimental, staged portraiture',
+  'Экспериментальный, постановочный ню': 'Experimental, staged nude',
+  'Арт-ню, концептуальная эстетика': 'Art nude, conceptual aesthetics',
+  'Классический художественный ню': 'Classical fine-art nude',
+  'Фэшн-ню, работа с образом': 'Fashion nude, styling and image',
+  'Фэшн-ню, международный стиль': 'Fashion nude, international styling',
+  'Концептуальный digital-art, технологичный ню': 'Conceptual digital art, tech-driven nude',
+  'Художественный ню, классическая школа': 'Fine-art nude, classical school',
+  'Классический ню, активность на площадках': 'Classical nude, active across platforms',
+  'Фэшн-ню, работа с цветом': 'Fashion nude, work with colour',
+  'Экспериментальный, слияние с природой': 'Experimental, merging with nature',
+  'Гламурный ню, коммерческая эстетика': 'Glamour nude, commercial aesthetics',
+  'Интимный арт-ню, деликатная эстетика': 'Intimate art nude, delicate aesthetics',
+  'Арт-ню, живописные композиции': 'Art nude, painterly compositions',
+  'Академизм, психологичный подход': 'Academism, psychological approach',
+  'Академизм, образовательный контент': 'Academism, educational content',
+  'Академизм, работа со светом': 'Academism, work with light',
+  'Экспериментальный, нестандартные ракурсы': 'Experimental, unconventional angles',
+  'Классика, работа с формой и фактурой': 'Classics, work with form and texture',
+  'Гламур, живописный свет, эстетика тела': 'Glamour, painterly light, body aesthetics',
+
+  'Wikipedia, персональный сайт': 'Wikipedia, personal site',
+  'Kulturologia, персональный сайт': 'Kulturologia, personal site',
+  '35photo, YouTube, сайт': '35photo, YouTube, site',
+  'Instagram, Flickr, сайт': 'Instagram, Flickr, site',
+  'YouTube, персональный сайт': 'YouTube, personal site',
+  'Cameralabs, сайт': 'Cameralabs, site',
+  'Beautifulrus, сайт': 'Beautifulrus, site',
+  '35photo, Sammen': '35photo, Sammen',
+
+  'Меньше активности в соцсетях': 'Less active on social media',
+  'Меньше присутствия в соцсетях': 'Smaller social media presence',
+  'Специфическая стилистика': 'Idiosyncratic styling',
+  'Устаревающий стиль 2010-х': 'Ageing 2010s style',
+  'Ограниченное присутствие': 'Limited presence',
+  'Локальная аудитория': 'Local audience',
+  'Нишевость, узкая аудитория': 'Niche, narrow audience',
+  'Меньше массового признания': 'Less mainstream recognition',
+  'Меньше разнообразия площадок': 'Fewer platforms',
+  'Меньше в русскоязычном сегменте': 'Less present in the Russian-language segment',
+  'Сложность стиля для широкой аудитории': 'Style is demanding for a broad audience',
+  'Традиционный подход': 'Traditional approach',
+  'Нет ярко выраженного стиля': 'No pronounced personal style',
+  'Ограниченность одной платформой': 'Limited to a single platform',
+  'Узкая ниша': 'Narrow niche',
+  'Коммерческий уклон': 'Commercial leaning',
+  'Меньше представленности в соцсетях': 'Less represented on social media',
+  'Меньше галерейного признания': 'Less gallery recognition',
+  'Русскоязычная аудитория': 'Russian-speaking audience',
+  'Нишевость стиля': 'Niche style',
+  'Неустоявшийся авторский стиль': 'Personal style not yet settled',
+
+  // Критерии
+  'Критерии оценки': 'Scoring criteria',
+  'Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.': 'Each photographer is scored on 10 metrics (1–10). The final score is a weighted average.',
+  'Шкала уровней': 'Level scale',
+  'Поджанры ню': 'Nude subgenres',
+  'Расшифровка поджанров.': 'Subgenre reference.',
+
+  // METRICS
+  'Узнаваемость авторского стиля': 'Recognisable personal style',
+  'Насколько легко узнать работы без подписи. Уникальность визуального языка.': 'How easily the work is recognised without a credit. Uniqueness of the visual language.',
+  'Техническое мастерство': 'Technical craft',
+  'Свет, композиция, ракурс, резкость, экспозиция.': 'Light, composition, angle, sharpness, exposure.',
+  'Работа с моделью': 'Working with the model',
+  'Эмоциональная выразительность, естественность поз, доверие в кадре.': 'Emotional expression, natural posing, trust on camera.',
+  'Сила и оригинальность концепции': 'Strength and originality of concept',
+  'Глубина и новизна художественного замысла. Наличие авторской идеи.': 'Depth and novelty of the artistic intent. Presence of an authorial idea.',
+  'Внимание к деталям': 'Attention to detail',
+  'Отсутствие визуального «мусора», аккуратность кадра и постобработки.': 'No visual clutter; a clean frame and clean post-processing.',
+  'Качество постобработки': 'Post-processing quality',
+  'Ретушь, колористика, тональность. Техническая сложность, целостность и новаторство в обработке.': 'Retouching, colour, tonality. Technical difficulty, coherence and innovation in the edit.',
+  'Целостные серии / проекты': 'Coherent series / projects',
+  'Умение создавать связные истории, а не только отдельные кадры.': 'The ability to build connected stories, not just single frames.',
+  'Публикации и медиа-присутствие': 'Publications and media presence',
+  'Статьи, интервью, соцсети, узнаваемость в профессиональном сообществе.': 'Articles, interviews, social media, recognition within the professional community.',
+  'Выставки и коллаборации': 'Exhibitions and collaborations',
+  'Галерейные проекты, работа с брендами, международные публикации.': 'Gallery projects, brand work, international publications.',
+  'Репутация и этичность практик': 'Reputation and ethical practice',
+  'Отзывы моделей, соблюдение профессиональных и этических стандартов.': 'Model testimonials, adherence to professional and ethical standards.',
+
+  // SCALE
+  'Начинающий': 'Beginner',
+  'Грубые технические ошибки, отсутствие стиля или серьёзные этические нарушения.': 'Crude technical errors, no style, or serious ethical violations.',
+  'Любитель с амбициями': 'Ambitious amateur',
+  'Базовые ошибки, попытки позиционировать себя как фотографа без понимания визуального языка.': 'Basic mistakes; positions themselves as a photographer without grasping visual language.',
+  'Любитель с системой': 'Systematic amateur',
+  'Появляется стабильность и повторяемость результата, но нет глубины концепции и авторского взгляда.': 'Results become consistent and repeatable, but lack conceptual depth and a personal view.',
+  'Пред-профи': 'Pre-professional',
+  'Огрехи в деталях, неестественные позы, отсутствие целостных серий.': 'Flaws in the details, unnatural posing, no coherent series.',
+  'Пред-профи+': 'Pre-professional+',
+  'Технически грамотен, активно ищет свой стиль, первые удачные серии — но без стабильного почерка.': 'Technically sound, actively searching for a style, first successful series — but no steady signature.',
+  'Профессионал': 'Professional',
+  'Стабильная техника, но нет уникального стиля. Надёжный ремесленник.': 'Consistent technique but no unique style. A dependable craftsman.',
+  'Профессионал+': 'Professional+',
+  'Поиск авторского голоса, первые персональные проекты, стиль формируется.': 'Searching for an authorial voice, first personal projects, a style taking shape.',
+  'Локально признанный': 'Locally recognised',
+  'Узнаваемый стиль, признание в профессиональной нише, высокий техуровень.': 'Recognisable style, respected within the professional niche, high technical level.',
+  'Нарастающее признание': 'Growing recognition',
+  'Выход за локальную нишу: серьёзные авторские проекты, внимание профессионального сообщества.': 'Breaking out of the local niche: serious personal projects, attention from the professional community.',
+  'Высокий уровень': 'High level',
+  'Яркий стиль, заметное медийное присутствие, мастер-классы, мощные серии.': 'Vivid style, notable media presence, masterclasses, powerful series.',
+  'Порог международного': 'International threshold',
+  'Прорыв за пределы страны: зарубежные публикации и выставки.': 'Breaking beyond the country: publications and exhibitions abroad.',
+  'Международно известный': 'Internationally known',
+  'Выдающийся': 'Outstanding',
+  'Сильнейший художественный почерк, новаторские концепции, влияние на индустрию.': 'A powerful artistic signature, innovative concepts, influence on the industry.',
+  'Легендарный': 'Legendary',
+  'Работы — часть визуальной культуры, влияние на поколения (Ньютон, Пенн, Бурден).': 'The work is part of visual culture, influencing generations (Newton, Penn, Bourdin).',
+};
+
 const TAG_COLORS = {
   'Крафт':                { bg: '#F6EEE6', border: '#8B5A2B', text: '#5A3010' },
   'Драма':                { bg: '#EDECEA', border: '#2C2C2C', text: '#1A1A1A' },
@@ -803,7 +1216,7 @@ function tagMetaFor(p) {
 function tagCellHtml(p) {
   const meta = tagMetaFor(p);
   if (!meta) return '';
-  return `<span class="ph-style-tag" title="${meta.desc || ''}" style="background:${meta.bg};border-color:${meta.border};color:${meta.text}">${meta.name}</span>`;
+  return `<span class="ph-style-tag" title="${t(meta.desc || '')}" style="${chipStyle(meta)}">${t(meta.name)}</span>`;
 }
 
 function nameCellHtml(p) {
@@ -851,27 +1264,31 @@ const TREND_NEW_SORT = 1e6;
 
 function trendCellHtml(p) {
   const d = p._trend;
-  if (d == null) return `<span class="trend new" title="Новый в рейтинге"><span class="trend-arrow">✦</span>NEW</span>`;
-  if (d > 0) return `<span class="trend up" title="Было место ${p._place + d}, стало ${p._place}"><span class="trend-arrow">▲</span>+${d}</span>`;
-  if (d < 0) return `<span class="trend down" title="Было место ${p._place + d}, стало ${p._place}"><span class="trend-arrow">▼</span>−${-d}</span>`;
-  return `<span class="trend flat" title="Место не изменилось: ${p._place}">―</span>`;
+  const was = { a: p._place + d, b: p._place };
+  if (d == null) return `<span class="trend new" title="${t('Новый в рейтинге')}"><span class="trend-arrow">✦</span>NEW</span>`;
+  if (d > 0) return `<span class="trend up" title="${t('Было место {a}, стало {b}', was)}"><span class="trend-arrow">▲</span>+${d}</span>`;
+  if (d < 0) return `<span class="trend down" title="${t('Было место {a}, стало {b}', was)}"><span class="trend-arrow">▼</span>−${-d}</span>`;
+  return `<span class="trend flat" title="${t('Место не изменилось: {n}', { n: p._place })}">―</span>`;
 }
 
-const ETHICS_HINT =
-  'Этика — насколько честно канал указывает тех, кого упоминает.\n' +
-  'Все ссылки канала делятся на: честные (ссылка на Telegram-канал упомянутого человека), ' +
-  'фейковые (внешняя веб-ссылка на имя — считается один раз на имя), ' +
-  'нераспознанные (Telegram-ссылки, ещё не сопоставленные) и промо (самореклама — не учитывается).\n' +
-  'Этика = честные / (честные + фейковые) × 100%.\n' +
-  'Если имён, упомянутых без ссылки, больше, чем честных ссылок, — результат делится пополам.';
-const ETHICS_NO_DATA_HINT = 'Недостаточно данных: у канала нет ни честных, ни фейковых ссылок для оценки.\n\n' + ETHICS_HINT;
+function ethicsHint() {
+  return [
+    t('Этика — насколько честно канал указывает тех, кого упоминает.'),
+    t('Все ссылки канала делятся на: честные (ссылка на Telegram-канал упомянутого человека), фейковые (внешняя веб-ссылка на имя — считается один раз на имя), нераспознанные (Telegram-ссылки, ещё не сопоставленные) и промо (самореклама — не учитывается).'),
+    t('Этика = честные / (честные + фейковые) × 100%.'),
+    t('Если имён, упомянутых без ссылки, больше, чем честных ссылок, — результат делится пополам.'),
+  ].join('\n');
+}
+function ethicsNoDataHint() {
+  return t('Недостаточно данных: у канала нет ни честных, ни фейковых ссылок для оценки.') + '\n\n' + ethicsHint();
+}
 
 const ETHICS_EMPTY = /^(|[—–-]+|n\/?a|no ?data|нет данных)$/i;
 
 function ethicsCellHtml(p) {
   const v = (p['Ethics'] || '').trim();
-  if (ETHICS_EMPTY.test(v)) return `<span class="ethics-val no-data" title="${ETHICS_NO_DATA_HINT}">no data</span>`;
-  return `<span class="ethics-val" title="${ETHICS_HINT}">${v}</span>`;
+  if (ETHICS_EMPTY.test(v)) return `<span class="ethics-val no-data" title="${ethicsNoDataHint()}">no data</span>`;
+  return `<span class="ethics-val" title="${ethicsHint()}">${v}</span>`;
 }
 
 const PH_COLUMNS = [
@@ -883,7 +1300,7 @@ const PH_COLUMNS = [
   { key: 'views',     label: 'Просмотры',  sortVal: p => parseNumeric(p['Views']) ?? -1, cell: p => p['Views'] || '—', hideNarrow: true },
   { key: 'viral',     label: 'Вирал',      sortVal: p => parseNumeric(p['Viral share']) ?? -1, cell: p => p['Viral share'] || '—', hideNarrow: true },
   { key: 'interest',  label: 'Интерес',    sortVal: p => parseNumeric(p['Post Quality']) ?? -1, cell: p => p['Post Quality'] || '—', hideNarrow: true },
-  { key: 'ethics',    label: 'Этика',      sortVal: p => parseNumeric(p['Ethics']) ?? -1, cell: ethicsCellHtml, hint: ETHICS_HINT, hideNarrow: true },
+  { key: 'ethics',    label: 'Этика',      sortVal: p => parseNumeric(p['Ethics']) ?? -1, cell: ethicsCellHtml, hint: ethicsHint, hideNarrow: true },
 ];
 // этика считается только для фотографов
 const MODEL_COLUMNS = PH_COLUMNS.filter(c => c.key !== 'tag' && c.key !== 'ethics').map(c => c.key === 'name' ? { ...c, label: 'Модель' } : c);
@@ -926,12 +1343,12 @@ function renderLegend() {
   const tagsHtml = Object.values(allTags).map(v => {
     const active = activeTagFilter === v.name ? ' active' : '';
     const n = counts[v.name] || 0;
-    const title = `${v.desc}${n ? ` — фотографов: ${n}` : ''}`;
-    return `<span class="style-tag clickable${active}" title="${title}" style="background:${v.bg};border-color:${v.border};color:${v.text}" onclick="filterByTag('${v.name.replace(/'/g, "\\'")}')">${v.name}<span class="tag-count">${n}</span></span>`;
+    const title = n ? t('{desc} — фотографов: {n}', { desc: t(v.desc), n }) : t(v.desc);
+    return `<span class="style-tag clickable${active}" title="${title}" style="${chipStyle(v)}" onclick="filterByTag('${v.name.replace(/'/g, "\\'")}')">${t(v.name)}<span class="tag-count">${n}</span></span>`;
   }).join('');
   const allActive = activeTagFilter === null ? ' active' : '';
   const total = allPhotographers.length;
-  bar.innerHTML = `<span class="legend-label">Поджанры ню:</span>${tagsHtml}<span class="style-tag clickable legend-all${allActive}" onclick="filterByTag(null)">Все<span class="tag-count">${total}</span></span>`;
+  bar.innerHTML = `<span class="legend-label">${t('Поджанры ню:')}</span>${tagsHtml}<span class="style-tag clickable legend-all${allActive}" onclick="filterByTag(null)">${t('Все')}<span class="tag-count">${total}</span></span>`;
 }
 
 function renderHead(rowId, columns, sortState) {
@@ -940,8 +1357,9 @@ function renderHead(rowId, columns, sortState) {
     const isSorted = sortState.key === c.key;
     const arrow = isSorted ? (sortState.dir === 'desc' ? ' ▼' : ' ▲') : '';
     const cls = ['sortable', c.hideNarrow ? 'col-hide-narrow' : '', isSorted ? 'sorted' : ''].filter(Boolean).join(' ');
-    const hint = c.hint ? ` title="${c.hint}"` : '';
-    return `<th class="${cls}"${hint} onclick="sortTable('${rowId === 'ph-head' ? 'ph' : 'model'}','${c.key}')">${c.label}${arrow}</th>`;
+    const hintText = typeof c.hint === 'function' ? c.hint() : c.hint;
+    const hint = hintText ? ` title="${hintText}"` : '';
+    return `<th class="${cls}"${hint} onclick="sortTable('${rowId === 'ph-head' ? 'ph' : 'model'}','${c.key}')">${t(c.label)}${arrow}</th>`;
   }).join('');
 }
 
@@ -949,7 +1367,7 @@ function renderRows(data, columns, sortState) {
   const col = columns.find(c => c.key === sortState.key) || columns[0];
   const sorted = [...data].sort((a, b) => {
     const av = col.sortVal(a), bv = col.sortVal(b);
-    const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), 'ru');
+    const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), localeTag());
     return sortState.dir === 'desc' ? -cmp : cmp;
   });
   return sorted.map((p, i) => `<tr>
@@ -1031,7 +1449,7 @@ function rowsFitInCircle(rows, r) {
 
 function prepareGenreNode(nd) {
   const titleFs = Math.min(21, 11 + 5 * Math.sqrt(nd.sum));
-  const titleText = `${nd.meta.name}   ${nd.shareLabel} · ${nd.count}`;
+  const titleText = `${t(nd.meta.name)}   ${nd.shareLabel} · ${nd.count}`;
   const title = { kind: 'title', fs: titleFs, h: titleFs * 1.6, w: measureTextWidth(titleText, titleFs, 900) };
   const names = nd.members.map(m => {
     const fs = 9.5 + 17 * Math.min(m.rating, 0.9);
@@ -1156,8 +1574,9 @@ function genreRowHtml(row, nd, scale) {
   const style = `top:${top.toFixed(1)}px;height:${h.toFixed(1)}px;font-size:${(row.fs * scale).toFixed(1)}px`;
   if (row.kind === 'title') {
     const arg = activeTagFilter === nd.tag ? 'null' : `'${nd.tag.replace(/'/g, "\\'")}'`;
-    const hint = `${nd.meta.desc || ''} — Rating ${nd.sum.toFixed(2)} из ${nd.total.toFixed(2)}, фотографов: ${nd.count}`;
-    return `<div class="grow" style="${style}"><span class="gtitle" style="color:${nd.meta.text}" title="${hint}" onclick="filterByTag(${arg})">${nd.meta.name}<span class="gsum">${nd.shareLabel} · ${nd.count}</span></span></div>`;
+    const hint = t('{desc} — Rating {sum} из {total}, фотографов: {n}', { desc: t(nd.meta.desc || ''), sum: nd.sum.toFixed(2), total: nd.total.toFixed(2), n: nd.count });
+    const titleColor = isDark() ? lighten(nd.meta.border, 0.45) : nd.meta.text;
+    return `<div class="grow" style="${style}"><span class="gtitle" style="color:${titleColor}" title="${hint}" onclick="filterByTag(${arg})">${t(nd.meta.name)}<span class="gsum">${nd.shareLabel} · ${nd.count}</span></span></div>`;
   }
   const m = row.m;
   const inner = m.link
@@ -1198,7 +1617,7 @@ function renderGenreMap() {
 
   const circles = [...nodes].sort((a, b) => b.r - a.r).map(n => {
     const dim = activeTagFilter && activeTagFilter !== n.tag ? ' dim' : '';
-    return `<circle class="gcircle${dim}" cx="${n.sx.toFixed(1)}" cy="${n.sy.toFixed(1)}" r="${(n.r * scale).toFixed(1)}" fill="${n.meta.bg}" fill-opacity="0.78" stroke="${n.meta.border}" stroke-width="1.75" />`;
+    return `<circle class="gcircle${dim}" cx="${n.sx.toFixed(1)}" cy="${n.sy.toFixed(1)}" r="${(n.r * scale).toFixed(1)}" fill="${isDark() ? n.meta.border : n.meta.bg}" fill-opacity="${isDark() ? 0.3 : 0.78}" stroke="${isDark() ? lighten(n.meta.border, 0.3) : n.meta.border}" stroke-width="1.75" />`;
   }).join('');
 
   const labels = nodes.map(n => {
@@ -1213,8 +1632,8 @@ function renderGenreMap() {
   inner.style.height = H.toFixed(0) + 'px';
   inner.innerHTML = `<svg width="${W.toFixed(0)}" height="${H.toFixed(0)}" viewBox="0 0 ${W.toFixed(0)} ${H.toFixed(0)}">${circles}</svg>${labels}`;
 
-  caption.innerHTML = `Размер круга — суммарный Rating поджанра (всего ${total.toFixed(2)} по ${allPhotographers.length} фотографам), число внутри — доля поджанра в общем Rating · количество фотографов.
-    Размер имени — Rating фотографа, имя кликабельно. Пересечение кругов — близость поджанров: пересекаются только пары с совместимостью ≥ ${OVERLAP_MIN}%, глубина пересечения уменьшена для читаемости. Клик по названию поджанра — фильтр.`;
+  caption.innerHTML = t('Размер круга — суммарный Rating поджанра (всего {total} по {n} фотографам), число внутри — доля поджанра в общем Rating · количество фотографов. Размер имени — Rating фотографа, имя кликабельно. Пересечение кругов — близость поджанров: пересекаются только пары с совместимостью ≥ {min}%, глубина пересечения уменьшена для читаемости. Клик по названию поджанра — фильтр.',
+    { total: total.toFixed(2), n: allPhotographers.length, min: OVERLAP_MIN });
 }
 
 function setShortlistView(view) {
@@ -1224,7 +1643,7 @@ function setShortlistView(view) {
   const isMap = view === 'map';
   map.style.display = isMap ? 'block' : 'none';
   btn.classList.toggle('active', isMap);
-  btn.textContent = isMap ? '▤ Поджанры таблицей' : '◉ Поджанры облаком';
+  btn.textContent = isMap ? t('▤ Поджанры таблицей') : t('◉ Поджанры облаком');
   document.getElementById('shortlist-cols').style.display = isMap ? 'none' : 'grid';
   if (isMap) renderGenreMap();
 }
@@ -1245,9 +1664,9 @@ function renderRating() {
     <tr>
       <td><span class="pos-num">${r.pos}</span>${r.star ? '<span class="pos-star">★</span>' : ''}</td>
       <td><span class="r-name">${r.name}</span></td>
-      <td><span class="r-style">${r.style}</span></td>
-      <td><span class="r-platform">${r.platforms}</span></td>
-      <td><span class="r-limit">${r.limits}</span></td>
+      <td><span class="r-style">${t(r.style)}</span></td>
+      <td><span class="r-platform">${t(r.platforms)}</span></td>
+      <td><span class="r-limit">${t(r.limits)}</span></td>
     </tr>
   `).join('');
 }
@@ -1256,15 +1675,15 @@ function renderCriteria() {
   document.getElementById('metrics-grid').innerHTML = METRICS.map(m => `
     <div class="metric-card">
       <div class="metric-num">${m.n}</div>
-      <div class="metric-title">${m.title}</div>
-      <div class="metric-desc">${m.desc}</div>
+      <div class="metric-title">${t(m.title)}</div>
+      <div class="metric-desc">${t(m.desc)}</div>
     </div>
   `).join('');
   document.getElementById('scale-grid').innerHTML = SCALE.map(s => `
     <div class="scale-card">
       <div class="scale-score">${s.score}</div>
-      <div class="scale-label">${s.label}</div>
-      <div class="scale-examples">${s.desc}</div>
+      <div class="scale-label">${t(s.label)}</div>
+      <div class="scale-examples">${t(s.desc)}</div>
     </div>
   `).join('');
 }
@@ -1272,8 +1691,8 @@ function renderCriteria() {
 function renderTagsGrid() {
   document.getElementById('styles-grid').innerHTML = Object.values(allTags).map(v => `
     <div class="metric-card" style="border-left-color:${v.border}">
-      <div class="metric-num" style="background:none;-webkit-text-fill-color:${v.text};color:${v.text};font-size:13px">${v.name}</div>
-      <div class="metric-desc">${v.longTag ? `<em>${v.longTag}</em><br>` : ''}${v.desc}</div>
+      <div class="metric-num" style="background:none;-webkit-text-fill-color:${isDark() ? lighten(v.border, 0.45) : v.text};color:${isDark() ? lighten(v.border, 0.45) : v.text};font-size:13px">${t(v.name)}</div>
+      <div class="metric-desc">${v.longTag ? `<em>${v.longTag}</em><br>` : ''}${t(v.desc)}</div>
     </div>
   `).join('');
 }
@@ -1324,7 +1743,7 @@ function linkifyHandle(name) {
 function renderHitmakers(year, list, containerId) {
   document.getElementById(containerId).innerHTML = list.map(item => {
     const safeName = item.name.replace(/'/g, "\\'");
-    return `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count clickable" title="Показать посты этого канала" onclick="filterByChannel(${year}, '${safeName}', '${item.count}')">📰${item.count}</span><span class="hm-name">${linkifyHandle(item.name)}</span></li>`;
+    return `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count clickable" title="${t('Показать посты этого канала')}" onclick="filterByChannel(${year}, '${safeName}', '${item.count}')">📰${item.count}</span><span class="hm-name">${linkifyHandle(item.name)}</span></li>`;
   }).join('');
 }
 
@@ -1343,7 +1762,7 @@ function renderChannelChip(year) {
     chip.innerHTML = `📰${h.channelCount != null ? h.channelCount : ''} ${h.channel}`;
     chip.classList.add('active');
   } else {
-    chip.textContent = 'ВСЕ КАНАЛЫ';
+    chip.textContent = t('ВСЕ КАНАЛЫ');
     chip.classList.remove('active');
   }
   chip.innerHTML += ' <span class="ch-caret">▾</span>';
@@ -1364,7 +1783,7 @@ function restChannels(year) {
   });
   return [...counts.entries()]
     .filter(([name]) => !(h.top10 && h.top10.has(name)))
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ru'));
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], localeTag()));
 }
 
 function renderChannelMenu(year) {
@@ -1372,12 +1791,12 @@ function renderChannelMenu(year) {
   const menu = document.getElementById('channel-menu-' + year);
   const rest = restChannels(year);
   const reset = h.channel
-    ? `<button class="channel-item reset" data-name=""><span class="ch-name">Все каналы</span><span class="ch-count">📰${h.posts.length}</span></button>`
+    ? `<button class="channel-item reset" data-name=""><span class="ch-name">${t('Все каналы')}</span><span class="ch-count">📰${h.posts.length}</span></button>`
     : '';
   const items = rest.length
     ? rest.map(([name, n]) => `<button class="channel-item" data-name="${escAttr(name)}" data-count="${n}">
         <span class="ch-name">${escAttr(name)}</span><span class="ch-count">📰${n}</span></button>`).join('')
-    : '<div class="channel-empty">Остальных каналов нет — все в топ-10</div>';
+    : `<div class="channel-empty">${t('Остальных каналов нет — все в топ-10')}</div>`;
   menu.innerHTML = reset + items;
   menu.onclick = e => {
     const btn = e.target.closest('.channel-item');
@@ -1498,6 +1917,7 @@ async function loadHits(year) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
     const { photographers, models } = parseHitmakers(text);
+    h.hitmakers = { photographers, models };
     h.top10 = new Set([...photographers, ...models].map(i => i.name));
     renderHitmakers(year, photographers, 'top10-photographers-' + year);
     renderHitmakers(year, models, 'top10-models-' + year);
@@ -1507,7 +1927,7 @@ async function loadHits(year) {
     renderPostsList(year);
     handlePlaceHash();
   } catch (e) {
-    document.getElementById('posts-loading-' + year).textContent = `Ошибка загрузки ${h.file}: ` + e.message;
+    document.getElementById('posts-loading-' + year).textContent = t('Ошибка загрузки {f}: {e}', { f: h.file, e: e.message });
   }
 }
 
@@ -1556,7 +1976,8 @@ function floorTo(v, step) { return Math.floor(v / step) * step; }
 let allAds = [];
 let adsSort = { key: 'value', dir: 'desc' };
 
-const fmtRub = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+let fmtRub = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+function refreshFormats() { fmtRub = new Intl.NumberFormat(localeTag(), { maximumFractionDigits: 0 }); }
 function money(v) { return fmtRub.format(Math.round(v)) + ' ₽'; }
 // mutual_pr.md выгружается то с английскими, то с русскими заголовками
 const ADS_FIELDS = {
@@ -1621,15 +2042,17 @@ function adsNameCell(r) {
   const link = full.startsWith('@') ? `https://t.me/${full.slice(1)}` : (LINK_OVERRIDES[full] || null);
   const inner = link ? `<a href="${link}" target="_blank" rel="noopener">${shown}</a>` : shown;
   return `<span class="ads-name" title="${full}">${inner}</span>` +
-    (link ? '' : ' <span class="private" title="Канал без публичной ссылки">•</span>');
+    (link ? '' : ` <span class="private" title="${t('Канал без публичной ссылки')}">•</span>`);
 }
 
 function adsValueCell(r) {
   const avg = r._f ? r._base / r._f : 0;
   const m = r._adsMult;
-  let hint = `${fmtRub.format(r._f)} подписчиков по прогрессивной шкале = ${money(r._base)} (в среднем ${avg.toFixed(1)} ₽ за подписчика). ` +
-    `Реклама ${money(r._adsMonthly)}/мес × ${VALUE_MONTHS} мес = ${money(r._adsMonthly * VALUE_MONTHS)} → поправка ×${m.toFixed(2)} (максимум ±${VALUE_MULT_RANGE * 100}%).`;
-  if (r._smallMult !== 1) hint += ` Канал меньше ${fmtRub.format(SMALL_CHANNEL_LIMIT)} — ещё ×${r._smallMult.toFixed(2)}.`;
+  let hint = t('{f} подписчиков по прогрессивной шкале = {base} (в среднем {avg} ₽ за подписчика).',
+      { f: fmtRub.format(r._f), base: money(r._base), avg: avg.toFixed(1) }) + ' ' +
+    t('Реклама {m}/мес × {months} мес = {total} → поправка ×{mult} (максимум ±{range}%).',
+      { m: money(r._adsMonthly), months: VALUE_MONTHS, total: money(r._adsMonthly * VALUE_MONTHS), mult: m.toFixed(2), range: VALUE_MULT_RANGE * 100 });
+  if (r._smallMult !== 1) hint += ' ' + t('Канал меньше {limit} — ещё ×{mult}.', { limit: fmtRub.format(SMALL_CHANNEL_LIMIT), mult: r._smallMult.toFixed(2) });
   return `<span class="ads-value" title="${hint}">${money(r._value)}</span>`;
 }
 
@@ -1639,7 +2062,7 @@ const ADS_COLUMNS = [
   ...ADS_PERIODS.map(p => ({
     key: p.key, label: p.label, num: true, hideNarrow: p.hideNarrow,
     sortVal: r => r._price[p.key],
-    cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}"${r._isModel ? ' title="Модель: +10% к рекламе"' : ''}>${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
+    cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}"${r._isModel ? ` title="${t('Модель: +10% к рекламе')}"` : ''}>${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
   })),
   { key: 'best', label: 'Лучшие дни рекламы', sortVal: r => (r._best || '').toLowerCase(),
     cell: r => `<span class="ads-best">${r._best || '—'}</span>` },
@@ -1649,14 +2072,14 @@ const ADS_COLUMNS = [
 function renderAdsHead() {
   const group = `<tr class="ads-group">
     <th colspan="3"></th>
-    <th colspan="${ADS_PERIODS.length}" class="ads-group-cell">Реклама — ${AD_RUB_PER_SUB} ₽ за подписчика</th>
+    <th colspan="${ADS_PERIODS.length}" class="ads-group-cell">${t('Реклама — {n} ₽ за подписчика', { n: AD_RUB_PER_SUB })}</th>
     <th colspan="2"></th>
   </tr>`;
   const head = '<tr><th style="width:32px">#</th>' + ADS_COLUMNS.map(c => {
     const isSorted = adsSort.key === c.key;
     const arrow = isSorted ? (adsSort.dir === 'desc' ? ' ▼' : ' ▲') : '';
     const cls = ['sortable', c.num ? 'num' : '', c.hideNarrow ? 'col-hide-narrow' : '', isSorted ? 'sorted' : ''].filter(Boolean).join(' ');
-    return `<th class="${cls}" onclick="sortTable('ads','${c.key}')">${c.label}${arrow}</th>`;
+    return `<th class="${cls}" onclick="sortTable('ads','${c.key}')">${t(c.label)}${arrow}</th>`;
   }).join('') + '</tr>';
   document.getElementById('ads-head').innerHTML = group + head;
 }
@@ -1666,7 +2089,7 @@ function renderAdsTable() {
   const col = ADS_COLUMNS.find(c => c.key === adsSort.key) || ADS_COLUMNS[0];
   const sorted = [...allAds].sort((a, b) => {
     const av = col.sortVal(a), bv = col.sortVal(b);
-    const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), 'ru');
+    const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), localeTag());
     return adsSort.dir === 'desc' ? -cmp : cmp;
   });
   document.getElementById('ads-body').innerHTML = sorted.map((r, i) => `<tr>
@@ -1680,7 +2103,7 @@ function renderAdsTable() {
   const subs = allAds.reduce((s, r) => s + r._f, 0);
   const val = allAds.reduce((s, r) => s + r._value, 0);
   document.getElementById('ads-desc').innerHTML =
-    `${allAds.length} каналов · ${fmtRub.format(subs)} подписчиков · суммарная оценка ${money(val)}. `;
+    t('{n} каналов · {subs} подписчиков · суммарная оценка {val}. ', { n: allAds.length, subs: fmtRub.format(subs), val: money(val) });
 }
 
 // ─── ВП ПАРЫ: агрегат раздела «Пары ВП» из mutual_pr.md ───────────────
@@ -1763,7 +2186,7 @@ function visiblePairChannels() {
 function renderPairSizeFilter() {
   document.getElementById('pairs-size-filter').innerHTML = PAIR_SIZE_BUCKETS.map(b => {
     const n = pairChannels.filter(c => inSizeBucket(c, b.key)).length;
-    return `<button class="size-btn${b.key === pairSizeFilter ? ' active' : ''}" onclick="setPairSizeFilter('${b.key}')">${b.label}<span class="size-count">${n}</span></button>`;
+    return `<button class="size-btn${b.key === pairSizeFilter ? ' active' : ''}" onclick="setPairSizeFilter('${b.key}')">${t(b.label)}<span class="size-count">${n}</span></button>`;
   }).join('');
 }
 
@@ -1781,7 +2204,7 @@ function renderPairsLeft() {
   renderPairSizeFilter();
   const visible = visiblePairChannels();
   if (!visible.length) {
-    document.getElementById('pairs-left').innerHTML = '<div class="pairs-empty">Нет каналов такого размера</div>';
+    document.getElementById('pairs-left').innerHTML = `<div class="pairs-empty">${t('Нет каналов такого размера')}</div>`;
     return;
   }
   document.getElementById('pairs-left').innerHTML = visible.map((c, i) => `
@@ -1789,9 +2212,9 @@ function renderPairsLeft() {
       <span class="pc-rank">${i + 1}</span>
       <span class="pc-body">
         <span class="pc-name">${pairChannelLink(c, c.name)}</span>
-        <span class="pc-meta">${c.size ? c.size + ' · ' : ''}пар: ${c.partners.length}</span>
+        <span class="pc-meta">${c.size ? c.size + ' · ' : ''}${t('пар: {n}', { n: c.partners.length })}</span>
       </span>
-      <span class="pc-score">${c.sum.toFixed(2)}<span class="pc-score-sub">рейтинг</span></span>
+      <span class="pc-score">${c.sum.toFixed(2)}<span class="pc-score-sub">${t('рейтинг')}</span></span>
     </div>`).join('');
 }
 
@@ -1806,15 +2229,16 @@ function renderPairsRight() {
   const c = pairChannels.find(x => x.name === selectedPair);
   const box = document.getElementById('pairs-right');
   const title = document.getElementById('pairs-right-title');
-  if (!c) { box.innerHTML = '<div class="pairs-empty">Выберите канал слева</div>'; return; }
-  title.innerHTML = `Лучшие пары<span class="pairs-sub">для ${c.name} — ${c.partners.length} ${plural(c.partners.length, 'пара', 'пары', 'пар')}</span>`;
+  if (!c) { box.innerHTML = `<div class="pairs-empty">${t('Выберите канал слева')}</div>`; return; }
+  const word = plur(c.partners.length, 'пара', 'пары', 'пар', 'pair', 'pairs');
+  title.innerHTML = `${t('Лучшие пары')}<span class="pairs-sub">${t('для {name} — {n} {word}', { name: c.name, n: c.partners.length, word })}</span>`;
   box.innerHTML = c.partners.map(p => `
     <div class="pair-card partner">
       <span class="pc-body">
         <span class="pc-name">${pairChannelLink(p.ch, p.ch.name)}</span>
-        <span class="pc-meta">${p.ch.size ? p.ch.size + ' · ' : ''}в ответ +${fmtRub.format(p.gets)}</span>
+        <span class="pc-meta">${p.ch.size ? p.ch.size + ' · ' : ''}${t('в ответ +{n}', { n: fmtRub.format(p.gets) })}</span>
       </span>
-      <span class="pc-score">${p.rating.toFixed(2)}<span class="pc-score-sub">пара</span></span>
+      <span class="pc-score">${p.rating.toFixed(2)}<span class="pc-score-sub">${t('пара')}</span></span>
     </div>`).join('');
 }
 
@@ -1838,7 +2262,8 @@ function drawPairArrows() {
   // цвет от зелёного (лучшая пара) к жёлтому (десятая)
   const arrowColor = (i, n) => {
     const t = n > 1 ? i / (n - 1) : 0;
-    return `hsl(${(122 - t * 76).toFixed(0)}, ${(45 + t * 25).toFixed(0)}%, ${(34 + t * 8).toFixed(0)}%)`;
+    const lift = isDark() ? 18 : 0;
+    return `hsl(${(122 - t * 76).toFixed(0)}, ${(45 + t * 25).toFixed(0)}%, ${(34 + t * 8 + lift).toFixed(0)}%)`;
   };
   const paths = cards.map((el, i) => {
     const p = parts[i];
@@ -1870,7 +2295,7 @@ function selectPairChannel(name) {
 function renderPairs() {
   pairChannels = buildPairChannels(allPairs);
   if (!pairChannels.length) {
-    document.getElementById('matches-loading').textContent = 'В mutual_pr.md нет раздела «Пары ВП».';
+    document.getElementById('matches-loading').textContent = t('В mutual_pr.md нет раздела «Пары ВП».');
     return;
   }
   if (!pairChannels.some(c => c.name === selectedPair)) selectedPair = pairChannels[0].name;
@@ -1879,9 +2304,9 @@ function renderPairs() {
   renderPairsLeft();
   renderPairsRight();
   const totalGain = allPairs.length;
-  document.getElementById('matches-desc').textContent =
-    `${totalGain} пар · ${pairChannels.length} каналов. Слева — каналы по сумме рейтинга всех своих пар, ` +
-    `справа — лучшие партнёры выбранного канала. На стрелке: лучший день для поста и прогноз прироста, который канал даёт партнёру.`;
+  document.getElementById('matches-desc').textContent = t(
+    '{pairs} пар · {ch} каналов. Слева — каналы по сумме рейтинга всех своих пар, справа — лучшие партнёры выбранного канала. На стрелке: лучший день для поста и прогноз прироста, который канал даёт партнёру.',
+    { pairs: totalGain, ch: pairChannels.length });
   requestAnimationFrame(drawPairArrows);
 }
 
@@ -1907,12 +2332,43 @@ async function loadAds() {
     renderAdsTable();
     renderPairs();
   } catch (e) {
-    document.getElementById('ads-loading').textContent = 'Ошибка загрузки mutual_pr.md: ' + e.message;
+    document.getElementById('ads-loading').textContent = t('Ошибка загрузки {f}: {e}', { f: 'mutual_pr.md', e: e.message });
     document.getElementById('matches-loading').textContent = 'Ошибка загрузки mutual_pr.md: ' + e.message;
   }
 }
 
+// перерисовка всего, что уже загружено — после смены темы или языка
+function renderAll() {
+  applyStaticI18n();
+  renderSwitches();
+  renderRating();
+  renderCriteria();
+  renderTagsGrid();
+  renderLegend();
+  const vb = document.getElementById('view-toggle-btn');
+  if (vb) vb.textContent = shortlistView === 'map' ? t('▤ Поджанры таблицей') : t('◉ Поджанры облаком');
+  if (allPhotographers.length) renderShortlistTables();
+  if (shortlistView === 'map') renderGenreMap();
+  HITS_YEARS.forEach(y => {
+    const h = hits[y];
+    if (h.hitmakers) {
+      renderHitmakers(y, h.hitmakers.photographers, 'top10-photographers-' + y);
+      renderHitmakers(y, h.hitmakers.models, 'top10-models-' + y);
+    }
+    if (h.posts.length) renderPostsList(y);
+  });
+  if (allAds.length) renderAdsTable();
+  if (pairChannels.length) {
+    renderPairsLeft();
+    renderPairsRight();
+    requestAnimationFrame(drawPairArrows);
+  }
+}
+
 async function init() {
+  initPrefs();
+  applyStaticI18n();
+  renderSwitches();
   renderRating();
   renderCriteria();
 
@@ -1965,7 +2421,7 @@ async function init() {
       document.fonts.ready.then(() => { if (shortlistView === 'map') renderGenreMap(); });
     }
   } catch (e) {
-    document.getElementById('loading').textContent = 'Ошибка загрузки folders.md: ' + e.message;
+    document.getElementById('loading').textContent = t('Ошибка загрузки {f}: {e}', { f: 'folders.md', e: e.message });
   }
 
   HITS_YEARS.forEach(loadHits);
