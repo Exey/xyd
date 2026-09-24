@@ -496,6 +496,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .metric-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
 .metric-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
 .scale-section { margin-top: 30px; }
+.criteria-wrap h2 + .scale-section { margin-top: 18px; }
 .scale-section h3 { font-size: 16px; font-weight: 800; color: var(--rose); margin-bottom: 12px; }
 .scale-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
 .scale-card {
@@ -967,16 +968,17 @@ footer .add-ph-btn { margin-left: 0; }
 <div id="tab-criteria" class="tab-content">
   <div class="criteria-wrap">
     <h2 data-i18n>Критерии оценки</h2>
-    <p class="criteria-intro" data-i18n>Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.</p>
-    <div class="metric-grid" id="metrics-grid"></div>
+    <div class="scale-section">
+      <h3 data-i18n>Поджанры ню</h3>
+      <div class="metric-grid" id="styles-grid"></div>
+    </div>
     <div class="scale-section">
       <h3 data-i18n>Шкала уровней</h3>
       <div class="scale-grid" id="scale-grid"></div>
     </div>
     <div class="scale-section">
-      <h3 data-i18n>Поджанры ню</h3>
-      <p class="criteria-intro" style="margin-bottom:14px" data-i18n>Расшифровка поджанров.</p>
-      <div class="metric-grid" id="styles-grid"></div>
+      <p class="criteria-intro" data-i18n>Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.</p>
+      <div class="metric-grid" id="metrics-grid"></div>
     </div>
   </div>
 </div>
@@ -1326,7 +1328,6 @@ const TR_EN = {
   'Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.': 'Each photographer is scored on 10 metrics (1–10). The final score is a weighted average.',
   'Шкала уровней': 'Level scale',
   'Поджанры ню': 'Nude subgenres',
-  'Расшифровка поджанров.': 'Subgenre reference.',
 
   // METRICS
   'Узнаваемость авторского стиля': 'Recognisable personal style',
