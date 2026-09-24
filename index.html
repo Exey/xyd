@@ -8,8 +8,10 @@
 <meta property="og:title" content="Худсовет — Рейтинг арт-ню фотографов">
 <meta property="og:description" content="Объективный рейтинг ню-моделей и фотографов: поджанры и продуманная система скоринга навыков фотографа.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#E6E6E6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
 <script>
-// дизайн выбираем до первой отрисовки, чтобы не мигал другой вид: ?design=classic|photo, иначе сохранённый, иначе photo
+// Pick design before first paint to avoid flicker: ?design=classic|photo, else saved, else photo
 (function () {
   var d = 'photo';
   try { d = new URLSearchParams(location.search).get('design') || localStorage.getItem('xyd-design') || d; } catch (e) {}
@@ -20,6 +22,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700;900&display=swap');
 
 :root {
+  color-scheme: light;
   --rose:          #C4706A;
   --rose-light:    #F2B5AE;
   --olive:         #7EA869;
@@ -60,9 +63,10 @@
   --font-display: var(--font-ui);
 }
 
-/* тёмная тема: по настройке ОС, либо принудительно data-theme на <html> */
+/* dark theme: OS preference, or forced via data-theme on <html> */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --bg:        #14100F;
     --card:      #1D1817;
     --card2:     #241D1B;
@@ -92,6 +96,7 @@
   }
 }
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --bg:        #14100F;
   --card:      #1D1817;
   --card2:     #241D1B;
@@ -121,13 +126,17 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); }
 body {
-  background: var(--bg);
-  background-image: var(--body-image);
-  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-ui);
   min-height: 100vh;
+}
+/* Glow layer: fixed, full-screen. iOS Safari ignores background-attachment: fixed, and 100lvh
+   avoids a gap when the Safari toolbar collapses. Sits under content (z-index: -1). */
+body::after {
+  content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh;
+  z-index: -1; pointer-events: none; background-image: var(--body-image);
 }
 
 @keyframes hdr-shift {
@@ -200,7 +209,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
   .shortlist-col + .shortlist-col { border-left: none; border-top: 2px solid var(--border2); }
 }
 
-/* SUBGENRE MAP (ПОДЖАНРЫ ОБЛАКОМ) */
+/* SUBGENRE MAP */
 .view-toggle-btn {
   background: transparent; border: 1.5px solid var(--border); color: var(--ink);
   font-size: 12px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase;
@@ -409,7 +418,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 }
 @media (max-width: 700px) { .ads-wrap { padding: 0 12px; } }
 
-/* ВП ПАРЫ */
+/* MUTUAL PR PAIRS */
 .pairs-board {
   position: relative; display: grid; grid-template-columns: 1fr 220px 1fr;
   gap: 0; padding: 0 24px; align-items: start;
@@ -524,11 +533,9 @@ footer .add-ph-btn { margin-left: 0; }
 }
 .tg-btn:hover { border-color: var(--rose); color: var(--rose); }
 
-/* ═══ ФОТО-ДИЗАЙН ═══════════════════════════════════════════════════════
-   Монохром: чёрный и серый, тонкие линии, журнальная типографика.
-   Включён по умолчанию; кнопка в футере возвращает прежний (classic) вид.
-   Структурные правила — через :where(), чтобы весить столько же, сколько
-   базовые селекторы, и не ломать их :hover / медиазапросы. */
+/* ═══ PHOTO DESIGN ═══
+   Monochrome, thin lines, editorial type. Default; the footer button switches back to classic.
+   Structural rules use :where() to keep base specificity so :hover and media queries still win. */
 :root[data-design="photo"] {
   --font-ui:      'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
   --font-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
@@ -571,6 +578,7 @@ footer .add-ph-btn { margin-left: 0; }
 }
 @media (prefers-color-scheme: dark) {
   :root[data-design="photo"]:not([data-theme="light"]) {
+    color-scheme: dark;
     --rose:         #FFFFFF;
     --rose-light:   #8A8A8A;
     --olive:        #8A8A8A;
@@ -604,6 +612,7 @@ footer .add-ph-btn { margin-left: 0; }
   }
 }
 :root[data-design="photo"][data-theme="dark"] {
+  color-scheme: dark;
   --rose:         #FFFFFF;
   --rose-light:   #8A8A8A;
   --olive:        #8A8A8A;
@@ -636,14 +645,16 @@ footer .add-ph-btn { margin-left: 0; }
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.7 0 0 0 -.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* плёночное зерно поверх страницы */
+/* film grain over the page */
 :root[data-design="photo"] body::before {
-  content: ''; position: fixed; inset: 0; z-index: 1000; pointer-events: none;
+  content: ''; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; pointer-events: none;
+  /* 100vh/100lvh instead of inset:0: on iOS inset:0 leaves a grain-free strip once the Safari toolbar collapses */
+  height: 100vh; height: 100lvh;
   background-image: var(--grain); opacity: var(--grain-opacity, .1);
 }
 :where([data-design="photo"]) body { -webkit-font-smoothing: antialiased; }
 
-/* шапка: строгая чёрная планка, вкладки — текст с подчёркиванием */
+/* header: black bar, tabs as underlined text */
 :where([data-design="photo"]) header { animation: none; background-size: auto; padding: 22px 32px; border-bottom-width: 1px; gap: 18px 28px; }
 :where([data-design="photo"]) .logo {
   font-family: var(--font-display); font-size: 27px; font-weight: 600;
@@ -660,7 +671,7 @@ footer .add-ph-btn { margin-left: 0; }
 :where([data-design="photo"]) .tab-btn:hover { background: none; color: #FFFFFF; }
 :where([data-design="photo"]) .tab-btn.active { background: none; color: #FFFFFF; border-bottom-color: #FFFFFF; box-shadow: none; }
 
-/* подзаголовки, легенда, кнопки: тонкие линии, прямые углы */
+/* subtitles, legend, buttons: thin lines, square corners */
 :where([data-design="photo"]) .shortlist-intro { background: transparent; border-bottom: 1px solid var(--border2); padding: 14px 32px; }
 :where([data-design="photo"]) .style-legend-bar { background: transparent; border-bottom: 1px solid var(--border2); padding: 12px 32px; }
 :where([data-design="photo"]) .algo-desc { font-size: 11px; letter-spacing: .04em; }
@@ -687,7 +698,7 @@ footer .add-ph-btn { margin-left: 0; }
 :where([data-design="photo"]) .style-tag.clickable.active { background: var(--ink); border-color: var(--ink); color: var(--on-ink); box-shadow: none; }
 :where([data-design="photo"]) .style-tag.clickable:hover { transform: none; border-color: var(--text); }
 
-/* заголовки секций — антиква (цифры прямые: Cormorant по умолчанию рисует «10» как «1o») */
+/* section headings: serif (lining digits — Cormorant draws "10" as "1o" by default) */
 :where([data-design="photo"]) .shortlist-col h3,
 :where([data-design="photo"]) .hitmakers-card h3,
 :where([data-design="photo"]) .scale-section h3,
@@ -701,7 +712,7 @@ footer .add-ph-btn { margin-left: 0; }
   font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-feature-settings: 'lnum' 1;
 }
 
-/* таблицы */
+/* tables */
 :where([data-design="photo"]) .rank-table th,
 :where([data-design="photo"]) .rating-table th {
   font-size: 10px; font-weight: 600; letter-spacing: .18em; border-bottom: 1px solid var(--border);
@@ -721,7 +732,7 @@ footer .add-ph-btn { margin-left: 0; }
 :where([data-design="photo"]) .ph-name { font-size: 13px; font-weight: 500; letter-spacing: .01em; }
 :where([data-design="photo"]) .trend.new { color: var(--text); }
 
-/* карточки: плоские, без теней, тонкий контур */
+/* cards: flat, no shadows, thin outline */
 :where([data-design="photo"]) .hitmakers-card,
 :where([data-design="photo"]) .post-item,
 :where([data-design="photo"]) .pair-card,
@@ -737,21 +748,19 @@ footer .add-ph-btn { margin-left: 0; }
 :where([data-design="photo"]) .post-place { font-size: 38px; }
 :where([data-design="photo"]) .post-channel { font-size: 15px; font-weight: 600; letter-spacing: .02em; }
 
-/* превью — чёрно-белые, цвет возвращается при наведении */
+/* thumbnails: full colour */
 :where([data-design="photo"]) .post-thumb {
   border-radius: 0; border: 1px solid var(--border2);
-  filter: grayscale(1) contrast(1.08); transition: filter .4s ease;
 }
-:where([data-design="photo"]) .post-item:hover .post-thumb { filter: none; }
 
-/* облако поджанров: монохромные круги, пересечения проступают темнее/светлее */
+/* subgenre cloud: monochrome circles, overlaps show darker/lighter */
 :where([data-design="photo"]) .gcircle {
   mix-blend-mode: normal; fill: var(--text); fill-opacity: .07;
   stroke: var(--text); stroke-opacity: .5; stroke-width: 1;
 }
 :where([data-design="photo"]) .gtitle { font-family: var(--font-display); font-weight: 700; letter-spacing: .18em; font-feature-settings: 'lnum' 1; }
 
-/* футер */
+/* footer */
 :where([data-design="photo"]) footer { background: transparent; border-top: 1px solid var(--border2); padding: 28px 32px; gap: 18px 32px; }
 :where([data-design="photo"]) footer p { font-size: 10.5px; letter-spacing: .04em; }
 :where([data-design="photo"]) footer a { font-weight: 600; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
@@ -780,10 +789,9 @@ footer .add-ph-btn { margin-left: 0; }
   .shortlist-col { padding: 12px; }
 }
 
-/* ═══ ПЛАНШЕТ И НЕБОЛЬШОЙ НОУТБУК (≤1560px) ═════════════════════════════
-   Две колонки шортлиста при 1440px давали таблицу шире колонки (страница ехала
-   вбок, у «Моделей» обрезались столбцы). Теперь: таблицы плотнее, а если не
-   влезли — листаются внутри своей колонки; ниже 1000px колонки встают друг под друга. */
+/* ═══ TABLET / SMALL LAPTOP (≤1560px) ═══
+   Two shortlist columns overflowed at 1440px: tables get denser and scroll inside their column;
+   below 1000px the columns stack. */
 @media (max-width: 1560px) {
   .shortlist-col { padding: 18px 14px; }
   .rank-table { font-size: 12.5px; }
@@ -792,22 +800,21 @@ footer .add-ph-btn { margin-left: 0; }
   :where([data-design="photo"]) .rank-table th { letter-spacing: .1em; }
   .ph-style-tag { font-size: 9.5px; padding: 2px 6px; }
 }
-/* карточки хитов рассчитаны на 1008px: ниже — текст уходит под цифры */
+/* hit cards are sized for 1008px; below that the text runs under the numbers */
 @media (max-width: 1080px) {
   .post-item { flex-wrap: wrap; }
   .post-block-identity { flex: 1 1 280px; min-width: 0; }
   .post-block-text { flex: 1 1 100%; }
 }
 
-/* ═══ ТЕЛЕФОН (≤700px) ═══════════════════════════════════════════════════
-   Страница не должна ездить вбок: шрифты и отступы мельче, шапка — одна строка
-   с прокруткой вкладок, карточки хитов и строки рейтинга складываются столбиком.
-   Внутри своего блока прокручивается только то, что по смыслу широкое (ADS).
-   Идёт после блока фото-дизайна, поэтому перекрывает его на равных. */
+/* ═══ PHONE (≤700px) ═══
+   No horizontal page scroll: smaller type, one-row header with scrollable tabs, hit cards and
+   rating rows stack. Only inherently wide blocks (ADS) scroll inside themselves.
+   Comes after the photo-design block so it overrides it at equal specificity. */
 @media (max-width: 700px) {
   html { -webkit-text-size-adjust: 100%; }
 
-  /* шапка: логотип и полоса вкладок, которую листают пальцем */
+  /* header: logo and a swipeable tab strip */
   header { padding: 12px 14px 0; gap: 8px; }
   .logo { font-size: 20px; }
   .site-title { display: none; }
@@ -821,12 +828,11 @@ footer .add-ph-btn { margin-left: 0; }
   :where([data-design="photo"]) nav { gap: 6px 18px; }
   :where([data-design="photo"]) .tab-btn { padding: 6px 0; font-size: 10px; letter-spacing: .14em; }
 
-  /* подзаголовки и легенда */
   .shortlist-intro { padding: 10px 14px; gap: 8px; }
   .algo-desc { font-size: 12px; }
   .style-legend-bar { padding: 8px 14px; }
 
-  /* шортлист: таблицы по ширине экрана; если имя длинное — обрезается */
+  /* shortlist: tables fit the screen; long names are truncated */
   .shortlist-col { padding: 12px 10px; overflow-x: auto; }
   .shortlist-col h3, .hitmakers-card h3 { font-size: 14px; }
   :where([data-design="photo"]) .shortlist-col h3,
@@ -840,7 +846,7 @@ footer .add-ph-btn { margin-left: 0; }
   .ph-style-tag, .style-tag { font-size: 9px; padding: 1px 5px; letter-spacing: .06em; }
   .trend { font-size: 11px; }
 
-  /* хиты: карточка складывается — ряд с местом и каналом, ниже цифры с превью, ниже текст */
+  /* hits: card stacks — place+channel row, numbers with thumb, then text */
   .hitmakers-wrap { padding: 12px 10px 0; gap: 10px; }
   .hitmakers-card { padding: 12px 14px; }
   .hitmakers-list li { font-size: 14px; padding: 6px 2px; }
@@ -850,7 +856,7 @@ footer .add-ph-btn { margin-left: 0; }
   .post-block-identity { flex: 1 1 100%; min-width: 0; }
   .post-place { font-size: 26px; }
   .post-channel { font-size: 15px; min-width: 0; }
-  /* цифры — одной полосой: Score | Views | Shares | превью */
+  /* numbers in one strip: Score | Views | Shares | thumb */
   .post-block-stats {
     flex: 1 1 100%; grid-template-columns: 1fr 1fr 1fr 56px; grid-template-rows: auto;
     column-gap: 8px; align-items: start;
@@ -864,7 +870,7 @@ footer .add-ph-btn { margin-left: 0; }
   }
   .post-thumb-cell { grid-column: 4; grid-row: 1; align-self: start; justify-self: end; }
   .post-thumb { width: 56px; height: 56px; }
-  /* значок «×N + тип медиа» — на углу превью, а не отдельной строкой */
+  /* "×N + media type" badge sits on the thumb corner */
   .post-media {
     grid-column: 4; grid-row: 1; align-self: end; justify-self: end; z-index: 1;
     margin: 0 3px 3px 0; padding: 0 4px; border-radius: 3px;
@@ -873,7 +879,7 @@ footer .add-ph-btn { margin-left: 0; }
   .post-block-text { flex: 1 1 100%; }
   .post-text { font-size: 13px; }
 
-  /* рейтинг 2025: строка таблицы → карточка (место слева, остальное друг под другом) */
+  /* rating 2025: table row becomes a card (place left, fields stacked) */
   .rating-wrap, .criteria-wrap { padding: 16px 14px; }
   .rating-wrap h2, .criteria-wrap h2 { font-size: 22px; }
   .rating-table, .rating-table tbody { display: block; }
@@ -883,16 +889,14 @@ footer .add-ph-btn { margin-left: 0; }
   .rating-table td:first-child { grid-column: 1; grid-row: 1 / span 4; }
   .rating-table tr:hover td { background: none; }
 
-  /* ADS: колонок много по смыслу — таблица листается внутри блока */
+  /* ADS: many columns — table scrolls inside its block */
   .ads-wrap { padding: 0 10px; }
   .ads-table { font-size: 11.5px; }
   .ads-table th, .ads-table td { padding: 8px 5px; }
 
-  /* критерии */
   .metric-grid { grid-template-columns: 1fr; }
   .scale-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 
-  /* футер */
   footer { padding: 16px 14px; gap: 14px; }
   .footer-actions { width: 100%; }
 }
@@ -914,7 +918,7 @@ footer .add-ph-btn { margin-left: 0; }
   </nav>
 </header>
 
-<!-- ══════════════════ SHORTLIST 2026 ══════════════════ -->
+<!-- SHORTLIST 2026 -->
 <div id="tab-shortlist" class="tab-content active">
   <div class="shortlist-intro">
     <button class="view-toggle-btn" id="view-toggle-btn"  data-i18n onclick="toggleShortlistView()">◉ Поджанры облаком</button>
@@ -949,12 +953,8 @@ footer .add-ph-btn { margin-left: 0; }
   </div>
 </div>
 
-<!-- ══════════════════ 250 HITS 2026 ══════════════════ -->
+<!-- 250 HITS 2026 -->
 <div id="tab-hits2026" class="tab-content">
-  <div class="shortlist-intro">
-    <span class="algo-desc" data-i18n="hits.desc.2026">Топ-250 постов 2026 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
-  </div>
-
   <div class="hitmakers-wrap">
     <div class="hitmakers-card">
       <h3 data-i18n>Топ-10 хитмейкеров-фотографов</h3>
@@ -981,12 +981,8 @@ footer .add-ph-btn { margin-left: 0; }
   </div>
 </div>
 
-<!-- ══════════════════ 250 HITS 2025 ══════════════════ -->
+<!-- 250 HITS 2025 -->
 <div id="tab-hits2025" class="tab-content">
-  <div class="shortlist-intro">
-    <span class="algo-desc" data-i18n="hits.desc.2025">Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.</span>
-  </div>
-
   <div class="hitmakers-wrap">
     <div class="hitmakers-card">
       <h3 data-i18n>Топ-10 хитмейкеров-фотографов</h3>
@@ -1013,7 +1009,7 @@ footer .add-ph-btn { margin-left: 0; }
   </div>
 </div>
 
-<!-- ══════════════════ RATING 2025 ══════════════════ -->
+<!-- RATING 2025 -->
 <div id="tab-rating" class="tab-content">
   <div class="rating-wrap">
     <h2>RATING 2025</h2>
@@ -1033,7 +1029,7 @@ footer .add-ph-btn { margin-left: 0; }
   </div>
 </div>
 
-<!-- ══════════════════ ADS ══════════════════ -->
+<!-- ADS -->
 <div id="tab-ads" class="tab-content">
   <div class="shortlist-intro">
     <span class="algo-desc" id="ads-desc" data-i18n>Прайс взаимного пиара и оценка каналов по данным mutual_pr.md.</span>
@@ -1050,7 +1046,7 @@ footer .add-ph-btn { margin-left: 0; }
   </div>
 </div>
 
-<!-- ══════════════════ ВП ПАРЫ ══════════════════ -->
+<!-- MUTUAL PR PAIRS -->
 <div id="tab-matches" class="tab-content">
   <div class="shortlist-intro">
     <span class="algo-desc" id="matches-desc" data-i18n>Пары взаимного пиара из mutual_pr.md.</span>
@@ -1075,7 +1071,7 @@ footer .add-ph-btn { margin-left: 0; }
   </div>
 </div>
 
-<!-- ══════════════════ CRITERIA ══════════════════ -->
+<!-- CRITERIA -->
 <div id="tab-criteria" class="tab-content">
   <div class="criteria-wrap">
     <h2 data-i18n>Критерии оценки</h2>
@@ -1107,13 +1103,13 @@ footer .add-ph-btn { margin-left: 0; }
 </footer>
 
 <script>
-// ─── Поджанры ню: цвета для тегов из tags.md (источник правды) ───────
+// ─── Subgenre tag colours (tags.md is the source of truth) ───────
 
-// ─── ТЕМА И ЯЗЫК: по умолчанию из настроек ОС, с ручным переключением ──
+// ─── Theme and language: OS default, manual override ──
 const THEME_KEY = 'xyd-theme', LANG_KEY = 'xyd-lang', DESIGN_KEY = 'xyd-design';
 const THEME_MODES = ['auto', 'light', 'dark'], LANG_MODES = ['auto', 'ru', 'en'];
 let themeMode = 'auto', langMode = 'auto', LANG = 'ru';
-// дизайн выбирает скрипт в <head> (до отрисовки) — здесь только читаем результат
+// design is set by the <head> script before paint; only read it here
 let designMode = document.documentElement.getAttribute('data-design') === 'classic' ? 'classic' : 'photo';
 
 function hexMix(hex, target, k) {
@@ -1127,8 +1123,7 @@ const lighten = (hex, k) => hexMix(hex, '#FFFFFF', k);
 
 const isPhoto = () => designMode === 'photo';
 
-// в тёмной теме пастельные плашки заменяем на подсвеченные контуры;
-// в фото-дизайне поджанры монохромные — вид плашек целиком в CSS
+// dark theme: pastel chips become glowing outlines; photo design chips are monochrome (styled in CSS)
 function chipStyle(meta) {
   if (isPhoto()) return '';
   return isDark()
@@ -1136,7 +1131,7 @@ function chipStyle(meta) {
     : `background:${meta.bg};border-color:${meta.border};color:${meta.text}`;
 }
 
-// цвет текста и левой линии карточки поджанра
+// text colour and left border of a subgenre card
 function tagInk(meta) {
   return isPhoto() ? 'var(--text)' : isDark() ? lighten(meta.border, 0.45) : meta.text;
 }
@@ -1160,13 +1155,18 @@ function applyTheme() {
   if (themeMode === 'auto') root.removeAttribute('data-theme');
   else root.setAttribute('data-theme', themeMode);
 }
+// tint mobile browser bars to the page colour (theme and design change --bg)
+function syncThemeColor() {
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+  if (bg) document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', bg));
+}
 function applyLang() {
   LANG = langMode === 'auto' ? systemLang() : langMode;
   document.documentElement.lang = LANG;
   if (typeof refreshFormats === 'function') refreshFormats();
 }
 
-// словарь: ключ — исходная русская строка, {x} — подстановка
+// dictionary: key is the original Russian string, {x} is a placeholder
 function t(ru, vars) {
   let out = LANG === 'en' ? (TR_EN[ru] !== undefined ? TR_EN[ru] : ru)
                           : (TR_RU[ru] !== undefined ? TR_RU[ru] : ru);
@@ -1182,7 +1182,7 @@ function plur(n, ruOne, ruFew, ruMany, enOne, enMany) {
 }
 function localeTag() { return LANG === 'en' ? 'en-US' : 'ru-RU'; }
 
-// статические надписи: оригинал запоминаем, чтобы переводить при каждом переключении
+// static labels: keep the original so each switch re-translates from it
 function applyStaticI18n() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const explicit = el.getAttribute('data-i18n');
@@ -1242,13 +1242,13 @@ function initPrefs() {
   if (!LANG_MODES.includes(langMode)) langMode = 'auto';
   applyTheme();
   applyLang();
-  // следим за настройками ОС, пока переключатели в режиме «авто»
+  // follow OS settings while the toggles are on "auto"
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
       if (themeMode === 'auto') { applyTheme(); renderAll(); }
     });
   }
-  // переключатели — в каждую строку-подзаголовок, слева от описания (нет описания — в конец строки)
+  // toggles go into every subtitle row, left of the description (row end if none)
   document.querySelectorAll('.shortlist-intro').forEach(intro => {
     if (intro.querySelector('.ui-switch')) return;
     const box = document.createElement('span');
@@ -1259,21 +1259,17 @@ function initPrefs() {
 }
 
 
-// ─── Словарь EN. Ключ — русская строка (или id для кусков с разметкой) ──
+// ─── EN dictionary: key is the Russian string (or an id for markup fragments) ──
 const TR_RU = {
-  'hits.desc.2026': 'Топ-250 постов 2026 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.',
-  'hits.desc.2025': 'Топ-250 постов 2025 года по Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Клик по названию канала, превью или тексту открывает пост в Telegram.',
   'footer.cc0': 'CC0 — данные свободны для использования',
   'footer.stats': 'Объективно собрано через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
 };
 
 const TR_EN = {
-  'hits.desc.2026': 'Top 250 posts of 2026 by Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Click the channel name, preview or text to open the post in Telegram.',
-  'hits.desc.2025': 'Top 250 posts of 2025 by Score CQI (<a href="https://github.com/Exey/tg-channel-stats">github.com/Exey/tg-channel-stats</a>). Click the channel name, preview or text to open the post in Telegram.',
   'footer.cc0': 'CC0 — the data is free to use',
   'footer.stats': 'Objectively collected via <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a>',
 
-  // шапка и вкладки
+  // header and tabs
   'Худсовет — Рейтинг арт-ню фотографов': 'Hudsovet — Art nude photographer ranking',
   'Рейтинг арт-ню фотографов': 'Art nude photographer ranking',
   'ВП Пары': 'PR Pairs',
@@ -1282,7 +1278,7 @@ const TR_EN = {
   'Язык: {mode}. Клик — следующий': 'Language: {mode}. Click for the next one',
   'по системе': 'system', 'светлая': 'light', 'тёмная': 'dark',
 
-  // шортлист
+  // shortlist
   '◉ Поджанры облаком': '◉ Subgenre cloud',
   '▤ Поджанры таблицей': '▤ Subgenre table',
   '+ Добавить модель/фотографа': '+ Add model/photographer',
@@ -1302,19 +1298,19 @@ const TR_EN = {
   'Поджанры ню:': 'Nude subgenres:', 'Все': 'All',
   '{desc} — фотографов: {n}': '{desc} — photographers: {n}',
 
-  // тренд
+  // trend
   'Новый в рейтинге': 'New in the ranking',
   'Было место {a}, стало {b}': 'Was #{a}, now #{b}',
   'Место не изменилось: {n}': 'Position unchanged: #{n}',
 
-  // этика
+  // ethics
   'Этика — насколько честно канал указывает тех, кого упоминает.': 'Ethics — how honestly the channel credits the people it mentions.',
   'Все ссылки канала делятся на: честные (ссылка на Telegram-канал упомянутого человека), фейковые (внешняя веб-ссылка на имя — считается один раз на имя), нераспознанные (Telegram-ссылки, ещё не сопоставленные) и промо (самореклама — не учитывается).': 'Every link is bucketed as: fair (a Telegram link to the credited person’s own channel), fake (an external web link on a name — counted once per name), unresolved (Telegram links not yet matched) and promo (self-promotion — excluded).',
   'Этика = честные / (честные + фейковые) × 100%.': 'Ethics = fair / (fair + fake) × 100%.',
   'Если имён, упомянутых без ссылки, больше, чем честных ссылок, — результат делится пополам.': 'If names mentioned without any link outnumber the fair links, the result is halved.',
   'Недостаточно данных: у канала нет ни честных, ни фейковых ссылок для оценки.': 'Not enough data: the channel has neither fair nor fake links to score.',
 
-  // карта поджанров
+  // subgenre map
   'Крафт': 'Craft', 'Драма': 'Drama', 'Классика': 'Classic', 'Концепт': 'Concept',
   'Гламур': 'Glamour', 'Кинк': 'Kink', 'Фэшн': 'Fashion',
   'Тщательно выстроенный ню — ручная режиссура, авторская обработка, часто плёнка': 'Carefully staged nude — hands-on direction, signature retouching, often shot on film',
@@ -1356,7 +1352,7 @@ const TR_EN = {
   'Канал меньше {limit} — ещё ×{mult}.': 'Channel below {limit} — a further ×{mult}.',
   '{n} каналов · {subs} подписчиков · суммарная оценка {val}. ': '{n} channels · {subs} subscribers · total valuation {val}. ',
 
-  // ВП Пары
+  // Mutual PR pairs
   'Пары взаимного пиара из mutual_pr.md.': 'Cross-promo pairs from mutual_pr.md.',
   'Лучшие каналы для ВП': 'Best channels for cross-promo',
   'сумма рейтинга по всем парам': 'sum of ratings across all pairs',
@@ -1377,7 +1373,7 @@ const TR_EN = {
 
   "Vogue, Harper's Bazaar, персональные выставки в топ-галереях.": "Vogue, Harper's Bazaar, solo shows at top galleries.",
 
-  // RATING 2025 — стиль / платформы / ограничения
+  // RATING 2025 — style / platforms / limits
   'Драматический ню, fashion-нарратив': 'Dramatic nude, fashion narrative',
   'Символизм, концептуальные проекты': 'Symbolism, conceptual projects',
   'Драматический свет, брутальная эстетика': 'Dramatic light, brutal aesthetics',
@@ -1435,7 +1431,7 @@ const TR_EN = {
   'Нишевость стиля': 'Niche style',
   'Неустоявшийся авторский стиль': 'Personal style not yet settled',
 
-  // Критерии
+  // criteria
   'Критерии оценки': 'Scoring criteria',
   'Каждый фотограф оценивается по 10 метрикам (1–10). Итоговый балл — взвешенное среднее.': 'Each photographer is scored on 10 metrics (1–10). The final score is a weighted average.',
   'Шкала уровней': 'Level scale',
@@ -1506,7 +1502,7 @@ const TAG_COLORS = {
 };
 const DEFAULT_TAG_COLOR = { bg: '#F5F5F5', border: '#888', text: '#555' };
 
-// ─── Близость поджанров, % (стилистическая совместимость) ────────────
+// ─── Subgenre affinity, % (stylistic compatibility) ────────────
 const TAG_AFFINITY = {
   'Крафт':     { 'Классика': 55, 'Фэшн': 60, 'Драма': 35, 'Концепт': 40, 'Кинк': 40, 'Гламур': 30, 'Thug': 30, 'Raw': 10 },
   'Драма':     { 'Thug': 65, 'Концепт': 60, 'Кинк': 55, 'Фэшн': 45, 'Классика': 45, 'Крафт': 35, 'Raw': 30, 'Гламур': 15 },
@@ -1584,7 +1580,7 @@ let allModels = [];
 function parseMarkdownTable(md) {
   const lines = md.split('\n').filter(l => l.trim().startsWith('|'));
   if (lines.length < 3) return [];
-  // экранированные \| внутри ячеек не считаются разделителями
+  // escaped \| inside cells is not a separator
   const parseRow = line => line.trim().split(/(?<!\\)\|/).slice(1, -1).map(s => s.replace(/\\\|/g, '|').trim());
   const headers = parseRow(lines[0]);
   const dataLines = lines.slice(2);
@@ -1619,7 +1615,7 @@ function tableBy(tables, re) {
   return t ? t.rows : [];
 }
 
-// значение поля по образцу заголовка — выгрузка бывает на разных языках
+// field value by header pattern — the export comes in different languages
 function fieldBy(row, ...patterns) {
   const keys = Object.keys(row);
   for (const re of patterns) {
@@ -1678,7 +1674,7 @@ function ratingCellHtml(p) {
   return `<span class="score-val">${ratingRaw}</span>`;
 }
 
-// ─── TREND: изменение места относительно folders_old.md ───────────────
+// ─── TREND: place change relative to folders_old.md ───────────────
 let hasPrevData = false;
 
 function entityKey(r) {
@@ -1693,7 +1689,7 @@ function ratingRankMap(rows) {
   return map;
 }
 
-// место считается по Rating desc — не зависит от текущей сортировки таблицы
+// place is by Rating desc, independent of the table sort
 function annotateTrend(rows, prevRows) {
   const cur = ratingRankMap(rows);
   const prev = prevRows ? ratingRankMap(prevRows) : null;
@@ -1701,7 +1697,7 @@ function annotateTrend(rows, prevRows) {
     const k = entityKey(r);
     r._place = cur.get(k);
     const was = prev ? prev.get(k) : undefined;
-    r._trend = was == null ? null : was - r._place;   // > 0 — поднялся
+    r._trend = was == null ? null : was - r._place;   // > 0 = moved up
   });
 }
 
@@ -1747,7 +1743,7 @@ const PH_COLUMNS = [
   { key: 'interest',  label: 'Интерес',    sortVal: p => parseNumeric(p['Post Quality']) ?? -1, cell: p => p['Post Quality'] || '—', hideNarrow: true },
   { key: 'ethics',    label: 'Этика',      sortVal: p => parseNumeric(p['Ethics']) ?? -1, cell: ethicsCellHtml, hint: ethicsHint, hideNarrow: true },
 ];
-// этика считается только для фотографов
+// ethics applies to photographers only
 const MODEL_COLUMNS = PH_COLUMNS.filter(c => c.key !== 'tag' && c.key !== 'ethics').map(c => c.key === 'name' ? { ...c, label: 'Модель' } : c);
 
 let phSort = { key: 'rating', dir: 'desc' };
@@ -1835,11 +1831,11 @@ function renderShortlistTables() {
   document.getElementById('shortlist-cols').style.display = shortlistView === 'map' ? 'none' : 'grid';
 }
 
-// ─── ПОДЖАНРЫ ОБЛАКОМ: карта поджанров кругами ─────────────────────────
+// ─── SUBGENRE CLOUD: circle map of subgenres ─────────────────────────
 let shortlistView = 'table';
 
-const OVERLAP_MIN = 40;     // ниже этого порога круги не пересекаются
-const OVERLAP_DAMP = 0.55;  // визуально пересечение уменьшено для читаемости
+const OVERLAP_MIN = 40;     // below this affinity circles do not overlap
+const OVERLAP_DAMP = 0.55;  // overlap is damped for readability
 
 function tagAffinity(a, b) {
   const x = (TAG_AFFINITY[a] || {})[b];
@@ -1900,12 +1896,12 @@ function prepareGenreNode(nd) {
     const fs = 9.5 + 17 * Math.min(m.rating, 0.9);
     return { kind: 'name', m, fs, h: fs * 1.34, w: measureTextWidth(m.display, fs, 700) };
   });
-  // самые крупные имена — ближе к центру круга, где хорда шире
+  // longest names go nearer the circle centre, where the chord is wider
   const above = [], below = [];
   names.forEach((row, i) => (i % 2 ? above : below).push(row));
   above.reverse();
   nd.rows = [...above, title, ...below];
-  let r = Math.max(26, 100 * Math.sqrt(nd.sum));  // площадь ∝ суммарному Rating
+  let r = Math.max(26, 100 * Math.sqrt(nd.sum));  // area ∝ total Rating
   for (let i = 0; i < 90 && !rowsFitInCircle(nd.rows, r); i++) r *= 1.035;
   stackRows(nd.rows);
   nd.r = r;
@@ -1940,7 +1936,7 @@ function textsCollide(a, b) {
   return ra.some(p => rb.some(q => p.x0 < q.x1 && q.x0 < p.x1 && p.y0 < q.y1 && q.y0 < p.y1));
 }
 
-// Пересечение кругов уменьшается ровно настолько, чтобы подписи не сталкивались
+// Overlap is reduced just enough that labels do not collide
 function resolveTextCollisions(nodes, pairs) {
   for (let pass = 0; pass < 80; pass++) {
     let moved = false;
@@ -1948,7 +1944,7 @@ function resolveTextCollisions(nodes, pairs) {
       const a = pr.a, b = pr.b;
       let dx = b.x - a.x, dy = b.y - a.y;
       let dist = Math.hypot(dx, dy);
-      const maxD = a.r + b.r;                 // предел: круги только касаются
+      const maxD = a.r + b.r;                 // max distance: circles just touch
       if (dist > maxD - 0.5) return;
       if (dist < 1e-3) { dx = 1; dy = 0.3; dist = Math.hypot(dx, dy); }
       if (!textsCollide(a, b)) return;
@@ -1966,7 +1962,7 @@ function resolveTextCollisions(nodes, pairs) {
 
 function relaxGenreNodes(nodes) {
   const rMax = Math.max(...nodes.map(n => n.r));
-  // крупные круги стремятся в центр, мелкие — на внешнее кольцо
+  // large circles pull to the centre, small ones to the outer ring
   nodes.forEach(nd => { nd.ring = rMax * 1.7 * (1 - nd.r / rMax); });
   [...nodes].sort((a, b) => b.r - a.r).forEach((nd, i) => {
     const ang = i * 2.39996, rad = i === 0 ? 0 : Math.max(nd.ring, rMax * 0.6);
@@ -1980,10 +1976,10 @@ function relaxGenreNodes(nodes) {
       const o = tagAffinity(a.tag, b.tag);
       let d, min;
       if (o < OVERLAP_MIN) {
-        d = sum * (1 + 0.12 * (OVERLAP_MIN - o) / OVERLAP_MIN);  // касание + зазор
+        d = sum * (1 + 0.12 * (OVERLAP_MIN - o) / OVERLAP_MIN);  // touch + gap
         min = sum;
       } else {
-        d = sum * (1 - (o - OVERLAP_MIN) / 100 * OVERLAP_DAMP);  // мягкое пересечение
+        d = sum * (1 - (o - OVERLAP_MIN) / 100 * OVERLAP_DAMP);  // soft overlap
         min = Math.max(d * 0.9, Math.abs(a.r - b.r) + Math.min(a.r, b.r) * 0.55);
       }
       pairs.push({ a, b, d, min, o });
@@ -1994,7 +1990,7 @@ function relaxGenreNodes(nodes) {
     const cool = 1 - 0.75 * (it / ITER);
     nodes.forEach(nd => {
       const dist = Math.hypot(nd.x, nd.y) || 1e-3;
-      const k = (nd.ring - dist) / dist * 0.11 * cool;   // радиальная пружина к своему кольцу
+      const k = (nd.ring - dist) / dist * 0.11 * cool;   // radial spring toward own ring
       nd.x += nd.x * k; nd.y += nd.y * k;
     });
     pairs.forEach(pr => {
@@ -2053,7 +2049,7 @@ function renderGenreMap() {
   const pad = 6;
   const bw = maxX - minX, bh = maxY - minY;
   const avail = Math.max(320, (document.getElementById('genre-map-scroll').clientWidth || 900) - 2 * pad - 2);
-  const scale = Math.min(1.3, Math.max(0.85, avail / bw));  // узкие экраны — горизонтальный скролл, а не мелкий шрифт
+  const scale = Math.min(1.3, Math.max(0.85, avail / bw));  // narrow screens scroll horizontally instead of shrinking the font
   const W = bw * scale + 2 * pad, H = bh * scale + 2 * pad;
   nodes.forEach(n => {
     n.sx = (n.x - minX) * scale + pad;
@@ -2149,12 +2145,12 @@ function showTab(name) {
   const btn = document.querySelector(`.tab-btn[data-tab="${name}"]`);
   if (btn) {
     btn.classList.add('active');
-    // на телефоне вкладки — прокручиваемая полоса: показываем выбранную
+    // on phones tabs are a scroll strip: bring the active one into view
     btn.scrollIntoView({ block: 'nearest', inline: 'center' });
   }
 }
 
-// ─── 250 HITS: одинаковая страница для каждого года ───────────────────
+// ─── 250 HITS: same page for every year ───────────────────
 const HITS_YEARS = [2026, 2025];
 const hits = {};
 HITS_YEARS.forEach(year => {
@@ -2222,7 +2218,7 @@ function escAttr(v) {
   return String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-// каналы вне топ-10 хитмейкеров, по числу постов в топ-250
+// channels outside the top-10 hitmakers, by number of posts in the top 250
 function restChannels(year) {
   const h = hits[year];
   const counts = new Map();
@@ -2346,7 +2342,7 @@ function renderPostsList(year) {
 }
 
 function handlePlaceHash() {
-  // #place-2026-12 — новый формат, #place-12 — старые ссылки на 2025
+  // #place-2026-12 is the new format; #place-12 is the legacy 2025 link
   const m = location.hash.match(/^#place-(?:(\d{4})-)?(\d+)$/);
   if (!m) return;
   const year = m[1] || 2025;
@@ -2380,27 +2376,27 @@ async function loadHits(year) {
   }
 }
 
-// ─── ADS: прайс взаимного пиара и оценка каналов (mutual_pr.md) ───────
-const AD_RUB_PER_SUB = 22;         // ₽ за одного пришедшего подписчика
-const AD_ROUND_TO = 10;            // цены округляются вниз до 10 ₽
-const AD_MODELS_MARKUP = 1.1;      // реклама у моделей на 10% дороже
-const SMALL_CHANNEL_LIMIT = 7000;      // с этого размера понижения нет
-const SMALL_CHANNEL_FLOOR = 1000;      // до этого размера — минимальный множитель
-const SMALL_CHANNEL_MULT = 0.33;       // множитель на 3 000 подписчиков
-const SMALL_CHANNEL_MULT_TOP = 0.88;   // множитель на 6 999 подписчиках
+// ─── ADS: mutual PR price list and channel valuation (mutual_pr.md) ───────
+const AD_RUB_PER_SUB = 22;         // ₽ per acquired subscriber
+const AD_ROUND_TO = 10;            // prices are rounded down to 10 ₽
+const AD_MODELS_MARKUP = 1.1;      // ads on model channels cost 10% more
+const SMALL_CHANNEL_LIMIT = 7000;      // no discount from this size up
+const SMALL_CHANNEL_FLOOR = 1000;      // at or below this size the minimum multiplier applies
+const SMALL_CHANNEL_MULT = 0.33;       // multiplier at the floor size
+const SMALL_CHANNEL_MULT_TOP = 0.88;   // multiplier just below the limit
 
-// плавная растушёвка вместо ступеньки: 0.66 на 3 000 → 0.88 на 6 999
+// linear ramp between the two multipliers instead of a step
 function smallChannelMult(f) {
   if (f >= SMALL_CHANNEL_LIMIT) return 1;
   if (f <= SMALL_CHANNEL_FLOOR) return SMALL_CHANNEL_MULT;
   const t = (f - SMALL_CHANNEL_FLOOR) / (SMALL_CHANNEL_LIMIT - 1 - SMALL_CHANNEL_FLOOR);
   return SMALL_CHANNEL_MULT + t * (SMALL_CHANNEL_MULT_TOP - SMALL_CHANNEL_MULT);
 }
-const VALUE_MONTHS = 24;           // канал ≈ 2 года рекламы
-const AD_SLOTS_PER_MONTH = 30;     // суточный слот каждый день месяца
-const VALUE_MULT_RANGE = 0.2;      // поправка по рекламной выручке — не более ±20%
+const VALUE_MONTHS = 24;           // a channel is valued at ~2 years of ads
+const AD_SLOTS_PER_MONTH = 30;     // one daily slot every day of the month
+const VALUE_MULT_RANGE = 0.2;      // ad-revenue adjustment, at most ±20%
 
-// 88 ₽ за подписчика, дальше cнижение и стоп на 50 ₽
+// ₽ per subscriber by tier: starts at 88, declines to a floor of 50
 const VALUE_TIERS = [
   { upTo: 10000,    rate: 88 },
   { upTo: 20000,    rate: 77 },
@@ -2428,7 +2424,7 @@ let adsSort = { key: 'value', dir: 'desc' };
 let fmtRub = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
 function refreshFormats() { fmtRub = new Intl.NumberFormat(localeTag(), { maximumFractionDigits: 0 }); }
 function money(v) { return fmtRub.format(Math.round(v)) + ' ₽'; }
-// mutual_pr.md выгружается то с английскими, то с русскими заголовками
+// mutual_pr.md is exported with either English or Russian headers
 const ADS_FIELDS = {
   followers: ['Followers', 'Подписчики'],
   title:     ['Title', 'Название'],
@@ -2464,16 +2460,16 @@ function annotateAds(rows) {
     r._name = adsField(r, 'title').trim();
     r._best = adsField(r, 'best');
     r._isModel = adsField(r, 'folder').trim().toLowerCase() === 'models';
-    // цена размещения: прогноз прироста × 22 ₽, у моделей +10%, вниз до 10 ₽
+    // placement price: forecast growth × rate, +10% for models, rounded down
     const markup = r._isModel ? AD_MODELS_MARKUP : 1;
     r._price = {};
     ADS_PERIODS.forEach(p => {
       const subs = parseNumeric(adsField(r, p.key)) ?? 0;
       r._price[p.key] = floorTo(subs * AD_RUB_PER_SUB * markup, AD_ROUND_TO);
     });
-    // оценка канала: прогрессивная шкала по подписчикам, наценка моделей не учитывается
+    // channel value: tiered by subscribers, no model markup
     r._base = subscribersValue(r._f);
-    // поправка по рекламной выручке: 2 года размещений против базы, не более ±20%
+    // ad-revenue adjustment: 2 years of placements vs base, at most ±20%
     const rawDaily = (parseNumeric(adsField(r, 'd1')) ?? 0) * AD_RUB_PER_SUB;
     r._adsMonthly = rawDaily * AD_SLOTS_PER_MONTH;
     const ratio = r._base > 0 ? r._adsMonthly * VALUE_MONTHS / r._base : 1;
@@ -2555,7 +2551,7 @@ function renderAdsTable() {
     t('{n} каналов · {subs} подписчиков · суммарная оценка {val}. ', { n: allAds.length, subs: fmtRub.format(subs), val: money(val) });
 }
 
-// ─── ВП ПАРЫ: агрегат раздела «Пары ВП» из mutual_pr.md ───────────────
+// ─── MUTUAL PR PAIRS: aggregate for the pairs tab, from mutual_pr.md ───────────────
 let allPairs = [];
 let pairChannels = [];
 let selectedPair = null;
@@ -2603,7 +2599,7 @@ function pairChannelLink(ch, text) {
   return ch.url ? `<a href="${ch.url}" target="_blank" rel="noopener">${text}</a>` : text;
 }
 
-// диапазоны сплошные: каждый канал попадает ровно в один
+// contiguous ranges: every channel falls in exactly one
 const PAIR_SIZE_BUCKETS = [
   { key: 'all', label: 'Все',   min: 0,     max: Infinity },
   { key: 's',   label: 'до 3K', min: 0,     max: 3000 },
@@ -2613,7 +2609,7 @@ const PAIR_SIZE_BUCKETS = [
 ];
 let pairSizeFilter = 'all';
 
-// «5.9K» → 5900, «669» → 669
+// "5.9K" → 5900, "669" → 669
 function channelSizeNum(label) {
   const m = String(label || '').replace(',', '.').match(/([\d.]+)\s*([KkКкMmМм]?)/);
   if (!m) return null;
@@ -2642,7 +2638,7 @@ function renderPairSizeFilter() {
 function setPairSizeFilter(key) {
   pairSizeFilter = key;
   const visible = visiblePairChannels();
-  // выбранный канал скрыт фильтром — берём лучший из видимых
+  // selected channel is filtered out — use the best visible one
   if (!visible.some(c => c.name === selectedPair)) selectedPair = visible.length ? visible[0].name : null;
   renderPairsLeft();
   renderPairsRight();
@@ -2708,7 +2704,7 @@ function drawPairArrows() {
   const sr = sel.getBoundingClientRect();
   const x1 = sr.right - br.left + 4, y1 = sr.top + sr.height / 2 - br.top;
   const parts = c.partners.slice(0, cards.length);
-  // цвет от зелёного (лучшая пара) к жёлтому (десятая)
+  // colour from green (best pair) to yellow (tenth)
   const arrowColor = (i, n) => {
     const t = n > 1 ? i / (n - 1) : 0;
     const lift = isDark() ? 18 : 0;
@@ -2720,9 +2716,9 @@ function drawPairArrows() {
     const x2 = rr.left - br.left - 9, y2 = rr.top + rr.height / 2 - br.top;
     const mx = (x1 + x2) / 2;
     const color = arrowColor(i, cards.length);
-    // на стрелке: лучший день, что канал даёт партнёру / что получает в ответ
+    // on the arrow: best day, what the channel gives the partner / gets back
     const label = `${p.days ? '★ ' + p.days + ' · ' : ''}+${fmtRub.format(p.gives)} / +${fmtRub.format(p.gets)}`;
-    // подпись у самого острия стрелки
+    // label at the arrow tip
     return `<path d="M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}" fill="none"
               stroke="${color}" stroke-width="${(2.2 - i * 0.09).toFixed(2)}" marker-end="url(#pair-arrow-${i})" />
             <text x="${(x2 - 7).toFixed(1)}" y="${(y2 - 5).toFixed(1)}" text-anchor="end"
@@ -2786,8 +2782,9 @@ async function loadAds() {
   }
 }
 
-// перерисовка всего, что уже загружено — после смены темы или языка
+// re-render everything already loaded after a theme or language change
 function renderAll() {
+  syncThemeColor();
   applyStaticI18n();
   renderSwitches();
   renderRating();
@@ -2816,6 +2813,7 @@ function renderAll() {
 
 async function init() {
   initPrefs();
+  syncThemeColor();
   applyStaticI18n();
   renderSwitches();
   renderRating();
@@ -2824,7 +2822,7 @@ async function init() {
   const params = new URLSearchParams(location.search);
   const pageParam = params.get('p');
   if (pageParam === 'hits2026') showTab('hits2026');
-  // posts2025 — старое имя параметра
+  // posts2025 is the legacy param name
   if (pageParam === 'hits2025' || pageParam === 'posts2025' || /^#place-(\d{4}-)?\d+$/.test(location.hash)) showTab('hits2025');
   if (params.get('p') === 'ads') showTab('ads');
   if (params.get('p') === 'matches') showTab('matches');
