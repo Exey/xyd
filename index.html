@@ -259,6 +259,9 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .rank-table th.sortable { cursor: pointer; user-select: none; }
 .rank-table th.sortable:hover { color: var(--rose); }
 .rank-table th.sorted { color: var(--text); }
+/* ?show= highlight */
+.rank-table tr.show-hit td { background: color-mix(in srgb, var(--cotton-candy) 35%, transparent); }
+.post-item.show-hit, .pair-card.show-hit { box-shadow: 0 0 0 3px var(--cotton-candy); }
 .rank-num { color: var(--muted); font-weight: 900; font-size: 15px; min-width: 32px; }
 .ph-name { font-weight: 700; color: var(--text); font-size: 14px; }
 .ph-name a { color: inherit; text-decoration: none; }
@@ -1625,6 +1628,19 @@ function fieldBy(row, ...patterns) {
   return '';
 }
 
+// ?show=a,b — channels to highlight everywhere; on phones the page also scrolls to the first match
+const normShow = s => s.trim().replace(/^@/, '').toLowerCase();
+const SHOW = new Set((new URLSearchParams(location.search).get('show') || '').split(',').map(normShow).filter(Boolean));
+const showCls = name => SHOW.has(normShow(name || '')) ? ' show-hit' : '';
+let showScrolled = false;
+function revealShown() {
+  if (showScrolled || !SHOW.size || !window.matchMedia('(max-width: 700px)').matches) return;
+  const el = document.querySelector('.tab-content.active .show-hit');
+  if (!el) return;
+  showScrolled = true;
+  requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+}
+
 const LINK_OVERRIDES = { 'xenaexsa': 'https://t.me/+u2LCuReui8pkMzJi' };
 
 function parseTelegramName(raw) {
@@ -1811,7 +1827,7 @@ function renderRows(data, columns, sortState) {
     const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), localeTag());
     return sortState.dir === 'desc' ? -cmp : cmp;
   });
-  return sorted.map((p, i) => `<tr>
+  return sorted.map((p, i) => `<tr class="${showCls(parseTelegramName(p['ID/Username']).display).trim()}">
     <td class="rank-num">${i + 1}</td>
     ${columns.map(c => `<td${c.hideNarrow ? ' class="col-hide-narrow"' : ''}>${c.cell(p)}</td>`).join('')}
   </tr>`).join('');
@@ -2308,7 +2324,7 @@ function renderPostItem(year, p) {
   const text = truncateText(p['Text'], 240);
   const title = truncateText(p['Channel'], 18);
   const anchor = `place-${year}-${p._place}`;
-  return `<div class="post-item" id="${anchor}">
+  return `<div class="post-item${showCls(p['Channel'])}" id="${anchor}">
     <div class="post-block-identity">
       <span class="post-place"><a href="#${anchor}">${p._place}</a></span>
       <a class="post-channel" href="${link}" target="_blank" rel="noopener">${title}</a>
@@ -2371,6 +2387,7 @@ async function loadHits(year) {
     document.getElementById('posts-list-' + year).style.display = 'flex';
     renderPostsList(year);
     handlePlaceHash();
+    revealShown();
   } catch (e) {
     document.getElementById('posts-loading-' + year).textContent = t('Ошибка загрузки {f}: {e}', { f: h.file, e: e.message });
   }
@@ -2537,7 +2554,7 @@ function renderAdsTable() {
     const cmp = (typeof av === 'number' && typeof bv === 'number') ? av - bv : String(av).localeCompare(String(bv), localeTag());
     return adsSort.dir === 'desc' ? -cmp : cmp;
   });
-  document.getElementById('ads-body').innerHTML = sorted.map((r, i) => `<tr>
+  document.getElementById('ads-body').innerHTML = sorted.map((r, i) => `<tr class="${showCls(r._name).trim()}">
     <td class="rank-num">${i + 1}</td>
     ${ADS_COLUMNS.map(c => {
       const cls = [c.num ? 'num' : '', c.hideNarrow ? 'col-hide-narrow' : ''].filter(Boolean).join(' ');
@@ -2653,7 +2670,7 @@ function renderPairsLeft() {
     return;
   }
   document.getElementById('pairs-left').innerHTML = visible.map((c, i) => `
-    <div class="pair-card${c.name === selectedPair ? ' active' : ''}" data-name="${c.name.replace(/"/g, '&quot;')}" onclick="selectPairChannel(this.dataset.name)">
+    <div class="pair-card${c.name === selectedPair ? ' active' : ''}${showCls(c.name)}" data-name="${c.name.replace(/"/g, '&quot;')}" onclick="selectPairChannel(this.dataset.name)">
       <span class="pc-rank">${i + 1}</span>
       <span class="pc-body">
         <span class="pc-name">${pairChannelLink(c, c.name)}</span>
@@ -2678,7 +2695,7 @@ function renderPairsRight() {
   const word = plur(c.partners.length, 'пара', 'пары', 'пар', 'pair', 'pairs');
   title.innerHTML = `${t('Лучшие пары')}<span class="pairs-sub">${t('для {name} — {n} {word}', { name: c.name, n: c.partners.length, word })}</span>`;
   box.innerHTML = c.partners.map(p => `
-    <div class="pair-card partner">
+    <div class="pair-card partner${showCls(p.ch.name)}">
       <span class="pc-body">
         <span class="pc-name">${pairChannelLink(p.ch, p.ch.name)}</span>
         <span class="pc-meta">${p.ch.size ? p.ch.size + ' · ' : ''}${t('в ответ +{n}', { n: fmtRub.format(p.gets) })}</span>
@@ -2776,6 +2793,7 @@ async function loadAds() {
     document.getElementById('ads-wrap').style.display = 'block';
     renderAdsTable();
     renderPairs();
+    revealShown();
   } catch (e) {
     document.getElementById('ads-loading').textContent = t('Ошибка загрузки {f}: {e}', { f: 'mutual_pr.md', e: e.message });
     document.getElementById('matches-loading').textContent = 'Ошибка загрузки mutual_pr.md: ' + e.message;
@@ -2863,6 +2881,7 @@ async function init() {
     document.getElementById('loading').style.display = 'none';
     renderLegend();
     renderShortlistTables();
+    revealShown();
     if (params.get('view') === 'map') setShortlistView('map');
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => { if (shortlistView === 'map') renderGenreMap(); });
