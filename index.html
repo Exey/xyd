@@ -518,6 +518,21 @@ footer {
   margin-top: 40px; background: var(--card2);
 }
 footer p { font-size: 11px; color: var(--muted); }
+footer .footer-sitemap { opacity: .6; }
+footer .footer-sitemap a { color: inherit; font-weight: 400; }
+.sitemap-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.sitemap-overlay[hidden] { display: none; }
+.sitemap-box { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 12px; width: min(520px, 100%); max-height: 80vh; display: flex; flex-direction: column; box-shadow: 0 16px 48px rgba(0,0,0,.35); }
+:where([data-design="photo"]) .sitemap-box { border-radius: 2px; box-shadow: none; }
+.sitemap-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border2); }
+.sitemap-head h3 { margin: 0; font-size: 16px; }
+.sitemap-close { background: none; border: 0; font-size: 26px; line-height: 1; color: var(--muted); cursor: pointer; }
+.sitemap-close:hover { color: var(--text); }
+.sitemap-list { overflow-y: auto; padding: 6px 18px 14px; }
+.sitemap-list a { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--border2); color: var(--text); text-decoration: none; font-size: 14px; }
+.sitemap-list a:hover { color: var(--rose); }
+.sitemap-list code { color: var(--muted); font-size: 12px; }
+
 footer a { color: var(--rose); text-decoration: none; font-weight: 700; }
 footer a:hover { color: var(--ink); }
 .footer-links { display: flex; flex-direction: column; gap: 6px; }
@@ -1097,6 +1112,7 @@ footer .add-ph-btn { margin-left: 0; }
   <div class="footer-links">
     <p data-i18n="footer.cc0">CC0 — данные свободны для использования</p>
     <p data-i18n="footer.stats">Объективно собрано через <a href="https://github.com/Exey/HypeStats" target="_blank" rel="noopener">HypeStats</a></p>
+    <p class="footer-sitemap"><a href="#" onclick="openSiteMap(event)" data-i18n>Карта сайта</a></p>
   </div>
   <div class="footer-actions">
     <a class="add-ph-btn" href="https://github.com/Exey/xyd/issues/new?title=Добавить%20фотографа%3A%20&body=**Имя%3A**%20%0A**Telegram%3A**%20%0A**Поджанр%3A**%20%0A**Обоснование%3A**&labels=new-photographer" target="_blank" rel="noopener" data-i18n>+ Добавить модель/фотографа</a>
@@ -1104,6 +1120,16 @@ footer .add-ph-btn { margin-left: 0; }
     <button class="design-btn" id="design-btn" onclick="toggleDesign()"></button>
   </div>
 </footer>
+
+<div class="sitemap-overlay" id="sitemap" hidden onclick="if (event.target === this) closeSiteMap()">
+  <div class="sitemap-box" role="dialog" aria-modal="true" aria-labelledby="sitemap-title">
+    <div class="sitemap-head">
+      <h3 id="sitemap-title" data-i18n>Карта сайта</h3>
+      <button class="sitemap-close" onclick="closeSiteMap()" aria-label="Close">×</button>
+    </div>
+    <div class="sitemap-list" id="sitemap-list"></div>
+  </div>
+</div>
 
 <script>
 // ─── Subgenre tag colours (tags.md is the source of truth) ───────
@@ -1346,7 +1372,7 @@ const TR_EN = {
   'Прайс взаимного пиара и оценка каналов по данным mutual_pr.md.': 'Cross-promo pricing and channel valuation from mutual_pr.md.',
   'Канал': 'Channel', 'Неделя': 'Week', 'Месяц': 'Month',
   '24ч': '24h', '48ч': '48h', '72ч': '72h',
-  'Лучшие дни рекламы': 'Best ad days', 'Оценка стоимости канала': 'Channel value estimate',
+  'Карта сайта': 'Site map', 'Лучшие дни рекламы': 'Best ad days', 'Самые свободные дни в канале: в них выходит меньше всего постов': 'Most free days in the channel: the days with the fewest posts published', 'Оценка стоимости канала': 'Channel value estimate',
   'Реклама — {n} ₽ за подписчика': 'Ads — {n} ₽ per subscriber',
   'Модель: +10% к рекламе': 'Model: +10% on ads',
   'Канал без публичной ссылки': 'Channel without a public link',
@@ -1629,7 +1655,7 @@ function fieldBy(row, ...patterns) {
 }
 
 // ?show=a,b — channels to highlight everywhere; on phones the page also scrolls to the first match
-const normShow = s => s.trim().replace(/^@/, '').toLowerCase();
+const normShow = s => s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}_]/gu, '');
 const SHOW = new Set((new URLSearchParams(location.search).get('show') || '').split(',').map(normShow).filter(Boolean));
 const showCls = name => SHOW.has(normShow(name || '')) ? ' show-hit' : '';
 let showScrolled = false;
@@ -2287,8 +2313,18 @@ document.addEventListener('click', e => {
   if (!e.target.closest('.channel-picker')) closeChannelMenus();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeChannelMenus();
+  if (e.key === 'Escape') { closeChannelMenus(); closeSiteMap(); }
 });
+
+// site map: one link per tab (built from the tab buttons) plus the subgenre cloud view
+function openSiteMap(e) {
+  if (e) e.preventDefault();
+  const items = [...document.querySelectorAll('.tab-btn')].map(b => ({ href: '?p=' + b.dataset.tab, label: b.textContent.trim() }));
+  items.push({ href: '?view=map', label: t('◉ Поджанры облаком') });
+  document.getElementById('sitemap-list').innerHTML = items.map(i => `<a href="${i.href}"><span>${i.label}</span><code>${i.href}</code></a>`).join('');
+  document.getElementById('sitemap').hidden = false;
+}
+function closeSiteMap() { document.getElementById('sitemap').hidden = true; }
 
 function extractThumbSrc(raw) {
   const m = (raw || '').match(/\((data:image\/[^)]+)\)/);
@@ -2391,6 +2427,20 @@ async function loadHits(year) {
   } catch (e) {
     document.getElementById('posts-loading-' + year).textContent = t('Ошибка загрузки {f}: {e}', { f: h.file, e: e.message });
   }
+}
+
+// day names in the export come in either language: show them in the current one
+const DAY_NAMES = {
+  en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  ru: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+};
+const DAY_RE = /(?<![A-Za-zА-Яа-яЁё])(Mon|Tue|Wed|Thu|Fri|Sat|Sun|Пн|Вт|Ср|Чт|Пт|Сб|Вс)(?![A-Za-zА-Яа-яЁё])/g;
+function localizeDays(str) {
+  const names = DAY_NAMES[LANG === 'en' ? 'en' : 'ru'];
+  return (str || '').replace(DAY_RE, d => {
+    const i = DAY_NAMES.en.indexOf(d);
+    return names[i >= 0 ? i : DAY_NAMES.ru.indexOf(d)];
+  });
 }
 
 // ─── ADS: mutual PR price list and channel valuation (mutual_pr.md) ───────
@@ -2526,8 +2576,9 @@ const ADS_COLUMNS = [
     sortVal: r => r._price[p.key],
     cell: r => `<span class="ads-money${r._price[p.key] ? '' : ' muted'}"${r._isModel ? ` title="${t('Модель: +10% к рекламе')}"` : ''}>${r._price[p.key] ? money(r._price[p.key]) : '—'}</span>`,
   })),
-  { key: 'best', label: 'Лучшие дни рекламы', sortVal: r => (r._best || '').toLowerCase(),
-    cell: r => `<span class="ads-best">${r._best || '—'}</span>` },
+  { key: 'best', label: 'Лучшие дни рекламы', hint: () => t('Самые свободные дни в канале: в них выходит меньше всего постов'),
+    sortVal: r => localizeDays(r._best).toLowerCase(),
+    cell: r => `<span class="ads-best">${localizeDays(r._best) || '—'}</span>` },
   { key: 'value', label: 'Оценка стоимости канала', num: true, sortVal: r => r._value, cell: adsValueCell },
 ];
 
@@ -2541,7 +2592,8 @@ function renderAdsHead() {
     const isSorted = adsSort.key === c.key;
     const arrow = isSorted ? (adsSort.dir === 'desc' ? ' ▼' : ' ▲') : '';
     const cls = ['sortable', c.num ? 'num' : '', c.hideNarrow ? 'col-hide-narrow' : '', isSorted ? 'sorted' : ''].filter(Boolean).join(' ');
-    return `<th class="${cls}" onclick="sortTable('ads','${c.key}')">${t(c.label)}${arrow}</th>`;
+    const hint = c.hint ? ` title="${c.hint()}"` : '';
+    return `<th class="${cls}"${hint} onclick="sortTable('ads','${c.key}')">${t(c.label)}${arrow}</th>`;
   }).join('') + '</tr>';
   document.getElementById('ads-head').innerHTML = group + head;
 }
@@ -2596,7 +2648,7 @@ function buildPairChannels(rows) {
     const b = parseChannelCell(fieldBy(r, /канал\s*b|channel\s*b/i));
     if (!a || !b) return;
     const rating = parseFloat((fieldBy(r, /рейтинг|rating/i) || '').replace(',', '.')) || 0;
-    const daysRaw = fieldBy(r, /лучшие дни|best days/i);
+    const daysRaw = fieldBy(r, /лучшие дни|best (posting )?days/i);
     const days = ((daysRaw.match(/★\s*([^·|]+)/) || [, ''])[1] || '').trim();
     const fc = fieldBy(r, /прогноз|forecast/i).split('/');
     const fa = parseNumeric(fc[0]) ?? 0;
@@ -2734,7 +2786,7 @@ function drawPairArrows() {
     const mx = (x1 + x2) / 2;
     const color = arrowColor(i, cards.length);
     // on the arrow: best day, what the channel gives the partner / gets back
-    const label = `${p.days ? '★ ' + p.days + ' · ' : ''}+${fmtRub.format(p.gives)} / +${fmtRub.format(p.gets)}`;
+    const label = `${p.days ? '★ ' + localizeDays(p.days) + ' · ' : ''}+${fmtRub.format(p.gives)} / +${fmtRub.format(p.gets)}`;
     // label at the arrow tip
     return `<path d="M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}" fill="none"
               stroke="${color}" stroke-width="${(2.2 - i * 0.09).toFixed(2)}" marker-end="url(#pair-arrow-${i})" />
@@ -2787,7 +2839,7 @@ async function loadAds() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const tables = parseMarkdownTables(await res.text());
     allAds = tables.length ? tables[0].rows : [];
-    allPairs = tableBy(tables, /пары\s*вп|mutual\s*pr\s*pairs/i);
+    allPairs = tableBy(tables, /пары\s*вп|(mutual\s*pr|mpr)\s*pairs/i);
     annotateAds(allAds);
     document.getElementById('ads-loading').style.display = 'none';
     document.getElementById('ads-wrap').style.display = 'block';
@@ -2839,11 +2891,9 @@ async function init() {
 
   const params = new URLSearchParams(location.search);
   const pageParam = params.get('p');
-  if (pageParam === 'hits2026') showTab('hits2026');
   // posts2025 is the legacy param name
-  if (pageParam === 'hits2025' || pageParam === 'posts2025' || /^#place-(\d{4}-)?\d+$/.test(location.hash)) showTab('hits2025');
-  if (params.get('p') === 'ads') showTab('ads');
-  if (params.get('p') === 'matches') showTab('matches');
+  if (pageParam === 'posts2025' || /^#place-(\d{4}-)?\d+$/.test(location.hash)) showTab('hits2025');
+  else if (pageParam && document.getElementById('tab-' + pageParam)) showTab(pageParam);
 
   try {
     const tagsRes = await fetch('tags.md');
