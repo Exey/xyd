@@ -2702,7 +2702,7 @@ function buildPairChannels(rows) {
     eb.partners.push({ ch: a, rating, days, gives: fb, gets: fa });
   });
   const list = [...map.values()];
-  list.forEach(c => c.partners.sort((x, y) => y.rating - x.rating || y.gives - x.gives));
+  list.forEach(c => c.partners.sort((x, y) => y.gets - x.gets || y.rating - x.rating));
   list.sort((a, b) => b.sum - a.sum || b.partners.length - a.partners.length);
   return list;
 }
@@ -2816,18 +2816,20 @@ function drawPairArrows() {
   const sr = sel.getBoundingClientRect();
   const x1 = sr.right - br.left + 4, y1 = sr.top + sr.height / 2 - br.top;
   const parts = c.partners.slice(0, cards.length);
-  // colour from green (best pair) to yellow (tenth)
-  const arrowColor = (i, n) => {
-    const t = n > 1 ? i / (n - 1) : 0;
+  // colour by what comes back: the biggest return is deep green, the smallest fades to yellow-green
+  const gets = parts.map(p => p.gets);
+  const maxGets = Math.max(...gets), minGets = Math.min(...gets);
+  const arrowColor = (i) => {
+    const t = maxGets > minGets ? (maxGets - parts[i].gets) / (maxGets - minGets) : 0;
     const lift = isDark() ? 18 : 0;
-    return `hsl(${(122 - t * 76).toFixed(0)}, ${(45 + t * 25).toFixed(0)}%, ${(34 + t * 8 + lift).toFixed(0)}%)`;
+    return `hsl(${(128 - t * 58).toFixed(0)}, ${(62 + t * 10).toFixed(0)}%, ${(30 + t * 10 + lift).toFixed(0)}%)`;
   };
   const paths = cards.map((el, i) => {
     const p = parts[i];
     const rr = el.getBoundingClientRect();
     const x2 = rr.left - br.left - 9, y2 = rr.top + rr.height / 2 - br.top;
     const mx = (x1 + x2) / 2;
-    const color = arrowColor(i, cards.length);
+    const color = arrowColor(i);
     // on the arrow: best day, what the channel gives the partner / gets back
     const label = `${p.days ? '★ ' + localizeDays(p.days) + ' · ' : ''}+${fmtRub.format(p.gives)} / +${fmtRub.format(p.gets)}`;
     // label at the arrow tip
@@ -2838,7 +2840,7 @@ function drawPairArrows() {
               stroke="var(--bg)" stroke-width="3" paint-order="stroke">${label}</text>`;
   }).join('');
   const markers = cards.map((el, i) => `<marker id="pair-arrow-${i}" viewBox="0 0 8 8" refX="7" refY="4"
-      markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="${arrowColor(i, cards.length)}" /></marker>`).join('');
+      markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="${arrowColor(i)}" /></marker>`).join('');
   svg.innerHTML = `<defs>${markers}</defs>${paths}`;
 }
 
