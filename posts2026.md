@@ -274,3 +274,194 @@ Top 10 models hitmakers
 | @art_nu_k | 609 | ![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAoABsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCmwppB4BBGRke9PfCgk1KYJZVRsAALwCetSUkQRj5TUTKdxqzEPX3pCozSbHFaClDJOqjueTVi74MYTjApbZCyvJ0A/nSZFzA7KfunFO2oJ6ELtkZHXHJ9TUOTUTSSYxz+FJvaiwrmsrxi2WI5/wBrHeoYnjgyqoqo3Xkk0UVZJTIQOx3Hk9BTcr6frRRSA//Z) | ×6🏞️ | В кадре Елизавета Курилко Полный сет с ней уже у меня на Boosty 📱 | 12 251 | 141 | https://t.me/art_nu_k/3110 |
 | @sexxxylesya | 609 | ![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAoACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwC8VzTGCiCbcwUHI3elTgVRvS32JVAzvfmgCovmWMixyMHgYZBHp61swDMQIOR2NZsZEl5bowBAXGPzrXVQowowB2oAhJwjH0FUJbuPEcSnMgByMetTTSFbaRs8YxWLAxa6DMeuf5UAaluB/aMWRg8/yNa9Y8MivqcLpkrgnP4GtZG3KG9aAMe4WR0dMEKaprZyiZdikj8KKKANixlR2KlP3vchMAVeoooA/9k=) | ×1🏞️ | fam fam 📷 @ph_naf_public | 9 892 | 74 | https://t.me/sexxxylesya/1448 |
 | @m0llbzero | 609 | ![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAbACgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCiVFMwXYKtSHnApCQoI7jmkC3Hi3YocfeFNELSYPAx1zV+2iyEUk525pzwrG4GPvdKx9ozZxTMx0+UUU9uFwfU0VsjF6EYOf4sVYghiyGkmyeuAKpDqKtRkgDFKSZcUmXTcwLOjMxQgdx1H4U97uFyJA2QOnFRWsEc8n7xA3FU9QRYrpkQYUdBWappqw27MZJIGYkdM0VFRWyVjNo//9k=) | ×1🏞️ | date idea: мы в костюмах клоуна кушаем чизкейк из пятёрочки 🤡 | 26 481 | 78 | https://t.me/m0llbzero/2355 |
+
+## Potential
+
+| Channel | Count | 600+ Score Count | Rate |
+| --- | --- | --- | --- |
+| Плотниковъ | 328 | 35 | 10.7% |
+| @n_mels | 155 | 23 | 14.8% |
+| @hey_im_katerina | 114 | 22 | 19.3% |
+| @photokravchenko | 89 | 19 | 21.3% |
+| @uaniliza | 154 | 18 | 11.7% |
+| @pocrovi | 55 | 17 | 30.9% |
+| @your_fatale | 108 | 17 | 15.7% |
+| @m0llbzero | 97 | 16 | 16.5% |
+| @nat_flame | 136 | 16 | 11.8% |
+| @dardarkpirs | 155 | 16 | 10.3% |
+| @nudocaffe | 100 | 15 | 15.0% |
+| Mentol💋vaya_Pastilka | 154 | 15 | 9.7% |
+| 🔥Pantera Nika🔥 | 163 | 15 | 9.2% |
+| @nakedtoffee | 186 | 15 | 8.1% |
+| @bella_bond | 208 | 15 | 7.2% |
+| @shurixNeo | 269 | 15 | 5.6% |
+| @veshkinfoto | 231 | 14 | 6.1% |
+| @artofroma | 501 | 14 | 2.8% |
+| @lorapalmer_spb | 72 | 13 | 18.1% |
+| @tgadore | 124 | 13 | 10.5% |
+| @saortoto | 89 | 12 | 13.5% |
+| @nu_home | 107 | 12 | 11.2% |
+| @pollyrumntsva | 161 | 12 | 7.5% |
+| @vechereyet2 | 197 | 12 | 6.1% |
+| Elf_sonya | 75 | 11 | 14.7% |
+| @reider_photo | 88 | 11 | 12.5% |
+| @skazki_debri | 115 | 11 | 9.6% |
+| @szweczikowa | 146 | 11 | 7.5% |
+| @max_kaftorman | 267 | 11 | 4.1% |
+| @lukcarefully | 83 | 10 | 12.0% |
+| @denbut_photoart | 150 | 10 | 6.7% |
+| @northern_lights_model | 659 | 10 | 1.5% |
+| @paramonovnu | 18 | 9 | 50.0% |
+| @KatySexyWife | 38 | 9 | 23.7% |
+| @AlinaaNeuer | 47 | 9 | 19.1% |
+| @nu_photo_art | 55 | 9 | 16.4% |
+| LoveUSsoul 18+ | 68 | 9 | 13.2% |
+| @driopa | 164 | 9 | 5.5% |
+| @alicelismagi | 187 | 9 | 4.8% |
+| Max Fayst📸😈 | 601 | 9 | 1.5% |
+| @ph_naf_public | 1 195 | 9 | 0.8% |
+| @callmepleasegirl | 34 | 8 | 23.5% |
+| @photokrafter83 | 116 | 8 | 6.9% |
+| @ana_grin | 121 | 8 | 6.6% |
+| @frolkinanude | 128 | 8 | 6.2% |
+| @juliasemenkova84 | 153 | 8 | 5.2% |
+| @art_nu_k | 154 | 8 | 5.2% |
+| 💜 Iris 💜 | 157 | 8 | 5.1% |
+| @just_me_not_more | 205 | 8 | 3.9% |
+| @kvudes | 231 | 8 | 3.5% |
+| Anna's secrets | 392 | 8 | 2.0% |
+| @krasnovTG | 22 | 7 | 31.8% |
+| @geekography | 28 | 7 | 25.0% |
+| @bsaphoto | 31 | 7 | 22.6% |
+| Neu_Ling Free | 37 | 7 | 18.9% |
+| @vladisyaro | 59 | 7 | 11.9% |
+| @olyaaster | 74 | 7 | 9.5% |
+| @na_licooo | 167 | 7 | 4.2% |
+| @amwi_i | 169 | 7 | 4.1% |
+| @bluekroovy_live | 194 | 7 | 3.6% |
+| @EgorovD_PhotoArt | 232 | 7 | 3.0% |
+| @erotica_fantasies | 275 | 7 | 2.5% |
+| Фотограф Гудвин 18+ | 309 | 7 | 2.3% |
+| @totototonightkissyou | 40 | 6 | 15.0% |
+| @gotomargosha | 46 | 6 | 13.0% |
+| @kostromin_art | 54 | 6 | 11.1% |
+| @gentlebeast0 | 69 | 6 | 8.7% |
+| @demchenko_art | 109 | 6 | 5.5% |
+| @maratsafinvapas | 139 | 6 | 4.3% |
+| @asmodeus_model | 168 | 6 | 3.6% |
+| xenaexsa | 184 | 6 | 3.3% |
+| @Yakubov_group | 189 | 6 | 3.2% |
+| @LizkinPip | 229 | 6 | 2.6% |
+| Helen Helen 🔥 | 269 | 6 | 2.2% |
+| @sexxxylesya | 307 | 6 | 2.0% |
+| вам мурлычат 🍓 | 348 | 6 | 1.7% |
+| @dishashemetova2 | 377 | 6 | 1.6% |
+| @LunaArtF | 457 | 6 | 1.3% |
+| Luna Lus | 481 | 6 | 1.2% |
+| @darnikmodel | 18 | 5 | 27.8% |
+| @ne_dumali | 25 | 5 | 20.0% |
+| @potaninfoto | 30 | 5 | 16.7% |
+| @shezyaphoto18 | 59 | 5 | 8.5% |
+| @omletik007 | 87 | 5 | 5.7% |
+| @artsproekt | 131 | 5 | 3.8% |
+| @raziltwo | 144 | 5 | 3.5% |
+| @mchuprin_ph | 169 | 5 | 3.0% |
+| @baevm | 184 | 5 | 2.7% |
+| @Juliatimoro | 305 | 5 | 1.6% |
+| Те самые фото что банит инстаграм | 357 | 5 | 1.4% |
+| @harismaimportrant | 452 | 5 | 1.1% |
+| Soulful Nude | 14 | 4 | 28.6% |
+| @bazilev_ph | 15 | 4 | 26.7% |
+| @mirploti | 47 | 4 | 8.5% |
+| @ioannova_a | 70 | 4 | 5.7% |
+| @NudeAbandon | 72 | 4 | 5.6% |
+| @ruslanpanovphoto | 76 | 4 | 5.3% |
+| @texhikvrn | 85 | 4 | 4.7% |
+| @Liepota | 101 | 4 | 4.0% |
+| @IevaModel | 107 | 4 | 3.7% |
+| @dariaarefeva | 176 | 4 | 2.3% |
+| @anastasiarenz | 192 | 4 | 2.1% |
+| @bonniewoods2306 | 326 | 4 | 1.2% |
+| Богиня Мотыльков 🦋 ✨ 💡 | 660 | 4 | 0.6% |
+| Sumiko☀️ | 663 | 4 | 0.6% |
+| @sugar_maple | 31 | 3 | 9.7% |
+| @artchos | 45 | 3 | 6.7% |
+| @lyskowetsphoto | 46 | 3 | 6.5% |
+| @ana_demchenko | 59 | 3 | 5.1% |
+| 🍑Сосочки можно 18+ | 63 | 3 | 4.8% |
+| @my_antibodies_photo | 74 | 3 | 4.1% |
+| @nuancefluent | 92 | 3 | 3.3% |
+| @alice_lt | 96 | 3 | 3.1% |
+| @afterdark_ks | 97 | 3 | 3.1% |
+| @art_nude_photos | 128 | 3 | 2.3% |
+| @sofababee | 143 | 3 | 2.1% |
+| @vixy_rea | 144 | 3 | 2.1% |
+| @plasmon_ph | 145 | 3 | 2.1% |
+| @msfantasyph | 179 | 3 | 1.7% |
+| @numodelveronika | 184 | 3 | 1.6% |
+| StasyQ 😈 | 204 | 3 | 1.5% |
+| Melons_Fans | 284 | 3 | 1.1% |
+| @leriya_sofia | 288 | 3 | 1.0% |
+| @elishanudes | 290 | 3 | 1.0% |
+| @zinkevichnu | 367 | 3 | 0.8% |
+| @prokolgotki_pub | 516 | 3 | 0.6% |
+| @alicesmoviess | 1 238 | 3 | 0.2% |
+| @ph_nabokov1 | 18 | 2 | 11.1% |
+| @gerachernyadyev | 25 | 2 | 8.0% |
+| @lermak_art | 30 | 2 | 6.7% |
+| @poplavsky_photo_nu | 44 | 2 | 4.5% |
+| @portrait_shoot | 73 | 2 | 2.7% |
+| @celledsnails | 91 | 2 | 2.2% |
+| @Shu_b_Niggurath | 134 | 2 | 1.5% |
+| @skinny_may | 178 | 2 | 1.1% |
+| aleksandrsavichevofficial | 239 | 2 | 0.8% |
+| @svuph | 288 | 2 | 0.7% |
+| Petite Lumière🪻 | 314 | 2 | 0.6% |
+| @geneoryxx | 343 | 2 | 0.6% |
+| @ph_miloradov | 419 | 2 | 0.5% |
+| @Marginal_Art_1 | 621 | 2 | 0.3% |
+| @lobanov_free | 11 | 1 | 9.1% |
+| @analog_nudes | 15 | 1 | 6.7% |
+| @ksjuha_live | 20 | 1 | 5.0% |
+| @madmaura | 39 | 1 | 2.6% |
+| Виктория Воронцова🔥 Фотомодель | 41 | 1 | 2.4% |
+| G.A.K. Production | 49 | 1 | 2.0% |
+| @veronikaklem | 52 | 1 | 1.9% |
+| @only_film_photo | 81 | 1 | 1.2% |
+| @lierootphoto | 110 | 1 | 0.9% |
+| @prozvitsky_ph | 149 | 1 | 0.7% |
+| @p_d_s_m | 163 | 1 | 0.6% |
+| @delicateflower | 171 | 1 | 0.6% |
+| @AdamsSinners18 | 172 | 1 | 0.6% |
+| delorathecookie🍪 | 199 | 1 | 0.5% |
+| @stasyakovlevphoto | 268 | 1 | 0.4% |
+| @orvientte | 310 | 1 | 0.3% |
+| @ura_pechen | 739 | 0 | 0.0% |
+| @nufotog | 406 | 0 | 0.0% |
+| @byoolessen | 399 | 0 | 0.0% |
+| Viktoria S⚜ | 272 | 0 | 0.0% |
+| @ArgatBellaD | 254 | 0 | 0.0% |
+| @smeilov_photo | 247 | 0 | 0.0% |
+| @petspet_ph | 194 | 0 | 0.0% |
+| @dmitry_arhar | 194 | 0 | 0.0% |
+| @tatianamodel | 174 | 0 | 0.0% |
+| @antonia_astart | 173 | 0 | 0.0% |
+| @SataJs | 167 | 0 | 0.0% |
+| @dallasgorben | 165 | 0 | 0.0% |
+| @hkhndgrls | 130 | 0 | 0.0% |
+| @youcansayyes12 | 106 | 0 | 0.0% |
+| @arishestova | 102 | 0 | 0.0% |
+| ✨Tretyakova Nadi✨ | 88 | 0 | 0.0% |
+| ❤️‍🔥Фотограф Алла Топорская 🔞 | 71 | 0 | 0.0% |
+| @vetaivaa | 43 | 0 | 0.0% |
+| @fieryli | 35 | 0 | 0.0% |
+| @my_fuckin_sky | 28 | 0 | 0.0% |
+| @alisa_verner_tg | 18 | 0 | 0.0% |
+| @good_girls_love_sex | 15 | 0 | 0.0% |
+| Ornella Life 🌶 | 14 | 0 | 0.0% |
+| Leica Erotica | 13 | 0 | 0.0% |
+| @Mal_vi_na11 | 12 | 0 | 0.0% |
+| @IvanAnanyinNu | 9 | 0 | 0.0% |
+| @alex_izyumovphoto | 6 | 0 | 0.0% |
+| @milky_rossee | 1 | 0 | 0.0% |
+| @justfcknrawww | 1 | 0 | 0.0% |
