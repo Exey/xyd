@@ -264,10 +264,17 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 /* ?show= highlight */
 .rank-table tr.show-hit td { background: color-mix(in srgb, var(--cotton-candy) 35%, transparent); }
 .post-item.show-hit, .pair-card.show-hit { box-shadow: 0 0 0 3px var(--cotton-candy); }
-.potential-wrap { padding: 8px 24px 32px; }
+.potential-wrap { max-width: 1008px; margin: 0 auto; padding: 8px 0 32px; }
 .potential-wrap h3 { font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--text); margin-bottom: 10px; }
 :where([data-design="photo"]) .potential-wrap h3 { font-family: var(--font-display); font-size: 19px; font-weight: 600; letter-spacing: .24em; }
-.potential-table td.num, .potential-table th.num { text-align: right; }
+.potential-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.potential-col h4 { font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.potential-table { font-size: 12px; }
+.potential-table th, .potential-table td { padding: 7px 5px; }
+.potential-table th.num, .potential-table td.num { text-align: right; white-space: nowrap; }
+.potential-table .ph-name { font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 130px; }
+.potential-table .score-val { font-size: 14px; min-width: 0; }
+@media (max-width: 900px) { .potential-cols { grid-template-columns: minmax(0, 1fr); } .potential-table .ph-name { max-width: none; } }
 @media (max-width: 700px) { .potential-wrap { padding: 8px 10px 24px; } }
 .rank-num { color: var(--muted); font-weight: 900; font-size: 15px; min-width: 32px; }
 .ph-name { font-weight: 700; color: var(--text); font-size: 14px; }
@@ -313,7 +320,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 /* TOP 250 POSTS TAB */
 .hitmakers-wrap {
   display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
-  max-width: 1008px; margin: 0 auto; padding: 20px 24px 6px;
+  max-width: 1008px; margin: 0 auto; padding: 20px 0 6px;
 }
 .hitmakers-card {
   background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
@@ -331,6 +338,7 @@ nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
 .hitmakers-list li:last-child { border-bottom: none; }
 .hm-rank { font-weight: 900; color: var(--muted); min-width: 20px; }
 .hm-count { font-weight: 900; color: var(--rose); min-width: 26px; text-align: right; font-size: 15px; }
+.hm-600 { font-weight: 400; color: var(--muted); opacity: .6; margin-left: 2px; }
 .hm-count.clickable { cursor: pointer; transition: transform .1s; }
 .hm-count.clickable:hover { transform: translateY(-1px); text-decoration: underline; }
 .hm-name { color: var(--text); font-weight: 700; }
@@ -1007,10 +1015,7 @@ footer .add-ph-btn { margin-left: 0; }
 
   <div class="potential-wrap" id="potential-wrap" style="display:none">
     <h3 data-i18n>Потенциал хита</h3>
-    <table class="rank-table potential-table">
-      <thead><tr id="potential-head"></tr></thead>
-      <tbody id="potential-body"></tbody>
-    </table>
+    <div class="potential-cols" id="potential-cols"></div>
   </div>
 </div>
 
@@ -1371,10 +1376,10 @@ const TR_EN = {
     'Circle size — the subgenre’s total Rating ({total} across {n} photographers); the number inside is its share of the overall Rating · photographer count. Name size — the photographer’s Rating; names are clickable. Overlapping circles mean related subgenres: only pairs with ≥ {min}% affinity overlap, and the overlap is shallower than the real figure for readability. Click a subgenre name to filter.',
 
   // 250 HITS
-  'Топ-10 хитмейкеров-фотографов 2026': 'Top 10 hitmaker photographers 2026',
-  'Топ-10 хитмейкеров-моделей 2026': 'Top 10 hitmaker models 2026',
-  'Топ-10 хитмейкеров-фотографов 2025': 'Top 10 hitmaker photographers 2025',
-  'Топ-10 хитмейкеров-моделей 2025': 'Top 10 hitmaker models 2025',
+  'хитмейкеры-фотографы 2026': 'hitmaker photographers 2026',
+  'хитмейкеры-модели 2026': 'hitmaker models 2026',
+  'хитмейкеры-фотографы 2025': 'hitmaker photographers 2025',
+  'хитмейкеры-модели 2025': 'hitmaker models 2025',
   'Сортировка:': 'Sort:',
   'Показать посты этого канала': 'Show posts from this channel',
   'ВСЕ КАНАЛЫ': 'ALL CHANNELS', 'Все каналы': 'All channels',
@@ -1389,7 +1394,7 @@ const TR_EN = {
   'Прайс взаимного пиара и оценка каналов по данным mutual_pr.md.': 'Cross-promo pricing and channel valuation from mutual_pr.md.',
   'Канал': 'Channel', 'Неделя': 'Week', 'Месяц': 'Month',
   '24ч': '24h', '48ч': '48h', '72ч': '72h',
-  'Потенциал хита': 'Hit potential', 'Постов': 'Posts', 'Постов 600+': '600+ posts', 'Доля': 'Rate',
+  'Потенциал хита': 'Hit potential', '<100 постов': '<100 posts', '100–249 постов': '100–249 posts', '250+ постов': '250+ posts', 'Постов': 'Posts', 'Постов 600+': '600+ posts', 'Доля': 'Rate',
   'Карта сайта': 'Site map', 'Лучшие дни рекламы': 'Best ad days', 'Самые свободные дни в канале: в них выходит меньше всего постов': 'Most free days in the channel: the days with the fewest posts published', 'Оценка стоимости канала': 'Channel value estimate',
   'Реклама — {n} ₽ за подписчика': 'Ads — {n} ₽ per subscriber',
   'Модель: +10% к рекламе': 'Model: +10% on ads',
@@ -2286,7 +2291,9 @@ function renderHitmakers(year, list, containerId) {
     const safeName = item.name.replace(/'/g, "\\'");
     const ph = isPh && allPhotographers.find(p => normShow(parseTelegramName(p['ID/Username']).display) === normShow(item.name));
     const tag = ph ? tagCellHtml(ph) : '';
-    return `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count clickable" title="${t('Показать посты этого канала')}" onclick="filterByChannel(${year}, '${safeName}', '${item.count}')">📰${item.count}</span><span class="hm-name">${linkifyHandle(item.name)}</span>${tag ? `<span class="hm-tag">${tag}</span>` : ''}</li>`;
+    const pot = (hits[year].potential || []).find(r => normShow(r['Channel']) === normShow(item.name));
+    const hot = pot && pot['600+ Score Count'] ? `<span class="hm-600" title="${t('Постов 600+')}">(${pot['600+ Score Count']})</span>` : '';
+    return `<li><span class="hm-rank">${item.rank}.</span><span class="hm-count clickable" title="${t('Показать посты этого канала')}" onclick="filterByChannel(${year}, '${safeName}', '${item.count}')">📰${item.count}${hot}</span><span class="hm-name">${linkifyHandle(item.name)}</span>${tag ? `<span class="hm-tag">${tag}</span>` : ''}</li>`;
   }).join('');
 }
 
@@ -2449,23 +2456,45 @@ function renderPostsList(year) {
   document.getElementById('posts-list-' + year).innerHTML = sorted.map(p => renderPostItem(year, p)).join('');
 }
 
-// hit potential: share of a channel's posts that scored 600+ (2026 only), best rate first
+// hit potential (2026 only): channels grouped by post count, each column sortable
+const POTENTIAL_GROUPS = [
+  { label: '<100 постов', test: n => n < 100 },
+  { label: '100–249 постов', test: n => n >= 100 && n < 250 },
+  { label: '250+ постов', test: n => n >= 250 },
+];
+const POTENTIAL_COLS = [
+  { key: 'Count', label: 'Постов' },
+  { key: '600+ Score Count', label: 'Постов 600+' },
+  { key: 'Rate', label: 'Доля' },
+];
+let potentialSort = { key: 'Rate', dir: 'desc' };
+function sortPotential(key) {
+  potentialSort = { key, dir: potentialSort.key === key && potentialSort.dir === 'desc' ? 'asc' : 'desc' };
+  renderPotential(2026);
+}
 function renderPotential(year) {
   const box = document.getElementById('potential-wrap');
   const rows = hits[year].potential || [];
   if (year !== 2026 || !box) return;
   box.style.display = rows.length ? 'block' : 'none';
-  const pct = r => parseFloat((r['Rate'] || '').replace(',', '.')) || 0;
-  const sorted = [...rows].sort((a, b) => pct(b) - pct(a) || (parseNumeric(b['600+ Score Count']) ?? 0) - (parseNumeric(a['600+ Score Count']) ?? 0));
-  document.getElementById('potential-head').innerHTML = '<th style="width:32px">#</th>' +
-    `<th>${t('Канал')}</th><th class="num">${t('Постов')}</th><th class="num">${t('Постов 600+')}</th><th class="num">${t('Доля')}</th>`;
-  document.getElementById('potential-body').innerHTML = sorted.map((r, i) => `<tr class="${showCls(r['Channel']).trim()}">
-    <td class="rank-num">${i + 1}</td>
-    <td><div class="ph-name">${linkifyHandle(r['Channel'] || '')}</div></td>
-    <td class="num">${r['Count'] || '—'}</td>
-    <td class="num">${r['600+ Score Count'] || '—'}</td>
-    <td class="num"><span class="score-val">${r['Rate'] || '—'}</span></td>
-  </tr>`).join('');
+  const val = (r, k) => parseFloat((r[k] || '').replace(',', '.')) || 0;
+  const { key, dir } = potentialSort;
+  const head = POTENTIAL_COLS.map(c => {
+    const arrow = key === c.key ? (dir === 'desc' ? ' ▼' : ' ▲') : '';
+    return `<th class="sortable num${key === c.key ? ' sorted' : ''}" onclick="sortPotential('${c.key}')">${t(c.label)}${arrow}</th>`;
+  }).join('');
+  document.getElementById('potential-cols').innerHTML = POTENTIAL_GROUPS.map(g => {
+    const part = rows.filter(r => g.test(val(r, 'Count')))
+      .sort((a, b) => (dir === 'desc' ? -1 : 1) * (val(a, key) - val(b, key)) || val(b, 'Rate') - val(a, 'Rate'));
+    const body = part.map(r => `<tr class="${showCls(r['Channel']).trim()}">
+      <td><div class="ph-name" title="${r['Channel'] || ''}">${linkifyHandle(r['Channel'] || '')}</div></td>
+      <td class="num">${r['Count'] || '—'}</td>
+      <td class="num">${r['600+ Score Count'] || '—'}</td>
+      <td class="num"><span class="score-val">${r['Rate'] || '—'}</span></td>
+    </tr>`).join('');
+    return `<div class="potential-col"><h4>${t(g.label)} · ${part.length}</h4>
+      <table class="rank-table potential-table"><thead><tr><th>${t('Канал')}</th>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+  }).join('');
 }
 
 function handlePlaceHash() {
@@ -2491,14 +2520,14 @@ async function loadHits(year) {
     const text = await res.text();
     const { photographers, models } = parseHitmakers(text);
     h.hitmakers = { photographers, models };
-    h.top10 = new Set([...photographers, ...models].map(i => i.name));
-    renderHitmakers(year, photographers, 'top10-photographers-' + year);
-    renderHitmakers(year, models, 'top10-models-' + year);
     const tables = parseMarkdownTables(text);
     const potential = tables.find(x => /potential/i.test(x.heading));
     const postsTable = tables.find(x => x !== potential);
     h.posts = (postsTable ? postsTable.rows : []).map((r, i) => ({ ...r, _place: i + 1 }));
     h.potential = potential ? potential.rows : [];
+    h.top10 = new Set([...photographers, ...models].map(i => i.name));
+    renderHitmakers(year, photographers, 'top10-photographers-' + year);
+    renderHitmakers(year, models, 'top10-models-' + year);
     document.getElementById('posts-loading-' + year).style.display = 'none';
     document.getElementById('posts-list-' + year).style.display = 'flex';
     renderPostsList(year);
