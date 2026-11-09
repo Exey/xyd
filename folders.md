@@ -30,20 +30,20 @@
 | photographers | 4 334 | @nu_home | Raw | 46% | 0.263 | 304 851 | 0.0% | 456 |
 | photographers | 7 827 | @krasnovTG | Крафт | 10% | 0.262 | 200 992 | 0.0% | 596 |
 | photographers | 7 190 | @potaninfoto | Гламур | 39% | 0.249 | 158 321 | 4.8% | 446 |
-| photographers | 1 930 | @mirploti | Кинк | 50% | 0.361 | 451 315 | 18.6% | 356 |
-| photographers | 1 839 | @kostromin_art | Классика | 34% | 0.354 | 140 645 | 10.6% | 496 |
-| photographers | 1 571 | @alicesmoviess | Драма | 100% | 0.311 | 692 350 | 5.9% | 435 |
-| photographers | 2 622 | @ura_pechen | Thug | — | 0.299 | 1 634 320 | 0.0% | 332 |
-| photographers | 1 439 | @verbitskayaasya | Крафт | 40% | 0.286 | 49 939 | 11.8% | 425 |
-| photographers | 2 723 | @ne_dumali | Гламур | 100% | 0.284 | 115 671 | 0.0% | 416 |
-| photographers | 1 767 | @alisa_verner_tg | Гламур | — | 0.278 | 55 786 | 0.0% | 364 |
-| photographers | 2 613 | @frolkinanude | Кинк | 65% | 0.265 | 374 528 | 2.5% | 399 |
-| photographers | 2 282 | @petspet_ph | Гламур | 50% | 0.263 | 198 573 | 2.9% | 247 |
-| photographers | 3 143 | @bsaphoto | Крафт | 28% | 0.262 | 130 265 | 4.5% | 521 |
-| photographers | 2 018 | @lierootphoto | Raw | 23% | 0.260 | 220 019 | 0.0% | 514 |
-| photographers | 2 710 | @paramonovnu | Гламур | 5% | 0.260 | 105 797 | 0.0% | 508 |
-| photographers | 2 529 | @nuancefluent | Крафт | 50% | 0.259 | 149 835 | 3.8% | 213 |
-| photographers | 2 014 | @prokolgotki_pub | Кинк | 0% | 0.250 | 542 378 | 4.0% | 490 |
+| photographers | 1 930 | @mirploti | Кинк | 50% | 0.248 | 451 315 | 18.6% | 356 |
+| photographers | 1 839 | @kostromin_art | Классика | 34% | 0.247 | 140 645 | 10.6% | 496 |
+| photographers | 1 571 | @alicesmoviess | Драма | 100% | 0.246 | 692 350 | 5.9% | 435 |
+| photographers | 2 622 | @ura_pechen | Thug | — | 0.245 | 1 634 320 | 0.0% | 332 |
+| photographers | 1 439 | @verbitskayaasya | Крафт | 40% | 0.244 | 49 939 | 11.8% | 425 |
+| photographers | 2 723 | @ne_dumali | Гламур | 100% | 0.243 | 115 671 | 0.0% | 416 |
+| photographers | 1 767 | @alisa_verner_tg | Гламур | — | 0.242 | 55 786 | 0.0% | 364 |
+| photographers | 2 613 | @frolkinanude | Кинк | 65% | 0.241 | 374 528 | 2.5% | 399 |
+| photographers | 2 282 | @petspet_ph | Гламур | 50% | 0.240 | 198 573 | 2.9% | 247 |
+| photographers | 3 143 | @bsaphoto | Крафт | 28% | 0.239 | 130 265 | 4.5% | 521 |
+| photographers | 2 018 | @lierootphoto | Raw | 23% | 0.238 | 220 019 | 0.0% | 514 |
+| photographers | 2 710 | @paramonovnu | Гламур | 5% | 0.237 | 105 797 | 0.0% | 508 |
+| photographers | 2 529 | @nuancefluent | Крафт | 50% | 0.236 | 149 835 | 3.8% | 213 |
+| photographers | 2 014 | @prokolgotki_pub | Кинк | 0% | 0.235 | 542 378 | 4.0% | 490 |
 | photographers | 290 | @harsh_generation |  | 50% | 0.249 | 7 633 | 28.6% | 497 |
 | photographers | 6 233 | @SlavioSt_photo | Гламур | 100% | 0.248 | 1 340 171 | 0.9% | 508 |
 | photographers | 1 645 | @slavic_tlt | Raw | 50% | 0.245 | 135 857 | 0.0% | 497 |
@@ -161,25 +161,25 @@
 | models | 4 204 | @harismaimportrant |  |  | 0.275 | 1 247 382 | 2.5% | 479 |
 | models | 7 857 | @asmodeus_model |  |  | 0.273 | 877 237 | 0.0% | 579 |
 | models | 10 357 | @prokhorenko_nu |  |  | 0.268 | 2 067 297 | 17.2% | 591 |
-| models | 2 109 | @skotomogilia |  |  | 0.513 | 479 712 | 2.8% | 592 |
-| models | 3 163 | @omletik007 |  |  | 0.460 | 519 754 | 2.6% | 404 |
-| models | 3 451 | @your_fatale |  |  | 0.457 | 602 808 | 3.3% | 490 |
-| models | 980 | @nikronikmm |  |  | 0.434 | 179 381 | 2.7% | 578 |
-| models | 1 231 | A Netflix series(2535854492) |  |  | 0.415 | 105 277 | 0.0% | 453 |
-| models | 2 403 | вам мурлычат 🍓(2005808580) |  |  | 0.399 | 746 498 | 0.0% | 441 |
-| models | 2 752 | @skazki_debri |  |  | 0.390 | 359 188 | 0.0% | 408 |
-| models | 2 821 | @szweczikowa |  |  | 0.377 | 318 343 | 0.0% | 537 |
-| models | 2 302 | @ana_grin |  |  | 0.349 | 291 808 | 0.0% | 504 |
-| models | 1 815 | @n_mels |  |  | 0.339 | 527 225 | 1.4% | 560 |
-| models | 2 815 | @ArgatBellaD |  |  | 0.338 | 524 876 | 0.8% | 120 |
-| models | 984 | @impelagia |  |  | 0.327 | 465 316 | 0.5% | 546 |
-| models | 1 750 | @kvudes |  |  | 0.326 | 528 234 | 0.0% | 448 |
-| models | 2 | @amwi_i |  |  | 0.308 | 1 068 582 | 6.0% | 254 |
-| models | 2 981 | @afterdark_ks |  |  | 0.307 | 286 785 | 10.0% | 404 |
-| models | 2 531 | @dardarkpirs |  |  | 0.293 | 429 640 | 0.7% | 450 |
-| models | 1 323 | @wolfling_everett |  |  | 0.288 | 101 353 | 2.2% | 566 |
-| models | 1 990 | @artchos |  |  | 0.272 | 87 211 | 2.2% | 273 |
-| models | 2 955 | @vixy_rea |  |  | 0.269 | 440 861 | 0.0% | 248 |
+| models | 2 109 | @skotomogilia |  |  | 0.266 | 479 712 | 2.8% | 592 |
+| models | 3 163 | @omletik007 |  |  | 0.265 | 519 754 | 2.6% | 404 |
+| models | 3 451 | @your_fatale |  |  | 0.264 | 602 808 | 3.3% | 490 |
+| models | 980 | @nikronikmm |  |  | 0.263 | 179 381 | 2.7% | 578 |
+| models | 1 231 | A Netflix series(2535854492) |  |  | 0.262 | 105 277 | 0.0% | 453 |
+| models | 2 403 | вам мурлычат 🍓(2005808580) |  |  | 0.261 | 746 498 | 0.0% | 441 |
+| models | 2 752 | @skazki_debri |  |  | 0.260 | 359 188 | 0.0% | 408 |
+| models | 2 821 | @szweczikowa |  |  | 0.259 | 318 343 | 0.0% | 537 |
+| models | 2 302 | @ana_grin |  |  | 0.258 | 291 808 | 0.0% | 504 |
+| models | 1 815 | @n_mels |  |  | 0.257 | 527 225 | 1.4% | 560 |
+| models | 2 815 | @ArgatBellaD |  |  | 0.256 | 524 876 | 0.8% | 120 |
+| models | 984 | @impelagia |  |  | 0.255 | 465 316 | 0.5% | 546 |
+| models | 1 750 | @kvudes |  |  | 0.254 | 528 234 | 0.0% | 448 |
+| models | 2 | @amwi_i |  |  | 0.253 | 1 068 582 | 6.0% | 254 |
+| models | 2 981 | @afterdark_ks |  |  | 0.252 | 286 785 | 10.0% | 404 |
+| models | 2 531 | @dardarkpirs |  |  | 0.251 | 429 640 | 0.7% | 450 |
+| models | 1 323 | @wolfling_everett |  |  | 0.250 | 101 353 | 2.2% | 566 |
+| models | 1 990 | @artchos |  |  | 0.249 | 87 211 | 2.2% | 273 |
+| models | 2 955 | @vixy_rea |  |  | 0.248 | 440 861 | 0.0% | 248 |
 | models | 2 159 | @gentlebeast0 |  |  | 0.259 | 209 332 | 0.0% | 409 |
 | models | 3 877 | 🔥Pantera Nika🔥(1534949251) |  |  | 0.259 | 367 356 | 0.0% | 541 |
 | models | 5 189 | @leriya_sofia |  |  | 0.249 | 783 177 | 0.4% | 314 |
